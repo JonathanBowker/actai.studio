@@ -1,0 +1,151 @@
+---
+import "../styles/global.css";
+
+const services = [
+	{
+		title: "strategy",
+		label: "01",
+		copy: "shape the product, data, and operating model before anyone opens a backlog.",
+		accent: "bg-acid",
+	},
+	{
+		title: "systems",
+		label: "02",
+		copy: "design ai workflows, internal tools, and governed automations that teams can trust.",
+		accent: "bg-sky",
+	},
+	{
+		title: "shipping",
+		label: "03",
+		copy: "prototype, test, and launch focused web experiences with a bias for working software.",
+		accent: "bg-coral text-paper",
+	},
+];
+
+const specimens = [
+	["automation design", "agent workflows, evals, review loops"],
+	["studio builds", "astro sites, dashboards, prototypes"],
+	["advisory sprints", "ai readiness, vendor choices, roadmaps"],
+	["knowledge systems", "search, retrieval, structured memory"],
+	["brand utility", "interfaces that feel exact and alive"],
+	["launch support", "measurement, iteration, handover"],
+];
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta
+			name="description"
+			content="actai.studio designs and ships practical AI systems, automations, and web experiences."
+		/>
+		<title>actai.studio</title>
+	</head>
+	<body class="min-h-screen pt-[var(--header-height)] lowercase">
+		<header class="fixed left-0 top-0 z-50 grid h-[var(--header-height)] w-full grid-cols-[1fr_auto] border-b border-ink bg-ink text-paper md:grid-cols-[minmax(180px,1fr)_auto_minmax(180px,1fr)]">
+			<a
+				href="/"
+				class="flex items-center px-4 text-[16px] leading-none no-underline transition-colors hover:bg-paper hover:text-ink sm:px-6"
+			>
+				<strong class="font-bold">act-ai</strong><span class="ml-1">studio</span>
+			</a>
+			<nav class="hidden items-center justify-center gap-8 px-6 text-[16px] md:flex">
+				<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="#work">work</a>
+				<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="#method">method</a>
+				<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="mailto:hello@actai.studio">contact</a>
+			</nav>
+			<a
+				href="mailto:hello@actai.studio"
+				class="flex items-center justify-end px-4 text-[16px] text-paper no-underline transition-colors hover:bg-paper hover:text-ink sm:px-6"
+			>
+				(0) inbox
+			</a>
+		</header>
+
+		<main>
+			<section class="grid min-h-[calc(100svh-var(--header-height))] grid-rows-[1fr_auto] border-b border-ink">
+				<div class="grid items-end gap-12 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(220px,34vw)_1fr] lg:px-10">
+					<p class="max-w-[24rem] text-[clamp(1rem,2vw,1.35rem)] leading-[1.18]">
+						practical ai systems, studio-built products, and web experiences for teams who want the future to do some work.
+					</p>
+					<h1 class="max-w-[12ch] font-display text-[clamp(4.2rem,17vw,18rem)] font-bold leading-[0.78] tracking-normal">
+						act-ai studio
+					</h1>
+				</div>
+				<div class="grid border-t border-ink md:grid-cols-3">
+					{
+						services.map((service) => (
+							<article class="group min-h-[220px] border-b border-ink p-4 transition-colors hover:bg-ink hover:text-paper md:border-b-0 md:border-r last:md:border-r-0 sm:p-6">
+								<div class={`mb-16 inline-flex h-10 min-w-10 items-center justify-center border border-ink px-3 text-sm group-hover:border-paper ${service.accent}`}>
+									{service.label}
+								</div>
+								<h2 class="font-display text-[clamp(2.5rem,7vw,6.5rem)] font-bold leading-[0.82]">
+									{service.title}
+								</h2>
+								<p class="mt-4 max-w-[28rem] text-[1rem] leading-[1.25]">{service.copy}</p>
+							</article>
+						))
+					}
+				</div>
+			</section>
+
+			<section id="work" class="px-4 py-10 sm:px-6 lg:px-10">
+				<div class="grid gap-6 lg:grid-cols-[minmax(220px,34vw)_1fr]">
+					<div>
+						<p class="sticky top-24 max-w-[22rem] text-[1.1rem] leading-[1.25]">
+							a catalogue-style studio surface: direct, typographic, fast to scan, and built around the work rather than a marketing wrapper.
+						</p>
+					</div>
+					<ul class="grid border-t border-ink md:grid-cols-2">
+						{
+							specimens.map(([title, detail], index) => (
+								<li class="group min-h-[230px] border-b border-ink md:odd:border-r">
+									<a href="mailto:hello@actai.studio" class="flex h-full flex-col justify-between p-5 text-ink no-underline transition-colors hover:bg-ink hover:text-paper sm:p-6">
+										<div class="flex items-start justify-between gap-4">
+											<span class="text-sm">{String(index + 1).padStart(2, "0")}</span>
+											<span class="h-4 w-4 border border-current bg-current transition-transform group-hover:rotate-45" />
+										</div>
+										<div>
+											<p class="mb-4 border-t border-current pt-2 text-[1rem] leading-[1.25]">{detail}</p>
+											<h3 class="font-display text-[clamp(2.75rem,8vw,7rem)] font-bold leading-[0.82]">{title}</h3>
+										</div>
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</section>
+
+			<section id="method" class="grid border-y border-ink lg:grid-cols-[1fr_2fr]">
+				<div class="border-b border-ink bg-sky p-4 sm:p-6 lg:border-b-0 lg:border-r">
+					<p class="font-display text-[clamp(3rem,9vw,9rem)] font-bold leading-[0.8]">no theatre.</p>
+				</div>
+				<div class="grid md:grid-cols-3">
+					<div class="border-b border-ink p-5 md:border-b-0 md:border-r sm:p-6">
+						<h2 class="text-[1rem] font-bold">01 listen</h2>
+						<p class="mt-10 leading-[1.25]">map the decision, the team, and the system constraints before prescribing technology.</p>
+					</div>
+					<div class="border-b border-ink p-5 md:border-b-0 md:border-r sm:p-6">
+						<h2 class="text-[1rem] font-bold">02 prototype</h2>
+						<p class="mt-10 leading-[1.25]">make a working surface early so risk becomes visible while changes are still cheap.</p>
+					</div>
+					<div class="p-5 sm:p-6">
+						<h2 class="text-[1rem] font-bold">03 handover</h2>
+						<p class="mt-10 leading-[1.25]">document the operating model, not just the code, so the work survives launch week.</p>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer class="grid gap-8 px-4 py-6 text-[16px] sm:px-6 md:grid-cols-3 lg:px-10">
+			<p><strong>actai</strong> studio</p>
+			<p>ai systems / web products / operational tooling</p>
+			<a class="text-ink underline decoration-ink underline-offset-4 hover:bg-ink hover:text-paper" href="mailto:hello@actai.studio">hello@actai.studio</a>
+		</footer>
+	</body>
+</html>
