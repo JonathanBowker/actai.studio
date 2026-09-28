@@ -62,26 +62,33 @@ const nextSteps = [
 		</header>
 
 		<main>
-			<section class="grid min-h-[calc(100svh-var(--header-height))] border-b border-ink lg:grid-cols-[minmax(220px,34vw)_1fr]">
-				<div class="border-b border-ink p-4 sm:p-6 lg:border-b-0 lg:border-r lg:p-10">
-					<p class="sticky top-24 max-w-[24rem] text-[clamp(1.45rem,3.2vw,3.25rem)] leading-[1.02]">
-						A face to face conversation is the fastest way to find the real AI opportunity.
-					</p>
-				</div>
-
-				<div class="grid content-between gap-16 p-4 sm:p-6 lg:p-10">
+			<section class="grid min-h-[calc(100svh-var(--header-height))] border-b border-ink lg:grid-cols-[1.05fr_0.95fr]">
+				<div class="grid content-between gap-12 border-b border-ink p-4 sm:p-6 lg:border-b-0 lg:border-r lg:p-10">
 					<div>
-						<p class="mb-10 max-w-[34rem] text-[1.1rem] leading-[1.25]">
-							Thirty minutes is enough to understand where you are, what is getting in the way, and whether an agentic system is the right next step. No pitch deck. Just a useful conversation about your business and what needs to work.
-						</p>
-						<h1 class="max-w-[12ch] font-display text-[clamp(4.2rem,17vw,18rem)] font-bold leading-[0.78] tracking-normal">
-							book a meeting
+						<p class="mb-8 text-[1rem] leading-[1.25]">Book a meeting</p>
+						<h1 class="max-w-[13ch] font-display text-[clamp(3.6rem,11vw,9rem)] font-bold leading-[0.82] tracking-normal">
+							meet face to face
 						</h1>
 					</div>
 
-					<div>
+					<p class="max-w-[38rem] text-[clamp(1.35rem,2.8vw,2.75rem)] leading-[1.04]">
+						A focused conversation is the fastest way to find the real <span class="uppercase">AI</span> opportunity.
+					</p>
+				</div>
+
+				<div class="grid content-between gap-12 p-4 sm:p-6 lg:p-10">
+					<div class="max-w-[34rem]">
+						<p class="text-[1.1rem] leading-[1.25]">
+							Thirty minutes is enough to understand where you are, what is getting in the way, and whether an agentic system is the right next step.
+						</p>
+						<p class="mt-6 text-[1.1rem] leading-[1.25]">
+							No pitch deck. Just a useful conversation about your business and what needs to work.
+						</p>
+					</div>
+
+					<div class="border-t border-ink pt-6">
 						<a href={emailHref} class={`${buttonClass} mb-6`}>
-							Book a meeting
+							Email to book a meeting
 						</a>
 						<p class="max-w-[28rem] text-[1rem] leading-[1.25]">
 							We reply within one business day. If we are not the right fit, we will say so clearly.
@@ -93,7 +100,7 @@ const nextSteps = [
 			<section class="grid border-b border-ink md:grid-cols-3">
 				{
 					nextSteps.map((step) => (
-						<article class="min-h-[260px] border-b border-ink p-5 md:border-b-0 md:border-r last:md:border-r-0 sm:p-6">
+						<article class="min-h-[220px] border-b border-ink p-5 md:border-b-0 md:border-r last:md:border-r-0 sm:p-6">
 							<h2 class="text-[1rem] font-bold">{step.title}</h2>
 							<p class="mt-10 leading-[1.25]">{step.body}</p>
 						</article>
