@@ -1,0 +1,105 @@
+---
+import "../styles/global.css";
+
+const emailHref = "mailto:hello@actai.studio?subject=Book%20a%20meeting";
+const buttonClass = "inline-flex h-10 items-center justify-center border border-ink bg-acid px-4 text-[16px] leading-none text-ink no-underline transition-colors hover:bg-ink hover:text-paper";
+
+const nextSteps = [
+	{
+		title: "01 tell us where you are",
+		body: "Send a short note about the business, the pressure you are trying to resolve, and what you want AI to make possible.",
+	},
+	{
+		title: "02 meet for 30 minutes",
+		body: "We use the conversation to understand context, constraints and whether an agentic approach is the right route.",
+	},
+	{
+		title: "03 leave with a next step",
+		body: "You get a clear recommendation: what to explore, what to avoid, and what would need to be scoped next.",
+	},
+];
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta
+			name="description"
+			content="Book a face to face meeting with Act to discuss where AI can make a real difference in your business."
+		/>
+		<title>Book a meeting | actai.studio</title>
+	</head>
+	<body class="min-h-screen pt-[var(--header-height)]">
+		<header class="fixed left-0 top-0 z-50 grid h-[var(--header-height)] w-full grid-cols-[1fr_auto] border-b border-ink bg-ink text-paper md:grid-cols-[minmax(180px,1fr)_auto_minmax(180px,1fr)]">
+			<a
+				href="/"
+				class="flex items-center px-4 text-paper no-underline transition-colors hover:bg-paper hover:text-ink sm:px-6"
+				aria-label="act-ai studio"
+			>
+				<svg
+					class="h-7 w-auto"
+					viewBox="360 289.86 1200.07 500.75"
+					role="img"
+					aria-hidden="true"
+				>
+					<path fill="currentColor" d="M1001.43 538.23c29.46 0 54.12 20.28 60.97 47.62h137.8c-8.22-97.46-94.04-174.14-198.78-174.14-110.17 0-199.48 84.82-199.48 189.45s89.31 189.45 199.48 189.45 190.56-76.68 198.78-174.14h-137.8c-6.85 27.34-31.51 47.62-60.97 47.62-34.75 0-62.93-28.17-62.93-62.93s28.17-62.93 62.93-62.93Z" />
+					<path fill="currentColor" d="M645.48 289.86H507.44L360.07 784.04h150.46l19.25-70.49h131.09l19.25 70.49h150.46L683.21 289.86h-37.73ZM562.62 593.3l32.71-119.78 32.71 119.78h-65.42Z" />
+					<path fill="currentColor" d="M1439.38 536.94V416.7h-45.8V289.86h-141.11V416.7h-45.81v120.24h45.81v247.09h141.11V536.94h45.8Z" />
+					<path fill="currentColor" d="M1418.96 663.79h141.11v120.25h-141.11z" />
+				</svg>
+			</a>
+			<nav class="hidden items-center justify-center gap-8 px-6 text-[16px] md:flex">
+				<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="/#work">work</a>
+				<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="/#method">method</a>
+			</nav>
+			<a href={emailHref} class={`${buttonClass} mx-4 my-2 sm:mx-6`}>
+				Email to book
+			</a>
+		</header>
+
+		<main>
+			<section class="grid min-h-[calc(100svh-var(--header-height))] border-b border-ink lg:grid-cols-[minmax(220px,34vw)_1fr]">
+				<div class="border-b border-ink p-4 sm:p-6 lg:border-b-0 lg:border-r lg:p-10">
+					<p class="sticky top-24 max-w-[24rem] text-[clamp(1.45rem,3.2vw,3.25rem)] leading-[1.02]">
+						A face to face conversation is the fastest way to find the real AI opportunity.
+					</p>
+				</div>
+
+				<div class="grid content-between gap-16 p-4 sm:p-6 lg:p-10">
+					<div>
+						<p class="mb-10 max-w-[34rem] text-[1.1rem] leading-[1.25]">
+							Thirty minutes is enough to understand where you are, what is getting in the way, and whether an agentic system is the right next step. No pitch deck. Just a useful conversation about your business and what needs to work.
+						</p>
+						<h1 class="max-w-[12ch] font-display text-[clamp(4.2rem,17vw,18rem)] font-bold leading-[0.78] tracking-normal">
+							book a meeting
+						</h1>
+					</div>
+
+					<div>
+						<a href={emailHref} class={`${buttonClass} mb-6`}>
+							Book a meeting
+						</a>
+						<p class="max-w-[28rem] text-[1rem] leading-[1.25]">
+							We reply within one business day. If we are not the right fit, we will say so clearly.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="grid border-b border-ink md:grid-cols-3">
+				{
+					nextSteps.map((step) => (
+						<article class="min-h-[260px] border-b border-ink p-5 md:border-b-0 md:border-r last:md:border-r-0 sm:p-6">
+							<h2 class="text-[1rem] font-bold">{step.title}</h2>
+							<p class="mt-10 leading-[1.25]">{step.body}</p>
+						</article>
+					))
+				}
+			</section>
+		</main>
+	</body>
+</html>
