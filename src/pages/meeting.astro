@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 
-const emailHref = "mailto:hello@actai.studio?subject=Book%20a%2030-minute%20meeting";
+const emailHref = "mailto:hello@actai.studio?subject=Book%20a%2030-minute%20call";
 const buttonClass = "inline-flex h-10 items-center justify-center border border-ink bg-acid px-4 text-[16px] leading-none text-ink no-underline transition-colors hover:bg-ink hover:text-paper";
 
 const nextSteps = [
@@ -34,7 +34,7 @@ const nextSteps = [
 			name="description"
 			content="Book a face to face meeting with Act to discuss where AI can make a real difference in your business."
 		/>
-		<title>Book a meeting | actai.studio</title>
+		<title>Book a call | actai.studio</title>
 	</head>
 	<body class="min-h-screen pt-[var(--header-height)]">
 		<header class="fixed left-0 top-0 z-50 grid h-[var(--header-height)] w-full grid-cols-[1fr_auto] border-b border-ink bg-ink text-paper md:grid-cols-[minmax(180px,1fr)_auto_minmax(180px,1fr)]">
@@ -50,7 +50,7 @@ const nextSteps = [
 				<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="/#work">work</a>
 				<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="/#method">method</a>
 			</nav>
-			<a href={emailHref} class={`${buttonClass} mx-4 my-2 sm:mx-6`}>Book a meeting</a>
+			<a href={emailHref} class={`${buttonClass} mx-4 my-2 sm:mx-6`}>Book a call</a>
 		</header>
 
 		<main>
@@ -70,7 +70,7 @@ const nextSteps = [
 
 			<section class="grid gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_0.82fr] lg:px-10 lg:py-16">
 				<div class="border border-ink bg-paper p-5 sm:p-8">
-					<p class="mb-8 text-[1.35rem] font-bold leading-[1.1]">Book a 30-minute meeting</p>
+					<p class="mb-8 text-[1.35rem] font-bold leading-[1.1]">Book a 30-minute call</p>
 
 					<div class="grid gap-4 md:grid-cols-2">
 						<div>
@@ -98,7 +98,7 @@ const nextSteps = [
 						</div>
 					</div>
 
-					<a href={emailHref} class={`${buttonClass} mt-6 w-full`}>Email to book your meeting</a>
+					<a href={emailHref} class={`${buttonClass} mt-6 w-full`}>Email to book your call</a>
 
 					<p class="mt-4 text-[1rem] leading-[1.25]">
 						This opens your email client for now. We reply within one business day.

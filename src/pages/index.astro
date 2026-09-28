@@ -13,6 +13,42 @@ const agentSlots = [
 	{ label: "production agent", accent: "bg-paper" },
 ];
 
+const proofSignals = [
+	["01", "outreach arm of Advanced Analytica"],
+	["02", "agentic systems, automation and web production"],
+	["03", "strategy, specification and build in one room"],
+];
+
+const stalls = [
+	{
+		title: "you know AI matters",
+		copy: "But the first useful move is unclear. We find the business problem before we talk about the technology.",
+	},
+	{
+		title: "knowledge is stuck",
+		copy: "It sits with busy people, static documents and workflows that were never designed for agents.",
+	},
+	{
+		title: "automation stopped early",
+		copy: "The simple work has been covered. The valuable work is specific, multi-step and full of judgement.",
+	},
+];
+
+const methodSteps = [
+	{
+		label: "01 meet",
+		copy: "Thirty minutes face to face. You bring the context, pressure and ambition. We listen for the work that should change.",
+	},
+	{
+		label: "02 map",
+		copy: "We bring AI into the conversation, test the shape of the opportunity and separate useful work from novelty.",
+	},
+	{
+		label: "03 build",
+		copy: "We turn what we learn into a brief: skills, functions, safeguards, systems and the first agentic build.",
+	},
+];
+
 const directors = [
 	{
 		name: "Jonny Bowker",
@@ -88,22 +124,66 @@ const clientLogos = [
 		</header>
 
 		<main>
-			<section class="grid min-h-[calc(100svh-var(--header-height))] border-b border-ink lg:grid-cols-[minmax(220px,34vw)_1fr]">
-				<div class="border-b border-ink p-4 sm:p-6 lg:border-b-0 lg:border-r lg:p-10">
-					<p class="sticky top-24 max-w-[22rem] text-[1rem] leading-[1.25]">The position</p>
+			<section class="grid min-h-[calc(100svh-var(--header-height))] border-b border-ink lg:grid-cols-[minmax(260px,38vw)_1fr]">
+				<div class="grid border-b border-ink lg:border-b-0 lg:border-r">
+					<div class="p-4 sm:p-6 lg:p-10">
+						<p class="mb-10 text-[1rem] leading-[1.25]">A face to face route into useful AI</p>
+						<p class="max-w-[23rem] text-[clamp(1.6rem,3.5vw,3.75rem)] leading-[1.02]">
+							You know your business. We find the AI opportunity.
+						</p>
+					</div>
+					<a
+						href={bookingHref}
+						class="group mt-auto grid border-t border-ink bg-acid p-4 text-ink no-underline transition-colors hover:bg-ink hover:text-paper sm:p-6 lg:p-10"
+					>
+						<span class="text-[1rem] leading-[1.25]">Book a call</span>
+						<span class="mt-12 max-w-[20rem] text-[1rem] leading-[1.25]">
+							Thirty minutes. One real business problem. A clear next step.
+						</span>
+					</a>
 				</div>
-				<div class="grid content-end gap-10 p-4 sm:p-6 lg:p-10">
-					<h1 class="max-w-[12ch] font-display text-[clamp(4.2rem,17vw,18rem)] font-bold leading-[0.78] tracking-normal">
-						intelligence needs direction
+				<div class="grid content-between gap-10 p-4 sm:p-6 lg:p-10">
+					<h1 class="max-w-[11ch] font-display text-[clamp(4.2rem,16vw,17rem)] font-bold leading-[0.78] tracking-normal">
+						AI needs direction
 					</h1>
-					<p class="max-w-[28rem] text-[clamp(1.45rem,3.2vw,3.25rem)] leading-[1.02]">
-						You don't need to understand <span class="uppercase">AI</span>.<br>
-						We need to understand your business.
-					</p>
+					<div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+						<p class="max-w-[34rem] text-[clamp(1.45rem,3vw,3.1rem)] leading-[1.04]">
+							You don't need to understand <span class="uppercase">AI</span>.<br>
+							We need to understand your business.
+						</p>
+						<a href={bookingHref} class={`${bookingButtonClass} w-fit`}>Book a call</a>
+					</div>
 				</div>
 			</section>
 
-			<section id="work" class="grid border-b border-ink md:grid-cols-2">
+			<section class="grid border-b border-ink md:grid-cols-3">
+				{proofSignals.map(([label, copy]) => (
+					<div class="border-b border-ink p-5 md:border-b-0 md:border-r last:md:border-r-0 sm:p-6">
+						<p class="mb-12 text-sm leading-none">{label}</p>
+						<p class="max-w-[20rem] text-[1.1rem] leading-[1.25]">{copy}</p>
+					</div>
+				))}
+			</section>
+
+			<section id="work" class="border-b border-ink">
+				<div class="grid gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(220px,34vw)_1fr] lg:px-10">
+					<p class="sticky top-24 max-w-[22rem] text-[1rem] leading-[1.25]">Where it stalls</p>
+					<h2 class="max-w-[13ch] font-display text-[clamp(3.4rem,11vw,11rem)] font-bold leading-[0.8]">
+						most AI work stops before it works
+					</h2>
+				</div>
+				<div class="grid border-t border-ink md:grid-cols-3">
+					{stalls.map((stall, index) => (
+						<article class="min-h-[300px] border-b border-ink p-5 md:border-b-0 md:border-r last:md:border-r-0 sm:p-6">
+							<p class="mb-16 text-sm leading-none">{String(index + 1).padStart(2, "0")}</p>
+							<h3 class="font-display text-[clamp(2.7rem,7vw,6rem)] font-bold leading-[0.82]">{stall.title}</h3>
+							<p class="mt-8 max-w-[28rem] text-[1rem] leading-[1.25]">{stall.copy}</p>
+						</article>
+					))}
+				</div>
+			</section>
+
+			<section class="grid border-b border-ink md:grid-cols-2">
 				<article class="min-h-[360px] border-b border-ink p-5 md:border-b-0 md:border-r sm:p-6 lg:p-10">
 					<p class="mb-16 text-[1rem] leading-[1.25]">The difference</p>
 					<h2 class="font-display text-[clamp(3rem,9vw,9rem)] font-bold leading-[0.8]">chatbot</h2>
@@ -160,18 +240,12 @@ const clientLogos = [
 					<p class="font-display text-[clamp(3rem,9vw,9rem)] font-bold leading-[0.8]">then we act</p>
 				</div>
 				<div class="grid md:grid-cols-3">
-					<div class="border-b border-ink p-5 md:border-b-0 md:border-r sm:p-6">
-						<h2 class="text-[1rem] font-bold">01 converse</h2>
-						<p class="mt-10 leading-[1.25]">We bring <span class="uppercase">AI</span> into the conversation. You see it work. You see what's possible.</p>
-					</div>
-					<div class="border-b border-ink p-5 md:border-b-0 md:border-r sm:p-6">
-						<h2 class="text-[1rem] font-bold">02 brief</h2>
-						<p class="mt-10 leading-[1.25]">We turn what we learn into a brief: what to build, where to start and what comes next.</p>
-					</div>
-					<div class="p-5 sm:p-6">
-						<h2 class="text-[1rem] font-bold">03 change</h2>
-						<p class="mt-10 leading-[1.25]">Then we act, and change the way your business works, <em class="font-serif italic">forever</em>.</p>
-					</div>
+					{methodSteps.map((step) => (
+						<div class="border-b border-ink p-5 md:border-b-0 md:border-r last:md:border-r-0 sm:p-6">
+							<h2 class="text-[1rem] font-bold">{step.label}</h2>
+							<p class="mt-10 leading-[1.25]">{step.copy}</p>
+						</div>
+					))}
 				</div>
 			</section>
 
@@ -195,10 +269,13 @@ const clientLogos = [
 
 			<section class="grid border-b border-ink lg:grid-cols-[1fr_1fr]">
 				<div class="border-b border-ink p-4 sm:p-6 lg:border-b-0 lg:border-r lg:p-10">
-					<p class="mb-8 text-[1rem] leading-[1.25]">The direction</p>
-					<h2 class="max-w-[12ch] font-display text-[clamp(3.8rem,11vw,12rem)] font-bold leading-[0.78]">
-						you know the business. we find the opportunity. together we act.
+					<p class="mb-8 text-[1rem] leading-[1.25]">Start with a conversation</p>
+					<h2 class="max-w-[11ch] font-display text-[clamp(3.8rem,11vw,12rem)] font-bold leading-[0.78]">
+						book a call. leave with direction.
 					</h2>
+					<p class="mt-8 max-w-[31rem] text-[1.25rem] leading-[1.15]">
+						We will tell you what to explore, what to avoid and what would need to be scoped next.
+					</p>
 					<a href={bookingHref} class={`${bookingButtonClass} mt-10 w-fit`}>Book a call</a>
 				</div>
 				<div class="grid md:grid-cols-2">
