@@ -4,34 +4,42 @@ import "../styles/global.css";
 const bookingHref = "/meeting";
 const bookingButtonClass = "inline-flex h-10 items-center justify-center border border-ink bg-acid px-4 text-[16px] leading-none text-ink no-underline transition-colors hover:bg-ink hover:text-paper";
 
-const services = [
+// Prospect-specific versions can swap these labels and image placeholders
+// without changing the surrounding possibility section.
+const agentSlots = [
+	{ label: "operations agent", accent: "bg-acid" },
+	{ label: "bookings agent", accent: "bg-sky" },
+	{ label: "knowledge agent", accent: "bg-coral text-paper" },
+	{ label: "production agent", accent: "bg-paper" },
+];
+
+const directors = [
 	{
-		title: "meet",
-		label: "01",
-		copy: "We meet the business first. You bring the context, constraints and ambition. We find where AI can make a real difference.",
-		accent: "bg-acid",
+		name: "Jonny Bowker",
+		role: "Technical Director",
+		phone: "+44 7552 045 721",
+		email: "jonathan@advancedanalytica.co.uk",
+		site: "advancedanalytica.co.uk",
+		linkedin: "LinkedIn",
 	},
 	{
-		title: "build",
-		label: "02",
-		copy: "We build the agent around the task: the skills it needs, the boundaries it works within, and prove it is ready.",
-		accent: "bg-sky",
-	},
-	{
-		title: "work",
-		label: "03",
-		copy: "We put it to work with the functions, safeguards and operating model needed to run inside the business.",
-		accent: "bg-coral text-paper",
+		name: "Mark Chatelier",
+		role: "Creative Director",
+		phone: "+44 7500 904 400",
+		email: "mark@chateliercreative.com",
+		site: "chateliercreative.com",
+		linkedin: "LinkedIn",
 	},
 ];
 
-const specimens = [
-	["direction", "Intelligence needs a business problem"],
-	["difference", "Chatbots respond. Agents finish the job"],
-	["possibility", "AI can do almost anything. That is not the point"],
-	["dialogue", "Bring an informed agent into the room"],
-	["scope", "Skills, functions, boundaries, next steps"],
-	["govern", "Build the technology. Govern the footprint"],
+// Confirm public-logo clearance before replacing these placeholders with marks.
+const clientLogos = [
+	"Target",
+	"Disney",
+	"Castrol",
+	"Code and Theory",
+	"JPMorgan",
+	"PwC",
 ];
 ---
 
@@ -75,94 +83,162 @@ const specimens = [
 				href={bookingHref}
 				class={`${bookingButtonClass} mx-4 my-2 sm:mx-6`}
 			>
-				Book a meeting
+				Book a call
 			</a>
 		</header>
 
 		<main>
-			<section class="grid min-h-[calc(100svh-var(--header-height))] grid-rows-[1fr_auto] border-b border-ink">
-				<div class="grid items-end gap-12 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(220px,34vw)_1fr] lg:px-10">
+			<section class="grid min-h-[calc(100svh-var(--header-height))] border-b border-ink lg:grid-cols-[minmax(220px,34vw)_1fr]">
+				<div class="border-b border-ink p-4 sm:p-6 lg:border-b-0 lg:border-r lg:p-10">
+					<p class="sticky top-24 max-w-[22rem] text-[1rem] leading-[1.25]">The position</p>
+				</div>
+				<div class="grid content-end gap-10 p-4 sm:p-6 lg:p-10">
+					<h1 class="max-w-[12ch] font-display text-[clamp(4.2rem,17vw,18rem)] font-bold leading-[0.78] tracking-normal">
+						intelligence needs direction
+					</h1>
 					<p class="max-w-[28rem] text-[clamp(1.45rem,3.2vw,3.25rem)] leading-[1.02]">
-						Intelligence needs direction.<br>
-						You know your business. <br>
-						We know the <span class="uppercase">AI</span> opportunity. 
+						You don't need to understand <span class="uppercase">AI</span>.<br>
+						We need to understand your business.
 					</p>
+				</div>
+			</section>
 
-					<div class="grid gap-6">
-						<h1 class="max-w-[12ch] font-display text-[clamp(4.2rem,17vw,18rem)] font-bold leading-[0.78] tracking-normal">
-							together we act
-						</h1>
-						<a
-							href={bookingHref}
-							class={`${bookingButtonClass} w-fit`}
-						>
-							Book a meeting
-						</a>
+			<section id="work" class="grid border-b border-ink md:grid-cols-2">
+				<article class="min-h-[360px] border-b border-ink p-5 md:border-b-0 md:border-r sm:p-6 lg:p-10">
+					<p class="mb-16 text-[1rem] leading-[1.25]">The difference</p>
+					<h2 class="font-display text-[clamp(3rem,9vw,9rem)] font-bold leading-[0.8]">chatbot</h2>
+					<p class="mt-8 max-w-[28rem] text-[1.1rem] leading-[1.25]">
+						A chatbot holds a conversation. You lead. It responds.
+					</p>
+				</article>
+				<article class="min-h-[360px] p-5 sm:p-6 lg:p-10">
+					<p class="mb-16 text-[1rem] leading-[1.25]">The difference</p>
+					<h2 class="font-display text-[clamp(3rem,9vw,9rem)] font-bold leading-[0.8]">agent</h2>
+					<p class="mt-8 max-w-[32rem] text-[1.1rem] leading-[1.25]">
+						An agent gets it done. Give it a job, the skills to do it, the boundaries to work within, and it finishes the task itself.
+					</p>
+				</article>
+			</section>
+
+			<section class="border-b border-ink">
+				<div class="grid gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(220px,34vw)_1fr] lg:px-10">
+					<div>
+						<p class="sticky top-24 max-w-[22rem] text-[1.1rem] leading-[1.25]">
+							To find the answer, we start with you. What works. What doesn't. What could.
+						</p>
+					</div>
+					<div>
+						<h2 class="max-w-[15ch] font-display text-[clamp(3rem,10vw,10rem)] font-bold leading-[0.8]">
+							<span class="uppercase">AI</span> can do almost anything
+						</h2>
+						<p class="mt-8 max-w-[34rem] text-[1.35rem] leading-[1.12]">
+							That's not the point. The question is what <span class="uppercase">AI</span> can really do for your business.
+						</p>
 					</div>
 				</div>
-				<div class="grid border-t border-ink md:grid-cols-3">
+				<div class="grid border-t border-ink md:grid-cols-4">
 					{
-						services.map((service) => (
-							<article class="group min-h-[220px] border-b border-ink p-4 transition-colors hover:bg-ink hover:text-paper md:border-b-0 md:border-r last:md:border-r-0 sm:p-6">
-								<div class={`mb-16 inline-flex h-10 min-w-10 items-center justify-center border border-ink px-3 text-sm group-hover:border-paper ${service.accent}`}>
-									{service.label}
+						agentSlots.map((slot, index) => (
+							<article class="min-h-[260px] border-b border-ink p-5 md:border-b-0 md:border-r last:md:border-r-0 sm:p-6">
+								<div class={`mb-16 aspect-[4/3] border border-ink ${slot.accent}`}>
+									<div class="flex h-full items-center justify-center text-[1rem] leading-none">
+										{String(index + 1).padStart(2, "0")}
+									</div>
 								</div>
-								<h2 class="font-display text-[clamp(2.5rem,7vw,6.5rem)] font-bold leading-[0.82]">
-									{service.title}
-								</h2>
-								<p class="mt-8 max-w-[28rem] text-[1rem] leading-[1.25]">{service.copy}</p>
+								<p class="border-t border-ink pt-2 text-[1rem] leading-[1.25]">{slot.label}</p>
 							</article>
 						))
 					}
 				</div>
-			</section>
-
-			<section id="work" class="px-4 py-10 sm:px-6 lg:px-10">
-				<div class="grid gap-6 lg:grid-cols-[minmax(220px,34vw)_1fr]">
-					<div>
-						<p class="sticky top-24 max-w-[22rem] text-[1.1rem] leading-[1.25]">
-							Most businesses already have the knowledge. It sits with busy people, static documents and processes that were never built for <span class="uppercase">AI</span>.
-						</p>
-					</div>
-					<ul class="grid border-t border-ink md:grid-cols-2">
-						{
-							specimens.map(([title, detail], index) => (
-								<li class="group min-h-[230px] border-b border-ink md:odd:border-r">
-									<a href="mailto:hello@actai.studio" class="flex h-full flex-col justify-between p-5 text-ink no-underline transition-colors hover:bg-ink hover:text-paper sm:p-6">
-										<div class="flex items-start justify-between gap-4">
-											<span class="text-sm">{String(index + 1).padStart(2, "0")}</span>
-											<span class="h-4 w-4 border border-current bg-current transition-transform group-hover:rotate-45" />
-										</div>
-										<div>
-											<p class="mb-4 border-t border-current pt-2 text-[1rem] leading-[1.25]">
-												{title === "possibility" ? <><span class="uppercase">AI</span> can do almost anything. That is not the point</> : detail}
-											</p>
-											<h3 class="font-display text-[clamp(2.75rem,8vw,7rem)] font-bold leading-[0.82]">{title}</h3>
-										</div>
-									</a>
-								</li>
-							))
-						}
-					</ul>
+				<div class="border-t border-ink px-4 py-8 sm:px-6 lg:px-10">
+					<a href={bookingHref} class={`${bookingButtonClass} w-fit`}>Book a call</a>
 				</div>
 			</section>
 
-			<section id="method" class="grid border-y border-ink lg:grid-cols-[1fr_2fr]">
+			<section id="method" class="grid border-b border-ink lg:grid-cols-[1fr_2fr]">
 				<div class="border-b border-ink bg-sky p-4 pb-12 sm:p-6 sm:pb-16 lg:border-b-0 lg:border-r">
-					<p class="font-display text-[clamp(3rem,9vw,9rem)] font-bold leading-[0.8]">act. and change.</p>
+					<p class="font-display text-[clamp(3rem,9vw,9rem)] font-bold leading-[0.8]">then we act</p>
 				</div>
 				<div class="grid md:grid-cols-3">
 					<div class="border-b border-ink p-5 md:border-b-0 md:border-r sm:p-6">
-						<h2 class="text-[1rem] font-bold">01 meet</h2>
-						<p class="mt-10 leading-[1.25]">We bring an informed agent into the room. You ask it anything. We learn where the real opportunity sits.</p>
+						<h2 class="text-[1rem] font-bold">01 converse</h2>
+						<p class="mt-10 leading-[1.25]">We bring <span class="uppercase">AI</span> into the conversation. You see it work. You see what's possible.</p>
 					</div>
 					<div class="border-b border-ink p-5 md:border-b-0 md:border-r sm:p-6">
-						<h2 class="text-[1rem] font-bold">02 build</h2>
-						<p class="mt-10 leading-[1.25]">We shape the task, skills and boundaries, then prove the agent can do useful work safely.</p>
+						<h2 class="text-[1rem] font-bold">02 brief</h2>
+						<p class="mt-10 leading-[1.25]">We turn what we learn into a brief: what to build, where to start and what comes next.</p>
 					</div>
 					<div class="p-5 sm:p-6">
-						<h2 class="text-[1rem] font-bold">03 work</h2>
-						<p class="mt-10 leading-[1.25]">We connect it to the functions, safeguards and operating model needed to run inside the business.</p>
+						<h2 class="text-[1rem] font-bold">03 change</h2>
+						<p class="mt-10 leading-[1.25]">Then we act, and change the way your business works, <em class="font-serif italic">forever</em>.</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="grid border-b border-ink lg:grid-cols-[1fr_2fr]">
+				<div class="border-b border-ink p-4 sm:p-6 lg:border-b-0 lg:border-r">
+					<div class="flex h-28 w-28 items-center justify-center border border-ink bg-paper text-center text-[0.9rem] leading-[1.05]">
+						Repay.<br>Earth
+					</div>
+				</div>
+				<div class="p-4 sm:p-6 lg:p-10">
+					<h2 class="max-w-[16ch] font-display text-[clamp(3rem,9vw,9rem)] font-bold leading-[0.8]">
+						we build the technology. we govern the footprint. we repay the earth.
+					</h2>
+					<div class="mt-10 grid gap-6 text-[1.1rem] leading-[1.35] lg:grid-cols-2">
+						<p>Repay.Earth is our commitment to making the impact of <span class="uppercase">AI</span> visible and doing something about it.</p>
+						<p>As <span class="uppercase">AI</span> becomes more embedded in business, so does its environmental cost. Repay.Earth gives us a way to address that impact when the need arises, working with established measurement, offsetting and restoration partners.</p>
+						<p>It connects the technology we build with verified natural capital to reduce and repay its impact. Because progress shouldn't come at the Earth's expense.</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="grid border-b border-ink lg:grid-cols-[1fr_1fr]">
+				<div class="border-b border-ink p-4 sm:p-6 lg:border-b-0 lg:border-r lg:p-10">
+					<p class="mb-8 text-[1rem] leading-[1.25]">The direction</p>
+					<h2 class="max-w-[12ch] font-display text-[clamp(3.8rem,11vw,12rem)] font-bold leading-[0.78]">
+						you know the business. we find the opportunity. together we act.
+					</h2>
+					<a href={bookingHref} class={`${bookingButtonClass} mt-10 w-fit`}>Book a call</a>
+				</div>
+				<div class="grid md:grid-cols-2">
+					{directors.map((director) => (
+						<article class="border-b border-ink p-5 md:border-b-0 md:border-r last:md:border-r-0 sm:p-6">
+							<p class="text-[1.35rem] font-bold leading-[1.1]">{director.name}</p>
+							<p class="mt-2 leading-[1.25]">{director.role}</p>
+							<div class="mt-10 grid gap-2 leading-[1.25]">
+								<p>{director.phone}</p>
+								<p>{director.email}</p>
+								<p>{director.site}</p>
+								<p>{director.linkedin}</p>
+							</div>
+						</article>
+					))}
+				</div>
+			</section>
+
+			<section class="px-4 py-12 sm:px-6 lg:px-10">
+				<div class="grid gap-10 lg:grid-cols-[minmax(220px,34vw)_1fr]">
+					<p class="max-w-[22rem] text-[1.1rem] leading-[1.25]">
+						Act is the outreach arm of Advanced Analytica.
+					</p>
+					<div>
+						<p class="max-w-[54rem] text-[clamp(1.8rem,4vw,4.5rem)] leading-[0.98]">
+							Most businesses already have the knowledge. The problem is putting it to work.
+						</p>
+						<p class="mt-8 max-w-[44rem] text-[1.1rem] leading-[1.35]">
+							It sits with busy people, in static documents and processes that were never built for <span class="uppercase">AI</span>. We turn that into agentic systems that actually run in production. And we bring the strategy, specification and skills to make it real.
+						</p>
+						<div class="mt-10 grid border-t border-ink sm:grid-cols-2 lg:grid-cols-3">
+							{clientLogos.map((logo) => (
+								<div class="border-b border-ink p-5 text-[1rem] leading-[1.25] sm:border-r">
+									{logo}
+								</div>
+							))}
+						</div>
+						<p class="mt-4 max-w-[42rem] text-sm leading-[1.35]">
+							Placeholder client names from private deck. Confirm clearance before replacing with public logo marks.
+						</p>
 					</div>
 				</div>
 			</section>
