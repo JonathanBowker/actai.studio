@@ -1,6 +1,9 @@
 ---
 import "../styles/global.css";
 
+const bookingHref = "mailto:hello@actai.studio?subject=Book%20a%20meeting";
+const bookingButtonClass = "inline-flex h-10 items-center justify-center border border-ink bg-acid px-4 text-[16px] leading-none text-ink no-underline transition-colors hover:bg-ink hover:text-paper";
+
 const services = [
 	{
 		title: "meet",
@@ -67,13 +70,12 @@ const specimens = [
 			<nav class="hidden items-center justify-center gap-8 px-6 text-[16px] md:flex">
 				<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="#work">work</a>
 				<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="#method">method</a>
-				<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="mailto:hello@actai.studio">contact</a>
 			</nav>
 			<a
-				href="mailto:hello@actai.studio"
-				class="flex items-center justify-end px-4 text-[16px] text-paper no-underline transition-colors hover:bg-paper hover:text-ink sm:px-6"
+				href={bookingHref}
+				class={`${bookingButtonClass} mx-4 my-2 sm:mx-6`}
 			>
-				(0) inbox
+				Book a meeting
 			</a>
 		</header>
 
@@ -86,9 +88,17 @@ const specimens = [
 						We know the <span class="uppercase">AI</span> opportunity. 
 					</p>
 
-					<h1 class="max-w-[12ch] font-display text-[clamp(4.2rem,17vw,18rem)] font-bold leading-[0.78] tracking-normal">
-						together we act
-					</h1>
+					<div class="grid gap-6">
+						<h1 class="max-w-[12ch] font-display text-[clamp(4.2rem,17vw,18rem)] font-bold leading-[0.78] tracking-normal">
+							together we act
+						</h1>
+						<a
+							href={bookingHref}
+							class={`${bookingButtonClass} w-fit`}
+						>
+							Book a meeting
+						</a>
+					</div>
 				</div>
 				<div class="grid border-t border-ink md:grid-cols-3">
 					{
