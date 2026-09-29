@@ -100,54 +100,63 @@ const frameworkCards = [
 		copy: "Most businesses already have the knowledge. We sit with you to find where it's stuck, not just where AI sounds impressive.",
 		image: "/fixa-assets/WXKx26vqrAI7XfrXAgsHkTeOeV0.webp",
 		type: "phase",
+		overlay: { type: "list", title: "Discovery focus", active: "Business pressure", items: ["Hidden context", "Repeated work", "Decision drag"] },
 	},
 	{
-		title: "Scope one thing properly",
+		title: "Scope the agent framework",
 		copy: "We measure success by what changes, not by what looks impressive. One clear job, defined before anything gets built.",
 		image: "/images/act-hero-cinematic.png",
 		type: "goal",
+		overlay: { type: "metric", title: "Scope lock", value: "01", action: "One job, clear edge" },
 	},
 	{
 		title: "Build the agent around the job",
-		copy: "The skills it needs, the boundaries it works within, and proof it's ready before it touches real work.",
+		copy: "The skills it needs, the parameters it needs to work within, and proof it's ready before it touches real work in production.",
 		image: "/fixa-assets/herovideo-poster.jpg",
 		type: "goal",
+		overlay: { type: "list", title: "Agent framework", active: "Skills", items: ["Parameters", "Evidence", "Production proof"] },
 	},
 	{
 		title: "Keep evidence, not impressions",
 		copy: "Every agent we shape leaves a trail, what it did, why, and what changed. Judged on outcomes, not demos.",
 		image: "/fixa-assets/K6oVlqJ1SryJzVBte2yxIFoGqI.webp",
 		type: "results",
+		overlay: { type: "results", title: "Proof trail", rows: [["Action log", "On"], ["Source trail", "On"], ["Human review", "On"]] },
 	},
 	{
 		title: "Cut through scattered documents",
 		copy: "Give teams a private route to the knowledge already sitting in static files, that knows the business context and the right next question.",
 		image: "/fixa-assets/tC5phDS1LNYMA1wQWaeq9OsGW18.webp",
 		type: "phase",
+		overlay: { type: "list", title: "Knowledge base", active: "Policies", items: ["Playbooks", "Client notes", "Team rules"] },
 	},
 	{
 		title: "Keep governance provable",
 		copy: "Build review points, evidence trails and escalation rules in from the start, so sensitive work stays accountable, not just compliant on paper.",
 		image: "/images/agentic-use-case.svg",
 		type: "phase",
+		overlay: { type: "results", title: "Governance checks", rows: [["Escalation", "Set"], ["Review loop", "Set"], ["Audit trail", "Set"]] },
 	},
 	{
 		title: "Lock the brief before you spend",
 		copy: "Storyboard, cast and shot list agreed and signed off first. Nothing gets generated until the plan is right.",
 		image: "/fixa-assets/MpwLfV3BL41ih4BTUbGjwjVEyU.webp",
 		type: "phase",
+		overlay: { type: "list", title: "Creative brief", active: "Storyboard", items: ["Cast", "Shot list", "Approval gate"] },
 	},
 	{
 		title: "Prepare for what's next",
 		copy: "Whether that's succession, an exit, or simply scaling past one person holding all the knowledge in their head.",
 		image: "/images/agentic-use-case-2.svg",
 		type: "results",
+		overlay: { type: "metric", title: "Continuity", value: "Next", action: "Knowledge ready" },
 	},
 	{
 		title: "Catch drift before it ships",
 		copy: "Check imagery, copy and tone against the guidelines automatically, so brand compliance isn't a bottleneck or an afterthought.",
 		image: "/images/agentic-use-case.svg",
 		type: "results",
+		overlay: { type: "results", title: "Brand checks", rows: [["Tone", "Pass"], ["Visual rules", "Pass"], ["Risk flag", "Clear"]] },
 	},
 ];
 
@@ -850,8 +859,7 @@ const faqs = [
 						<p class="w-fit rounded-lg bg-black/5 px-4 py-3 text-[#7a7770]">The offer</p>
 						<div class="mt-12 max-w-[19ch] text-[clamp(1.75rem,2.7vw,3rem)] font-bold leading-[1]">
 							<p>
-								Talk to the agent briefed<br />
-								on your business.
+								Talk to an agent fully briefed on your business.
 							</p>
 							<p class="mt-8 text-[#4d4b46]">
 								Ask it anything.
@@ -928,7 +936,7 @@ const faqs = [
 						<div>
 							<p class="mb-6 w-fit rounded-lg bg-black/5 px-4 py-3 text-[1rem] font-bold text-[#77736a]">Use Cases</p>
 							<h2 class="max-w-[20ch] text-[clamp(2.2rem,4vw,4.2rem)] font-bold leading-[1] text-[#34312b]">
-								We help many businesses give time back to people and scale up capacity.
+								We help our clients give time back to their people and scale up capacity.
 							</h2>
 						</div>
 						<div class="flex items-center gap-3 justify-self-start lg:justify-self-end">
@@ -944,40 +952,40 @@ const faqs = [
 									<img class="absolute inset-0 h-full w-full object-cover" src={card.image} alt="" />
 									<div class="absolute inset-0 bg-black/18"></div>
 
-									{card.type === "phase" && (
+									{card.overlay.type === "list" && (
 										<div class="absolute left-1/2 top-1/2 w-[min(80%,16rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#e3ddd4]/88 p-3 shadow-2xl glass">
 											<div class="mb-2 flex items-center justify-between rounded-lg bg-[#d0c9bf] px-4 py-3 font-bold text-[#4d4942]">
-												<span>Project phase</span>
+												<span>{card.overlay.title}</span>
 												<span>⌃</span>
 											</div>
 											<div class="grid gap-1 text-[0.95rem] font-bold text-[#3d3933]">
-												<p class="rounded-lg bg-white/88 px-4 py-3">Business case</p>
-												<p class="px-4 py-2">Data mapping</p>
-												<p class="px-4 py-2">Agent scope</p>
-												<p class="px-4 py-2">Review loop</p>
+												<p class="rounded-lg bg-white/88 px-4 py-3">{card.overlay.active}</p>
+												{card.overlay.items.map((item) => (
+													<p class="px-4 py-2">{item}</p>
+												))}
 											</div>
 										</div>
 									)}
 
-									{card.type === "goal" && (
+									{card.overlay.type === "metric" && (
 										<div class="absolute left-1/2 top-1/2 grid h-[14rem] w-[14rem] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-[1.6rem] bg-[#e3ddd4]/86 p-6 text-center shadow-2xl glass">
-											<p class="text-sm font-bold text-[#5f5b54]">Quarter goal</p>
+											<p class="text-sm font-bold text-[#5f5b54]">{card.overlay.title}</p>
 											<div class="relative my-2 h-28 w-28">
 												<div class="absolute inset-0 rounded-full border-[12px] border-black/8"></div>
 												<div class="absolute inset-0 rounded-full border-[12px] border-white border-b-transparent border-l-transparent"></div>
-												<p class="absolute inset-0 grid place-items-center text-[2.4rem] font-bold">84%</p>
+												<p class="absolute inset-0 grid place-items-center text-[2.4rem] font-bold">{card.overlay.value}</p>
 											</div>
-											<p class="rounded-full bg-white/50 px-4 py-2 text-sm font-bold">Success story →</p>
+											<p class="rounded-full bg-white/50 px-4 py-2 text-sm font-bold">{card.overlay.action}</p>
 										</div>
 									)}
 
-									{card.type === "results" && (
+									{card.overlay.type === "results" && (
 										<div class="absolute left-1/2 top-1/2 w-[min(78%,17rem)] -translate-x-1/2 -translate-y-1/2 rounded-[1.3rem] bg-[#e3ddd4]/88 p-6 shadow-2xl glass">
-											<p class="mb-5 text-center font-bold text-[#4d4942]">Real results</p>
+											<p class="mb-5 text-center font-bold text-[#4d4942]">{card.overlay.title}</p>
 											<div class="grid gap-3 text-sm font-bold text-[#4d4942]">
-												<p class="flex justify-between rounded-md bg-white/70 px-3 py-2"><span>Clarity boost</span><span>78%</span></p>
-												<p class="flex justify-between rounded-md bg-white/70 px-3 py-2"><span>Faster decisions</span><span>66%</span></p>
-												<p class="flex justify-between rounded-md bg-white/70 px-3 py-2"><span>Reusable scope</span><span>45%</span></p>
+												{card.overlay.rows.map(([label, value]) => (
+													<p class="flex justify-between rounded-md bg-white/70 px-3 py-2"><span>{label}</span><span>{value}</span></p>
+												))}
 											</div>
 										</div>
 									)}
@@ -1106,7 +1114,7 @@ const faqs = [
 							Jonny Bowker is a Law Society of Scotland accredited AI Expert with over twenty years in data and AI, working across law firms, Fortune 500 companies, private equity and landed estates. He mentors ambitious scale-ups and mid-caps through the same thinking, and is the founder of the Brando schema, a structured framework for brand governance.
 						</p>
 						<p class="mt-auto max-w-[24rem] border-t border-black/28 pt-4 text-[0.95rem] font-bold leading-[1.25]">
-							Law Society of Scotland accredited AI Expert · Data and AI leadership · Brando schema
+							ADVANCED ANALYTICA: Law Society of Scotland accredited AI Expert · Data and AI leadership · Brando schema
 						</p>
 					</article>
 
@@ -1384,7 +1392,6 @@ const faqs = [
 						return {
 							column,
 							direction: index % 2 === 0 ? 1 : -1,
-							hovered: false,
 							pauseUntil: 0,
 						};
 					});
@@ -1396,9 +1403,9 @@ const faqs = [
 
 						scrollState.forEach((state) => {
 							const loopPoint = Math.max(0, state.column.scrollHeight / 2);
-							if (!loopPoint || state.hovered || time < state.pauseUntil) return;
+							if (!loopPoint || time < state.pauseUntil) return;
 
-							state.column.scrollTop += state.direction * delta * 0.038;
+							state.column.scrollTop += state.direction * delta * 0.064;
 							if (state.direction > 0 && state.column.scrollTop >= loopPoint) {
 								state.column.scrollTop -= loopPoint;
 							}
@@ -1415,13 +1422,6 @@ const faqs = [
 							state.column.addEventListener(eventName, () => {
 								state.pauseUntil = performance.now() + 2600;
 							}, { passive: true });
-						});
-						state.column.addEventListener("mouseenter", () => {
-							state.hovered = true;
-						});
-						state.column.addEventListener("mouseleave", () => {
-							state.hovered = false;
-							state.pauseUntil = performance.now() + 450;
 						});
 					});
 
