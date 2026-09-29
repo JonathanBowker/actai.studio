@@ -153,59 +153,119 @@ const frameworkCards = [
 
 const caseStudies = [
 	{
+		filter: "regulated",
 		kicker: "Finance & Banking",
 		title: "Keep reporting moving without losing control",
 		copy: "A scoped agent can gather the right inputs, check them against agreed rules and prepare review-ready updates for finance teams.",
 		points: ["Board packs", "Variance notes", "Approval trails"],
 	},
 	{
+		filter: "built",
 		kicker: "Land & Estates",
 		title: "Make estate knowledge easier to act on",
 		copy: "Bring leases, maintenance history, access rules and local knowledge into an agent that can answer practical questions with sources.",
 		points: ["Asset context", "Maintenance records", "Local rules"],
 	},
 	{
+		filter: "customer",
 		kicker: "Hospitality & Entertainment",
 		title: "Support bookings, staffing and guest detail",
 		copy: "Use agents to organise the moving parts around events, enquiries, schedules and service notes without replacing human judgement.",
 		points: ["Booking context", "Staff handovers", "Guest follow-up"],
 	},
 	{
+		filter: "supply",
 		kicker: "Transport & Logistics",
 		title: "Help teams respond when plans change",
 		copy: "A practical agent can surface constraints, flag knock-on effects and prepare clear updates when routes, stock or timings move.",
 		points: ["Route changes", "Stock signals", "Customer updates"],
 	},
 	{
+		filter: "supply",
 		kicker: "Agriculture & Food",
 		title: "Turn seasonal knowledge into usable guidance",
 		copy: "Agents can help teams retrieve field notes, compliance detail and supplier context when timing and local judgement matter.",
 		points: ["Field notes", "Supplier context", "Compliance checks"],
 	},
 	{
+		filter: "regulated",
 		kicker: "Risk & Compliance",
 		title: "Make sensitive work easier to review",
 		copy: "Shape agents with clear boundaries, evidence trails and escalation points so regulated work stays visible and accountable.",
 		points: ["Evidence trails", "Review loops", "Escalation rules"],
 	},
 	{
+		filter: "supply",
 		kicker: "Technology & Software",
 		title: "Turn product knowledge into better support",
 		copy: "A focused agent can help teams answer product, implementation and support questions using the latest internal context.",
 		points: ["Product notes", "Support patterns", "Release context"],
 	},
 	{
+		filter: "knowledge",
 		kicker: "Consulting & Operations",
 		title: "Make delivery knowledge repeatable",
 		copy: "Capture how experienced people diagnose, plan and deliver work, then shape that judgement into agent support for the wider team.",
 		points: ["Delivery playbooks", "Client context", "Repeatable steps"],
 	},
 	{
+		filter: "customer",
 		kicker: "Brand & Media",
 		title: "Keep content useful and on brand",
 		copy: "Agents can help generate, review and adapt content against your standards, with clear approval before anything goes live.",
 		points: ["Tone checks", "Asset reuse", "Approval flow"],
 	},
+	{
+		filter: "built",
+		kicker: "Property & Real Estate",
+		title: "Make portfolio detail easier to navigate",
+		copy: "Help teams find lease detail, tenant context and maintenance history without searching across scattered folders and inboxes.",
+		points: ["Lease detail", "Tenant context", "Maintenance history"],
+	},
+	{
+		filter: "regulated",
+		kicker: "Healthcare & Care",
+		title: "Support admin without losing sensitivity",
+		copy: "A carefully scoped agent can help with non-clinical coordination, policy lookup and handover preparation while keeping review points clear.",
+		points: ["Policy lookup", "Care coordination", "Review points"],
+	},
+	{
+		filter: "knowledge",
+		kicker: "Education & Training",
+		title: "Turn learning material into guided support",
+		copy: "Shape course content, staff guidance and learner questions into an agent that supports understanding without replacing teaching.",
+		points: ["Course content", "Learner support", "Staff guidance"],
+	},
+	{
+		filter: "knowledge",
+		kicker: "Professional Services",
+		title: "Make client context easier to reuse",
+		copy: "Agents can help teams prepare briefs, retrieve precedent and keep client knowledge consistent across busy delivery teams.",
+		points: ["Client briefs", "Precedent lookup", "Delivery notes"],
+	},
+	{
+		filter: "customer",
+		kicker: "Retail & Ecommerce",
+		title: "Connect product, service and stock context",
+		copy: "Give teams faster access to product detail, customer issues and fulfilment context so support stays practical and accurate.",
+		points: ["Product detail", "Service patterns", "Fulfilment context"],
+	},
+	{
+		filter: "supply",
+		kicker: "Manufacturing & Supply",
+		title: "Make operational knowledge easier to apply",
+		copy: "A focused agent can surface process notes, supplier detail and quality checks when teams need practical answers quickly.",
+		points: ["Process notes", "Supplier detail", "Quality checks"],
+	},
+];
+
+const caseStudyFilters = [
+	{ label: "All sectors", value: "all" },
+	{ label: "Regulated work", value: "regulated" },
+	{ label: "Built environment", value: "built" },
+	{ label: "Customer-facing", value: "customer" },
+	{ label: "Knowledge work", value: "knowledge" },
+	{ label: "Product & supply", value: "supply" },
 ];
 
 const faqs = [
@@ -603,6 +663,7 @@ const faqs = [
 						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#process">Process</a>
 						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#use-cases">Use Cases</a>
 						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#case-studies">Case Studies</a>
+						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#direction">Direction</a>
 						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#faq">FAQ</a>
 						<a class="mt-1 rounded-xl bg-[#11110f] px-4 py-3 text-center text-white no-underline transition hover:bg-[#dfff42] hover:text-black" href={bookingHref}>Book a meeting</a>
 					</div>
@@ -700,85 +761,85 @@ const faqs = [
 			</section>
 
 			<section class="stack-panel bg-[#f6f4ef] px-4 pb-40 pt-24 text-[#11110f] sm:px-8 lg:px-10 lg:pb-56">
-				<div class="reveal mx-auto grid max-w-[96rem] gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:items-stretch">
-					<div class="frame-stack relative h-[38rem] overflow-hidden rounded-[2rem] bg-[#ebe9e4] p-6 sm:p-8 lg:h-[42rem]" data-frame-stack>
+				<div class="reveal mx-auto grid max-w-[96rem] gap-14 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
+					<div class="frame-stack relative h-[38rem] overflow-hidden rounded-[1.6rem] bg-[#ebe9e4] p-4 sm:p-5 lg:h-[42rem]" data-frame-stack>
 						<div
-							class="frame-layer absolute left-1/2 top-1/2 h-[88%] w-[82%] overflow-hidden rounded-[1.2rem] bg-black shadow-2xl"
+							class="frame-layer absolute left-1/2 top-1/2 aspect-[3/4] h-[88%] overflow-hidden rounded-[1.05rem] bg-black shadow-2xl"
 							data-frame-layer
 							style="--frame-delay: 0ms"
 						>
 							<img class="h-full w-full object-cover object-center" src="/fixa-assets/herovideo-poster.jpg" alt="" />
 							<div class="absolute left-1/2 top-1/2 w-[min(78%,17rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#e3ddd4]/90 p-3 shadow-2xl glass">
 								<div class="mb-2 flex items-center justify-between rounded-lg bg-[#d0c9bf] px-4 py-3 font-bold text-[#4d4942]">
-									<span>Private knowledge</span>
-									<span>⌃</span>
+									<span>Voice note</span>
+									<span>)))</span>
 								</div>
 								<p class="rounded-lg bg-white/90 px-4 py-4 text-[1rem] font-bold leading-[1.18] text-[#2f2b25]">
-									Which client handoffs most often stall after proposal approval?
+									Ask the agent where client handoffs are slowing down.
 								</p>
 							</div>
 						</div>
 						<div
-							class="frame-layer absolute left-1/2 top-1/2 z-[1] h-[72%] w-[66%] overflow-hidden bg-black shadow-2xl"
+							class="frame-layer absolute left-1/2 top-1/2 z-[1] aspect-[3/4] h-[76%] overflow-hidden bg-black shadow-2xl"
 							data-frame-layer
 							style="--frame-delay: 130ms"
 						>
 							<img class="h-full w-full object-cover object-center" src="/images/act-hero-cinematic.png" alt="" />
 							<div class="absolute left-1/2 top-1/2 w-[min(78%,16rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#e3ddd4]/90 p-3 shadow-2xl glass">
 								<div class="mb-2 flex items-center justify-between rounded-lg bg-[#d0c9bf] px-4 py-3 font-bold text-[#4d4942]">
-									<span>Private knowledge</span>
-									<span>⌃</span>
+									<span>Voice note</span>
+									<span>)))</span>
 								</div>
 								<p class="rounded-lg bg-white/90 px-4 py-4 text-[0.95rem] font-bold leading-[1.18] text-[#2f2b25]">
-									What decisions still depend on one person knowing the hidden context?
+									Ask what still depends on one person knowing the context.
 								</p>
 							</div>
 						</div>
 						<div
-							class="frame-layer absolute left-1/2 top-1/2 z-[2] h-[56%] w-[52%] overflow-hidden bg-black shadow-2xl"
+							class="frame-layer absolute left-1/2 top-1/2 z-[2] aspect-[3/4] h-[64%] overflow-hidden bg-black shadow-2xl"
 							data-frame-layer
 							style="--frame-delay: 260ms"
 						>
 							<img class="h-full w-full object-cover object-center" src="/fixa-assets/MpwLfV3BL41ih4BTUbGjwjVEyU.webp" alt="" />
 							<div class="absolute left-1/2 top-1/2 w-[min(78%,14rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#e3ddd4]/90 p-3 shadow-2xl glass">
 								<div class="mb-2 flex items-center justify-between rounded-lg bg-[#d0c9bf] px-4 py-3 text-[0.9rem] font-bold text-[#4d4942]">
-									<span>Private knowledge</span>
-									<span>⌃</span>
+									<span>Voice note</span>
+									<span>)))</span>
 								</div>
 								<p class="rounded-lg bg-white/90 px-4 py-4 text-[0.88rem] font-bold leading-[1.18] text-[#2f2b25]">
-									Which data definitions change between teams before work can move?
+									Ask which data definitions change between teams.
 								</p>
 							</div>
 						</div>
 						<div
-							class="frame-layer absolute left-1/2 top-1/2 z-[3] h-[40%] w-[40%] overflow-hidden bg-black shadow-2xl"
+							class="frame-layer absolute left-1/2 top-1/2 z-[3] aspect-[3/4] h-[52%] overflow-hidden bg-black shadow-2xl"
 							data-frame-layer
 							style="--frame-delay: 410ms"
 						>
 							<img class="h-full w-full object-cover object-center" src="/fixa-assets/K6oVlqJ1SryJzVBte2yxIFoGqI.webp" alt="" />
 							<div class="absolute left-1/2 top-1/2 w-[min(82%,12rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#e3ddd4]/90 p-2 shadow-2xl glass">
 								<div class="mb-2 flex items-center justify-between rounded-lg bg-[#d0c9bf] px-3 py-2 text-[0.78rem] font-bold text-[#4d4942]">
-									<span>Private knowledge</span>
-									<span>⌃</span>
+									<span>Voice note</span>
+									<span>)))</span>
 								</div>
 								<p class="rounded-lg bg-white/90 px-3 py-3 text-[0.78rem] font-bold leading-[1.16] text-[#2f2b25]">
-									Which exceptions should become a controlled workflow?
+									Ask which exceptions need a controlled workflow.
 								</p>
 							</div>
 						</div>
 						<div
-							class="frame-layer absolute left-1/2 top-1/2 z-[4] h-[36%] w-[54%] overflow-hidden bg-black shadow-2xl"
+							class="frame-layer absolute left-1/2 top-1/2 z-[4] aspect-[3/4] h-[42%] overflow-hidden bg-black shadow-2xl"
 							data-frame-layer
 							style="--frame-delay: 540ms"
 						>
 							<img class="h-full w-full object-cover object-center" src="/fixa-assets/WXKx26vqrAI7XfrXAgsHkTeOeV0.webp" alt="" />
 							<div class="absolute left-1/2 top-1/2 w-[min(78%,11rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#e3ddd4]/90 p-2 shadow-2xl glass">
 								<div class="mb-2 flex items-center justify-between rounded-lg bg-[#d0c9bf] px-2 py-2 text-[0.68rem] font-bold text-[#4d4942]">
-									<span>Private knowledge</span>
-									<span>⌃</span>
+									<span>Voice note</span>
+									<span>)))</span>
 								</div>
 								<p class="rounded-lg bg-white/90 px-2 py-3 text-[0.68rem] font-bold leading-[1.14] text-[#2f2b25]">
-									What should the agent ask before acting?
+									Ask what the agent should confirm before acting.
 								</p>
 							</div>
 						</div>
@@ -943,9 +1004,42 @@ const faqs = [
 						</div>
 					</div>
 
-					<div class="grid gap-5 lg:grid-cols-3">
+					<div class="reveal relative z-30 flex justify-start">
+						<div class="case-filter relative z-30" data-case-filter>
+							<button
+								class="flex min-w-[15rem] items-center justify-between gap-6 rounded-2xl border border-white/10 bg-white px-4 py-3 text-left font-bold text-[#11110f] shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition hover:bg-[#dfff42]"
+								type="button"
+								aria-expanded="false"
+								data-case-filter-toggle
+							>
+								<span data-case-filter-label>All sectors</span>
+								<span class="text-xl leading-none">⌄</span>
+							</button>
+							<div class="absolute left-0 top-[calc(100%+.5rem)] z-50 hidden min-w-[18rem] rounded-2xl border border-white/10 bg-[#f6f4ef] p-2 text-[#11110f] shadow-[0_24px_70px_rgba(0,0,0,0.38)]" data-case-filter-menu>
+								{caseStudyFilters.map((filter) => (
+									<button
+										class="flex w-full items-center justify-between rounded-xl px-4 py-3 text-left font-bold transition hover:bg-black/8"
+										type="button"
+										data-case-filter-option={filter.value}
+										data-case-filter-name={filter.label}
+									>
+										<span>{filter.label}</span>
+									</button>
+								))}
+							</div>
+						</div>
+					</div>
+
+					<div class="relative z-0 grid gap-5 lg:grid-cols-3" data-case-grid>
 						{caseStudies.map((study, index) => (
-							<article class="reveal grid min-h-[25rem] content-between rounded-[1.6rem] border border-white/10 bg-white/[0.06] p-7 shadow-[0_24px_70px_rgba(0,0,0,0.28)]" style={`--delay: ${index * 90}ms`}>
+							<article
+								class="reveal grid min-h-[25rem] content-between rounded-[1.6rem] border border-white/10 bg-white/[0.06] p-7 shadow-[0_24px_70px_rgba(0,0,0,0.28)]"
+								style={`--delay: ${Math.min(index * 90, 270)}ms`}
+								data-case-extra={index > 2 ? "true" : undefined}
+								data-case-card
+								data-case-filter-value={study.filter}
+								hidden={index > 2}
+							>
 								<div>
 									<p class="mb-8 w-fit rounded-lg bg-white px-3 py-2 text-[0.78rem] font-black uppercase text-[#11110f]">{study.kicker}</p>
 									<h3 class="text-[clamp(1.65rem,2.3vw,2.35rem)] font-bold leading-[1] text-white">{study.title}</h3>
@@ -959,6 +1053,75 @@ const faqs = [
 							</article>
 						))}
 					</div>
+					<div class="reveal flex justify-center">
+						<button
+							class="inline-flex h-12 items-center rounded-xl bg-white px-7 font-bold text-black transition hover:bg-[#dfff42]"
+							type="button"
+							data-case-reveal
+						>
+							More case studies
+						</button>
+					</div>
+				</div>
+			</section>
+
+			<section id="direction" class="stack-panel bg-[#ebe9e4] px-4 pb-36 pt-24 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48">
+				<div
+					class="reveal mx-auto grid min-h-[46rem] max-w-[96rem] gap-10 rounded-[1.4rem] border border-black/18 p-6 sm:p-8 lg:grid-cols-[0.75fr_1fr_1fr] lg:grid-rows-[auto_1fr_auto] lg:p-10"
+				>
+					<p class="text-[1rem] font-black uppercase leading-none">The direction</p>
+
+					<div class="lg:col-span-2">
+						<h2 class="max-w-[18ch] text-[clamp(2.3rem,4.3vw,4.7rem)] font-bold leading-[0.96]">
+							We take on direction, not just the advice.
+						</h2>
+						<p class="mt-6 max-w-[50rem] text-[clamp(1.05rem,1.5vw,1.28rem)] font-bold leading-[1.28] text-[#5f5b54]">
+							AI and creative leadership, offered as fractional services to fit the needs of the business. Not another report to file away, real seats, real accountability, for the calls that actually move the business.
+						</p>
+					</div>
+
+					<div class="grid content-start gap-8 border-y border-black/40 py-10 lg:row-span-2 lg:border-y-0 lg:py-0">
+						<div>
+							<p class="max-w-[10ch] text-[clamp(2rem,3.2vw,3.4rem)] font-bold leading-[0.92]">
+								Two Directors.<br />
+								<span class="italic">One Direction</span>
+							</p>
+						</div>
+						<p class="max-w-[16ch] text-[clamp(1.15rem,1.65vw,1.75rem)] font-bold leading-[1.08]">
+							You bring the business.<br />
+							We bring the agents and skills.<br />
+							Together, we make the future work.
+						</p>
+						<a href={bookingHref} class="mt-2 inline-flex h-12 w-fit items-center rounded-none bg-black px-7 font-bold uppercase text-white no-underline transition hover:bg-[#dfff42] hover:text-black">
+							Book a meeting
+						</a>
+					</div>
+
+					<article class="grid content-start gap-7 border-t border-black/40 pt-10 lg:border-t-0 lg:pt-0">
+						<div>
+							<p class="text-[clamp(2rem,3vw,3.2rem)] font-bold leading-[0.9]">Jonny Bowker</p>
+							<h3 class="text-[clamp(1.7rem,2.65vw,2.85rem)] font-bold leading-[0.96]">AI Director</h3>
+						</div>
+						<p class="max-w-[31rem] text-[1.03rem] font-bold leading-[1.34] text-[#5f5b54]">
+							Jonny Bowker is a Law Society of Scotland accredited AI Expert with over twenty years in data and AI, working across law firms, Fortune 500 companies, private equity and landed estates. He mentors ambitious scale-ups and mid-caps through the same thinking, and is the founder of the Brando schema, a structured framework for brand governance.
+						</p>
+						<p class="mt-auto max-w-[24rem] border-t border-black/28 pt-4 text-[0.95rem] font-bold leading-[1.25]">
+							Law Society of Scotland accredited AI Expert · Data and AI leadership · Brando schema
+						</p>
+					</article>
+
+					<article class="grid content-start gap-7 border-t border-black/40 pt-10 lg:border-t-0 lg:pt-0">
+						<div>
+							<p class="text-[clamp(2rem,3vw,3.2rem)] font-bold leading-[0.9]">Mark Chatelier</p>
+							<h3 class="text-[clamp(1.7rem,2.65vw,2.85rem)] font-bold leading-[0.96]">Creative Director</h3>
+						</div>
+						<p class="max-w-[31rem] text-[1.03rem] font-bold leading-[1.34] text-[#5f5b54]">
+							Mark Chatelier is a hands-on Creative Director, founder and collaborator with experience leading creative teams on global accounts. He brings strategy, storytelling and execution together across identity, activation, photography, film, motion, 3D, experiential and AI, helping brands connect harder through sharper creative work.
+						</p>
+						<p class="mt-auto max-w-[24rem] border-t border-black/28 pt-4 text-[0.95rem] font-bold leading-[1.25]">
+							CHATELIER CREATIVE · Phoenix Studios · HSBC · Audi · Vodafone
+						</p>
+					</article>
 				</div>
 			</section>
 
@@ -968,7 +1131,7 @@ const faqs = [
 				<div class="relative z-10 mx-auto grid min-h-[32rem] max-w-[72rem] place-items-center px-4 text-center sm:px-8">
 					<div class="reveal grid justify-items-center gap-6">
 						<h2 class="max-w-[18ch] text-[clamp(2.8rem,5.8vw,6.4rem)] font-bold leading-[0.96]">
-							Less tedious work.<br />More productive work.
+							Less laborious work.<br />More productive work.
 						</h2>
 						<p class="max-w-[36rem] text-[clamp(1.1rem,1.6vw,1.35rem)] leading-[1.28] text-white/82">
 							Making the future work for your business. Empowering your people with AI. Harnessing your AI with controls.
@@ -1008,7 +1171,7 @@ const faqs = [
 
 			<footer class="stack-panel bg-[#ebe9e4] px-4 pb-4 pt-20 sm:px-8 lg:px-10">
 				<h2 class="footer-word pointer-events-none mx-auto -mb-8 max-w-[64rem] text-center text-[clamp(3rem,7vw,7.5rem)] font-bold leading-[0.9]">
-					AI planning for busy businesses
+					AI direction for busy businesses
 				</h2>
 				<div class="relative z-10 mx-auto grid min-h-[24rem] max-w-[96rem] gap-10 rounded-[1.4rem] bg-[#151614] p-8 text-white md:grid-cols-[1fr_1fr_0.7fr]">
 					<div class="grid content-between gap-10">
@@ -1028,6 +1191,7 @@ const faqs = [
 							<a class="text-white no-underline" href="#process">Process</a>
 							<a class="text-white no-underline" href="#use-cases">Use Cases</a>
 							<a class="text-white no-underline" href="#case-studies">Case Studies</a>
+							<a class="text-white no-underline" href="#direction">Direction</a>
 							<a class="text-white no-underline" href="#faq">FAQ</a>
 						</div>
 						<p class="mb-3 mt-10 font-bold text-white/38">Contact</p>
@@ -1076,6 +1240,60 @@ const faqs = [
 			menuPanel?.querySelectorAll("a").forEach((link) => {
 				link.addEventListener("click", () => setMenuOpen(false));
 			});
+
+			const caseCards = [...document.querySelectorAll("[data-case-card]")];
+			const caseRevealButton = document.querySelector("[data-case-reveal]");
+			const caseRevealWrap = caseRevealButton?.closest("div");
+			const caseFilter = document.querySelector("[data-case-filter]");
+			const caseFilterToggle = document.querySelector("[data-case-filter-toggle]");
+			const caseFilterMenu = document.querySelector("[data-case-filter-menu]");
+			const caseFilterLabel = document.querySelector("[data-case-filter-label]");
+			let activeCaseFilter = "all";
+			let visibleCaseCount = 3;
+
+			const matchingCaseCards = () => caseCards.filter((card) => activeCaseFilter === "all" || card.dataset.caseFilterValue === activeCaseFilter);
+
+			const setCaseFilterOpen = (open) => {
+				if (!caseFilterToggle || !caseFilterMenu) return;
+				caseFilterToggle.setAttribute("aria-expanded", String(open));
+				caseFilterMenu.classList.toggle("hidden", !open);
+			};
+
+			const updateCaseCards = () => {
+				const matching = matchingCaseCards();
+				caseCards.forEach((card) => {
+					const match = matching.includes(card);
+					const visible = match && matching.indexOf(card) < visibleCaseCount;
+					card.toggleAttribute("hidden", !visible);
+					if (visible) window.requestAnimationFrame(() => card.classList.add("is-visible"));
+				});
+				caseRevealWrap?.toggleAttribute("hidden", matching.length <= visibleCaseCount);
+			};
+
+			caseFilterToggle?.addEventListener("click", () => {
+				setCaseFilterOpen(caseFilterToggle.getAttribute("aria-expanded") !== "true");
+			});
+
+			document.querySelectorAll("[data-case-filter-option]").forEach((option) => {
+				option.addEventListener("click", () => {
+					activeCaseFilter = option.dataset.caseFilterOption || "all";
+					visibleCaseCount = 3;
+					if (caseFilterLabel) caseFilterLabel.textContent = option.dataset.caseFilterName || "All sectors";
+					setCaseFilterOpen(false);
+					updateCaseCards();
+				});
+			});
+
+			document.addEventListener("click", (event) => {
+				if (caseFilter && !caseFilter.contains(event.target)) setCaseFilterOpen(false);
+			});
+
+			caseRevealButton?.addEventListener("click", () => {
+				visibleCaseCount += 3;
+				updateCaseCards();
+			});
+
+			updateCaseCards();
 
 			const proofModal = document.querySelector("[data-proof-modal]");
 			const proofClose = proofModal?.querySelector("[data-proof-close]");
