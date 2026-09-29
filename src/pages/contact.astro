@@ -1,0 +1,70 @@
+---
+import "../styles/global.css";
+
+const emailHref = "mailto:hello@actai.studio?subject=Act.%20AI%20contact";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content="Contact Act. AI for clear guidance on where to start with AI in your business." />
+		<title>Contact | actai.studio</title>
+		<style>
+			html,
+			body {
+				background: #ebe9e4;
+				color: #11110f;
+			}
+
+			.glass {
+				backdrop-filter: blur(22px) saturate(1.1);
+				-webkit-backdrop-filter: blur(22px) saturate(1.1);
+			}
+
+			.nav-pill {
+				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+			}
+		</style>
+	</head>
+	<body>
+		<header class="nav-pill fixed left-1/2 top-8 z-50 flex -translate-x-1/2 items-center gap-9 rounded-2xl bg-white/92 px-4 py-3 text-[#11110f] glass">
+			<a href="/" class="flex h-8 items-center text-base font-black uppercase tracking-[-0.01em] text-[#11110f] no-underline" aria-label="actai.studio">
+				ACTAI.STUDIO
+			</a>
+			<a class="rounded-xl bg-[#11110f] px-4 py-3 font-bold text-white no-underline transition hover:bg-[#dfff42] hover:text-black" href="/">
+				Home
+			</a>
+		</header>
+
+		<main class="min-h-screen px-4 pb-10 pt-36 sm:px-8 lg:px-10">
+			<section class="mx-auto grid min-h-[calc(100vh-11rem)] max-w-[86rem] items-center gap-12 rounded-[2rem] bg-[#151614] p-8 text-white sm:p-12 lg:grid-cols-[1fr_.85fr] lg:p-16">
+				<div>
+					<p class="mb-8 w-fit rounded-lg bg-white/8 px-4 py-3 text-white/58">Contact</p>
+					<h1 class="max-w-[11ch] text-[clamp(3.2rem,8vw,8rem)] font-bold leading-[0.92]">
+						Send us a message.
+					</h1>
+					<p class="mt-8 max-w-[35rem] text-[clamp(1.1rem,1.6vw,1.35rem)] leading-[1.3] text-white/68">
+						Tell us what you are trying to improve, where work is stuck, or what you need AI to make clearer.
+					</p>
+				</div>
+
+				<div class="rounded-[1.5rem] bg-white p-6 text-[#11110f] sm:p-8">
+					<p class="text-[1.4rem] font-bold leading-tight">Start with one note.</p>
+					<p class="mt-4 text-[1.05rem] font-bold leading-[1.35] text-[#6f6d68]">
+						Email us with your business context and the question you are trying to answer. We will come back with the best next step.
+					</p>
+					<a href={emailHref} class="mt-8 inline-flex h-12 items-center rounded-xl bg-[#11110f] px-6 font-bold text-white no-underline transition hover:bg-[#dfff42] hover:text-black">
+						Email hello@actai.studio
+					</a>
+					<div class="my-8 h-px bg-black/10"></div>
+					<p class="text-sm font-bold text-[#85827b]">Response time</p>
+					<p class="mt-2 font-bold">Within one business day</p>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>
