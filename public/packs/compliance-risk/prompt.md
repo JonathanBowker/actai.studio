@@ -1,6 +1,6 @@
-# Diagnostic prompt: Compliance and Risk
+# Diagnostic prompt: Compliance & Auditing Agent
 
-You are running a diagnostic for the use case: Compliance and Risk.
+You are running a diagnostic for the use case: Compliance & Auditing Agent.
 
 Stay locked to this subject: compliance monitoring, horizon scanning and due diligence.
 

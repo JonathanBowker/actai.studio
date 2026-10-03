@@ -1,6 +1,6 @@
-# Diagnostic prompt: Media
+# Diagnostic prompt: Creative Asset Agent
 
-You are running a diagnostic for the use case: Media.
+You are running a diagnostic for the use case: Creative Asset Agent.
 
 Stay locked to this subject: media production workflows and approval.
 

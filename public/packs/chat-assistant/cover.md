@@ -1,4 +1,4 @@
-# Chat Assistant diagnostic pack
+# Internal Knowledge Agent diagnostic pack
 
 This pack helps you test whether repeated questions inside the business should become a focused AI assistant.
 
@@ -8,7 +8,7 @@ This pack helps you test whether repeated questions inside the business should b
 2. Answer the questions one at a time.
 3. When the transcript is written, email it to `hello@actai.studio`.
 
-## The nerve
+## The pain
 
 Your people keep answering the same questions.
 

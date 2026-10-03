@@ -1,13 +1,13 @@
-# Chat Assistant knowledge
+# Internal Knowledge Agent knowledge
 
 ## What the agent does
 
-A Chat Assistant answers repeated questions from trusted business knowledge, including brand, compliance, regulation and education material.
+An Internal Knowledge Agent ingests company documentation to provide instant, unified answers around the clock.
 
 ## Problem it removes
 
-Repeated questions drain senior time. Answers vary because people search different files, ask different colleagues or use out-of-date guidance.
+Customers receive inconsistent information, institutional trust erodes, and experienced staff waste hours acting as human search engines.
 
 ## How it fits a business
 
-The agent gives people one clear place to ask. It draws from approved knowledge, keeps answers consistent and helps repeated questions stop interrupting the people who should be doing higher-value work.
+The agent provides one controlled place to ask, using approved company knowledge to keep repeated answers consistent and available.

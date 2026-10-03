@@ -1,4 +1,4 @@
-# Workforce diagnostic pack
+# Onboarding Agent diagnostic pack
 
 This pack helps you test whether people-process drag should become a focused AI-supported workflow.
 
@@ -8,7 +8,7 @@ This pack helps you test whether people-process drag should become a focused AI-
 2. Answer the questions one at a time.
 3. When the transcript is written, email it to `hello@actai.studio`.
 
-## The nerve
+## The pain
 
 Hiring, onboarding and skills gaps drain time before work starts.
 

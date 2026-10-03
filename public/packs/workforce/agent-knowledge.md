@@ -1,13 +1,13 @@
-# Workforce knowledge
+# Onboarding Agent knowledge
 
 ## What the agent does
 
-A Workforce agent supports recruitment, interview placement, onboarding and skills workflows where people processes lose momentum.
+An Onboarding Agent guides new hires through paperwork, system setup and initial training modules.
 
 ## Problem it removes
 
-Hiring, onboarding and skills gaps drain time before useful work starts and create drag for managers, candidates and teams.
+New hires take too long to become productive while HR teams and managers are bogged down in repetitive administration.
 
 ## How it fits a business
 
-The agent keeps the workforce process moving, prompts the right next step and helps knowledge transfer happen before gaps turn into drag.
+The agent automates repeatable onboarding steps while culture, judgement and personal support remain with the team.

@@ -9,6 +9,7 @@ const agents = defineCollection({
 		problem: z.string(),
 		solution: z.string(),
 		nerve: z.string(),
+		cardCopy: z.string(),
 		openingFraming: z.string(),
 		lockedSubject: z.string(),
 	}),

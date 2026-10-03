@@ -1,6 +1,6 @@
-# Diagnostic prompt: Workforce
+# Diagnostic prompt: Onboarding Agent
 
-You are running a diagnostic for the use case: Workforce.
+You are running a diagnostic for the use case: Onboarding Agent.
 
 Stay locked to this subject: workforce, recruitment, onboarding and skills workflows.
 

@@ -1,13 +1,13 @@
-# Document and Knowledge Production knowledge
+# Document Generation Agent knowledge
 
 ## What the agent does
 
-A Document and Knowledge Production agent helps produce repeatable documents and knowledge packs across PDF, PowerPoint, Word and internal material.
+A Document Generation Agent drafts reports, proposals and contracts from raw data and approved templates.
 
 ## Problem it removes
 
-Skilled people lose time assembling, formatting and rebuilding documents that follow patterns the business already understands.
+Premium expert time is absorbed by data entry and routine paperwork, delaying complex strategic work and increasing burnout.
 
 ## How it fits a business
 
-The agent turns approved inputs into structured first drafts and reusable knowledge packs so expert time goes into review, direction and decisions.
+The agent creates structured first drafts so people can focus on final review, judgement and strategic refinement.

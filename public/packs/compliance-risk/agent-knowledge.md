@@ -1,13 +1,13 @@
-# Compliance and Risk knowledge
+# Compliance & Auditing Agent knowledge
 
 ## What the agent does
 
-A Compliance and Risk agent monitors risk signals, regulatory movement and due diligence material so exposure is easier to see before it becomes a finding.
+A Compliance & Auditing Agent continuously scans contracts, communications and transactions against regulatory frameworks.
 
 ## Problem it removes
 
-Exposure builds quietly when regulatory change, due diligence signals or internal risks are not surfaced early enough.
+Compliance fines, legal liabilities and operational failures can arrive without warning because people cannot monitor every signal and transaction.
 
 ## How it fits a business
 
-The agent watches the agreed sources, surfaces relevant change and helps people see where attention is needed before risk is buried in the noise.
+The agent flags anomalies before they become crises while investigation and accountability remain with responsible people.

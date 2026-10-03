@@ -1,6 +1,6 @@
-# Diagnostic prompt: Process Automation
+# Diagnostic prompt: Inbound Triage Agent
 
-You are running a diagnostic for the use case: Process Automation.
+You are running a diagnostic for the use case: Inbound Triage Agent.
 
 Stay locked to this subject: process automation for lead intake, document handling and inbox work.
 

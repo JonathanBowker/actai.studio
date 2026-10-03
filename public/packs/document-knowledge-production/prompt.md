@@ -1,6 +1,6 @@
-# Diagnostic prompt: Document and Knowledge Production
+# Diagnostic prompt: Document Generation Agent
 
-You are running a diagnostic for the use case: Document and Knowledge Production.
+You are running a diagnostic for the use case: Document Generation Agent.
 
 Stay locked to this subject: document automation and knowledge pack production.
 

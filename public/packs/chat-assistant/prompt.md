@@ -1,6 +1,6 @@
-# Diagnostic prompt: Chat Assistant
+# Diagnostic prompt: Internal Knowledge Agent
 
-You are running a diagnostic for the use case: Chat Assistant.
+You are running a diagnostic for the use case: Internal Knowledge Agent.
 
 Stay locked to this subject: knowledge-based business chat assistants.
 

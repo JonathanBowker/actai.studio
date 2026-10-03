@@ -1,4 +1,4 @@
-# Compliance and Risk diagnostic pack
+# Compliance & Auditing Agent diagnostic pack
 
 This pack helps you test whether hidden exposure should become a focused AI monitoring workflow.
 
@@ -8,7 +8,7 @@ This pack helps you test whether hidden exposure should become a focused AI moni
 2. Answer the questions one at a time.
 3. When the transcript is written, email it to `hello@actai.studio`.
 
-## The nerve
+## The pain
 
 You do not know what risk exposure is building up in the background.
 

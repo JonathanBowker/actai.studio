@@ -1,4 +1,4 @@
-# Document and Knowledge Production diagnostic pack
+# Document Generation Agent diagnostic pack
 
 This pack helps you test whether document-heavy work should become a focused AI production workflow.
 
@@ -8,7 +8,7 @@ This pack helps you test whether document-heavy work should become a focused AI 
 2. Answer the questions one at a time.
 3. When the transcript is written, email it to `hello@actai.studio`.
 
-## The nerve
+## The pain
 
 Skilled people spend their week building documents.
 

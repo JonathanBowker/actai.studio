@@ -4,21 +4,24 @@ import { getCollection, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
 	const agents = await getCollection("agents");
-	return agents.map((agent) => ({
-		params: { slug: agent.id },
-		props: { agent },
-	}));
+	return agents.map((agent) => ({ params: { slug: agent.id }, props: { agent } }));
 }
 
-type Props = {
-	agent: CollectionEntry<"agents">;
-};
-
+type Props = { agent: CollectionEntry<"agents"> };
 const { agent } = Astro.props;
 const bookingHref = "/meeting";
-const contactEmail = "hello@actai.studio";
 const packBase = `/packs/${agent.id}`;
 const zipHref = `${packBase}/${agent.id}-triage-pack.zip`;
+const heroArt = [
+	"/images/use-case-shapes/shape-01.jpg",
+	"/images/use-case-shapes/shape-02.jpg",
+	"/images/use-case-shapes/shape-03.jpg",
+	"/images/use-case-shapes/shape-04.jpg",
+	"/images/use-case-shapes/shape-05.jpg",
+	"/images/use-case-shapes/shape-06.jpg",
+];
+const artIndex = [...agent.id].reduce((total, character) => total + character.charCodeAt(0), 0) % heroArt.length;
+const heroImage = heroArt[artIndex];
 ---
 
 <html lang="en">
@@ -30,175 +33,196 @@ const zipHref = `${packBase}/${agent.id}-triage-pack.zip`;
 		<meta name="description" content={`${agent.data.name}: a diagnostic self-help pack from Actai.Studio.`} />
 		<title>{agent.data.name} | Actai.Studio</title>
 		<style>
-			:root {
-				--cream: #ebe9e4;
-				--paper: #f6f4ef;
-				--ink: #11110f;
-				--muted: #5f5b54;
-				--lime: #dfff42;
-			}
+			:root { --cream:#ebe9e4; --paper:#f6f4ef; --ink:#11110f; --muted:#77736a; --lime:#dfff42; }
+			html, body { background:var(--ink); }
+			body { overflow-x:hidden; }
+			.agent-page { background:var(--ink); color:var(--ink); min-height:100vh; overflow:hidden; width:100%; }
+			.agent-nav { align-items:center; display:flex; justify-content:space-between; left:0; padding:1.4rem clamp(1rem,3vw,2.5rem); position:absolute; top:0; width:100%; z-index:5; }
+			.agent-nav__actions { display:flex; gap:.6rem; }
+			.agent-nav__brand, .agent-nav__link, .agent-button { align-items:center; border-radius:.85rem; display:inline-flex; font-weight:800; justify-content:center; min-height:3.25rem; padding:.8rem 1.15rem; text-decoration:none; transition:background 180ms ease,color 180ms ease,transform 180ms ease; }
+			.agent-nav__brand, .agent-nav__link--primary { background:white; color:var(--ink); }
+			.agent-nav__link { background:rgba(17,17,15,.72); color:white; backdrop-filter:blur(16px); }
+			.agent-nav__brand:hover, .agent-nav__link:hover, .agent-button:hover { background:var(--lime); color:var(--ink); transform:translateY(-1px); }
 
-			html,
-			body {
-				background: var(--cream);
-			}
+			.agent-hero { align-items:end; display:grid; isolation:isolate; min-height:min(58rem,100svh); overflow:hidden; padding:clamp(8rem,14vh,11rem) clamp(1rem,4vw,4.5rem) clamp(5rem,8vw,8rem); position:relative; }
+			.agent-hero__media, .agent-hero__shade { inset:0; position:absolute; }
+			.agent-hero__media { height:100%; object-fit:cover; transform:scale(1.04); width:100%; z-index:-2; }
+			.agent-hero__shade { background:linear-gradient(180deg,rgba(17,17,15,.22),rgba(17,17,15,.18) 30%,rgba(17,17,15,.95)); z-index:-1; }
+			.agent-hero__inner, .diagnosis__intro, .diagnosis__steps, .pack__inner { margin:0 auto; max-width:96rem; width:100%; }
+			.agent-kicker { align-items:center; background:rgba(255,255,255,.92); border-radius:.65rem; color:var(--ink); display:inline-flex; font-size:.85rem; font-weight:800; gap:.6rem; margin:0; padding:.7rem .9rem; }
+			.agent-kicker::before { background:var(--lime); border-radius:50%; content:""; height:.65rem; width:.65rem; }
+			.agent-hero h1 { color:white; font-size:clamp(4rem,10vw,10rem); font-weight:700; letter-spacing:0; line-height:.82; margin:1.5rem 0 0; max-width:10ch; overflow-wrap:anywhere; }
+			.agent-hero__bottom { align-items:end; display:grid; gap:2rem; grid-template-columns:minmax(0,1fr) minmax(18rem,.55fr); margin-top:clamp(3rem,8vh,7rem); }
+			.agent-hero__nerve { color:white; font-size:clamp(1.75rem,3vw,3.4rem); font-weight:700; line-height:.98; margin:0; max-width:18ch; }
+			.agent-hero__note { border-top:1px solid rgba(255,255,255,.45); color:rgba(255,255,255,.78); font-size:1rem; font-weight:700; line-height:1.35; margin:0; padding-top:1rem; }
 
-			.agent-shell {
-				background:
-					radial-gradient(circle at 78% 8%, rgba(223, 255, 66, 0.34), transparent 24rem),
-					linear-gradient(180deg, #ebe9e4 0%, #f6f4ef 58%, #11110f 58%);
-				color: var(--ink);
-				min-height: 100vh;
-			}
+			.stack-panel { border-radius:2.5rem 2.5rem 0 0; margin-top:-2.5rem; position:relative; }
+			.diagnosis { background:var(--paper); padding:clamp(6rem,10vw,10rem) clamp(1rem,4vw,4.5rem) clamp(8rem,12vw,12rem); z-index:2; }
+			.diagnosis__intro, .pack__header { display:grid; gap:2rem; grid-template-columns:.42fr 1fr; }
+			.section-label { color:var(--muted); font-size:.85rem; font-weight:800; margin:0; text-transform:uppercase; }
+			.diagnosis__intro h2, .pack__header h2 { font-size:clamp(3rem,6vw,6.6rem); font-weight:700; letter-spacing:0; line-height:.9; margin:0; max-width:13ch; }
+			.diagnosis__steps { border-top:1px solid rgba(17,17,15,.24); display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:clamp(5rem,9vw,9rem); }
+			.diagnostic-step { min-height:28rem; padding:2rem clamp(1.25rem,2.5vw,2.75rem) 2.5rem 0; }
+			.diagnostic-step + .diagnostic-step { border-left:1px solid rgba(17,17,15,.24); padding-left:clamp(1.25rem,2.5vw,2.75rem); }
+			.diagnostic-step__number { align-items:center; background:var(--ink); border-radius:50%; color:white; display:flex; font-size:.85rem; font-weight:800; height:2.75rem; justify-content:center; width:2.75rem; }
+			.diagnostic-step:last-child .diagnostic-step__number { background:var(--lime); color:var(--ink); }
+			.diagnostic-step h3 { font-size:clamp(1.8rem,2.5vw,2.65rem); font-weight:700; line-height:.98; margin:5rem 0 1.25rem; }
+			.diagnostic-step p { color:#4d4942; font-size:clamp(1rem,1.25vw,1.2rem); font-weight:700; line-height:1.42; margin:0; max-width:31rem; }
 
-			.agent-card {
-				box-shadow: 0 30px 90px rgba(17, 17, 15, 0.12);
-			}
+			.pack { background:var(--ink); color:white; padding:clamp(6rem,10vw,10rem) clamp(1rem,4vw,4.5rem) 3rem; z-index:3; }
+			.pack .section-label { color:rgba(255,255,255,.5); }
+			.pack__contents { border-block:1px solid rgba(255,255,255,.22); display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:clamp(4rem,7vw,7rem); }
+			.pack-item { min-height:15rem; padding:1.5rem 2rem 2rem 0; }
+			.pack-item + .pack-item { border-left:1px solid rgba(255,255,255,.22); padding-left:2rem; }
+			.pack-item span { color:var(--lime); font-size:.85rem; font-weight:800; }
+			.pack-item h3 { font-size:clamp(1.35rem,2vw,2rem); line-height:1; margin:3rem 0 0; max-width:15ch; }
 
-			.gate-input {
-				background: white;
-				border: 1px solid rgba(17, 17, 15, 0.16);
-				border-radius: 0.9rem;
-				color: var(--ink);
-				font: inherit;
-				font-weight: 700;
-				min-height: 3.1rem;
-				padding: 0.9rem 1rem;
-				width: 100%;
-			}
+			.gate-workspace { align-items:start; display:grid; gap:clamp(2rem,6vw,7rem); grid-template-columns:.75fr 1fr; padding:clamp(5rem,9vw,9rem) 0; }
+			.gate-workspace__copy h2 { font-size:clamp(2.5rem,4.5vw,5rem); line-height:.92; margin:0; max-width:10ch; }
+			.gate-workspace__copy p { color:rgba(255,255,255,.58); font-size:1.05rem; font-weight:700; line-height:1.4; max-width:29rem; }
+			.delivery-note { border-left:4px solid var(--lime); margin-top:2rem; max-width:31rem; padding:.15rem 0 .15rem 1rem; }
+			.delivery-note strong { display:block; font-size:1.05rem; margin-bottom:.45rem; }
+			.delivery-note p { font-size:.95rem; margin:0; }
+			.gate-surface { background:#1b1b1b; border-radius:1.5rem; padding:clamp(1.25rem,3vw,2.5rem); }
+			.gate-form { display:grid; gap:1rem; }
+			.gate-fields { display:grid; gap:.8rem; grid-template-columns:1fr 1fr; }
+			.gate-label { display:grid; font-size:.85rem; font-weight:800; gap:.55rem; }
+			.gate-input { background:#242424; border:1px solid transparent; border-radius:.75rem; color:white; font:inherit; min-height:3.35rem; padding:.9rem 1rem; width:100%; }
+			.gate-input:focus, .gate-checkbox input:focus-visible + span, .agent-button:focus-visible { outline:2px solid var(--lime); outline-offset:3px; }
+			.gate-checkbox { align-items:flex-start; color:rgba(255,255,255,.72); display:flex; font-size:.92rem; font-weight:700; gap:.7rem; line-height:1.35; }
+			.gate-checkbox input { accent-color:var(--lime); flex:0 0 auto; height:1.1rem; margin-top:.12rem; width:1.1rem; }
+			.gate-privacy, .gate-privacy a { color:rgba(255,255,255,.46); font-size:.82rem; font-weight:700; line-height:1.35; }
+			.agent-button { border:0; cursor:pointer; font:inherit; }
+			.agent-button--unlock { background:white; color:var(--ink); width:100%; }
+			.unlock-panel { background:var(--lime); border-radius:1rem; color:var(--ink); display:grid; gap:1rem; margin-top:1rem; padding:1.25rem; }
+			.unlock-panel[hidden] { display:none; }
+			.unlock-panel__actions { display:grid; gap:.65rem; grid-template-columns:repeat(3,1fr); }
+			.unlock-panel .agent-button { background:var(--ink); color:white; font-size:.9rem; }
+			.unlock-panel .agent-button--download { background:white; color:var(--ink); }
+			.unlock-panel p { font-weight:700; line-height:1.35; margin:0; }
+			.agent-footer { align-items:end; border-top:1px solid rgba(255,255,255,.22); display:flex; gap:2rem; justify-content:space-between; padding:2rem 0 0; }
+			.agent-footer p { color:rgba(255,255,255,.5); font-size:.85rem; font-weight:700; margin:0; }
+			.reveal { opacity:0; transform:translateY(2rem); transition:opacity 700ms ease,transform 700ms cubic-bezier(.22,1,.36,1); }
+			.reveal.is-visible { opacity:1; transform:translateY(0); }
 
-			.gate-input:focus,
-			.gate-checkbox input:focus-visible + span,
-			.agent-button:focus-visible {
-				outline: 2px solid var(--ink);
-				outline-offset: 3px;
+			@media (max-width:760px) {
+				.agent-nav { padding:1rem; }
+				.agent-nav__brand, .agent-nav__link { font-size:.82rem; min-height:2.8rem; padding:.65rem .8rem; }
+				.agent-nav__link:not(.agent-nav__link--primary) { display:none; }
+				.agent-hero { min-height:46rem; padding-bottom:5.5rem; }
+				.agent-hero h1 { font-size:clamp(3.35rem,14vw,4.7rem); max-width:100%; }
+				.agent-hero__bottom, .diagnosis__intro, .pack__header, .gate-workspace { grid-template-columns:1fr; }
+				.agent-hero__bottom { margin-top:3rem; }
+				.stack-panel { border-radius:1.5rem 1.5rem 0 0; margin-top:-1.5rem; }
+				.diagnosis__steps, .pack__contents { grid-template-columns:1fr; }
+				.diagnostic-step { min-height:0; padding:1.5rem 0 3rem; }
+				.diagnostic-step + .diagnostic-step { border-left:0; border-top:1px solid rgba(17,17,15,.24); padding-left:0; }
+				.diagnostic-step h3 { margin-top:3rem; }
+				.pack-item { min-height:0; padding:1.5rem 0 2.5rem; }
+				.pack-item + .pack-item { border-left:0; border-top:1px solid rgba(255,255,255,.22); padding-left:0; }
+				.pack-item h3 { margin-top:2rem; }
+				.gate-fields, .unlock-panel__actions { grid-template-columns:1fr; }
+				.agent-footer { align-items:start; flex-direction:column; }
 			}
-
-			.agent-button {
-				align-items: center;
-				border-radius: 0.85rem;
-				display: inline-flex;
-				font-weight: 800;
-				justify-content: center;
-				min-height: 3rem;
-				padding: 0.8rem 1.2rem;
-				text-decoration: none;
-				transition:
-					background 180ms ease,
-					color 180ms ease,
-					transform 180ms ease;
-			}
-
-			.agent-button:hover {
-				transform: translateY(-1px);
-			}
-
-			.unlock-panel[hidden] {
-				display: none;
+			@media (prefers-reduced-motion:reduce) {
+				*, *::before, *::after { scroll-behavior:auto!important; transition-duration:.01ms!important; }
+				.reveal { opacity:1; transform:none; }
 			}
 		</style>
 	</head>
 	<body>
-		<main class="agent-shell px-4 py-8 sm:px-8 lg:px-10">
-			<nav class="mx-auto flex max-w-[96rem] items-center justify-between">
-				<a class="inline-flex h-14 items-center rounded-2xl bg-white px-5 font-bold text-[#11110f] no-underline shadow-xl transition hover:bg-[#dfff42]" href="/">
-					ACTAI.STUDIO
-				</a>
-				<a class="agent-button bg-[#11110f] text-white hover:bg-[#dfff42] hover:text-[#11110f]" href={bookingHref}>
-					Book a meeting
-				</a>
+		<main class="agent-page">
+			<nav class="agent-nav" aria-label="Agent page navigation">
+				<a class="agent-nav__brand" href="/">ACTAI.STUDIO</a>
+				<div class="agent-nav__actions">
+					<a class="agent-nav__link" href="/#triage">All agents</a>
+					<a class="agent-nav__link agent-nav__link--primary" href={bookingHref}>Book a meeting</a>
+				</div>
 			</nav>
 
-			<section class="mx-auto mt-16 grid max-w-[96rem] gap-8 lg:grid-cols-[0.7fr_1fr] lg:items-start">
-				<div class="grid gap-6">
-					<p class="w-fit rounded-lg bg-black/5 px-4 py-3 text-[1rem] font-bold text-[#77736a]">Diagnostic pack</p>
-					<h1 class="max-w-[11ch] text-[clamp(3.2rem,7vw,7.2rem)] font-bold leading-[0.88]">
-						{agent.data.name}
-					</h1>
-					<p class="max-w-[28rem] text-[clamp(1.2rem,1.8vw,1.65rem)] font-bold leading-[1.1] text-[#5f5b54]">
-						{agent.data.nerve}
-					</p>
-				</div>
-
-				<article class="agent-card grid gap-8 rounded-[1.7rem] bg-[#f6f4ef] p-6 sm:p-8 lg:p-10">
-					<div class="grid gap-5 sm:grid-cols-2">
-						<section class="rounded-[1.2rem] bg-white p-6">
-							<p class="mb-4 text-[0.85rem] font-black uppercase text-[#77736a]">Name</p>
-							<h2 class="text-[clamp(1.8rem,2.5vw,2.5rem)] font-bold leading-none">{agent.data.name}</h2>
-						</section>
-						<section class="rounded-[1.2rem] bg-white p-6">
-							<p class="mb-4 text-[0.85rem] font-black uppercase text-[#77736a]">Function</p>
-							<p class="text-[1.05rem] font-bold leading-[1.32] text-[#37342e]">{agent.data.function}</p>
-						</section>
-						<section class="rounded-[1.2rem] bg-white p-6">
-							<p class="mb-4 text-[0.85rem] font-black uppercase text-[#77736a]">Problem</p>
-							<p class="text-[1.05rem] font-bold leading-[1.32] text-[#37342e]">{agent.data.problem}</p>
-						</section>
-						<section class="rounded-[1.2rem] bg-white p-6">
-							<p class="mb-4 text-[0.85rem] font-black uppercase text-[#77736a]">Solution</p>
-							<p class="text-[1.05rem] font-bold leading-[1.32] text-[#37342e]">{agent.data.solution}</p>
-						</section>
+			<section class="agent-hero">
+				<img class="agent-hero__media" src={heroImage} alt="" />
+				<div class="agent-hero__shade"></div>
+				<div class="agent-hero__inner">
+					<p class="agent-kicker">Agent diagnostic</p>
+					<h1>{agent.data.name}</h1>
+					<div class="agent-hero__bottom">
+						<p class="agent-hero__nerve">{agent.data.nerve}</p>
+						<p class="agent-hero__note">Start with the pain. Trace where time, consistency or control is being lost. Then decide whether an agent is the right response.</p>
 					</div>
+				</div>
+			</section>
 
-					<section class="grid gap-4 rounded-[1.2rem] bg-[#11110f] p-6 text-white">
-						<h2 class="text-[clamp(1.7rem,2.5vw,2.4rem)] font-bold leading-none">What is inside the pack</h2>
-						<div class="grid gap-3 font-bold text-white/68 sm:grid-cols-3">
-							<p class="rounded-xl bg-white/8 p-4">A short cover note that names the issue.</p>
-							<p class="rounded-xl bg-white/8 p-4">A diagnostic prompt to run in Claude or ChatGPT.</p>
-							<p class="rounded-xl bg-white/8 p-4">Agent knowledge for the Q&A section.</p>
-						</div>
-					</section>
+			<section id="diagnosis" class="diagnosis stack-panel">
+				<div class="diagnosis__intro reveal">
+					<p class="section-label">The diagnosis</p>
+					<h2>See the problem before you build the agent.</h2>
+				</div>
+				<div class="diagnosis__steps">
+					<article class="diagnostic-step reveal">
+						<span class="diagnostic-step__number">01</span>
+						<h3>The signal</h3>
+						<p>{agent.data.openingFraming}</p>
+					</article>
+					<article class="diagnostic-step reveal">
+						<span class="diagnostic-step__number">02</span>
+						<h3>The business cost</h3>
+						<p>{agent.data.problem}</p>
+					</article>
+					<article class="diagnostic-step reveal">
+						<span class="diagnostic-step__number">03</span>
+						<h3>The agent response</h3>
+						<p>{agent.data.solution}</p>
+					</article>
+				</div>
+			</section>
 
-					<section class="grid gap-5 rounded-[1.2rem] bg-white p-6">
-						<div>
-							<h2 class="text-[clamp(1.7rem,2.4vw,2.35rem)] font-bold leading-none">Get the self-help pack</h2>
-							<p class="mt-3 max-w-[42rem] font-bold leading-[1.35] text-[#5f5b54]">
-								Share your contact details and consent to be contacted. The pack unlocks on this page.
-							</p>
-						</div>
-
-						<form class="grid gap-4" data-pack-gate data-agent-slug={agent.id}>
-							<div class="grid gap-4 sm:grid-cols-2">
-								<label class="grid gap-2 font-bold">
-									<span>Name</span>
-									<input class="gate-input" name="name" autocomplete="name" required />
-								</label>
-								<label class="grid gap-2 font-bold">
-									<span>Email</span>
-									<input class="gate-input" name="email" type="email" autocomplete="email" required />
-								</label>
+			<section id="pack" class="pack stack-panel">
+				<div class="pack__inner">
+					<header class="pack__header reveal">
+						<p class="section-label">Self-help pack</p>
+						<h2>Put the problem to the test.</h2>
+					</header>
+					<div class="pack__contents">
+						<article class="pack-item reveal"><span>01 / Frame</span><h3>A short cover note that names the issue.</h3></article>
+						<article class="pack-item reveal"><span>02 / Diagnose</span><h3>A diagnostic prompt to run in your assistant.</h3></article>
+						<article class="pack-item reveal"><span>03 / Question</span><h3>Agent knowledge for the follow-up conversation.</h3></article>
+					</div>
+					<div class="gate-workspace">
+						<div class="gate-workspace__copy reveal">
+							<h2>One ZIP. Ready for your assistant.</h2>
+							<p>Share your details and download one compressed pack containing the complete diagnosis.</p>
+							<div class="delivery-note">
+								<strong>Load it in two ways.</strong>
+								<p>Upload the ZIP directly if your assistant supports ZIP files. Otherwise, unzip it and upload the three files together.</p>
 							</div>
-							<label class="gate-checkbox flex items-start gap-3 font-bold leading-[1.3] text-[#37342e]">
-								<input class="mt-1 h-5 w-5" name="consent" type="checkbox" required />
-								<span>I consent to Actai.Studio contacting me about this diagnostic pack and related AI direction.</span>
-							</label>
-							<p class="text-[0.9rem] font-bold leading-[1.35] text-[#77736a]">
-								We use these details to exchange the self-help pack for contact permission. Read the <a class="text-[#11110f] underline" href="/privacy">privacy notice</a>.
-							</p>
-							<button class="agent-button w-full border-0 bg-[#11110f] text-white hover:bg-[#dfff42] hover:text-[#11110f]" type="submit">
-								Unlock the pack
-							</button>
-						</form>
-
-						<div class="unlock-panel grid gap-4 rounded-[1rem] bg-[#ebe9e4] p-5" data-pack-unlock hidden>
-							<p class="font-bold text-[#37342e]">Pack unlocked. Choose where to use it, or download the zip.</p>
-							<div class="grid gap-3 sm:grid-cols-3">
-								<button class="agent-button border-0 bg-[#11110f] text-white hover:bg-[#dfff42] hover:text-[#11110f]" type="button" data-open-tool="claude" data-pack-base={packBase}>
-									Open in Claude
-								</button>
-								<button class="agent-button border-0 bg-[#11110f] text-white hover:bg-[#dfff42] hover:text-[#11110f]" type="button" data-open-tool="chatgpt" data-pack-base={packBase}>
-									Open in ChatGPT
-								</button>
-								<a class="agent-button bg-white text-[#11110f] hover:bg-[#dfff42]" href={zipHref} download data-pack-download>
-									Download zip
-								</a>
-							</div>
-							<p class="text-[0.88rem] font-bold leading-[1.35] text-[#77736a]" data-tool-note>
-								The tool buttons copy the diagnostic prompt to your clipboard and open the selected assistant. Use the zip if your assistant cannot load a pack directly.
-							</p>
 						</div>
-					</section>
-				</article>
+						<div class="gate-surface reveal">
+							<form class="gate-form" data-pack-gate data-agent-slug={agent.id}>
+								<div class="gate-fields">
+									<label class="gate-label"><span>Name</span><input class="gate-input" name="name" autocomplete="name" required /></label>
+									<label class="gate-label"><span>Email</span><input class="gate-input" name="email" type="email" autocomplete="email" required /></label>
+								</div>
+								<label class="gate-checkbox"><input name="consent" type="checkbox" required /><span>I consent to Actai.Studio contacting me about this diagnostic pack and related AI direction.</span></label>
+								<p class="gate-privacy">We use these details to exchange the self-help pack for contact permission. Read the <a href="/privacy">privacy notice</a>.</p>
+								<button class="agent-button agent-button--unlock" type="submit">Unlock the pack</button>
+							</form>
+							<div class="unlock-panel" data-pack-unlock hidden>
+								<p>Your compressed ZIP pack is ready.</p>
+								<div class="unlock-panel__actions">
+									<a class="agent-button agent-button--download" href={zipHref} download data-pack-download>Download ZIP pack</a>
+									<button class="agent-button" type="button" data-open-tool="claude" data-pack-base={packBase}>Open in Claude</button>
+									<button class="agent-button" type="button" data-open-tool="chatgpt" data-pack-base={packBase}>Open in ChatGPT</button>
+								</div>
+								<p data-tool-note>Upload the ZIP directly where supported. If it is not accepted, unzip it and upload cover.md, prompt.md and agent-knowledge.md together. The assistant buttons also copy the pack text before opening a new chat.</p>
+							</div>
+						</div>
+					</div>
+					<footer class="agent-footer">
+						<p>© 2026 Act. All Rights Reserved.</p>
+						<a class="agent-nav__link agent-nav__link--primary" href={bookingHref}>Book a meeting</a>
+					</footer>
+				</div>
 			</section>
 		</main>
 
@@ -207,51 +231,42 @@ const zipHref = `${packBase}/${agent.id}-triage-pack.zip`;
 				window.dispatchEvent(new CustomEvent(name, { detail }));
 				window.dataLayer?.push({ event: name, ...detail });
 			};
-
 			const gate = document.querySelector("[data-pack-gate]");
 			const unlockPanel = document.querySelector("[data-pack-unlock]");
 			const storageKey = gate ? `actai-pack:${gate.dataset.agentSlug}` : "";
-
-			if (storageKey && localStorage.getItem(storageKey) === "unlocked") {
-				unlockPanel?.removeAttribute("hidden");
-			}
-
+			if (storageKey && localStorage.getItem(storageKey) === "unlocked") unlockPanel?.removeAttribute("hidden");
 			gate?.addEventListener("submit", (event) => {
 				event.preventDefault();
 				const formData = new FormData(gate);
-				const submission = {
-					agentSlug: gate.dataset.agentSlug,
-					name: formData.get("name"),
-					email: formData.get("email"),
-					consent: formData.get("consent") === "on",
-					timestamp: new Date().toISOString(),
-				};
+				const submission = { agentSlug:gate.dataset.agentSlug, name:formData.get("name"), email:formData.get("email"), consent:formData.get("consent") === "on", timestamp:new Date().toISOString() };
 				localStorage.setItem(storageKey, "unlocked");
 				localStorage.setItem(`${storageKey}:submission`, JSON.stringify(submission));
 				trackPackEvent("pack_gate_submit", submission);
 				unlockPanel?.removeAttribute("hidden");
-				unlockPanel?.scrollIntoView({ behavior: "smooth", block: "center" });
+				unlockPanel?.scrollIntoView({ behavior:"smooth", block:"center" });
 			});
-
 			document.querySelectorAll("[data-open-tool]").forEach((button) => {
 				button.addEventListener("click", async () => {
 					const packBase = button.dataset.packBase;
 					const tool = button.dataset.openTool;
 					if (packBase) {
-						const files = await Promise.all(["cover.md", "prompt.md", "agent-knowledge.md"].map(async (file) => {
+						const files = await Promise.all(["cover.md","prompt.md","agent-knowledge.md"].map(async (file) => {
 							const response = await fetch(`${packBase}/${file}`);
 							return `# ${file}\n\n${await response.text()}`;
 						}));
 						await navigator.clipboard?.writeText(files.join("\n\n---\n\n"));
 					}
-					trackPackEvent("pack_open_tool", { agentSlug: gate?.dataset.agentSlug, tool });
+					trackPackEvent("pack_open_tool", { agentSlug:gate?.dataset.agentSlug, tool });
 					window.open(tool === "claude" ? "https://claude.ai/new" : "https://chatgpt.com/", "_blank", "noopener,noreferrer");
 				});
 			});
-
-			document.querySelector("[data-pack-download]")?.addEventListener("click", () => {
-				trackPackEvent("pack_download", { agentSlug: gate?.dataset.agentSlug });
-			});
+			document.querySelector("[data-pack-download]")?.addEventListener("click", () => trackPackEvent("pack_download", { agentSlug:gate?.dataset.agentSlug }));
+			const revealObserver = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) { entry.target.classList.add("is-visible"); revealObserver.unobserve(entry.target); }
+				});
+			}, { threshold:.12 });
+			document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
 		</script>
 	</body>
 </html>

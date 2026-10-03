@@ -1,4 +1,4 @@
-# Process Automation diagnostic pack
+# Inbound Triage Agent diagnostic pack
 
 This pack helps you test whether a stalled operational process should become a focused AI workflow.
 
@@ -8,7 +8,7 @@ This pack helps you test whether a stalled operational process should become a f
 2. Answer the questions one at a time.
 3. When the transcript is written, email it to `hello@actai.studio`.
 
-## The nerve
+## The pain
 
 Leads, forms and inboxes eat hours and still go cold.
 
