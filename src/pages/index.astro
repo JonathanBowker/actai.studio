@@ -1026,6 +1026,29 @@ const faqs = [
 
 			.triage-vertical-grid {
 				align-self: start;
+				position: relative;
+			}
+
+			.triage-vertical-grid::before,
+			.triage-vertical-grid::after {
+				content: "";
+				left: 0;
+				pointer-events: none;
+				position: absolute;
+				right: 0;
+				z-index: 2;
+			}
+
+			.triage-vertical-grid::before {
+				background: linear-gradient(180deg, #f6f4ef 0%, rgba(246, 244, 239, 0) 100%);
+				height: 5rem;
+				top: 0;
+			}
+
+			.triage-vertical-grid::after {
+				background: linear-gradient(0deg, #f6f4ef 0%, rgba(246, 244, 239, 0.88) 30%, rgba(246, 244, 239, 0) 100%);
+				bottom: 0;
+				height: 8rem;
 			}
 
 			.triage-vertical-column {
@@ -1048,7 +1071,7 @@ const faqs = [
 			}
 
 			.triage-vertical-card .use-case-shell {
-				aspect-ratio: 3 / 4;
+				aspect-ratio: 4 / 5;
 				border-radius: 0.9rem;
 			}
 
