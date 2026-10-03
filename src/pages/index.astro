@@ -377,6 +377,181 @@ const faqs = [
 				transform: translateY(-5px) rotate(-45deg);
 			}
 
+			body[data-contact-open="true"] {
+				overflow: hidden;
+			}
+
+			body[data-contact-open="true"] main,
+			body[data-contact-open="true"] .nav-pill,
+			body[data-contact-open="true"] .contact-trigger {
+				filter: blur(11px);
+				pointer-events: none;
+				transform: translateZ(0);
+				transition: filter 220ms ease;
+				user-select: none;
+			}
+
+			.contact-trigger {
+				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+			}
+
+			.contact-layer {
+				display: grid;
+				inset: 0;
+				opacity: 0;
+				pointer-events: none;
+				position: fixed;
+				transition: opacity 220ms ease;
+				z-index: 80;
+			}
+
+			.contact-layer[data-open="true"] {
+				opacity: 1;
+				pointer-events: auto;
+			}
+
+			.contact-scrim {
+				background: rgba(0, 0, 0, 0.52);
+				inset: 0;
+				position: absolute;
+			}
+
+			.contact-panel {
+				align-self: stretch;
+				background: #171717;
+				border: 1px solid rgba(255, 255, 255, 0.06);
+				border-radius: 1.8rem;
+				box-shadow: 0 32px 90px rgba(0, 0, 0, 0.48);
+				color: white;
+				justify-self: end;
+				margin: 5rem 0.45rem 0.7rem 0;
+				max-height: calc(100vh - 5.7rem);
+				overflow-y: auto;
+				padding: clamp(2rem, 3vw, 2.65rem);
+				position: relative;
+				transform: translateX(2rem);
+				transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+				width: min(35rem, calc(100vw - 1rem));
+			}
+
+			.contact-layer[data-open="true"] .contact-panel {
+				transform: translateX(0);
+			}
+
+			.contact-close {
+				background: rgba(255, 255, 255, 0.14);
+				border: 0;
+				border-radius: 0.8rem;
+				color: white;
+				cursor: pointer;
+				font: inherit;
+				font-weight: 700;
+				left: -1.2rem;
+				padding: 0.72rem 1rem;
+				position: absolute;
+				top: 12.8rem;
+				transition:
+					background 180ms ease,
+					transform 180ms ease;
+			}
+
+			.contact-close:hover {
+				background: rgba(255, 255, 255, 0.2);
+				transform: translateX(-0.1rem);
+			}
+
+			.contact-control {
+				background: #242424;
+				border: 0;
+				border-radius: 0.9rem;
+				color: white;
+				font: inherit;
+				font-weight: 700;
+				min-width: 0;
+				outline: 0;
+				padding: 0.95rem 1rem;
+				width: 100%;
+			}
+
+			.contact-control::placeholder {
+				color: rgba(255, 255, 255, 0.42);
+			}
+
+			.contact-control:focus,
+			.contact-option input:focus-visible + span,
+			.contact-submit:focus-visible,
+			.contact-close:focus-visible {
+				outline: 2px solid white;
+				outline-offset: 3px;
+			}
+
+			.contact-option span {
+				background: #242424;
+				border-radius: 999px;
+				color: rgba(255, 255, 255, 0.52);
+				cursor: pointer;
+				display: inline-flex;
+				font-weight: 700;
+				min-height: 2.8rem;
+				padding: 0.8rem 1rem;
+				transition:
+					background 180ms ease,
+					color 180ms ease,
+					box-shadow 180ms ease;
+			}
+
+			.contact-option input:checked + span {
+				background: white;
+				box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
+				color: #11110f;
+			}
+
+			.contact-submit {
+				background: white;
+				border: 0;
+				border-radius: 0.9rem;
+				color: #11110f;
+				cursor: pointer;
+				font: inherit;
+				font-weight: 800;
+				min-height: 3.2rem;
+				transition:
+					background 180ms ease,
+					color 180ms ease,
+					transform 180ms ease;
+			}
+
+			.contact-submit:hover {
+				background: var(--lime);
+				transform: translateY(-1px);
+			}
+
+			.contact-confirm {
+				background: #1b1b1b;
+				border-radius: 1.7rem;
+				box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+				color: white;
+				left: min(26rem, 34vw);
+				opacity: 0;
+				padding: 2.1rem 1.25rem 1.25rem;
+				pointer-events: none;
+				position: fixed;
+				text-align: center;
+				top: 43%;
+				transform: translate(-50%, -50%) scale(0.98);
+				transition:
+					opacity 180ms ease,
+					transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+				width: min(22rem, calc(100vw - 2rem));
+				z-index: 90;
+			}
+
+			.contact-confirm[data-open="true"] {
+				opacity: 1;
+				pointer-events: auto;
+				transform: translate(-50%, -50%) scale(1);
+			}
+
 			.rounded-sheet {
 				border-radius: 3.4rem 3.4rem 0 0;
 			}
@@ -858,6 +1033,39 @@ const faqs = [
 			}
 
 			@media (max-width: 760px) {
+				body[data-contact-open="true"] main,
+				body[data-contact-open="true"] .nav-pill,
+				body[data-contact-open="true"] .contact-trigger {
+					filter: blur(7px);
+				}
+
+				.contact-trigger {
+					left: 50%;
+					right: auto;
+					top: auto;
+					bottom: 1rem;
+					transform: translateX(-50%);
+				}
+
+				.contact-panel {
+					align-self: end;
+					border-radius: 1.6rem 1.6rem 0 0;
+					margin: 0;
+					max-height: 92vh;
+					padding: 1.35rem;
+					width: 100%;
+				}
+
+				.contact-close {
+					left: 1rem;
+					top: -3.15rem;
+				}
+
+				.contact-confirm {
+					left: 50%;
+					top: 50%;
+				}
+
 				.rounded-sheet {
 					border-radius: 2rem 2rem 0 0;
 				}
@@ -892,7 +1100,9 @@ const faqs = [
 				.cta-pill,
 				.reveal:not(.is-visible) .cta-pill,
 				.cta-line:hover .cta-pill,
-				.cta-line:hover .cta-pill-alt {
+				.cta-line:hover .cta-pill-alt,
+				.contact-panel,
+				.contact-layer {
 					transform: none;
 					transition: none;
 				}
@@ -920,6 +1130,73 @@ const faqs = [
 				</div>
 			</nav>
 		</header>
+
+		<button class="contact-trigger fixed right-10 top-8 z-50 inline-flex h-14 items-center gap-3 rounded-2xl bg-white/92 px-5 font-bold text-[#11110f] transition hover:bg-[#dfff42]" type="button" data-contact-open>
+			<span aria-hidden="true">✦</span>
+			<span>Get in touch</span>
+		</button>
+
+		<div class="contact-layer" data-contact-layer data-open="false" aria-hidden="true">
+			<div class="contact-scrim" aria-hidden="true"></div>
+			<aside class="contact-panel" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+				<button class="contact-close" type="button" data-contact-close>Close</button>
+				<h2 id="contact-title" class="max-w-[12ch] text-[clamp(2.7rem,4.5vw,4.75rem)] font-bold leading-[0.98]">
+					Let's build AI around your business.
+				</h2>
+
+				<form class="mt-10 grid gap-8" data-contact-form>
+					<fieldset class="grid gap-3 border-0 p-0">
+						<legend class="text-[0.95rem] font-bold text-white/48">Select route</legend>
+						<div class="flex flex-wrap gap-2">
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="route" value="Engage" checked />
+								<span>Engage</span>
+							</label>
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="route" value="Enable" />
+								<span>Enable</span>
+							</label>
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="route" value="Extend" />
+								<span>Extend</span>
+							</label>
+						</div>
+					</fieldset>
+
+					<div class="grid gap-3">
+						<label class="text-[0.95rem] font-bold text-white/48" for="contact-name">Personal info</label>
+						<div class="grid gap-2 sm:grid-cols-2">
+							<input id="contact-name" class="contact-control" name="name" type="text" placeholder="Your name" autocomplete="name" required />
+							<input class="contact-control" name="email" type="email" placeholder="Email" autocomplete="email" required />
+						</div>
+					</div>
+
+					<div class="grid gap-3">
+						<label class="text-[0.95rem] font-bold text-white/48" for="contact-details">Project details</label>
+						<textarea id="contact-details" class="contact-control min-h-[7.5rem] resize-none" name="details" placeholder="Tell us where AI could help, what is stuck, or what you want to understand." required></textarea>
+					</div>
+
+					<button class="contact-submit" type="submit">Submit</button>
+					<p class="text-center text-[0.9rem] font-bold leading-tight text-white/48">
+						By sending this, you're starting a direct conversation with our directors.
+					</p>
+				</form>
+			</aside>
+
+			<div class="contact-confirm" data-contact-confirm data-open="false" role="alertdialog" aria-modal="true" aria-labelledby="contact-confirm-title">
+				<p id="contact-confirm-title" class="mx-auto max-w-[10ch] text-[2rem] font-bold leading-[1]">
+					Forgot to press submit?
+				</p>
+				<div class="mt-8 grid grid-cols-2 gap-3">
+					<button class="rounded-xl bg-white/12 px-4 py-3 font-bold text-white transition hover:bg-white/18" type="button" data-contact-discard>
+						× Close anyway
+					</button>
+					<button class="rounded-xl bg-white/12 px-4 py-3 font-bold text-white transition hover:bg-white/18" type="button" data-contact-resume>
+						↗ Back to form
+					</button>
+				</div>
+			</div>
+		</div>
 
 		<main class="bg-[#ebe9e4]">
 			<section class="relative grid min-h-screen place-items-center overflow-hidden px-4 py-24 text-center text-white">
@@ -1541,6 +1818,86 @@ const faqs = [
 				link.addEventListener("click", () => setMenuOpen(false));
 			});
 
+			const contactLayer = document.querySelector("[data-contact-layer]");
+			const contactPanel = document.querySelector(".contact-panel");
+			const contactForm = document.querySelector("[data-contact-form]");
+			const contactConfirm = document.querySelector("[data-contact-confirm]");
+			const contactName = document.querySelector("#contact-name");
+			let contactDirty = false;
+
+			const setContactOpen = (open) => {
+				if (!contactLayer) return;
+				contactLayer.dataset.open = String(open);
+				contactLayer.setAttribute("aria-hidden", String(!open));
+				document.body.dataset.contactOpen = String(open);
+				if (open) {
+					setMenuOpen(false);
+					window.setTimeout(() => contactName?.focus(), 220);
+				} else {
+					if (contactConfirm) contactConfirm.dataset.open = "false";
+				}
+			};
+
+			const requestContactClose = () => {
+				if (contactDirty) {
+					if (contactConfirm) contactConfirm.dataset.open = "true";
+					return;
+				}
+				setContactOpen(false);
+			};
+
+			document.querySelectorAll("[data-contact-open]").forEach((button) => {
+				button.addEventListener("click", () => setContactOpen(true));
+			});
+
+			document.querySelectorAll("[data-contact-close]").forEach((button) => {
+				button.addEventListener("click", requestContactClose);
+			});
+
+			contactLayer?.addEventListener("click", (event) => {
+				const target = event.target;
+				if (target === contactLayer || target?.classList?.contains("contact-scrim")) {
+					requestContactClose();
+				}
+			});
+
+			contactForm?.addEventListener("input", () => {
+				contactDirty = true;
+			});
+
+			document.querySelector("[data-contact-resume]")?.addEventListener("click", () => {
+				if (contactConfirm) contactConfirm.dataset.open = "false";
+				contactName?.focus();
+			});
+
+			document.querySelector("[data-contact-discard]")?.addEventListener("click", () => {
+				contactDirty = false;
+				contactForm?.reset();
+				setContactOpen(false);
+			});
+
+			contactForm?.addEventListener("submit", (event) => {
+				event.preventDefault();
+				const formData = new FormData(contactForm);
+				const route = formData.get("route") || "Engage";
+				const name = formData.get("name") || "";
+				const email = formData.get("email") || "";
+				const details = formData.get("details") || "";
+				const subject = encodeURIComponent(`Actai.Studio enquiry: ${route}`);
+				const body = encodeURIComponent([
+					`Route: ${route}`,
+					`Name: ${name}`,
+					`Email: ${email}`,
+					"",
+					"Project details:",
+					String(details),
+				].join("\n"));
+				window.location.href = `mailto:hello@actai.studio?subject=${subject}&body=${body}`;
+				contactDirty = false;
+				contactForm.reset();
+				setContactOpen(false);
+			});
+
 			const caseCards = [...document.querySelectorAll("[data-case-card]")];
 			const caseRevealButton = document.querySelector("[data-case-reveal]");
 			const caseRevealWrap = caseRevealButton?.closest("div");
@@ -1598,6 +1955,7 @@ const faqs = [
 			window.addEventListener("keydown", (event) => {
 				if (event.key === "Escape") {
 					setMenuOpen(false);
+					if (contactLayer?.dataset.open === "true") requestContactClose();
 				}
 			});
 
