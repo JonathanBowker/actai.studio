@@ -444,17 +444,26 @@ const faqs = [
 				border-radius: 0.8rem;
 				color: white;
 				cursor: pointer;
+				align-items: center;
+				display: inline-flex;
+				gap: 0.5rem;
 				font: inherit;
 				font-weight: 700;
-				left: 1rem;
 				padding: 0.72rem 1rem;
 				position: absolute;
+				right: 1rem;
 				top: 1rem;
 				transform: none;
 				transition:
 					background 180ms ease,
+					opacity 180ms ease,
 					transform 180ms ease;
 				z-index: 2;
+			}
+
+			.contact-layer[data-confirm-open="true"] .contact-close {
+				opacity: 0;
+				pointer-events: none;
 			}
 
 			.contact-close:hover {
@@ -1060,7 +1069,7 @@ const faqs = [
 				}
 
 				.contact-close {
-					left: 1rem;
+					right: 1rem;
 					top: 1rem;
 				}
 
@@ -1142,9 +1151,12 @@ const faqs = [
 		<div class="contact-layer" data-contact-layer data-open="false" aria-hidden="true">
 			<div class="contact-scrim" aria-hidden="true"></div>
 			<aside class="contact-panel" role="dialog" aria-modal="true" aria-labelledby="contact-title">
-				<button class="contact-close" type="button" data-contact-close>Close</button>
+				<button class="contact-close" type="button" data-contact-close>
+					<span aria-hidden="true">&times;</span>
+					<span>Close</span>
+				</button>
 				<h2 id="contact-title" class="max-w-[12ch] text-[clamp(2.85rem,4.4vw,3.6rem)] font-bold leading-[0.98]">
-					Let's build the future of your brand.
+					Let's put the future of your business to work.
 				</h2>
 
 				<form class="mt-10 grid gap-6" data-contact-form>
@@ -1445,7 +1457,7 @@ const faqs = [
 							</p>
 							<p class="mt-8 text-[#4d4b46]">
 								Ask it anything.
-								Put it to the test.
+								Put combined intelligence to the test.
 							</p>
 							<p class="mt-8 text-[#78746c]">
 								What happens next could change your business<br />
@@ -1679,7 +1691,7 @@ const faqs = [
 
 			<section id="direction" class="stack-panel bg-[#ebe9e4] px-4 pb-36 pt-24 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48">
 				<div
-					class="reveal mx-auto grid min-h-[46rem] max-w-[96rem] gap-10 rounded-[1.4rem] border border-black/18 p-6 sm:p-8 lg:grid-cols-[0.75fr_1fr_1fr] lg:grid-rows-[auto_1fr_auto] lg:p-10"
+					class="reveal mx-auto grid min-h-[46rem] max-w-[96rem] gap-10 rounded-[1.4rem] p-6 sm:p-8 lg:grid-cols-[0.75fr_1fr_1fr] lg:grid-rows-[auto_1fr_auto] lg:p-10"
 				>
 					<p class="text-[1rem] font-black uppercase leading-none">The direction</p>
 
@@ -1688,23 +1700,23 @@ const faqs = [
 							We take on direction, not just the advice.
 						</h2>
 						<p class="mt-6 max-w-[50rem] text-[clamp(1.05rem,1.5vw,1.28rem)] font-bold leading-[1.28] text-[#5f5b54]">
-							AI and creative leadership, offered as fractional services to fit the needs of the business. Not another report to file away, real seats, real accountability, for the calls that actually move the business.
+							AI and creative thinking, backed by practice, driven by outcomes, not reports.
 						</p>
 					</div>
 
-					<div class="grid content-start gap-8 border-y border-black/40 py-10 lg:row-span-2 lg:border-y-0 lg:py-0">
+					<div class="grid content-start gap-8 border-y border-black/40 py-10 lg:row-span-2 lg:-mt-16 lg:border-y-0 lg:py-0">
 						<div>
-							<p class="max-w-[10ch] text-[clamp(2rem,3.2vw,3.4rem)] font-bold leading-[0.92]">
+							<p class="max-w-[13ch] text-[clamp(1.85rem,2.85vw,3.05rem)] font-bold leading-[0.92]">
 								Two Directors.<br />
-								<span class="italic">One Direction</span>
+								<span class="italic">One Direction.</span>
 							</p>
 						</div>
 						<p class="max-w-[16ch] text-[clamp(1.15rem,1.65vw,1.75rem)] font-bold leading-[1.08]">
 							You bring the business.<br />
-							We bring the agents and skills.<br />
+							We bring the agentic skills.<br />
 							Together, we make the future work.
 						</p>
-						<a href={bookingHref} class="mt-2 inline-flex h-12 w-fit items-center rounded-none bg-black px-7 font-bold uppercase text-white no-underline transition hover:bg-[#dfff42] hover:text-black">
+						<a href={bookingHref} class="mt-2 inline-flex h-12 w-fit items-center rounded-xl bg-black px-7 font-bold uppercase text-white no-underline transition hover:bg-[#dfff42] hover:text-black">
 							Book a meeting
 						</a>
 					</div>
@@ -1715,23 +1727,23 @@ const faqs = [
 							<h3 class="text-[clamp(1.7rem,2.65vw,2.85rem)] font-bold leading-[0.96]">AI Director, Strategy</h3>
 						</div>
 						<p class="max-w-[31rem] text-[1.03rem] font-bold leading-[1.34] text-[#5f5b54]">
-							Jonny Bowker is a Law Society of Scotland accredited AI Expert with over twenty years in data and AI, working across law firms, Fortune 500 companies, private equity and landed estates. He mentors ambitious scale-ups and mid-caps through the same thinking, and is the founder of the Brando schema, a structured framework for brand governance.
+							Jonny Bowker is a Law Society of Scotland accredited AI Expert and practitioner, working across Fortune 500 companies and mid-caps. He structures problems into solutions through Agent in the Room, a live design tree methodology for solving business problems, and directs ambitious scale-ups through the same thinking.
 						</p>
 						<p class="mt-auto max-w-[24rem] border-t border-black/28 pt-4 text-[0.95rem] font-bold leading-[1.25]">
-							ADVANCED ANALYTICA: Law Society of Scotland accredited AI Expert · Data and AI leadership · Brando schema
+							Growing the tree of the concept.
 						</p>
 					</article>
 
 					<article class="grid content-start gap-7 border-t border-black/40 pt-10 lg:border-t-0 lg:pt-0">
 						<div>
 							<p class="text-[clamp(2rem,3vw,3.2rem)] font-bold leading-[0.9]">Mark Chatelier</p>
-							<h3 class="text-[clamp(1.7rem,2.65vw,2.85rem)] font-bold leading-[0.96]">AI Director, Creative</h3>
+							<h3 class="text-[clamp(1.7rem,2.65vw,2.85rem)] font-bold leading-[0.96]">AI Director, Discovery</h3>
 						</div>
 						<p class="max-w-[31rem] text-[1.03rem] font-bold leading-[1.34] text-[#5f5b54]">
-							Mark Chatelier is a hands-on Creative Director, founder and collaborator with experience leading creative teams on global accounts. He brings strategy, storytelling and execution together across identity, activation, photography, film, motion, 3D, experiential and AI, helping brands connect harder through sharper creative work.
+							Mark Chatelier is an AI generalist who leads discovery through creative thinking and direction, drawing on two decades leading creative teams on global accounts including HSBC, Audi and Vodafone. He listens first, then leads the conversation toward the real problem, applying the same discipline wherever it actually sits.
 						</p>
 						<p class="mt-auto max-w-[24rem] border-t border-black/28 pt-4 text-[0.95rem] font-bold leading-[1.25]">
-							CHATELIER CREATIVE · Phoenix Studios · HSBC · Audi · Vodafone
+							Shaping branches into direction.
 						</p>
 					</article>
 				</div>
@@ -1914,12 +1926,14 @@ const faqs = [
 					window.setTimeout(() => contactName?.focus(), 220);
 				} else {
 					if (contactConfirm) contactConfirm.dataset.open = "false";
+					contactLayer.dataset.confirmOpen = "false";
 				}
 			};
 
 			const requestContactClose = () => {
 				if (contactDirty) {
 					if (contactConfirm) contactConfirm.dataset.open = "true";
+					if (contactLayer) contactLayer.dataset.confirmOpen = "true";
 					return;
 				}
 				setContactOpen(false);
@@ -1950,6 +1964,7 @@ const faqs = [
 
 			document.querySelector("[data-contact-resume]")?.addEventListener("click", () => {
 				if (contactConfirm) contactConfirm.dataset.open = "false";
+				if (contactLayer) contactLayer.dataset.confirmOpen = "false";
 				contactName?.focus();
 			});
 
