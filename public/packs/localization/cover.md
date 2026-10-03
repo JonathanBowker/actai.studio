@@ -1,4 +1,4 @@
-# Localization Agent diagnostic pack
+# Localisation Agent diagnostic pack
 
 Use this pack to test where manual translation is delaying market expansion.
 

@@ -10,7 +10,7 @@ Use this pack to test where churn signals are being noticed too late.
 
 ## The pain
 
-Customers are canceling before you can save them.
+Customers are cancelling before you can save them.
 
 ## Talk to Jonny and Mark
 

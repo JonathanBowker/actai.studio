@@ -22,6 +22,8 @@ const heroArt = [
 ];
 const artIndex = [...agent.id].reduce((total, character) => total + character.charCodeAt(0), 0) % heroArt.length;
 const heroImage = heroArt[artIndex];
+const cascadeLabels = ["Signal", "Friction", "Pattern", "Evidence", "Response"];
+const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index + 1) % heroArt.length]);
 ---
 
 <html lang="en">
@@ -36,7 +38,7 @@ const heroImage = heroArt[artIndex];
 			:root { --cream:#ebe9e4; --paper:#f6f4ef; --ink:#11110f; --muted:#77736a; --lime:#dfff42; }
 			html, body { background:var(--ink); }
 			body { overflow-x:hidden; }
-			.agent-page { background:var(--ink); color:var(--ink); min-height:100vh; overflow:hidden; width:100%; }
+			.agent-page { background:var(--ink); color:var(--ink); min-height:100vh; overflow-x:clip; width:100%; }
 			.agent-nav { align-items:center; display:flex; justify-content:space-between; left:0; padding:1.4rem clamp(1rem,3vw,2.5rem); position:absolute; top:0; width:100%; z-index:5; }
 			.agent-nav__actions { display:flex; gap:.6rem; }
 			.agent-nav__brand, .agent-nav__link, .agent-button { align-items:center; border-radius:.85rem; display:inline-flex; font-weight:800; justify-content:center; min-height:3.25rem; padding:.8rem 1.15rem; text-decoration:none; transition:background 180ms ease,color 180ms ease,transform 180ms ease; }
@@ -55,6 +57,24 @@ const heroImage = heroArt[artIndex];
 			.agent-hero__bottom { align-items:end; display:grid; gap:2rem; grid-template-columns:minmax(0,1fr) minmax(18rem,.55fr); margin-top:clamp(3rem,8vh,7rem); }
 			.agent-hero__nerve { color:white; font-size:clamp(1.75rem,3vw,3.4rem); font-weight:700; line-height:.98; margin:0; max-width:18ch; }
 			.agent-hero__note { border-top:1px solid rgba(255,255,255,.45); color:rgba(255,255,255,.78); font-size:1rem; font-weight:700; line-height:1.35; margin:0; padding-top:1rem; }
+			.cascade { background:var(--ink); color:white; height:190svh; position:relative; }
+			.cascade__sticky { height:100svh; min-height:42rem; overflow:hidden; position:sticky; top:0; }
+			.cascade__copy { left:50%; max-width:46rem; position:absolute; text-align:left; top:50%; transform:translate(-50%,-50%); width:min(54vw,46rem); z-index:2; }
+			.cascade__eyebrow { align-items:center; color:var(--lime); display:flex; font-size:.82rem; font-weight:800; gap:.7rem; margin:0 0 2.5rem; text-transform:uppercase; }
+			.cascade__eyebrow::after { background:rgba(255,255,255,.28); content:""; height:1px; width:5rem; }
+			.cascade__statement { color:rgba(255,255,255,.36); font-size:clamp(2rem,3vw,3.45rem); font-weight:700; line-height:1.03; margin:0; }
+			.cascade__statement strong { color:white; font-weight:700; }
+			.cascade__index { align-items:center; display:flex; gap:.7rem; margin-top:2.5rem; }
+			.cascade__index span { background:var(--lime); border-radius:50%; height:.7rem; width:.7rem; }
+			.cascade__index p { color:rgba(255,255,255,.62); font-size:.82rem; font-weight:800; margin:0; }
+			.cascade-tile { border-radius:1.15rem; box-shadow:0 1.5rem 5rem rgba(0,0,0,.42); margin:0; overflow:hidden; position:absolute; transform:translate3d(0,var(--cascade-drift,0),0) rotate(var(--cascade-rotate,0deg)); will-change:transform; z-index:1; }
+			.cascade-tile img { display:block; height:100%; object-fit:cover; width:100%; }
+			.cascade-tile figcaption { background:linear-gradient(transparent,rgba(17,17,15,.84)); bottom:0; color:white; font-size:.75rem; font-weight:800; left:0; padding:2.2rem .9rem .8rem; position:absolute; right:0; text-transform:uppercase; }
+			.cascade-tile:nth-of-type(1) { --cascade-rotate:-3deg; aspect-ratio:4/5; left:6vw; top:8vh; width:clamp(10rem,17vw,17rem); }
+			.cascade-tile:nth-of-type(2) { --cascade-rotate:3deg; aspect-ratio:1/1; right:8vw; top:9vh; width:clamp(9rem,14vw,14rem); }
+			.cascade-tile:nth-of-type(3) { --cascade-rotate:2deg; aspect-ratio:5/4; bottom:7vh; left:11vw; width:clamp(12rem,20vw,20rem); }
+			.cascade-tile:nth-of-type(4) { --cascade-rotate:-2deg; aspect-ratio:4/5; bottom:5vh; right:6vw; width:clamp(9rem,15vw,15rem); }
+			.cascade-tile:nth-of-type(5) { --cascade-rotate:4deg; aspect-ratio:3/2; right:23vw; top:-8vh; width:clamp(10rem,16vw,16rem); }
 
 			.stack-panel { border-radius:2.5rem 2.5rem 0 0; margin-top:-2.5rem; position:relative; }
 			.diagnosis { background:var(--paper); padding:clamp(6rem,10vw,10rem) clamp(1rem,4vw,4.5rem) clamp(8rem,12vw,12rem); z-index:2; }
@@ -78,7 +98,7 @@ const heroImage = heroArt[artIndex];
 			.pack-item h3 { font-size:clamp(1.35rem,2vw,2rem); line-height:1; margin:3rem 0 0; max-width:15ch; }
 
 			.gate-workspace { align-items:start; display:grid; gap:clamp(2rem,6vw,7rem); grid-template-columns:.75fr 1fr; padding:clamp(5rem,9vw,9rem) 0; }
-			.gate-workspace__copy h2 { font-size:clamp(2.5rem,4.5vw,5rem); line-height:.92; margin:0; max-width:10ch; }
+			.gate-workspace__copy h2 { font-size:clamp(2.25rem,3.2vw,3.75rem); line-height:1.02; margin:0; max-width:13ch; }
 			.gate-workspace__copy p { color:rgba(255,255,255,.58); font-size:1.05rem; font-weight:700; line-height:1.4; max-width:29rem; }
 			.delivery-note { border-left:4px solid var(--lime); margin-top:2rem; max-width:31rem; padding:.15rem 0 .15rem 1rem; }
 			.delivery-note strong { display:block; font-size:1.05rem; margin-bottom:.45rem; }
@@ -113,6 +133,17 @@ const heroImage = heroArt[artIndex];
 				.agent-hero h1 { font-size:clamp(3.35rem,14vw,4.7rem); max-width:100%; }
 				.agent-hero__bottom, .diagnosis__intro, .pack__header, .gate-workspace { grid-template-columns:1fr; }
 				.agent-hero__bottom { margin-top:3rem; }
+				.cascade { height:145svh; }
+				.cascade__sticky { min-height:38rem; }
+				.cascade__copy { width:calc(100% - 3rem); }
+				.cascade__eyebrow { margin-bottom:1.5rem; }
+				.cascade__statement { font-size:clamp(1.8rem,8vw,2.5rem); }
+				.cascade-tile { border-radius:.8rem; }
+				.cascade-tile:nth-of-type(1) { left:-5vw; top:5vh; width:34vw; }
+				.cascade-tile:nth-of-type(2) { right:-7vw; top:8vh; width:31vw; }
+				.cascade-tile:nth-of-type(3) { bottom:4vh; left:-4vw; width:39vw; }
+				.cascade-tile:nth-of-type(4) { bottom:3vh; right:-5vw; width:32vw; }
+				.cascade-tile:nth-of-type(5) { display:none; }
 				.stack-panel { border-radius:1.5rem 1.5rem 0 0; margin-top:-1.5rem; }
 				.diagnosis__steps, .pack__contents { grid-template-columns:1fr; }
 				.diagnostic-step { min-height:0; padding:1.5rem 0 3rem; }
@@ -127,6 +158,9 @@ const heroImage = heroArt[artIndex];
 			@media (prefers-reduced-motion:reduce) {
 				*, *::before, *::after { scroll-behavior:auto!important; transition-duration:.01ms!important; }
 				.reveal { opacity:1; transform:none; }
+				.cascade { height:100svh; }
+				.cascade__sticky { position:relative; }
+				.cascade-tile { --cascade-drift:0px!important; }
 			}
 		</style>
 	</head>
@@ -150,6 +184,22 @@ const heroImage = heroArt[artIndex];
 						<p class="agent-hero__nerve">{agent.data.nerve}</p>
 						<p class="agent-hero__note">Start with the pain. Trace where time, consistency or control is being lost. Then decide whether an agent is the right response.</p>
 					</div>
+				</div>
+			</section>
+
+			<section class="cascade" data-cascade aria-label="From business signal to agent response">
+				<div class="cascade__sticky">
+					<div class="cascade__copy">
+						<p class="cascade__eyebrow">Read the signals</p>
+						<p class="cascade__statement"><strong>{agent.data.nerve}</strong> {agent.data.function}</p>
+						<div class="cascade__index"><span></span><p>One problem. One focused response.</p></div>
+					</div>
+					{cascadeImages.map((image, index) => (
+						<figure class="cascade-tile" data-cascade-tile data-speed={[-150, 110, -90, 145, 80][index]}>
+							<img src={image} alt="" loading="lazy" />
+							<figcaption>{cascadeLabels[index]}</figcaption>
+						</figure>
+					))}
 				</div>
 			</section>
 
@@ -190,7 +240,7 @@ const heroImage = heroArt[artIndex];
 					</div>
 					<div class="gate-workspace">
 						<div class="gate-workspace__copy reveal">
-							<h2>One ZIP. Ready for your assistant.</h2>
+							<h2>One knowledge pack. Ready for your assistant.</h2>
 							<p>Share your details and download one compressed pack containing the complete diagnosis.</p>
 							<div class="delivery-note">
 								<strong>Load it in two ways.</strong>
@@ -267,6 +317,28 @@ const heroImage = heroArt[artIndex];
 				});
 			}, { threshold:.12 });
 			document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+
+			const cascade = document.querySelector("[data-cascade]");
+			const cascadeTiles = [...document.querySelectorAll("[data-cascade-tile]")];
+			const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+			let cascadeFrame = 0;
+			const updateCascade = () => {
+				cascadeFrame = 0;
+				if (!cascade || reduceMotion.matches) return;
+				const rect = cascade.getBoundingClientRect();
+				const travel = Math.max(1, rect.height - window.innerHeight);
+				const progress = Math.min(1, Math.max(0, -rect.top / travel));
+				cascadeTiles.forEach((tile) => {
+					const speed = Number(tile.dataset.speed || 0);
+					tile.style.setProperty("--cascade-drift", `${(progress - 0.5) * speed}px`);
+				});
+			};
+			const requestCascadeUpdate = () => {
+				if (!cascadeFrame) cascadeFrame = requestAnimationFrame(updateCascade);
+			};
+			updateCascade();
+			window.addEventListener("scroll", requestCascadeUpdate, { passive:true });
+			window.addEventListener("resize", requestCascadeUpdate);
 		</script>
 	</body>
 </html>

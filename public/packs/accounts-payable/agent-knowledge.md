@@ -2,7 +2,7 @@
 
 ## What the agent does
 
-Extracts invoice line items, checks them against authorized budgets and routes them to the right approver.
+Extracts invoice line items, checks them against authorised budgets and routes them to the right approver.
 
 ## Problem it removes
 
