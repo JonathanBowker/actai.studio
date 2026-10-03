@@ -446,19 +446,20 @@ const faqs = [
 				cursor: pointer;
 				font: inherit;
 				font-weight: 700;
-				left: -1.6rem;
+				left: 1rem;
 				padding: 0.72rem 1rem;
 				position: absolute;
-				top: 50%;
-				transform: translate(-100%, -50%);
+				top: 1rem;
+				transform: none;
 				transition:
 					background 180ms ease,
 					transform 180ms ease;
+				z-index: 2;
 			}
 
 			.contact-close:hover {
 				background: rgba(255, 255, 255, 0.2);
-				transform: translate(calc(-100% - 0.1rem), -50%);
+				transform: translateY(-0.08rem);
 			}
 
 			.contact-control {
@@ -1060,7 +1061,7 @@ const faqs = [
 
 				.contact-close {
 					left: 1rem;
-					top: -3.15rem;
+					top: 1rem;
 				}
 
 				.contact-confirm {
