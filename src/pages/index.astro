@@ -255,6 +255,67 @@ const caseStudyFilters = [
 	{ label: "Product & supply", value: "supply" },
 ];
 
+const resultStats = [
+	{
+		value: "£475k",
+		countTo: 475,
+		prefix: "£",
+		suffix: "k",
+		label: "Average potential saved per year for a midcap after one 4hr workshop.",
+	},
+	{
+		value: "100%",
+		countTo: 100,
+		prefix: "",
+		suffix: "%",
+		label: "Feel more confident with AI and their capability to move faster while staying safe.",
+	},
+	{
+		value: "100%",
+		countTo: 100,
+		prefix: "",
+		suffix: "%",
+		label: "Feel more optimistic about the future of their business and workforce.",
+	},
+	{
+		value: "9.2/10",
+		countTo: 9.2,
+		prefix: "",
+		suffix: "/10",
+		label: "How likely clients are to recommend Act AI's services to another business.",
+	},
+];
+
+const pathwayCards = [
+	{
+		title: "Engage",
+		stage: "Stage 1: Direction",
+		copy: "Sit down with an with an AI director for one live Agent in the Room session. Leave with a decision, not a deck, and a scoped plan to act on.",
+		priceLabel: "Start with",
+		price: "Agent in the Room",
+		action: "Book a meeting",
+		shape: "half",
+	},
+	{
+		title: "Enable",
+		stage: "Stage 2: Delivery",
+		copy: "We build the agents. Monthly capacity against your agreed plan, shipping working agents into your business, working with you every month.",
+		priceLabel: "Move into",
+		price: "Ongoing delivery",
+		action: "Book a meeting",
+		shape: "hourglass",
+	},
+	{
+		title: "Extend",
+		stage: "Stage 3: Partnership",
+		copy: "An AI director embedded at board level, for six months or more, setting strategic direction across your whole programme, not a single project.",
+		priceLabel: "Build towards",
+		price: "AI partnership",
+		action: "Book a meeting",
+		shape: "orbit",
+	},
+];
+
 const faqs = [
 	["What's the difference between ongoing direction and project-based work?", "Ongoing direction gives you a senior AI or creative lead inside the business rhythm. Project-based work is more contained: one defined business case, one agent framework, one build or proof loop. We can help with either, but we always start by finding the scope that is actually worth doing."],
 	["What counts as one active agent or use case at a time?", "One active use case means we focus on a single business problem before moving to the next. That could be a knowledge agent, reporting workflow, review process, client handover or internal tool. Focused work leads to clearer decisions and safer results."],
@@ -1134,7 +1195,6 @@ const faqs = [
 					<div class="grid gap-1 p-3 font-bold">
 						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#process">Process</a>
 						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#use-cases">Use Cases</a>
-						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#case-studies">Case Studies</a>
 						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#direction">Direction</a>
 						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#faq">FAQ</a>
 						<a class="mt-1 rounded-xl bg-[#11110f] px-4 py-3 text-center text-white no-underline transition hover:bg-[#dfff42] hover:text-black" href={bookingHref}>Book a meeting</a>
@@ -1614,7 +1674,104 @@ const faqs = [
 				</div>
 			</section>
 
-			<section id="case-studies" class="stack-panel bg-[#11110f] px-4 pb-36 pt-24 text-white sm:px-8 lg:px-10 lg:pb-48">
+			<section id="pathway" class="stack-panel bg-[#ebe9e4] px-4 pb-36 pt-28 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48 lg:pt-36">
+				<div class="mx-auto grid max-w-[96rem] gap-14">
+					<div class="reveal mx-auto grid max-w-[56rem] justify-items-center gap-5 text-center">
+						<p class="w-fit rounded-lg bg-black/5 px-4 py-3 text-[1rem] font-bold text-[#77736a]">The pathway</p>
+						<h2 class="max-w-[18ch] text-[clamp(2.25rem,4vw,4.5rem)] font-bold leading-[0.96]">
+							A clear path from AI experiment to business advantage.
+						</h2>
+						<p class="max-w-[46rem] text-[clamp(1.02rem,1.35vw,1.2rem)] font-bold leading-[1.35] text-[#5f5b54]">
+							Start with one step. Prove it works. Then decide what comes next.
+						</p>
+					</div>
+
+					<div class="grid gap-5 lg:grid-cols-3">
+						{pathwayCards.map((card, index) => (
+							<article class="reveal grid min-h-[31rem] content-between rounded-[1.55rem] border border-[#11110f]/20 bg-[#f6f4ef] p-6 shadow-[0_22px_55px_rgba(17,17,15,0.08)] sm:p-8" style={`--delay: ${Math.min(index * 80, 240)}ms`}>
+								<div>
+									<div class="mb-10 grid h-16 place-items-center">
+										{card.shape === "half" && (
+											<div class="relative h-16 w-24" aria-hidden="true">
+												<span class="absolute left-3 top-0 h-16 w-8 rounded-l-full bg-[#11110f]"></span>
+												<span class="absolute right-3 top-0 h-16 w-8 rounded-r-full bg-[#dfff42]"></span>
+											</div>
+										)}
+										{card.shape === "hourglass" && (
+											<div class="relative grid h-16 w-24 place-items-center" aria-hidden="true">
+												<span class="absolute top-0 h-0 w-0 border-x-[1.9rem] border-t-[1.9rem] border-x-transparent border-t-[#dfff42]"></span>
+												<span class="absolute bottom-0 h-0 w-0 border-x-[1.9rem] border-b-[1.9rem] border-x-transparent border-b-[#11110f]"></span>
+											</div>
+										)}
+										{card.shape === "orbit" && (
+											<div class="relative h-16 w-24" aria-hidden="true">
+												<span class="absolute left-4 top-2 h-12 w-12 rounded-full bg-[#dfff42]"></span>
+												<span class="absolute left-9 top-4 h-8 w-8 rounded-full bg-[#11110f]"></span>
+												<span class="absolute right-4 top-2 h-12 w-6 rounded-r-full bg-[#8a6a2e]"></span>
+											</div>
+										)}
+									</div>
+									<h3 class="text-center text-[clamp(1.65rem,2vw,2.1rem)] font-bold leading-none">{card.title}</h3>
+									<p class="mx-auto mt-8 w-full rounded-full bg-[#e4e0d7] px-4 py-2 text-center text-[0.95rem] font-bold">{card.stage}</p>
+									<p class="mx-auto mt-7 max-w-[25rem] text-center text-[1rem] font-bold leading-[1.38] text-[#37342e]">{card.copy}</p>
+								</div>
+								<div class="mt-14 grid justify-items-center gap-5 text-center">
+									<p class="text-[0.95rem] font-bold leading-tight text-[#5f5b54]">
+										{card.priceLabel}<br />
+										<span class="text-[1.25rem] text-[#11110f]">{card.price}</span>
+									</p>
+									<a href={bookingHref} class="inline-flex h-12 w-full items-center justify-center rounded-xl bg-[#11110f] px-7 font-bold uppercase text-white no-underline transition hover:bg-[#dfff42] hover:text-[#11110f]">
+										{card.action}
+									</a>
+								</div>
+							</article>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<section id="results" class="stack-panel bg-[#f6f4ef] px-4 pb-36 pt-28 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48 lg:pt-36">
+				<div class="mx-auto grid max-w-[96rem] gap-14 lg:grid-cols-[0.42fr_1fr] lg:gap-20">
+					<div class="reveal">
+						<p class="mb-6 w-fit rounded-lg bg-black/5 px-4 py-3 text-[1rem] font-bold text-[#77736a]">The proof</p>
+						<h2 class="max-w-[12ch] text-[clamp(2.25rem,3.6vw,4rem)] font-bold leading-[0.98]">
+							Proven results
+						</h2>
+					</div>
+
+					<div class="grid gap-x-12 gap-y-16 sm:grid-cols-2 lg:gap-x-16 lg:gap-y-24">
+						{resultStats.map((stat, index) => (
+							<article class="reveal grid gap-5" style={`--delay: ${Math.min(index * 80, 240)}ms`}>
+								<div class="flex items-start justify-between gap-6">
+									<p
+										class="text-[clamp(2.6rem,4.6vw,4.9rem)] font-bold leading-none tracking-[0]"
+										data-result-number
+										data-result-target={stat.countTo}
+										data-result-prefix={stat.prefix}
+										data-result-suffix={stat.suffix}
+										aria-label={stat.value}
+									>
+										{stat.value}
+									</p>
+									<span class="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-[#dfff42] text-[2rem] font-bold leading-none text-[#11110f]" aria-hidden="true">↑</span>
+								</div>
+								<div class="h-px w-full bg-[#11110f]"></div>
+								<p class="max-w-[27rem] text-[clamp(1.02rem,1.25vw,1.22rem)] font-bold leading-[1.28] text-[#292723]">
+									{stat.label}
+								</p>
+							</article>
+						))}
+					</div>
+
+					<div class="reveal lg:col-start-2">
+						<a href={bookingHref} class="mx-auto inline-flex h-12 w-fit items-center rounded-xl bg-[#11110f] px-7 font-bold uppercase text-white no-underline transition hover:bg-[#dfff42] hover:text-[#11110f]">
+							Book a meeting
+						</a>
+					</div>
+				</div>
+			</section>
+
+			<section id="case-studies" class="stack-panel hidden bg-[#11110f] px-4 pb-36 pt-24 text-white sm:px-8 lg:px-10 lg:pb-48" hidden>
 				<div class="mx-auto grid max-w-[86rem] gap-12">
 					<div class="reveal grid gap-8 lg:grid-cols-[0.38fr_1fr] lg:items-end">
 						<p class="h-fit w-fit rounded-lg bg-white/10 px-4 py-3 text-[1rem] font-bold text-white/58">Case Studies</p>
@@ -1840,7 +1997,6 @@ const faqs = [
 							<a class="text-white no-underline" href="/">Home</a>
 							<a class="text-white no-underline" href="#process">Process</a>
 							<a class="text-white no-underline" href="#use-cases">Use Cases</a>
-							<a class="text-white no-underline" href="#case-studies">Case Studies</a>
 							<a class="text-white no-underline" href="#direction">Direction</a>
 							<a class="text-white no-underline" href="#faq">FAQ</a>
 						</div>
@@ -1862,6 +2018,59 @@ const faqs = [
 
 		<script>
 			const revealItems = document.querySelectorAll(".reveal");
+			const resultNumbers = document.querySelectorAll("[data-result-number]");
+			const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+			const formatResultNumber = (number, prefix = "", suffix = "", target = number) => {
+				const decimals = Number.isInteger(target) ? 0 : 1;
+				return `${prefix}${number.toLocaleString("en-GB", {
+					maximumFractionDigits: decimals,
+					minimumFractionDigits: decimals,
+				})}${suffix}`;
+			};
+			const animateResultNumber = (item) => {
+				if (item.dataset.resultAnimated === "true") return;
+				item.dataset.resultAnimated = "true";
+
+				const target = Number(item.dataset.resultTarget || 0);
+				const prefix = item.dataset.resultPrefix || "";
+				const suffix = item.dataset.resultSuffix || "";
+				const duration = 1100;
+				const startTime = performance.now();
+
+				if (prefersReducedMotion || target === 0) {
+					item.textContent = formatResultNumber(target, prefix, suffix, target);
+					return;
+				}
+
+				const tick = (time) => {
+					const progress = Math.min((time - startTime) / duration, 1);
+					const eased = 1 - Math.pow(1 - progress, 3);
+					item.textContent = formatResultNumber(target * eased, prefix, suffix, target);
+					if (progress < 1) requestAnimationFrame(tick);
+				};
+
+				item.textContent = formatResultNumber(0, prefix, suffix, target);
+				requestAnimationFrame(tick);
+			};
+
+			resultNumbers.forEach((item) => {
+				const target = Number(item.dataset.resultTarget || 0);
+				const prefix = item.dataset.resultPrefix || "";
+				const suffix = item.dataset.resultSuffix || "";
+				item.textContent = formatResultNumber(0, prefix, suffix, target);
+			});
+
+			const resultObserver = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						animateResultNumber(entry.target);
+						resultObserver.unobserve(entry.target);
+					}
+				});
+			}, { threshold: 0.35 });
+
+			resultNumbers.forEach((item) => resultObserver.observe(item));
+
 			const observer = new IntersectionObserver((entries) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
