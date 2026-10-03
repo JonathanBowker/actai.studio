@@ -10,7 +10,7 @@ This pack helps you test whether hidden exposure should become a focused AI moni
 
 ## The nerve
 
-You do not know what risk exposure is building until it is a finding.
+You do not know what risk exposure is building in the background.
 
 ## Talk to Jonny and Mark
 
