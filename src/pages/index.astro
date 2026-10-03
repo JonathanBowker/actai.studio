@@ -29,7 +29,7 @@ const triageAgents = (await getCollection("agents")).sort((a, b) => triageOrder.
 const indexedTriageAgents = triageAgents.map((agent, index) => ({ agent, index }));
 const triageRows = [
 	indexedTriageAgents.filter(({ index }) => index % 2 === 0),
-	indexedTriageAgents.filter(({ index }) => index % 2 === 1),
+	indexedTriageAgents.filter(({ index }) => index % 2 === 1).reverse(),
 ];
 
 const featureTabs = [
@@ -1030,11 +1030,12 @@ const faqs = [
 			}
 
 			.triage-row {
-				padding-right: 12vw;
+				scroll-snap-type: x mandatory;
 			}
 
 			.triage-row .triage-card {
-				width: clamp(20rem, 25vw, 25rem);
+				flex: 0 0 max(20rem, calc((100% - 3rem) / 3));
+				scroll-snap-align: start;
 			}
 
 			.triage-mobile-track {
@@ -1311,7 +1312,7 @@ const faqs = [
 
 				<form class="mt-10 grid gap-6" data-contact-form>
 					<fieldset class="grid gap-3 border-0 p-0">
-						<legend class="text-[0.95rem] font-bold text-white/48">Select type</legend>
+						<legend class="mb-3 text-[0.95rem] font-bold text-white/48">Select type</legend>
 						<div class="flex flex-wrap gap-2">
 							<label class="contact-option">
 								<input class="sr-only" type="radio" name="route" value="Project based" checked />
@@ -1332,67 +1333,23 @@ const faqs = [
 						</div>
 					</div>
 
-					<fieldset class="grid gap-3 border-0 p-0" data-project-fields>
-						<legend class="text-[0.95rem] font-bold text-white/48">What we build?</legend>
-						<div class="flex flex-wrap gap-2">
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="build" value="Website" checked />
-								<span>Website</span>
-							</label>
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="build" value="Mobile App" />
-								<span>Mobile App</span>
-							</label>
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="build" value="Branding" />
-								<span>Branding</span>
-							</label>
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="build" value="Corporate" />
-								<span>Corporate</span>
-							</label>
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="build" value="Other" />
-								<span>Other</span>
-							</label>
-						</div>
-					</fieldset>
-
-					<fieldset class="grid gap-3 border-0 p-0" data-project-fields>
-						<legend class="text-[0.95rem] font-bold text-white/48">Starting point</legend>
-						<div class="flex flex-wrap gap-2">
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="startingPoint" value="Discovery" checked />
-								<span>Discovery</span>
-							</label>
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="startingPoint" value="Build" />
-								<span>Build</span>
-							</label>
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="startingPoint" value="Direction" />
-								<span>Direction</span>
-							</label>
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="startingPoint" value="Not sure" />
-								<span>Not sure</span>
-							</label>
-						</div>
-					</fieldset>
-
 					<fieldset class="hidden gap-3 border-0 p-0" data-retainer-fields>
-						<div class="flex items-center justify-between gap-4">
+						<div class="mb-3 flex items-center justify-between gap-4">
 							<legend class="text-[0.95rem] font-bold text-white/48">Select plan</legend>
 							<a class="font-bold text-white underline underline-offset-4" href="#process">About plans</a>
 						</div>
 						<div class="flex flex-wrap gap-2">
 							<label class="contact-option">
-								<input class="sr-only" type="radio" name="plan" value="Standard plan" checked />
-								<span>Standard plan</span>
+								<input class="sr-only" type="radio" name="plan" value="Engage" checked />
+								<span>Engage</span>
 							</label>
 							<label class="contact-option">
-								<input class="sr-only" type="radio" name="plan" value="Pro plan" />
-								<span>Pro plan</span>
+								<input class="sr-only" type="radio" name="plan" value="Enable" />
+								<span>Enable</span>
+							</label>
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="plan" value="Extend" />
+								<span>Extend</span>
 							</label>
 						</div>
 					</fieldset>
@@ -1485,9 +1442,9 @@ const faqs = [
 
 					<div class="triage-desktop-rows">
 						{triageRows.map((row, rowIndex) => (
-							<div class="use-case-track triage-row flex gap-6 overflow-x-auto" data-triage-track data-triage-direction={rowIndex === 0 ? "1" : "-1"} aria-label={`Agent triage row ${rowIndex + 1}`}>
+							<div class="use-case-track triage-row flex gap-6 overflow-x-auto" data-triage-track aria-label={`Agent triage row ${rowIndex + 1}`}>
 								{row.map(({ agent, index }) => (
-									<article class="use-case-card triage-card reveal shrink-0" style={`--delay: ${(index % 10) * 70}ms; --case-tilt: ${index % 2 === 0 ? "-5deg" : "5deg"}`}>
+									<article class="use-case-card triage-card shrink-0" style={`--case-tilt: ${index % 2 === 0 ? "-5deg" : "5deg"}`}>
 										<div class="use-case-shell relative overflow-hidden rounded-[1.55rem] p-4 sm:p-5">
 											<img class="use-case-art-image absolute inset-0 h-full w-full object-cover" src={useCaseArt[index % useCaseArt.length]} alt="" />
 											<div class="use-case-texture"></div>
@@ -1513,7 +1470,7 @@ const faqs = [
 
 					<div class="use-case-track triage-mobile-track gap-6 overflow-x-auto pr-[12vw]" data-triage-mobile-track>
 						{triageAgents.map((agent, index) => (
-							<article class="use-case-card triage-card reveal w-[min(86vw,31rem)] shrink-0" style={`--delay: ${index * 70}ms; --case-tilt: ${index % 2 === 0 ? "-5deg" : "5deg"}`}>
+							<article class="use-case-card triage-card w-[min(86vw,31rem)] shrink-0" style={`--case-tilt: ${index % 2 === 0 ? "-5deg" : "5deg"}`}>
 								<div class="use-case-shell relative overflow-hidden rounded-[1.55rem] p-4 sm:p-5">
 									<img class="use-case-art-image absolute inset-0 h-full w-full object-cover" src={useCaseArt[index % useCaseArt.length]} alt="" />
 									<div class="use-case-texture"></div>
@@ -2284,17 +2241,12 @@ const faqs = [
 			const contactForm = document.querySelector("[data-contact-form]");
 			const contactConfirm = document.querySelector("[data-contact-confirm]");
 			const contactName = document.querySelector("#contact-name");
-			const projectFields = [...document.querySelectorAll("[data-project-fields]")];
 			const retainerFields = [...document.querySelectorAll("[data-retainer-fields]")];
 			let contactDirty = false;
 
 			const syncContactType = () => {
 				const route = contactForm?.querySelector("input[name='route']:checked")?.value || "Project based";
 				const retainer = route === "Retainer model";
-				projectFields.forEach((field) => {
-					field.classList.toggle("hidden", retainer);
-					field.classList.toggle("grid", !retainer);
-				});
 				retainerFields.forEach((field) => {
 					field.classList.toggle("hidden", !retainer);
 					field.classList.toggle("grid", retainer);
@@ -2363,8 +2315,6 @@ const faqs = [
 				event.preventDefault();
 				const formData = new FormData(contactForm);
 				const route = formData.get("route") || "Engage";
-				const build = formData.get("build") || "";
-				const startingPoint = formData.get("startingPoint") || "";
 				const plan = formData.get("plan") || "";
 				const name = formData.get("name") || "";
 				const email = formData.get("email") || "";
@@ -2372,8 +2322,6 @@ const faqs = [
 				const subject = encodeURIComponent(`Actai.Studio enquiry: ${route}`);
 				const body = encodeURIComponent([
 					`Type: ${route}`,
-					`Build: ${build}`,
-					`Starting point: ${startingPoint}`,
 					`Plan: ${plan}`,
 					`Name: ${name}`,
 					`Email: ${email}`,
@@ -2599,13 +2547,9 @@ const faqs = [
 			const triageTracks = [...document.querySelectorAll("[data-triage-track]")];
 			const triageMobileTrack = document.querySelector("[data-triage-mobile-track]");
 			const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-			const pauseTriageTrack = (track) => {
-				track.dataset.pauseUntil = String(performance.now() + 3200);
-			};
 			const scrollTriageTrack = (track, direction) => {
 				const card = track.querySelector(".use-case-card");
 				const distance = card ? card.getBoundingClientRect().width + 24 : track.clientWidth * 0.8;
-				pauseTriageTrack(track);
 				track.scrollBy({ left: direction * distance, behavior: reducedMotion.matches ? "auto" : "smooth" });
 			};
 
@@ -2616,54 +2560,19 @@ const faqs = [
 						scrollTriageTrack(triageMobileTrack, direction);
 						return;
 					}
-					triageTracks.forEach((track) => scrollTriageTrack(track, direction * Number(track.dataset.triageDirection || 1)));
+					triageTracks.forEach((track) => scrollTriageTrack(track, direction));
 				});
 			});
 
 			[...triageTracks, triageMobileTrack].filter(Boolean).forEach((track) => {
-				["pointerdown", "touchstart", "focusin", "mouseenter"].forEach((eventName) => {
-					track.addEventListener(eventName, () => pauseTriageTrack(track), { passive: true });
-				});
 				track.addEventListener("wheel", (event) => {
 					if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-					pauseTriageTrack(track);
 					track.scrollLeft += event.deltaY;
 					event.preventDefault();
 				}, { passive: false });
 			});
 
-			if (triageTracks.length && !reducedMotion.matches) {
-				let triageVisible = false;
-				let triageLastTick = performance.now();
-				requestAnimationFrame(() => {
-					triageTracks.forEach((track) => {
-						if (Number(track.dataset.triageDirection) < 0) track.scrollLeft = (track.scrollWidth - track.clientWidth) * 0.68;
-					});
-				});
-
-				const triageObserver = new IntersectionObserver(([entry]) => {
-					triageVisible = entry.isIntersecting;
-				}, { threshold: 0.08 });
-				const triageSection = document.querySelector("#triage");
-				if (triageSection) triageObserver.observe(triageSection);
-
-				const animateTriageRows = (time) => {
-					const delta = Math.min(34, time - triageLastTick);
-					triageLastTick = time;
-					if (triageVisible && window.innerWidth > 760) {
-						triageTracks.forEach((track) => {
-							if (time < Number(track.dataset.pauseUntil || 0)) return;
-							const direction = Number(track.dataset.triageDirection || 1);
-							const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
-							track.scrollLeft += direction * delta * 0.025;
-							if (track.scrollLeft >= maxScroll - 1) track.dataset.triageDirection = "-1";
-							if (track.scrollLeft <= 1) track.dataset.triageDirection = "1";
-						});
-					}
-					requestAnimationFrame(animateTriageRows);
-				};
-				requestAnimationFrame(animateTriageRows);
-			}
+			requestAnimationFrame(() => triageTracks.forEach((track) => { track.scrollLeft = 0; }));
 
 			document.querySelectorAll("[data-frame-stack]").forEach((stack) => {
 				const layers = [...stack.querySelectorAll("[data-frame-layer]")];
