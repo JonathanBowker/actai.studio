@@ -1,0 +1,257 @@
+---
+import "../../styles/global.css";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+	const agents = await getCollection("agents");
+	return agents.map((agent) => ({
+		params: { slug: agent.id },
+		props: { agent },
+	}));
+}
+
+type Props = {
+	agent: CollectionEntry<"agents">;
+};
+
+const { agent } = Astro.props;
+const bookingHref = "/meeting";
+const contactEmail = "hello@actai.studio";
+const packBase = `/packs/${agent.id}`;
+const zipHref = `${packBase}/${agent.id}-triage-pack.zip`;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content={`${agent.data.name}: a diagnostic self-help pack from Actai.Studio.`} />
+		<title>{agent.data.name} | Actai.Studio</title>
+		<style>
+			:root {
+				--cream: #ebe9e4;
+				--paper: #f6f4ef;
+				--ink: #11110f;
+				--muted: #5f5b54;
+				--lime: #dfff42;
+			}
+
+			html,
+			body {
+				background: var(--cream);
+			}
+
+			.agent-shell {
+				background:
+					radial-gradient(circle at 78% 8%, rgba(223, 255, 66, 0.34), transparent 24rem),
+					linear-gradient(180deg, #ebe9e4 0%, #f6f4ef 58%, #11110f 58%);
+				color: var(--ink);
+				min-height: 100vh;
+			}
+
+			.agent-card {
+				box-shadow: 0 30px 90px rgba(17, 17, 15, 0.12);
+			}
+
+			.gate-input {
+				background: white;
+				border: 1px solid rgba(17, 17, 15, 0.16);
+				border-radius: 0.9rem;
+				color: var(--ink);
+				font: inherit;
+				font-weight: 700;
+				min-height: 3.1rem;
+				padding: 0.9rem 1rem;
+				width: 100%;
+			}
+
+			.gate-input:focus,
+			.gate-checkbox input:focus-visible + span,
+			.agent-button:focus-visible {
+				outline: 2px solid var(--ink);
+				outline-offset: 3px;
+			}
+
+			.agent-button {
+				align-items: center;
+				border-radius: 0.85rem;
+				display: inline-flex;
+				font-weight: 800;
+				justify-content: center;
+				min-height: 3rem;
+				padding: 0.8rem 1.2rem;
+				text-decoration: none;
+				transition:
+					background 180ms ease,
+					color 180ms ease,
+					transform 180ms ease;
+			}
+
+			.agent-button:hover {
+				transform: translateY(-1px);
+			}
+
+			.unlock-panel[hidden] {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<main class="agent-shell px-4 py-8 sm:px-8 lg:px-10">
+			<nav class="mx-auto flex max-w-[96rem] items-center justify-between">
+				<a class="inline-flex h-14 items-center rounded-2xl bg-white px-5 font-bold text-[#11110f] no-underline shadow-xl transition hover:bg-[#dfff42]" href="/">
+					ACTAI.STUDIO
+				</a>
+				<a class="agent-button bg-[#11110f] text-white hover:bg-[#dfff42] hover:text-[#11110f]" href={bookingHref}>
+					Book a meeting
+				</a>
+			</nav>
+
+			<section class="mx-auto mt-16 grid max-w-[96rem] gap-8 lg:grid-cols-[0.7fr_1fr] lg:items-start">
+				<div class="grid gap-6">
+					<p class="w-fit rounded-lg bg-black/5 px-4 py-3 text-[1rem] font-bold text-[#77736a]">Diagnostic pack</p>
+					<h1 class="max-w-[11ch] text-[clamp(3.2rem,7vw,7.2rem)] font-bold leading-[0.88]">
+						{agent.data.name}
+					</h1>
+					<p class="max-w-[28rem] text-[clamp(1.2rem,1.8vw,1.65rem)] font-bold leading-[1.1] text-[#5f5b54]">
+						{agent.data.nerve}
+					</p>
+				</div>
+
+				<article class="agent-card grid gap-8 rounded-[1.7rem] bg-[#f6f4ef] p-6 sm:p-8 lg:p-10">
+					<div class="grid gap-5 sm:grid-cols-2">
+						<section class="rounded-[1.2rem] bg-white p-6">
+							<p class="mb-4 text-[0.85rem] font-black uppercase text-[#77736a]">Name</p>
+							<h2 class="text-[clamp(1.8rem,2.5vw,2.5rem)] font-bold leading-none">{agent.data.name}</h2>
+						</section>
+						<section class="rounded-[1.2rem] bg-white p-6">
+							<p class="mb-4 text-[0.85rem] font-black uppercase text-[#77736a]">Function</p>
+							<p class="text-[1.05rem] font-bold leading-[1.32] text-[#37342e]">{agent.data.function}</p>
+						</section>
+						<section class="rounded-[1.2rem] bg-white p-6">
+							<p class="mb-4 text-[0.85rem] font-black uppercase text-[#77736a]">Problem</p>
+							<p class="text-[1.05rem] font-bold leading-[1.32] text-[#37342e]">{agent.data.problem}</p>
+						</section>
+						<section class="rounded-[1.2rem] bg-white p-6">
+							<p class="mb-4 text-[0.85rem] font-black uppercase text-[#77736a]">Solution</p>
+							<p class="text-[1.05rem] font-bold leading-[1.32] text-[#37342e]">{agent.data.solution}</p>
+						</section>
+					</div>
+
+					<section class="grid gap-4 rounded-[1.2rem] bg-[#11110f] p-6 text-white">
+						<h2 class="text-[clamp(1.7rem,2.5vw,2.4rem)] font-bold leading-none">What is inside the pack</h2>
+						<div class="grid gap-3 font-bold text-white/68 sm:grid-cols-3">
+							<p class="rounded-xl bg-white/8 p-4">A short cover note that names the issue.</p>
+							<p class="rounded-xl bg-white/8 p-4">A diagnostic prompt to run in Claude or ChatGPT.</p>
+							<p class="rounded-xl bg-white/8 p-4">Agent knowledge for the Q&A section.</p>
+						</div>
+					</section>
+
+					<section class="grid gap-5 rounded-[1.2rem] bg-white p-6">
+						<div>
+							<h2 class="text-[clamp(1.7rem,2.4vw,2.35rem)] font-bold leading-none">Get the self-help pack</h2>
+							<p class="mt-3 max-w-[42rem] font-bold leading-[1.35] text-[#5f5b54]">
+								Share your contact details and consent to be contacted. The pack unlocks on this page.
+							</p>
+						</div>
+
+						<form class="grid gap-4" data-pack-gate data-agent-slug={agent.id}>
+							<div class="grid gap-4 sm:grid-cols-2">
+								<label class="grid gap-2 font-bold">
+									<span>Name</span>
+									<input class="gate-input" name="name" autocomplete="name" required />
+								</label>
+								<label class="grid gap-2 font-bold">
+									<span>Email</span>
+									<input class="gate-input" name="email" type="email" autocomplete="email" required />
+								</label>
+							</div>
+							<label class="gate-checkbox flex items-start gap-3 font-bold leading-[1.3] text-[#37342e]">
+								<input class="mt-1 h-5 w-5" name="consent" type="checkbox" required />
+								<span>I consent to Actai.Studio contacting me about this diagnostic pack and related AI direction.</span>
+							</label>
+							<p class="text-[0.9rem] font-bold leading-[1.35] text-[#77736a]">
+								We use these details to exchange the self-help pack for contact permission. Read the <a class="text-[#11110f] underline" href="/privacy">privacy notice</a>.
+							</p>
+							<button class="agent-button w-full border-0 bg-[#11110f] text-white hover:bg-[#dfff42] hover:text-[#11110f]" type="submit">
+								Unlock the pack
+							</button>
+						</form>
+
+						<div class="unlock-panel grid gap-4 rounded-[1rem] bg-[#ebe9e4] p-5" data-pack-unlock hidden>
+							<p class="font-bold text-[#37342e]">Pack unlocked. Choose where to use it, or download the zip.</p>
+							<div class="grid gap-3 sm:grid-cols-3">
+								<button class="agent-button border-0 bg-[#11110f] text-white hover:bg-[#dfff42] hover:text-[#11110f]" type="button" data-open-tool="claude" data-pack-base={packBase}>
+									Open in Claude
+								</button>
+								<button class="agent-button border-0 bg-[#11110f] text-white hover:bg-[#dfff42] hover:text-[#11110f]" type="button" data-open-tool="chatgpt" data-pack-base={packBase}>
+									Open in ChatGPT
+								</button>
+								<a class="agent-button bg-white text-[#11110f] hover:bg-[#dfff42]" href={zipHref} download data-pack-download>
+									Download zip
+								</a>
+							</div>
+							<p class="text-[0.88rem] font-bold leading-[1.35] text-[#77736a]" data-tool-note>
+								The tool buttons copy the diagnostic prompt to your clipboard and open the selected assistant. Use the zip if your assistant cannot load a pack directly.
+							</p>
+						</div>
+					</section>
+				</article>
+			</section>
+		</main>
+
+		<script>
+			const trackPackEvent = (name, detail = {}) => {
+				window.dispatchEvent(new CustomEvent(name, { detail }));
+				window.dataLayer?.push({ event: name, ...detail });
+			};
+
+			const gate = document.querySelector("[data-pack-gate]");
+			const unlockPanel = document.querySelector("[data-pack-unlock]");
+			const storageKey = gate ? `actai-pack:${gate.dataset.agentSlug}` : "";
+
+			if (storageKey && localStorage.getItem(storageKey) === "unlocked") {
+				unlockPanel?.removeAttribute("hidden");
+			}
+
+			gate?.addEventListener("submit", (event) => {
+				event.preventDefault();
+				const formData = new FormData(gate);
+				const submission = {
+					agentSlug: gate.dataset.agentSlug,
+					name: formData.get("name"),
+					email: formData.get("email"),
+					consent: formData.get("consent") === "on",
+					timestamp: new Date().toISOString(),
+				};
+				localStorage.setItem(storageKey, "unlocked");
+				localStorage.setItem(`${storageKey}:submission`, JSON.stringify(submission));
+				trackPackEvent("pack_gate_submit", submission);
+				unlockPanel?.removeAttribute("hidden");
+				unlockPanel?.scrollIntoView({ behavior: "smooth", block: "center" });
+			});
+
+			document.querySelectorAll("[data-open-tool]").forEach((button) => {
+				button.addEventListener("click", async () => {
+					const packBase = button.dataset.packBase;
+					const tool = button.dataset.openTool;
+					if (packBase) {
+						const files = await Promise.all(["cover.md", "prompt.md", "agent-knowledge.md"].map(async (file) => {
+							const response = await fetch(`${packBase}/${file}`);
+							return `# ${file}\n\n${await response.text()}`;
+						}));
+						await navigator.clipboard?.writeText(files.join("\n\n---\n\n"));
+					}
+					trackPackEvent("pack_open_tool", { agentSlug: gate?.dataset.agentSlug, tool });
+					window.open(tool === "claude" ? "https://claude.ai/new" : "https://chatgpt.com/", "_blank", "noopener,noreferrer");
+				});
+			});
+
+			document.querySelector("[data-pack-download]")?.addEventListener("click", () => {
+				trackPackEvent("pack_download", { agentSlug: gate?.dataset.agentSlug });
+			});
+		</script>
+	</body>
+</html>
