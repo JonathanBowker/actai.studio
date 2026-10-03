@@ -424,14 +424,14 @@ const faqs = [
 				box-shadow: 0 32px 90px rgba(0, 0, 0, 0.48);
 				color: white;
 				justify-self: end;
-				margin: 5rem 0.45rem 0.7rem 0;
-				max-height: calc(100vh - 5.7rem);
+				margin: 0.25rem 0.45rem 0.25rem 0;
+				max-height: calc(100vh - 0.5rem);
 				overflow-y: auto;
-				padding: clamp(2rem, 3vw, 2.65rem);
+				padding: clamp(2.5rem, 3vw, 2.95rem);
 				position: relative;
 				transform: translateX(2rem);
 				transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
-				width: min(35rem, calc(100vw - 1rem));
+				width: min(42rem, calc(100vw - 1rem));
 			}
 
 			.contact-layer[data-open="true"] .contact-panel {
@@ -449,7 +449,7 @@ const faqs = [
 				left: -1.2rem;
 				padding: 0.72rem 1rem;
 				position: absolute;
-				top: 12.8rem;
+				top: 23rem;
 				transition:
 					background 180ms ease,
 					transform 180ms ease;
@@ -469,7 +469,8 @@ const faqs = [
 				font-weight: 700;
 				min-width: 0;
 				outline: 0;
-				padding: 0.95rem 1rem;
+				min-height: 2.75rem;
+				padding: 0.84rem 1rem;
 				width: 100%;
 			}
 
@@ -492,8 +493,8 @@ const faqs = [
 				cursor: pointer;
 				display: inline-flex;
 				font-weight: 700;
-				min-height: 2.8rem;
-				padding: 0.8rem 1rem;
+				min-height: 2.85rem;
+				padding: 0.78rem 1rem;
 				transition:
 					background 180ms ease,
 					color 180ms ease,
@@ -514,7 +515,7 @@ const faqs = [
 				cursor: pointer;
 				font: inherit;
 				font-weight: 800;
-				min-height: 3.2rem;
+				min-height: 3.15rem;
 				transition:
 					background 180ms ease,
 					color 180ms ease,
@@ -1140,25 +1141,21 @@ const faqs = [
 			<div class="contact-scrim" aria-hidden="true"></div>
 			<aside class="contact-panel" role="dialog" aria-modal="true" aria-labelledby="contact-title">
 				<button class="contact-close" type="button" data-contact-close>Close</button>
-				<h2 id="contact-title" class="max-w-[12ch] text-[clamp(2.7rem,4.5vw,4.75rem)] font-bold leading-[0.98]">
-					Let's build AI around your business.
+				<h2 id="contact-title" class="max-w-[12ch] text-[clamp(2.85rem,4.4vw,3.6rem)] font-bold leading-[0.98]">
+					Let's build the future of your brand.
 				</h2>
 
-				<form class="mt-10 grid gap-8" data-contact-form>
+				<form class="mt-10 grid gap-6" data-contact-form>
 					<fieldset class="grid gap-3 border-0 p-0">
-						<legend class="text-[0.95rem] font-bold text-white/48">Select route</legend>
+						<legend class="text-[0.95rem] font-bold text-white/48">Select type</legend>
 						<div class="flex flex-wrap gap-2">
 							<label class="contact-option">
-								<input class="sr-only" type="radio" name="route" value="Engage" checked />
-								<span>Engage</span>
+								<input class="sr-only" type="radio" name="route" value="Project based" checked />
+								<span>Project based</span>
 							</label>
 							<label class="contact-option">
-								<input class="sr-only" type="radio" name="route" value="Enable" />
-								<span>Enable</span>
-							</label>
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="route" value="Extend" />
-								<span>Extend</span>
+								<input class="sr-only" type="radio" name="route" value="Retainer model" />
+								<span>Retainer model</span>
 							</label>
 						</div>
 					</fieldset>
@@ -1171,12 +1168,77 @@ const faqs = [
 						</div>
 					</div>
 
+					<fieldset class="grid gap-3 border-0 p-0" data-project-fields>
+						<legend class="text-[0.95rem] font-bold text-white/48">What we build?</legend>
+						<div class="flex flex-wrap gap-2">
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="build" value="Website" checked />
+								<span>Website</span>
+							</label>
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="build" value="Mobile App" />
+								<span>Mobile App</span>
+							</label>
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="build" value="Branding" />
+								<span>Branding</span>
+							</label>
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="build" value="Corporate" />
+								<span>Corporate</span>
+							</label>
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="build" value="Other" />
+								<span>Other</span>
+							</label>
+						</div>
+					</fieldset>
+
+					<fieldset class="grid gap-3 border-0 p-0" data-project-fields>
+						<legend class="text-[0.95rem] font-bold text-white/48">Budget range</legend>
+						<div class="flex flex-wrap gap-2">
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="budget" value="3-5k" checked />
+								<span>3-5k</span>
+							</label>
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="budget" value="5-10k" />
+								<span>5-10k</span>
+							</label>
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="budget" value="10k+" />
+								<span>10k+</span>
+							</label>
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="budget" value="Other" />
+								<span>Other</span>
+							</label>
+						</div>
+					</fieldset>
+
+					<fieldset class="hidden gap-3 border-0 p-0" data-retainer-fields>
+						<div class="flex items-center justify-between gap-4">
+							<legend class="text-[0.95rem] font-bold text-white/48">Select plan</legend>
+							<a class="font-bold text-white underline underline-offset-4" href="#process">About plans</a>
+						</div>
+						<div class="flex flex-wrap gap-2">
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="plan" value="Standard plan" checked />
+								<span>Standard plan</span>
+							</label>
+							<label class="contact-option">
+								<input class="sr-only" type="radio" name="plan" value="Pro plan" />
+								<span>Pro plan</span>
+							</label>
+						</div>
+					</fieldset>
+
 					<div class="grid gap-3">
 						<label class="text-[0.95rem] font-bold text-white/48" for="contact-details">Project details</label>
 						<textarea id="contact-details" class="contact-control min-h-[7.5rem] resize-none" name="details" placeholder="Tell us where AI could help, what is stuck, or what you want to understand." required></textarea>
 					</div>
 
-					<button class="contact-submit" type="submit">Submit</button>
+					<button class="contact-submit mt-4" type="submit">Submit</button>
 					<p class="text-center text-[0.9rem] font-bold leading-tight text-white/48">
 						By sending this, you're starting a direct conversation with our directors.
 					</p>
@@ -1823,7 +1885,22 @@ const faqs = [
 			const contactForm = document.querySelector("[data-contact-form]");
 			const contactConfirm = document.querySelector("[data-contact-confirm]");
 			const contactName = document.querySelector("#contact-name");
+			const projectFields = [...document.querySelectorAll("[data-project-fields]")];
+			const retainerFields = [...document.querySelectorAll("[data-retainer-fields]")];
 			let contactDirty = false;
+
+			const syncContactType = () => {
+				const route = contactForm?.querySelector("input[name='route']:checked")?.value || "Project based";
+				const retainer = route === "Retainer model";
+				projectFields.forEach((field) => {
+					field.classList.toggle("hidden", retainer);
+					field.classList.toggle("grid", !retainer);
+				});
+				retainerFields.forEach((field) => {
+					field.classList.toggle("hidden", !retainer);
+					field.classList.toggle("grid", retainer);
+				});
+			};
 
 			const setContactOpen = (open) => {
 				if (!contactLayer) return;
@@ -1863,7 +1940,11 @@ const faqs = [
 
 			contactForm?.addEventListener("input", () => {
 				contactDirty = true;
+				syncContactType();
 			});
+
+			contactForm?.addEventListener("change", syncContactType);
+			syncContactType();
 
 			document.querySelector("[data-contact-resume]")?.addEventListener("click", () => {
 				if (contactConfirm) contactConfirm.dataset.open = "false";
@@ -1880,12 +1961,18 @@ const faqs = [
 				event.preventDefault();
 				const formData = new FormData(contactForm);
 				const route = formData.get("route") || "Engage";
+				const build = formData.get("build") || "";
+				const budget = formData.get("budget") || "";
+				const plan = formData.get("plan") || "";
 				const name = formData.get("name") || "";
 				const email = formData.get("email") || "";
 				const details = formData.get("details") || "";
 				const subject = encodeURIComponent(`Actai.Studio enquiry: ${route}`);
 				const body = encodeURIComponent([
-					`Route: ${route}`,
+					`Type: ${route}`,
+					`Build: ${build}`,
+					`Budget: ${budget}`,
+					`Plan: ${plan}`,
 					`Name: ${name}`,
 					`Email: ${email}`,
 					"",
