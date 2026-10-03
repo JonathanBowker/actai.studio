@@ -26,6 +26,11 @@ const triageOrder = [
 	"localization",
 ];
 const triageAgents = (await getCollection("agents")).sort((a, b) => triageOrder.indexOf(a.id) - triageOrder.indexOf(b.id));
+const indexedTriageAgents = triageAgents.map((agent, index) => ({ agent, index }));
+const triageRows = [
+	indexedTriageAgents.filter(({ index }) => index % 2 === 0),
+	indexedTriageAgents.filter(({ index }) => index % 2 === 1),
+];
 
 const featureTabs = [
 	{
@@ -1019,6 +1024,23 @@ const faqs = [
 				aspect-ratio: 4 / 5;
 			}
 
+			.triage-desktop-rows {
+				display: grid;
+				gap: 1.5rem;
+			}
+
+			.triage-row {
+				padding-right: 12vw;
+			}
+
+			.triage-row .triage-card {
+				width: clamp(20rem, 25vw, 25rem);
+			}
+
+			.triage-mobile-track {
+				display: none;
+			}
+
 			.triage-action {
 				background: white;
 				color: #11110f;
@@ -1154,6 +1176,14 @@ const faqs = [
 			}
 
 			@media (max-width: 760px) {
+				.triage-desktop-rows {
+					display: none;
+				}
+
+				.triage-mobile-track {
+					display: flex;
+				}
+
 				body[data-contact-open="true"] main,
 				body[data-contact-open="true"] .nav-pill,
 				body[data-contact-open="true"] .contact-trigger {
@@ -1453,29 +1483,49 @@ const faqs = [
 						</div>
 					</div>
 
-					<div class="use-case-track flex gap-6 overflow-x-auto pr-[12vw]" data-triage-track>
+					<div class="triage-desktop-rows">
+						{triageRows.map((row, rowIndex) => (
+							<div class="use-case-track triage-row flex gap-6 overflow-x-auto" data-triage-track data-triage-direction={rowIndex === 0 ? "1" : "-1"} aria-label={`Agent triage row ${rowIndex + 1}`}>
+								{row.map(({ agent, index }) => (
+									<article class="use-case-card triage-card reveal shrink-0" style={`--delay: ${(index % 10) * 70}ms; --case-tilt: ${index % 2 === 0 ? "-5deg" : "5deg"}`}>
+										<div class="use-case-shell relative overflow-hidden rounded-[1.55rem] p-4 sm:p-5">
+											<img class="use-case-art-image absolute inset-0 h-full w-full object-cover" src={useCaseArt[index % useCaseArt.length]} alt="" />
+											<div class="use-case-texture"></div>
+											<div class="use-case-content relative px-5 py-5 text-center sm:px-6 sm:py-6">
+												<div class="use-case-kicker flex items-center justify-between gap-4 text-white/82">
+													<p class="text-[0.7rem] font-bold uppercase tracking-[0.14em]">Example</p>
+													<p class="use-case-nav rounded-full px-3 py-1.5 text-[0.72rem] font-bold tabular-nums">{(index + 1).toString().padStart(2, "0")} / {triageAgents.length.toString().padStart(2, "0")}</p>
+												</div>
+												<div class="use-case-heading mx-auto grid max-w-[18rem] justify-items-center">
+													<h3 class="use-case-title font-bold text-white">{agent.data.nerve}</h3>
+												</div>
+												<div class="use-case-detail triage-detail mx-auto w-full max-w-[17.5rem] rounded-[1.05rem] p-3 text-left">
+													<p class="text-[0.88rem] font-bold leading-[1.28] text-white/84">{agent.data.cardCopy}</p>
+													<a href={`/agents/${agent.id}`} class="triage-action inline-flex min-h-11 w-full items-center justify-center rounded-xl px-4 text-center text-[0.9rem] font-bold no-underline transition" data-agent-card-click={agent.id}>That sounds like me</a>
+												</div>
+											</div>
+										</div>
+									</article>
+								))}
+							</div>
+						))}
+					</div>
+
+					<div class="use-case-track triage-mobile-track gap-6 overflow-x-auto pr-[12vw]" data-triage-mobile-track>
 						{triageAgents.map((agent, index) => (
-							<article class="use-case-card triage-card reveal w-[min(86vw,31rem)] shrink-0" style={`--delay: ${index * 90}ms; --case-tilt: ${index % 2 === 0 ? "-5deg" : "5deg"}`}>
+							<article class="use-case-card triage-card reveal w-[min(86vw,31rem)] shrink-0" style={`--delay: ${index * 70}ms; --case-tilt: ${index % 2 === 0 ? "-5deg" : "5deg"}`}>
 								<div class="use-case-shell relative overflow-hidden rounded-[1.55rem] p-4 sm:p-5">
 									<img class="use-case-art-image absolute inset-0 h-full w-full object-cover" src={useCaseArt[index % useCaseArt.length]} alt="" />
 									<div class="use-case-texture"></div>
 									<div class="use-case-content relative px-5 py-5 text-center sm:px-6 sm:py-6">
 										<div class="use-case-kicker flex items-center justify-between gap-4 text-white/82">
 											<p class="text-[0.7rem] font-bold uppercase tracking-[0.14em]">Example</p>
-											<p class="use-case-nav rounded-full px-3 py-1.5 text-[0.72rem] font-bold tabular-nums">
-												{(index + 1).toString().padStart(2, "0")} / {triageAgents.length.toString().padStart(2, "0")}
-											</p>
+											<p class="use-case-nav rounded-full px-3 py-1.5 text-[0.72rem] font-bold tabular-nums">{(index + 1).toString().padStart(2, "0")} / {triageAgents.length.toString().padStart(2, "0")}</p>
 										</div>
-
-										<div class="use-case-heading mx-auto grid max-w-[18rem] justify-items-center">
-											<h3 class="use-case-title font-bold text-white">{agent.data.nerve}</h3>
-										</div>
-
+										<div class="use-case-heading mx-auto grid max-w-[18rem] justify-items-center"><h3 class="use-case-title font-bold text-white">{agent.data.nerve}</h3></div>
 										<div class="use-case-detail triage-detail mx-auto w-full max-w-[17.5rem] rounded-[1.05rem] p-3 text-left">
 											<p class="text-[0.88rem] font-bold leading-[1.28] text-white/84">{agent.data.cardCopy}</p>
-											<a href={`/agents/${agent.id}`} class="triage-action inline-flex min-h-11 w-full items-center justify-center rounded-xl px-4 text-center text-[0.9rem] font-bold no-underline transition" data-agent-card-click={agent.id}>
-												That sounds like me
-											</a>
+											<a href={`/agents/${agent.id}`} class="triage-action inline-flex min-h-11 w-full items-center justify-center rounded-xl px-4 text-center text-[0.9rem] font-bold no-underline transition" data-agent-card-click={agent.id}>That sounds like me</a>
 										</div>
 									</div>
 								</div>
@@ -2546,28 +2596,74 @@ const faqs = [
 				}, { passive: false });
 			});
 
-			document.querySelectorAll("[data-triage-track]").forEach((track) => {
-				const scrollByCard = (direction) => {
-					const card = track.querySelector(".use-case-card");
-					const distance = card ? card.getBoundingClientRect().width + 24 : track.clientWidth * 0.8;
-					track.scrollBy({
-						left: direction * distance,
-						behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-					});
-				};
+			const triageTracks = [...document.querySelectorAll("[data-triage-track]")];
+			const triageMobileTrack = document.querySelector("[data-triage-mobile-track]");
+			const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+			const pauseTriageTrack = (track) => {
+				track.dataset.pauseUntil = String(performance.now() + 3200);
+			};
+			const scrollTriageTrack = (track, direction) => {
+				const card = track.querySelector(".use-case-card");
+				const distance = card ? card.getBoundingClientRect().width + 24 : track.clientWidth * 0.8;
+				pauseTriageTrack(track);
+				track.scrollBy({ left: direction * distance, behavior: reducedMotion.matches ? "auto" : "smooth" });
+			};
 
-				document.querySelectorAll("[data-triage-scroll]").forEach((button) => {
-					button.addEventListener("click", () => {
-						scrollByCard(Number(button.dataset.triageScroll || 1));
-					});
+			document.querySelectorAll("[data-triage-scroll]").forEach((button) => {
+				button.addEventListener("click", () => {
+					const direction = Number(button.dataset.triageScroll || 1);
+					if (window.innerWidth <= 760 && triageMobileTrack) {
+						scrollTriageTrack(triageMobileTrack, direction);
+						return;
+					}
+					triageTracks.forEach((track) => scrollTriageTrack(track, direction * Number(track.dataset.triageDirection || 1)));
 				});
+			});
 
+			[...triageTracks, triageMobileTrack].filter(Boolean).forEach((track) => {
+				["pointerdown", "touchstart", "focusin", "mouseenter"].forEach((eventName) => {
+					track.addEventListener(eventName, () => pauseTriageTrack(track), { passive: true });
+				});
 				track.addEventListener("wheel", (event) => {
 					if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+					pauseTriageTrack(track);
 					track.scrollLeft += event.deltaY;
 					event.preventDefault();
 				}, { passive: false });
 			});
+
+			if (triageTracks.length && !reducedMotion.matches) {
+				let triageVisible = false;
+				let triageLastTick = performance.now();
+				requestAnimationFrame(() => {
+					triageTracks.forEach((track) => {
+						if (Number(track.dataset.triageDirection) < 0) track.scrollLeft = (track.scrollWidth - track.clientWidth) * 0.68;
+					});
+				});
+
+				const triageObserver = new IntersectionObserver(([entry]) => {
+					triageVisible = entry.isIntersecting;
+				}, { threshold: 0.08 });
+				const triageSection = document.querySelector("#triage");
+				if (triageSection) triageObserver.observe(triageSection);
+
+				const animateTriageRows = (time) => {
+					const delta = Math.min(34, time - triageLastTick);
+					triageLastTick = time;
+					if (triageVisible && window.innerWidth > 760) {
+						triageTracks.forEach((track) => {
+							if (time < Number(track.dataset.pauseUntil || 0)) return;
+							const direction = Number(track.dataset.triageDirection || 1);
+							const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+							track.scrollLeft += direction * delta * 0.025;
+							if (track.scrollLeft >= maxScroll - 1) track.dataset.triageDirection = "-1";
+							if (track.scrollLeft <= 1) track.dataset.triageDirection = "1";
+						});
+					}
+					requestAnimationFrame(animateTriageRows);
+				};
+				requestAnimationFrame(animateTriageRows);
+			}
 
 			document.querySelectorAll("[data-frame-stack]").forEach((stack) => {
 				const layers = [...stack.querySelectorAll("[data-frame-layer]")];
