@@ -1,0 +1,39 @@
+---
+interface Props { bookingHref: string }
+const { bookingHref } = Astro.props;
+---
+<footer class="relative overflow-hidden bg-black px-4 pb-0 pt-8 text-white sm:px-8 lg:px-10 lg:pt-10">
+				<div class="relative z-10 grid min-h-[24rem] w-full gap-10 bg-black p-8 text-white md:grid-cols-[1fr_1fr_0.7fr]">
+					<div class="grid content-between gap-10">
+						<div>
+							<p class="text-[1.7rem] font-bold">Act.</p>
+							<p class="mt-10 font-bold text-white/55">Get a useful recommendation.<br />No spam. No noise.</p>
+							<a href={bookingHref} class="mt-6 inline-flex h-12 items-center rounded-xl bg-white px-6 font-bold text-black no-underline transition hover:bg-[#dfff42]">
+								BEGIN THE CONVERSATION
+							</a>
+						</div>
+						<p class="text-white/42">© 2026 Act. All Rights Reserved.</p>
+					</div>
+					<div>
+						<p class="mb-5 font-bold text-white/38">Information</p>
+					<div class="grid gap-2 font-bold">
+						<a class="text-white no-underline" href="/">Home</a>
+						<a class="text-white no-underline" href="#results">Results</a>
+						<a class="text-white no-underline" href="#direction">About us</a>
+						<a class="text-white no-underline" href="#faq">FAQ</a>
+						<a class="text-white no-underline" href="/sitemap">Site map</a>
+						</div>
+						<p class="mb-3 mt-10 font-bold text-white/38">Contact</p>
+						<a class="font-bold text-white no-underline" href="mailto:hello@actai.studio">hello@actai.studio</a>
+					</div>
+					<div>
+						<p class="mb-5 font-bold text-white/38">Social</p>
+						<div class="grid gap-2 font-bold">
+							<a class="text-white no-underline" href="https://www.linkedin.com/company/advancedanalytica/" target="_blank" rel="noreferrer">LinkedIn</a>
+						</div>
+					</div>
+				</div>
+				<div class="pointer-events-none relative z-0 -mt-8 grid justify-center overflow-hidden">
+					<img class="w-[min(76vw,52rem)]" src="/logos/ACT_White.svg" alt="" aria-hidden="true" />
+				</div>
+			</footer>

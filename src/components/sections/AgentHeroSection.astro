@@ -1,0 +1,16 @@
+---
+interface Props { agent: any; heroImage: string }
+const { agent, heroImage } = Astro.props;
+---
+<section class="agent-hero">
+	<img class="agent-hero__media" src={heroImage} alt="" />
+	<div class="agent-hero__shade"></div>
+	<div class="agent-hero__inner">
+		<p class="agent-kicker">Agent diagnostic</p>
+		<h1>{agent.data.name}</h1>
+		<div class="agent-hero__bottom">
+			<p class="agent-hero__nerve">{agent.data.nerve}</p>
+			<p class="agent-hero__note">Start with the pain. Trace where time, consistency or control is being lost. Then decide whether an agent is the right response.</p>
+		</div>
+	</div>
+</section>

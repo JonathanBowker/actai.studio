@@ -1,0 +1,356 @@
+---
+const conversationSteps = [
+	"You discuss the process topic.",
+	"The expert refines the definition.",
+	"The agent confirms it has understood.",
+	"The agent starts the discovery process.",
+	"The expert interrogates the technical problem.",
+	"You add the details that change the context to your needs.",
+	"We all agree on the finding, and the agent locks it down.",
+	"The agent moves to the next layer.",
+];
+
+const conversationImages = [
+	"/fixa-assets/herovideo-poster.jpg",
+	"/images/act-hero-cinematic.png",
+	"/fixa-assets/MpwLfV3BL41ih4BTUbGjwjVEyU.webp",
+	"/fixa-assets/K6oVlqJ1SryJzVBte2yxIFoGqI.webp",
+	"/fixa-assets/WXKx26vqrAI7XfrXAgsHkTeOeV0.webp",
+];
+---
+
+<section id="offer" class="stack-panel bg-[#262722] px-4 pb-40 pt-24 text-white sm:px-8 lg:px-10 lg:pb-56">
+	<div class="reveal mx-auto grid max-w-[96rem] gap-14 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
+		<div class="design-tree-shell relative h-[38rem] overflow-hidden rounded-[1.6rem] bg-[#10110f] sm:h-[40rem] lg:h-[42rem]" data-design-tree-carousel>
+			<div class="design-tree-header absolute left-5 right-5 top-5 z-20 flex items-center justify-between text-[0.68rem] font-bold uppercase text-white/55 sm:left-7 sm:right-7 sm:top-7 sm:text-xs">
+				<span>Agent in the Room</span>
+				<span class="rounded-lg bg-white/10 px-3 py-2 backdrop-blur-md" data-design-tree-count>01 / 08</span>
+			</div>
+
+			<div class="design-tree-viewport absolute inset-x-0 bottom-20 top-16" role="region" aria-label="Agent in the Room conversation stages" aria-roledescription="carousel">
+				{conversationSteps.map((step, index) => (
+					<article
+					class="design-tree-card absolute left-1/2 top-1/2 overflow-hidden bg-[#11110f] text-white shadow-[0_24px_70px_rgba(17,17,15,0.22)]"
+						data-design-tree-card
+						data-index={index}
+						aria-label={`Step ${index + 1} of ${conversationSteps.length}`}
+					>
+						<img class="design-tree-image absolute inset-0 h-full w-full object-cover" src={conversationImages[index % conversationImages.length]} alt="" />
+						<div class="absolute inset-0 bg-gradient-to-r from-black/42 via-black/20 to-transparent"></div>
+					<div class="relative flex h-full flex-col justify-end p-5 pb-24 pt-20 sm:p-6 sm:pb-28 sm:pt-24">
+						<div>
+								<p class="mb-3 text-[0.68rem] font-bold uppercase text-[#dfff42] sm:text-xs">Interaction {String(index + 1).padStart(2, "0")}</p>
+								<p class="max-w-[19ch] text-[clamp(1.2rem,2.1vw,1.75rem)] font-bold leading-[1.04] [text-wrap:balance]">{step}</p>
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+
+			<div class="design-tree-footer absolute bottom-5 left-5 right-5 z-20 flex items-center justify-between sm:bottom-7 sm:left-7 sm:right-7">
+				<p class="max-w-[23ch] text-xs font-bold leading-tight text-white/48 sm:text-sm">A finding is agreed before the conversation moves deeper.</p>
+				<div class="flex gap-2">
+					<button class="design-tree-control" type="button" aria-label="Previous conversation stage" data-design-tree-previous>↑</button>
+					<button class="design-tree-control" type="button" aria-label="Next conversation stage" data-design-tree-next>↓</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="lg:pl-10">
+			<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-white/50">The method</p>
+			<div class="mt-12 max-w-[19ch] text-[clamp(1.75rem,2.7vw,3rem)] font-bold leading-[1]">
+				<p>Interact with an agent fully briefed on your business.</p>
+				<p class="mt-8 text-white/68">
+					Ask it anything.
+					Put our expert-led intelligence to the test.
+				</p>
+				<p class="mt-8 text-white/44">
+					What happens next could change your business<br />
+					- forever.
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.design-tree-shell::before,
+	.design-tree-shell::after {
+		content: "";
+		left: 0;
+		pointer-events: none;
+		position: absolute;
+		right: 0;
+		z-index: 12;
+	}
+
+	.design-tree-header {
+		left: 1.25rem;
+		right: 1.25rem;
+		top: 1.25rem;
+	}
+
+	.design-tree-footer {
+		bottom: 1.25rem;
+		left: 1.25rem;
+		right: 1.25rem;
+	}
+
+	.design-tree-shell::before {
+		background: linear-gradient(180deg, #10110f 10%, rgba(16, 17, 15, 0));
+		height: 7rem;
+		top: 0;
+	}
+
+	.design-tree-shell::after {
+		background: linear-gradient(0deg, #10110f 12%, rgba(16, 17, 15, 0));
+		bottom: 0;
+		height: 8rem;
+	}
+
+	.design-tree-viewport {
+		bottom: 0;
+		left: 0;
+		perspective: 80rem;
+		position: absolute;
+		right: 0;
+		touch-action: pan-y pinch-zoom;
+		top: 0;
+	}
+
+	.design-tree-card {
+		height: 100%;
+		max-width: none;
+		opacity: 0;
+		transform-origin: center;
+		transition: opacity 420ms ease, transform 820ms cubic-bezier(0.16, 1, 0.3, 1), filter 420ms ease;
+		width: 100%;
+		will-change: transform, opacity;
+	}
+
+	.design-tree-card[data-sliding="true"] {
+		pointer-events: none;
+		transition: none;
+	}
+
+	.design-tree-card[data-visible="true"] {
+		filter: saturate(calc(1 - var(--tree-distance, 0) * 0.2));
+	}
+
+	.design-tree-card[data-active="true"] {
+		cursor: grab;
+	}
+
+	.design-tree-card[data-active="true"] .design-tree-image {
+		transform: scale(1.04);
+	}
+
+	.design-tree-card > .relative {
+		transition: opacity 360ms ease;
+	}
+
+	.design-tree-card:not([data-active="true"]) > .relative {
+		opacity: 0;
+	}
+
+	.design-tree-card[data-entering="true"] > .relative {
+		opacity: 1;
+	}
+
+	.design-tree-image {
+		transition: transform 3.2s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.design-tree-control {
+		align-items: center;
+		background: white;
+		border: 0;
+		border-radius: 0.65rem;
+		color: #11110f;
+		cursor: pointer;
+		display: inline-flex;
+		font-size: 1.05rem;
+		font-weight: 700;
+		height: 2.75rem;
+		justify-content: center;
+		transition: background-color 180ms ease, color 180ms ease;
+		width: 2.75rem;
+	}
+
+	.design-tree-control:hover,
+	.design-tree-control:focus-visible {
+		background: #dfff42;
+		color: #11110f;
+		outline: none;
+	}
+
+	@media (min-width: 640px) {
+		.design-tree-header {
+			left: 1.75rem;
+			right: 1.75rem;
+			top: 1.75rem;
+		}
+
+		.design-tree-footer {
+			bottom: 1.75rem;
+			left: 1.75rem;
+			right: 1.75rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.design-tree-card,
+		.design-tree-image {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	document.querySelectorAll("[data-design-tree-carousel]").forEach((carousel) => {
+		const cards = [...carousel.querySelectorAll("[data-design-tree-card]")];
+		const count = carousel.querySelector("[data-design-tree-count]");
+		const previous = carousel.querySelector("[data-design-tree-previous]");
+		const next = carousel.querySelector("[data-design-tree-next]");
+		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+		let activeIndex = 0;
+		let startX = null;
+		let startY = null;
+		let paused = false;
+		let lastWheel = 0;
+		let moving = false;
+		const slideDuration = 1050;
+		const slideEasing = "cubic-bezier(0.65, 0, 0.35, 1)";
+
+		const shortestOffset = (index) => {
+			let offset = index - activeIndex;
+			if (offset > cards.length / 2) offset -= cards.length;
+			if (offset < -cards.length / 2) offset += cards.length;
+			return offset;
+		};
+
+		const render = () => {
+			cards.forEach((card, index) => {
+				const offset = shortestOffset(index);
+				const distance = Math.abs(offset);
+				card.style.setProperty("--tree-distance", String(Math.min(distance, 3)));
+				card.style.transform = `translate(-50%, calc(-50% + ${offset * 88}%)) rotateX(${offset * -7}deg) scale(${1 - Math.min(distance, 2) * 0.07})`;
+				card.style.opacity = distance === 0 ? "1" : distance === 1 ? "0.68" : distance === 2 ? "0.16" : "0";
+				card.style.zIndex = String(10 - distance);
+				card.dataset.visible = String(distance <= 2);
+				card.dataset.active = String(distance === 0);
+				card.setAttribute("aria-hidden", String(distance > 2));
+			});
+			if (count) count.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(cards.length).padStart(2, "0")}`;
+		};
+
+		const moveTo = (targetIndex, direction) => {
+			if (moving || targetIndex === activeIndex) return;
+			if (reducedMotion.matches || typeof cards[0]?.animate !== "function") {
+				activeIndex = targetIndex;
+				render();
+				return;
+			}
+
+			moving = true;
+			const outgoing = cards[activeIndex];
+			const incoming = cards[targetIndex];
+			const travel = direction > 0 ? 104 : -104;
+			const incomingStart = `translate(-50%, calc(-50% + ${travel}%)) scale(1.025)`;
+			const centre = "translate(-50%, -50%) scale(1)";
+			const outgoingEnd = `translate(-50%, calc(-50% + ${direction * -3}%)) scale(0.985)`;
+
+			incoming.dataset.sliding = "true";
+			incoming.dataset.entering = "true";
+			outgoing.dataset.sliding = "true";
+			incoming.dataset.visible = "true";
+			incoming.style.opacity = "1";
+			incoming.style.transform = incomingStart;
+			incoming.style.zIndex = "14";
+			outgoing.style.opacity = "1";
+			outgoing.style.transform = centre;
+			outgoing.style.zIndex = "13";
+
+			const incomingAnimation = incoming.animate([
+				{ transform: incomingStart },
+				{ transform: centre },
+			], { duration: slideDuration, easing: slideEasing, fill: "forwards" });
+			outgoing.animate([
+				{ transform: centre, filter: "brightness(1)" },
+				{ transform: outgoingEnd, filter: "brightness(0.72)" },
+			], { duration: slideDuration, easing: slideEasing, fill: "forwards" });
+
+			incomingAnimation.finished.then(() => {
+				activeIndex = targetIndex;
+				cards.forEach((card) => card.getAnimations().forEach((animation) => animation.cancel()));
+				render();
+				window.requestAnimationFrame(() => {
+					incoming.removeAttribute("data-entering");
+					incoming.removeAttribute("data-sliding");
+					outgoing.removeAttribute("data-sliding");
+					moving = false;
+				});
+			});
+		};
+
+		const move = (direction) => {
+			const targetIndex = (activeIndex + direction + cards.length) % cards.length;
+			moveTo(targetIndex, direction);
+		};
+
+		previous?.addEventListener("click", () => move(-1));
+		next?.addEventListener("click", () => move(1));
+		cards.forEach((card, index) => card.addEventListener("click", () => {
+			if (index === activeIndex) {
+				move(1);
+				return;
+			}
+			const offset = shortestOffset(index);
+			moveTo(index, offset >= 0 ? 1 : -1);
+		}));
+
+		carousel.addEventListener("wheel", (event) => {
+			const now = Date.now();
+			if (Math.abs(event.deltaY) < 12 || now - lastWheel < 420) return;
+			lastWheel = now;
+			move(event.deltaY > 0 ? 1 : -1);
+		}, { passive: true });
+
+		carousel.addEventListener("touchstart", (event) => {
+			startX = event.touches[0]?.clientX ?? null;
+			startY = event.touches[0]?.clientY ?? null;
+			paused = true;
+		}, { passive: true });
+		carousel.addEventListener("touchend", (event) => {
+			const endX = event.changedTouches[0]?.clientX;
+			const endY = event.changedTouches[0]?.clientY;
+			if (startX === null || startY === null || endX === undefined || endY === undefined) return;
+			const distanceX = startX - endX;
+			const distanceY = startY - endY;
+			const distance = Math.abs(distanceX) > Math.abs(distanceY) ? distanceX : distanceY;
+			if (Math.abs(distance) > 28) move(distance > 0 ? 1 : -1);
+			startX = null;
+			startY = null;
+			paused = false;
+		}, { passive: true });
+		carousel.addEventListener("touchcancel", () => {
+			startX = null;
+			startY = null;
+			paused = false;
+		}, { passive: true });
+
+		carousel.addEventListener("mouseenter", () => { paused = true; });
+		carousel.addEventListener("mouseleave", () => { paused = false; });
+		carousel.addEventListener("focusin", () => { paused = true; });
+		carousel.addEventListener("focusout", () => { paused = false; });
+
+		if (!reducedMotion.matches) {
+			window.setInterval(() => {
+				const bounds = carousel.getBoundingClientRect();
+				if (!paused && bounds.top < window.innerHeight && bounds.bottom > 0) move(1);
+			}, 3200);
+		}
+
+		render();
+	});
+</script>

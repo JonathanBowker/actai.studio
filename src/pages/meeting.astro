@@ -1,8 +1,9 @@
 ---
 import "../styles/global.css";
+import { MeetingBookingSection, MeetingHeader, MeetingHeroSection } from "../components/sections";
 
-const emailHref = "mailto:hello@actai.studio?subject=Book%20a%2030-minute%20call";
-const buttonClass = "inline-flex h-10 items-center justify-center border border-ink bg-acid px-4 text-[16px] leading-none text-ink no-underline transition-colors hover:bg-ink hover:text-paper";
+const bookingHref = "/contact";
+const buttonClass = "inline-flex h-10 items-center justify-center border border-ink bg-acid px-3 text-xs leading-none text-ink no-underline transition-colors hover:bg-ink hover:text-paper sm:px-4 sm:text-sm";
 
 const nextSteps = [
 	{
@@ -34,109 +35,15 @@ const nextSteps = [
 			name="description"
 			content="Book a face to face meeting with Act to discuss where AI can make a real difference in your business."
 		/>
-		<title>Book a call | actai.studio</title>
+		<title>Begin the conversation | actai.studio</title>
 	</head>
 	<body class="min-h-screen pt-[var(--header-height)]">
-		<header class="fixed left-0 top-0 z-50 grid h-[var(--header-height)] w-full grid-cols-[1fr_auto] border-b border-ink bg-ink text-paper md:grid-cols-[minmax(180px,1fr)_auto_minmax(180px,1fr)]">
-			<a href="/" class="flex items-center px-4 text-paper no-underline transition-colors hover:bg-paper hover:text-ink sm:px-6" aria-label="act-ai studio">
-				<svg class="h-7 w-auto" viewBox="360 289.86 1200.07 500.75" role="img" aria-hidden="true">
-					<path fill="currentColor" d="M1001.43 538.23c29.46 0 54.12 20.28 60.97 47.62h137.8c-8.22-97.46-94.04-174.14-198.78-174.14-110.17 0-199.48 84.82-199.48 189.45s89.31 189.45 199.48 189.45 190.56-76.68 198.78-174.14h-137.8c-6.85 27.34-31.51 47.62-60.97 47.62-34.75 0-62.93-28.17-62.93-62.93s28.17-62.93 62.93-62.93Z" />
-					<path fill="currentColor" d="M645.48 289.86H507.44L360.07 784.04h150.46l19.25-70.49h131.09l19.25 70.49h150.46L683.21 289.86h-37.73ZM562.62 593.3l32.71-119.78 32.71 119.78h-65.42Z" />
-					<path fill="currentColor" d="M1439.38 536.94V416.7h-45.8V289.86h-141.11V416.7h-45.81v120.24h45.81v247.09h141.11V536.94h45.8Z" />
-					<path fill="currentColor" d="M1418.96 663.79h141.11v120.25h-141.11z" />
-				</svg>
-			</a>
-			<nav class="hidden items-center justify-center gap-8 px-6 text-[16px] md:flex">
-				<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="/#work">work</a>
-				<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="/#method">method</a>
-			</nav>
-			<a href={emailHref} class={`${buttonClass} mx-4 my-2 sm:mx-6`}>Book a call</a>
-		</header>
+		<MeetingHeader {bookingHref} {buttonClass} />
 
 		<main>
-			<section class="border-b border-ink px-4 py-10 sm:px-6 lg:px-10 lg:py-16">
-				<div class="grid gap-10 lg:grid-cols-[1fr_1.35fr] lg:items-end">
-					<div>
-						<p class="mb-8 text-[1rem] leading-[1.25]">Move fast. Stay clear.</p>
-						<h1 class="max-w-[14ch] text-[clamp(2.4rem,5vw,5.5rem)] font-bold leading-[0.94] tracking-normal">
-							Let's talk about your business and AI.
-						</h1>
-					</div>
-					<p class="max-w-[36rem] text-[1.1rem] leading-[1.35] lg:ml-auto">
-						Thirty minutes is typically enough to understand where you are, what is not working and whether we are the right fit. No pitch deck, just an honest conversation about your business, your AI opportunity and what you need to do next.
-					</p>
-				</div>
-			</section>
+			<MeetingHeroSection />
 
-			<section class="grid gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_0.82fr] lg:px-10 lg:py-16">
-				<div class="border border-ink bg-paper p-5 sm:p-8">
-					<p class="mb-8 text-[1.35rem] font-bold leading-[1.1]">Book a 30-minute call</p>
-
-					<div class="grid gap-4 md:grid-cols-2">
-						<div>
-							<p class="mb-2 text-sm font-bold">Name</p>
-							<div class="border border-ink bg-white px-4 py-3 text-ink/55">Your name</div>
-						</div>
-						<div>
-							<p class="mb-2 text-sm font-bold">Role</p>
-							<div class="border border-ink bg-white px-4 py-3 text-ink/55">Founder, COO, director...</div>
-						</div>
-						<div>
-							<p class="mb-2 text-sm font-bold">Company</p>
-							<div class="border border-ink bg-white px-4 py-3 text-ink/55">Company name</div>
-						</div>
-						<div>
-							<p class="mb-2 text-sm font-bold">Email</p>
-							<div class="border border-ink bg-white px-4 py-3 text-ink/55">you@company.com</div>
-						</div>
-					</div>
-
-					<div class="mt-4">
-						<p class="mb-2 text-sm font-bold">What should we discuss?</p>
-						<div class="min-h-[112px] border border-ink bg-white px-4 py-3 text-ink/55">
-							Tell us what you are trying to improve, where work is stuck, or what you want AI to make possible.
-						</div>
-					</div>
-
-					<a href={emailHref} class={`${buttonClass} mt-6 w-full`}>Email to book your call</a>
-
-					<p class="mt-4 text-[1rem] leading-[1.25]">
-						This opens your email client for now. We reply within one business day.
-					</p>
-				</div>
-
-				<div class="grid gap-8">
-					<div>
-						<p class="mb-6 text-[1rem] leading-[1.25]">What happens next</p>
-						<div class="grid gap-8">
-							{
-								nextSteps.map((step) => (
-									<div class="grid grid-cols-[auto_1fr] gap-4">
-										<div class="flex h-10 min-w-10 items-center justify-center border border-ink bg-acid px-3 text-sm">
-											{step.label}
-										</div>
-										<div>
-											<p class="font-bold leading-[1.25]">{step.title}</p>
-											<p class="mt-3 leading-[1.35]">{step.body}</p>
-										</div>
-									</div>
-								))
-							}
-						</div>
-					</div>
-
-					<div class="border border-ink p-5 sm:p-6">
-						<p class="mb-6 text-[1rem] leading-[1.25]">Direct contact</p>
-						<p class="text-sm font-bold">Email</p>
-						<a class="mt-2 block text-ink underline decoration-ink underline-offset-4 hover:bg-ink hover:text-paper" href="mailto:hello@actai.studio">
-							hello@actai.studio
-						</a>
-						<div class="my-5 border-t border-ink"></div>
-						<p class="text-sm font-bold">Response time</p>
-						<p class="mt-2">Within one business day</p>
-					</div>
-				</div>
-			</section>
+			<MeetingBookingSection {bookingHref} {buttonClass} {nextSteps} />
 		</main>
 	</body>
 </html>

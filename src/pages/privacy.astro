@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { PrivacyContentSection } from "../components/sections";
 ---
 
 <html lang="en">
@@ -13,14 +14,7 @@ import "../styles/global.css";
 	</head>
 	<body class="bg-[#ebe9e4] text-[#11110f]">
 		<main class="mx-auto grid min-h-screen max-w-[58rem] content-center gap-8 px-4 py-20 sm:px-8">
-			<a class="w-fit rounded-2xl bg-white px-5 py-4 font-bold text-[#11110f] no-underline transition hover:bg-[#dfff42]" href="/">ACTAI.STUDIO</a>
-			<h1 class="text-[clamp(3rem,7vw,6rem)] font-bold leading-[0.9]">Privacy notice</h1>
-			<div class="grid gap-5 text-[1.1rem] font-bold leading-[1.42] text-[#4b4740]">
-				<p>When you request a diagnostic pack, we ask for your name, email address and consent to be contacted.</p>
-				<p>We use those details to respond to your request, discuss the diagnostic pack and follow up about relevant Actai.Studio services. We do not sell your details.</p>
-				<p>This static site currently unlocks packs in your browser while secure submission storage is being finalised. If you email us a transcript, we will use it only to understand your business problem and respond to you.</p>
-				<p>You can ask us to delete your contact details or stop contacting you by emailing <a class="text-[#11110f] underline" href="mailto:hello@actai.studio">hello@actai.studio</a>.</p>
-			</div>
+			<PrivacyContentSection />
 		</main>
 	</body>
 </html>

@@ -1,0 +1,70 @@
+---
+import "../styles/global.css";
+import { getCollection } from "astro:content";
+import {
+	SitemapDirectorySection,
+	SitemapFooterSection,
+	SitemapHeaderSection,
+	SitemapHeroSection,
+} from "../components/sections";
+
+const bookingHref = "/contact";
+const agents = (await getCollection("agents")).sort((a, b) => a.data.name.localeCompare(b.data.name, "en-GB"));
+const groups = [
+	{
+		label: "Start here",
+		links: [
+			{ label: "Home", href: "/", note: "ACT's direction, approach and evidence." },
+			{ label: "Results", href: "/#results", note: "The outcomes our work is designed to create." },
+			{ label: "About us", href: "/#direction", note: "Meet the directors behind ACT." },
+			{ label: "Frequently asked questions", href: "/#faq", note: "Practical answers about working together." },
+		],
+	},
+	{
+		label: "Talk to ACT",
+		links: [
+			{ label: "Begin the conversation", href: bookingHref, note: "Start with a direct conversation." },
+			{ label: "Contact", href: "/contact", note: "Send us the business context and your question." },
+		],
+	},
+	{
+		label: "Agent diagnostics",
+		wide: true,
+		links: agents.map((agent) => ({
+			label: agent.data.name,
+			href: `/agents/${agent.id}`,
+			note: agent.data.nerve,
+		})),
+	},
+	{
+		label: "Site information",
+		links: [
+			{ label: "Privacy notice", href: "/privacy", note: "How ACT handles the information you share." },
+			{ label: "Site map", href: "/sitemap", note: "You are here." },
+		],
+	},
+];
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content="A complete directory of ACT's pages, agent diagnostics and site information." />
+		<title>Site map | actai.studio</title>
+		<style is:global>
+			html, body { background: #f6f4ef; color: #11110f; }
+		</style>
+	</head>
+	<body>
+		<SitemapHeaderSection {bookingHref} />
+		<main>
+			<SitemapHeroSection />
+			<SitemapDirectorySection {groups} />
+		</main>
+		<SitemapFooterSection {bookingHref} />
+	</body>
+</html>

@@ -1,0 +1,86 @@
+<button class="contact-trigger fixed right-5 top-3 z-50 inline-flex h-12 items-center gap-3 rounded-xl bg-[#11110f] px-5 font-bold text-white transition hover:bg-[#dfff42] hover:text-[#11110f] sm:right-8" type="button" data-contact-open data-scroll-contact>
+	<span aria-hidden="true">✦</span>
+	<span>Get in touch</span>
+</button>
+
+<div class="contact-layer" data-contact-layer data-open="false" aria-hidden="true">
+	<div class="contact-scrim" aria-hidden="true"></div>
+	<aside class="contact-panel" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+		<button class="contact-close" type="button" data-contact-close>
+			<span aria-hidden="true">&times;</span>
+			<span>Close</span>
+		</button>
+		<h2 id="contact-title" class="max-w-[12ch] text-[clamp(2.85rem,4.4vw,3.6rem)] font-bold leading-[0.98]">
+			Let's put the future to work for your business.
+		</h2>
+
+		<form class="mt-10 grid gap-6" data-contact-form>
+			<fieldset class="grid gap-3 border-0 p-0">
+				<legend class="mb-3 text-[0.95rem] font-bold text-white/48">Select type</legend>
+				<div class="flex flex-wrap gap-2">
+					<label class="contact-option">
+						<input class="sr-only" type="radio" name="route" value="Project based" checked />
+						<span>Project based</span>
+					</label>
+					<label class="contact-option">
+						<input class="sr-only" type="radio" name="route" value="Retainer model" />
+						<span>Retainer model</span>
+					</label>
+				</div>
+			</fieldset>
+
+			<div class="grid gap-3">
+				<label class="text-[0.95rem] font-bold text-white/48" for="contact-name">Personal info</label>
+				<div class="grid gap-2 sm:grid-cols-2">
+					<input id="contact-name" class="contact-control" name="name" type="text" placeholder="Your name" autocomplete="name" required />
+					<input class="contact-control" name="email" type="email" placeholder="Email" autocomplete="email" required />
+				</div>
+			</div>
+
+			<fieldset class="hidden gap-3 border-0 p-0" data-retainer-fields>
+				<div class="mb-3 flex items-center justify-between gap-4">
+					<legend class="text-[0.95rem] font-bold text-white/48">Select plan</legend>
+					<a class="font-bold text-white underline underline-offset-4" href="#process">About plans</a>
+				</div>
+				<div class="flex flex-wrap gap-2">
+					<label class="contact-option">
+						<input class="sr-only" type="radio" name="plan" value="Engage" checked />
+						<span>Engage</span>
+					</label>
+					<label class="contact-option">
+						<input class="sr-only" type="radio" name="plan" value="Enable" />
+						<span>Enable</span>
+					</label>
+					<label class="contact-option">
+						<input class="sr-only" type="radio" name="plan" value="Extend" />
+						<span>Extend</span>
+					</label>
+				</div>
+			</fieldset>
+
+			<div class="grid gap-3">
+				<label class="text-[0.95rem] font-bold text-white/48" for="contact-details">Project details</label>
+				<textarea id="contact-details" class="contact-control min-h-[7.5rem] resize-none" name="details" placeholder="Tell us where AI could help, what is stuck, or what you want to understand." required></textarea>
+			</div>
+
+			<button class="contact-submit mt-4" type="submit">Submit</button>
+			<p class="text-center text-[0.9rem] font-bold leading-tight text-white/48">
+				By sending this, you're starting a direct conversation with our directors.
+			</p>
+		</form>
+	</aside>
+
+	<div class="contact-confirm" data-contact-confirm data-open="false" role="alertdialog" aria-modal="true" aria-labelledby="contact-confirm-title">
+		<p id="contact-confirm-title" class="mx-auto max-w-[10ch] text-[2rem] font-bold leading-[1]">
+			Forgot to press submit?
+		</p>
+		<div class="mt-8 grid grid-cols-2 gap-3">
+			<button class="rounded-xl bg-white/12 px-4 py-3 font-bold text-white transition hover:bg-white/18" type="button" data-contact-discard>
+				× Close anyway
+			</button>
+			<button class="rounded-xl bg-white/12 px-4 py-3 font-bold text-white transition hover:bg-white/18" type="button" data-contact-resume>
+				↗ Back to form
+			</button>
+		</div>
+	</div>
+</div>

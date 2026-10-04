@@ -1,0 +1,63 @@
+---
+interface Props { bookingHref: string }
+const { bookingHref } = Astro.props;
+---
+<section id="direction" class="stack-panel bg-[#ebe9e4] px-4 pb-36 pt-24 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48">
+				<div
+					class="reveal mx-auto grid min-h-[46rem] max-w-[96rem] gap-10 rounded-[1.4rem] p-6 sm:p-8 lg:grid-cols-[0.75fr_1fr_1fr] lg:grid-rows-[auto_1fr_auto] lg:p-10"
+				>
+					<p class="w-fit self-start rounded-lg bg-black/5 px-4 py-3 text-[1rem] font-bold text-[#77736a]">The direction</p>
+
+					<div class="lg:col-span-2">
+						<h2 class="max-w-[18ch] text-[clamp(2.3rem,4.3vw,4.7rem)] font-bold leading-[0.96]">
+							We direct the AI, and deliver the results.
+						</h2>
+						<p class="mt-6 max-w-[50rem] text-[clamp(1.05rem,1.5vw,1.28rem)] font-bold leading-[1.28] text-[#5f5b54]">
+							AI and creative thinking, backed by practice, driven by outcomes, not reports.
+						</p>
+					</div>
+
+					<div class="grid content-start gap-8 border-y border-black/40 py-10 lg:row-span-2 lg:-mt-16 lg:border-y-0 lg:py-0">
+						<div>
+							<p class="max-w-[13ch] text-[clamp(1.85rem,2.85vw,3.05rem)] font-bold leading-[0.92]">
+								Two Directors.<br />
+								<span class="italic">One Direction.</span>
+							</p>
+						</div>
+						<p class="max-w-[16ch] text-[clamp(1.15rem,1.65vw,1.75rem)] font-bold leading-[1.08]">
+							You bring the business.<br />
+							We bring the agentic competency.<br />
+							Together, we make the future work.
+						</p>
+						<a href={bookingHref} class="mt-2 inline-flex h-12 w-fit items-center rounded-xl bg-black px-7 font-bold uppercase text-white no-underline transition hover:bg-[#dfff42] hover:text-black">
+							BEGIN THE CONVERSATION
+						</a>
+					</div>
+
+					<article class="grid content-start gap-7 border-t border-black/40 pt-10 lg:border-t-0 lg:pt-0">
+						<div>
+							<p class="text-[clamp(2rem,3vw,3.2rem)] font-bold leading-[0.9]">Jonny Bowker</p>
+							<h3 class="text-[clamp(1.7rem,2.65vw,2.85rem)] font-bold leading-[0.96]">AI Director, Strategy</h3>
+						</div>
+						<p class="max-w-[31rem] text-[1.03rem] font-bold leading-[1.34] text-[#5f5b54]">
+							Jonny Bowker is a Law Society of Scotland accredited AI Expert and practitioner, working across Fortune 500 companies and mid-caps. He structures problems into solutions through Agent in the Room, a live design tree methodology for solving business problems, and directs ambitious scale-ups with the same thinking.
+						</p>
+						<p class="mt-auto max-w-[24rem] border-t border-black/28 pt-4 text-[0.95rem] font-bold leading-[1.25]">
+							Mapping the business.
+						</p>
+					</article>
+
+					<article class="grid content-start gap-7 border-t border-black/40 pt-10 lg:border-t-0 lg:pt-0">
+						<div>
+							<p class="text-[clamp(2rem,3vw,3.2rem)] font-bold leading-[0.9]">Mark Chatelier</p>
+							<h3 class="text-[clamp(1.7rem,2.65vw,2.85rem)] font-bold leading-[0.96]">AI Director, Discovery</h3>
+						</div>
+						<p class="max-w-[31rem] text-[1.03rem] font-bold leading-[1.34] text-[#5f5b54]">
+							Mark Chatelier is an AI generalist who leads discovery through creative thinking and direction, drawing on two decades leading creative teams on global accounts including HSBC, Audi and Vodafone. He listens first, then leads the conversation toward the real problem, applying the same discipline wherever it actually sits.
+						</p>
+						<p class="mt-auto max-w-[24rem] border-t border-black/28 pt-4 text-[0.95rem] font-bold leading-[1.25]">
+							Shaping the direction.
+						</p>
+					</article>
+				</div>
+			</section>

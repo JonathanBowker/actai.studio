@@ -1,0 +1,84 @@
+---
+interface Props { frameworkCards: any[]; useCaseArt: string[] }
+const { frameworkCards, useCaseArt } = Astro.props;
+---
+<section id="use-cases" class="stack-panel bg-[#f6f4ef] px-4 pb-32 pt-32 text-[#11110f] sm:px-8 lg:px-10 lg:pb-44 lg:pt-36">
+				<div class="mx-auto grid max-w-[96rem] gap-10">
+					<div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+						<div>
+							<p class="mb-6 w-fit rounded-lg bg-black/5 px-4 py-3 text-[1rem] font-bold text-[#77736a]">Use Cases</p>
+							<h2 class="max-w-[20ch] text-[clamp(2.2rem,4vw,4.2rem)] font-bold leading-[1] text-[#34312b]">
+							Let's find the time you're losing and get it back.
+							</h2>
+						</div>
+						<div class="flex items-center gap-3 justify-self-start lg:justify-self-end lg:pb-2">
+							<button class="grid h-12 w-12 place-items-center rounded-xl bg-white text-2xl font-bold leading-none text-[#11110f] shadow-sm transition hover:bg-[#dfff42]" type="button" aria-label="Scroll use cases left" data-use-case-scroll="-1">‹</button>
+							<button class="grid h-12 w-12 place-items-center rounded-xl bg-white text-2xl font-bold leading-none text-[#11110f] shadow-sm transition hover:bg-[#dfff42]" type="button" aria-label="Scroll use cases right" data-use-case-scroll="1">›</button>
+						</div>
+					</div>
+
+					<div class="use-case-track flex gap-6 overflow-x-auto pr-[12vw]" data-use-case-track>
+						{frameworkCards.map((card, index) => (
+							<article class="use-case-card reveal w-[min(86vw,31rem)] shrink-0" style={`--delay: ${index * 90}ms; --case-tilt: ${index % 2 === 0 ? "-5deg" : "5deg"}`}>
+								<div class="use-case-shell relative overflow-hidden rounded-[1.55rem] p-4 sm:p-5">
+									<img class="use-case-art-image absolute inset-0 h-full w-full object-cover" src={useCaseArt[index % useCaseArt.length]} alt="" />
+									<div class="use-case-texture"></div>
+									<div class="use-case-content relative px-5 py-5 text-center sm:px-6 sm:py-6">
+										<div class="use-case-kicker flex items-center justify-between gap-4 text-white/82">
+											<p class="text-[0.7rem] font-bold uppercase tracking-[0.14em]">Use Case</p>
+											<p class="use-case-nav rounded-full px-3 py-1.5 text-[0.72rem] font-bold tabular-nums">
+												{(index + 1).toString().padStart(2, "0")} / {frameworkCards.length.toString().padStart(2, "0")}
+											</p>
+										</div>
+
+										<div class="use-case-heading mx-auto grid max-w-[18rem] justify-items-center">
+											<h3 class="use-case-title font-bold text-white">{card.displayTitle}</h3>
+											<p class="use-case-copy mt-3 text-[0.86rem] font-bold leading-[1.28] text-white/82">{card.copy}</p>
+										</div>
+
+										<div class="use-case-detail mx-auto w-full max-w-[17.5rem] rounded-[1.05rem] p-2.5 text-left">
+											{card.overlay.type === "list" && (
+												<div>
+													<p class="use-case-menu-title text-[0.72rem] font-bold uppercase tracking-[0.12em] text-white/72">{card.overlay.title}</p>
+													<div class="use-case-menu-body text-[0.82rem] font-bold text-white/82">
+														<p class="use-case-menu-row text-white">{card.overlay.active}</p>
+														{card.overlay.items.slice(0, 2).map((item) => (
+															<p class="use-case-menu-muted">{item}</p>
+														))}
+													</div>
+												</div>
+											)}
+
+											{card.overlay.type === "metric" && (
+												<div>
+													<p class="use-case-menu-title text-[0.72rem] font-bold uppercase tracking-[0.12em] text-white/72">{card.overlay.title}</p>
+													<div class="use-case-menu-body text-center">
+														<div class="use-case-chart" aria-hidden="true">
+															<span style="height: 46%"></span>
+															<span style="height: 72%"></span>
+															<span style="height: 54%"></span>
+															<span style="height: 90%"></span>
+														</div>
+														<p class="mx-auto rounded-full bg-white/14 px-4 py-2 text-[0.78rem] font-bold text-white/82">{card.overlay.action}</p>
+													</div>
+												</div>
+											)}
+
+											{card.overlay.type === "results" && (
+												<div>
+													<p class="use-case-menu-title text-[0.72rem] font-bold uppercase tracking-[0.12em] text-white/72">{card.overlay.title}</p>
+													<div class="use-case-menu-body text-[0.82rem] font-bold text-white/84">
+														{card.overlay.rows.slice(0, 2).map(([label, value]) => (
+															<p class="use-case-menu-row"><span class="inline-flex items-center gap-2"><span class="use-case-status-dot"></span>{label}</span><span>{value}</span></p>
+														))}
+													</div>
+												</div>
+											)}
+										</div>
+									</div>
+								</div>
+							</article>
+						))}
+					</div>
+				</div>
+			</section>

@@ -1,0 +1,53 @@
+---
+interface Props { leadershipSectorColumns: any[][] }
+const { leadershipSectorColumns } = Astro.props;
+const useCaseTotal = leadershipSectorColumns.flat().length;
+---
+<section id="use-cases" class="stack-panel bg-[#11110f] px-4 pb-40 pt-24 text-white sm:px-8 lg:px-10 lg:pb-56">
+				<div class="mx-auto grid max-w-[96rem] gap-20">
+					<div class="reveal grid gap-12 overflow-hidden rounded-[2rem] bg-[#11110f] p-5 text-white sm:p-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:p-10">
+						<div class="lg:pr-12">
+							<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-white/50">Use cases</p>
+							<div class="mt-12 max-w-[17ch] text-[clamp(1.75rem,2.7vw,3rem)] font-bold leading-[1]">
+								<p>AI can do almost anything, but that's not the point.</p>
+								<p class="mt-8 text-white/68">Q: What can AI really do for your business?</p>
+								<p class="mt-8 text-white">A: Give back the time you lose on process work.</p>
+							</div>
+						</div>
+
+						<div class="sector-grid sector-grid-dark grid h-[38rem] grid-cols-2 gap-x-4 overflow-hidden rounded-[1.6rem] bg-[#11110f] p-4 sm:gap-x-5 lg:h-[42rem]" aria-label="Business use cases">
+							{leadershipSectorColumns.map((column) => (
+								<div class="sector-column grid h-[36rem] gap-7 overflow-y-auto pb-16 sm:gap-8 lg:h-[40rem]" data-sector-column>
+									{[...column, ...column].map((sector) => (
+										<figure>
+											<div class="relative aspect-[3/4] overflow-hidden rounded-[0.9rem] bg-black shadow-[0_20px_60px_rgba(0,0,0,0.26)]">
+												<img class="absolute inset-0 h-full w-full object-cover" src={sector.image} alt="" />
+												<div class="absolute inset-0 bg-gradient-to-b from-black/28 via-black/12 to-black/48"></div>
+												<div class="absolute inset-0 flex flex-col p-4 text-white">
+													<div class="flex min-h-8 items-start justify-between gap-3 text-[0.68rem] font-bold uppercase leading-none tracking-[0] text-white/82 sm:text-xs">
+														<span class="pt-2">Use case</span>
+														<span class="rounded-lg bg-white/16 px-3 py-2 backdrop-blur-sm">
+															{String(sector.number).padStart(2, "0")} / {String(useCaseTotal).padStart(2, "0")}
+														</span>
+													</div>
+											<div class="flex flex-1 flex-col justify-center px-1 pb-4 pt-3 text-center">
+														<p class="text-[0.68rem] font-bold uppercase leading-[1.1] tracking-[0] text-white/68 sm:text-xs">{sector.kicker}</p>
+														<figcaption class="mx-auto mt-2.5 max-w-[15ch] text-[clamp(1.05rem,1.65vw,1.55rem)] font-bold leading-[1.02] tracking-[0] [text-wrap:balance]">
+														{sector.title}
+														</figcaption>
+													</div>
+													<ul class="mt-auto grid w-full gap-1.5 rounded-lg border border-white/24 bg-white/12 p-2.5 text-left text-[0.68rem] font-bold leading-[1.15] text-white/88 backdrop-blur-md sm:text-xs">
+														{sector.points.map((point) => (
+															<li class="rounded-md bg-white/10 px-3 py-2">{point}</li>
+														))}
+													</ul>
+												</div>
+											</div>
+										</figure>
+									))}
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			</section>

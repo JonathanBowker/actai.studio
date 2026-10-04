@@ -1,0 +1,11 @@
+---
+interface Props { bookingHref: string }
+const { bookingHref } = Astro.props;
+---
+<nav class="agent-nav" aria-label="Agent page navigation">
+	<a class="agent-nav__brand" href="/">ACTAI.STUDIO</a>
+	<div class="agent-nav__actions">
+		<a class="agent-nav__link" href="/#triage">All agents</a>
+		<a class="agent-nav__link agent-nav__link--primary" href={bookingHref}>BEGIN THE CONVERSATION</a>
+	</div>
+</nav>

@@ -1,0 +1,19 @@
+---
+interface Props { bookingHref: string; buttonClass: string }
+const { bookingHref, buttonClass } = Astro.props;
+---
+<header class="fixed left-0 top-0 z-50 grid h-[var(--header-height)] w-full grid-cols-[1fr_auto] border-b border-ink bg-ink text-paper md:grid-cols-[minmax(180px,1fr)_auto_minmax(180px,1fr)]">
+	<a href="/" class="flex items-center px-4 text-paper no-underline transition-colors hover:bg-paper hover:text-ink sm:px-6" aria-label="act-ai studio">
+		<svg class="h-7 w-auto" viewBox="360 289.86 1200.07 500.75" role="img" aria-hidden="true">
+			<path fill="currentColor" d="M1001.43 538.23c29.46 0 54.12 20.28 60.97 47.62h137.8c-8.22-97.46-94.04-174.14-198.78-174.14-110.17 0-199.48 84.82-199.48 189.45s89.31 189.45 199.48 189.45 190.56-76.68 198.78-174.14h-137.8c-6.85 27.34-31.51 47.62-60.97 47.62-34.75 0-62.93-28.17-62.93-62.93s28.17-62.93 62.93-62.93Z" />
+			<path fill="currentColor" d="M645.48 289.86H507.44L360.07 784.04h150.46l19.25-70.49h131.09l19.25 70.49h150.46L683.21 289.86h-37.73ZM562.62 593.3l32.71-119.78 32.71 119.78h-65.42Z" />
+			<path fill="currentColor" d="M1439.38 536.94V416.7h-45.8V289.86h-141.11V416.7h-45.81v120.24h45.81v247.09h141.11V536.94h45.8Z" />
+			<path fill="currentColor" d="M1418.96 663.79h141.11v120.25h-141.11z" />
+		</svg>
+	</a>
+	<nav class="hidden items-center justify-center gap-8 px-6 text-[16px] md:flex">
+		<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="/#work">work</a>
+		<a class="leading-[var(--header-height)] text-paper no-underline hover:bg-paper hover:px-1 hover:text-ink" href="/#method">method</a>
+	</nav>
+	<a href={bookingHref} class={`${buttonClass} mx-4 my-2 sm:mx-6`}>BEGIN THE CONVERSATION</a>
+</header>

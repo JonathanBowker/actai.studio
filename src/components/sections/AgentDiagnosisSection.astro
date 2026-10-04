@@ -1,0 +1,27 @@
+---
+interface Props { agent: any }
+const { agent } = Astro.props;
+---
+<section id="diagnosis" class="diagnosis stack-panel">
+	<div class="diagnosis__intro reveal">
+		<p class="section-label">The diagnosis</p>
+		<h2>See the problem before you build the agent.</h2>
+	</div>
+	<div class="diagnosis__steps">
+		<article class="diagnostic-step reveal">
+			<span class="diagnostic-step__number">01</span>
+			<h3>The signal</h3>
+			<p>{agent.data.openingFraming}</p>
+		</article>
+		<article class="diagnostic-step reveal">
+			<span class="diagnostic-step__number">02</span>
+			<h3>The business cost</h3>
+			<p>{agent.data.problem}</p>
+		</article>
+		<article class="diagnostic-step reveal">
+			<span class="diagnostic-step__number">03</span>
+			<h3>The agent response</h3>
+			<p>{agent.data.solution}</p>
+		</article>
+	</div>
+</section>

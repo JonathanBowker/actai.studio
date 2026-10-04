@@ -1,0 +1,17 @@
+---
+interface Props { bookingHref: string }
+const { bookingHref } = Astro.props;
+---
+
+<footer class="bg-black px-5 py-12 text-white sm:px-8 lg:px-10">
+	<div class="mx-auto grid max-w-[88rem] gap-10 border-t border-white/16 pt-8 md:grid-cols-[1fr_auto] md:items-end">
+		<div>
+			<p class="text-[2rem] font-bold">Act.</p>
+			<p class="mt-5 max-w-[30rem] font-bold leading-tight text-white/50">Find where time is being lost, decide what AI should do, and put it to work.</p>
+		</div>
+		<div class="flex flex-wrap items-center gap-5 font-bold">
+			<a class="text-white/60 no-underline transition hover:text-white" href="/privacy">Privacy</a>
+			<a class="inline-flex h-12 items-center rounded-lg bg-white px-5 text-sm text-black no-underline transition hover:bg-[#dfff42]" href={bookingHref}>BEGIN THE CONVERSATION</a>
+		</div>
+	</div>
+</footer>

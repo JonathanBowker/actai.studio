@@ -1,0 +1,19 @@
+---
+interface Props { agent: any; cascadeImages: string[]; cascadeLabels: string[] }
+const { agent, cascadeImages, cascadeLabels } = Astro.props;
+---
+<section class="cascade" data-cascade aria-label="From business signal to agent response">
+	<div class="cascade__sticky">
+		<div class="cascade__copy">
+			<p class="cascade__eyebrow">Read the signals</p>
+			<p class="cascade__statement"><strong>{agent.data.nerve}</strong> {agent.data.function}</p>
+			<div class="cascade__index"><span></span><p>One problem. One focused response.</p></div>
+		</div>
+		{cascadeImages.map((image, index) => (
+			<figure class="cascade-tile" data-cascade-tile data-speed={[-220, 165, -135, 210, 120][index]}>
+				<img src={image} alt="" loading="lazy" />
+				<figcaption>{cascadeLabels[index]}</figcaption>
+			</figure>
+		))}
+	</div>
+</section>

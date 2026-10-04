@@ -1,0 +1,73 @@
+---
+interface Props { bookingHref: string; buttonClass: string; nextSteps: any[] }
+const { bookingHref, buttonClass, nextSteps } = Astro.props;
+---
+<section class="grid gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_0.82fr] lg:px-10 lg:py-16">
+	<div class="border border-ink bg-paper p-5 sm:p-8">
+		<p class="mb-8 text-[1.35rem] font-bold leading-[1.1]">Book a 30-minute call</p>
+
+		<div class="grid gap-4 md:grid-cols-2">
+			<div>
+				<p class="mb-2 text-sm font-bold">Name</p>
+				<div class="border border-ink bg-white px-4 py-3 text-ink/55">Your name</div>
+			</div>
+			<div>
+				<p class="mb-2 text-sm font-bold">Role</p>
+				<div class="border border-ink bg-white px-4 py-3 text-ink/55">Founder, COO, director...</div>
+			</div>
+			<div>
+				<p class="mb-2 text-sm font-bold">Company</p>
+				<div class="border border-ink bg-white px-4 py-3 text-ink/55">Company name</div>
+			</div>
+			<div>
+				<p class="mb-2 text-sm font-bold">Email</p>
+				<div class="border border-ink bg-white px-4 py-3 text-ink/55">you@company.com</div>
+			</div>
+		</div>
+
+		<div class="mt-4">
+			<p class="mb-2 text-sm font-bold">What should we discuss?</p>
+			<div class="min-h-[112px] border border-ink bg-white px-4 py-3 text-ink/55">
+				Tell us what you are trying to improve, where work is stuck, or what you want AI to make possible.
+			</div>
+		</div>
+
+		<a href={bookingHref} class={`${buttonClass} mt-6 w-full`}>BEGIN THE CONVERSATION</a>
+
+		<p class="mt-4 text-[1rem] leading-[1.25]">
+			Complete the contact form and we will reply within one business day.
+		</p>
+	</div>
+
+	<div class="grid gap-8">
+		<div>
+			<p class="mb-6 text-[1rem] leading-[1.25]">What happens next</p>
+			<div class="grid gap-8">
+				{
+					nextSteps.map((step) => (
+						<div class="grid grid-cols-[auto_1fr] gap-4">
+							<div class="flex h-10 min-w-10 items-center justify-center border border-ink bg-acid px-3 text-sm">
+								{step.label}
+							</div>
+							<div>
+								<p class="font-bold leading-[1.25]">{step.title}</p>
+								<p class="mt-3 leading-[1.35]">{step.body}</p>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="border border-ink p-5 sm:p-6">
+			<p class="mb-6 text-[1rem] leading-[1.25]">Direct contact</p>
+			<p class="text-sm font-bold">Email</p>
+			<a class="mt-2 block text-ink underline decoration-ink underline-offset-4 hover:bg-ink hover:text-paper" href="mailto:hello@actai.studio">
+				hello@actai.studio
+			</a>
+			<div class="my-5 border-t border-ink"></div>
+			<p class="text-sm font-bold">Response time</p>
+			<p class="mt-2">Within one business day</p>
+		</div>
+	</div>
+</section>

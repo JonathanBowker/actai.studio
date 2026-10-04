@@ -1,0 +1,78 @@
+---
+interface Props { caseStudies: any[]; caseStudyFilters: string[] }
+const { caseStudies, caseStudyFilters } = Astro.props;
+---
+<section id="case-studies" class="stack-panel hidden bg-[#11110f] px-4 pb-36 pt-24 text-white sm:px-8 lg:px-10 lg:pb-48" hidden>
+				<div class="mx-auto grid max-w-[86rem] gap-12">
+					<div class="reveal grid gap-8 lg:grid-cols-[0.38fr_1fr] lg:items-end">
+						<p class="h-fit w-fit rounded-lg bg-white/10 px-4 py-3 text-[1rem] font-bold text-white/58">Case Studies</p>
+						<div>
+							<h2 class="max-w-[18ch] text-[clamp(2.2rem,4vw,4.2rem)] font-bold leading-[1] text-white">
+								What focused agents can change.
+							</h2>
+							<p class="mt-6 max-w-[42rem] text-[clamp(1.05rem,1.5vw,1.3rem)] font-bold leading-[1.28] text-white/58">
+								Each study starts with one business pressure, one realistic scope and one agent designed around the work.
+							</p>
+						</div>
+					</div>
+
+					<div class="reveal relative z-30 flex justify-start">
+						<div class="case-filter relative z-30" data-case-filter>
+							<button
+								class="flex min-w-[15rem] items-center justify-between gap-6 rounded-2xl border border-white/10 bg-white px-4 py-3 text-left font-bold text-[#11110f] shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition hover:bg-[#dfff42]"
+								type="button"
+								aria-expanded="false"
+								data-case-filter-toggle
+							>
+								<span data-case-filter-label>All sectors</span>
+								<span class="text-xl leading-none">⌄</span>
+							</button>
+							<div class="absolute left-0 top-[calc(100%+.5rem)] z-50 hidden min-w-[18rem] rounded-2xl border border-white/10 bg-[#f6f4ef] p-2 text-[#11110f] shadow-[0_24px_70px_rgba(0,0,0,0.38)]" data-case-filter-menu>
+								{caseStudyFilters.map((filter) => (
+									<button
+										class="flex w-full items-center justify-between rounded-xl px-4 py-3 text-left font-bold transition hover:bg-black/8"
+										type="button"
+										data-case-filter-option={filter.value}
+										data-case-filter-name={filter.label}
+									>
+										<span>{filter.label}</span>
+									</button>
+								))}
+							</div>
+						</div>
+					</div>
+
+					<div class="relative z-0 grid gap-5 lg:grid-cols-3" data-case-grid>
+						{caseStudies.map((study, index) => (
+							<article
+								class="reveal grid min-h-[25rem] content-between rounded-[1.6rem] border border-white/10 bg-white/[0.06] p-7 shadow-[0_24px_70px_rgba(0,0,0,0.28)]"
+								style={`--delay: ${Math.min(index * 90, 270)}ms`}
+								data-case-extra={index > 2 ? "true" : undefined}
+								data-case-card
+								data-case-filter-value={study.filter}
+								hidden={index > 2}
+							>
+								<div>
+									<p class="mb-8 w-fit rounded-lg bg-white px-3 py-2 text-[0.78rem] font-black uppercase text-[#11110f]">{study.kicker}</p>
+									<h3 class="text-[clamp(1.65rem,2.3vw,2.35rem)] font-bold leading-[1] text-white">{study.title}</h3>
+									<p class="mt-5 text-[1.02rem] font-bold leading-[1.34] text-white/58">{study.copy}</p>
+								</div>
+								<div class="mt-10 grid gap-2">
+									{study.points.map((point) => (
+										<p class="rounded-lg bg-white/10 px-4 py-3 text-[0.96rem] font-bold text-white/72">{point}</p>
+									))}
+								</div>
+							</article>
+						))}
+					</div>
+					<div class="reveal flex justify-center">
+						<button
+							class="inline-flex h-12 items-center rounded-xl bg-white px-7 font-bold text-black transition hover:bg-[#dfff42]"
+							type="button"
+							data-case-reveal
+						>
+							More case studies
+						</button>
+					</div>
+				</div>
+			</section>

@@ -1,5 +1,6 @@
 ---
 import "../../styles/global.css";
+import { AgentCascadeSection, AgentDiagnosisSection, AgentHeroSection, AgentPackSection, AgentPageNav } from "../../components/sections";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
@@ -9,7 +10,7 @@ export async function getStaticPaths() {
 
 type Props = { agent: CollectionEntry<"agents"> };
 const { agent } = Astro.props;
-const bookingHref = "/meeting";
+const bookingHref = "/contact";
 const packBase = `/packs/${agent.id}`;
 const zipHref = `${packBase}/${agent.id}-triage-pack.zip`;
 const heroArt = [
@@ -34,7 +35,7 @@ const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index 
 		<meta name="viewport" content="width=device-width" />
 		<meta name="description" content={`${agent.data.name}: a diagnostic self-help pack from Actai.Studio.`} />
 		<title>{agent.data.name} | Actai.Studio</title>
-		<style>
+		<style is:global>
 			:root { --cream:#ebe9e4; --paper:#f6f4ef; --ink:#11110f; --muted:#77736a; --lime:#dfff42; }
 			html, body { background:var(--ink); }
 			body { overflow-x:hidden; }
@@ -166,114 +167,15 @@ const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index 
 	</head>
 	<body>
 		<main class="agent-page">
-			<nav class="agent-nav" aria-label="Agent page navigation">
-				<a class="agent-nav__brand" href="/">ACTAI.STUDIO</a>
-				<div class="agent-nav__actions">
-					<a class="agent-nav__link" href="/#triage">All agents</a>
-					<a class="agent-nav__link agent-nav__link--primary" href={bookingHref}>Book a meeting</a>
-				</div>
-			</nav>
+			<AgentPageNav {bookingHref} />
 
-			<section class="agent-hero">
-				<img class="agent-hero__media" src={heroImage} alt="" />
-				<div class="agent-hero__shade"></div>
-				<div class="agent-hero__inner">
-					<p class="agent-kicker">Agent diagnostic</p>
-					<h1>{agent.data.name}</h1>
-					<div class="agent-hero__bottom">
-						<p class="agent-hero__nerve">{agent.data.nerve}</p>
-						<p class="agent-hero__note">Start with the pain. Trace where time, consistency or control is being lost. Then decide whether an agent is the right response.</p>
-					</div>
-				</div>
-			</section>
+			<AgentHeroSection {agent} {heroImage} />
 
-			<section class="cascade" data-cascade aria-label="From business signal to agent response">
-				<div class="cascade__sticky">
-					<div class="cascade__copy">
-						<p class="cascade__eyebrow">Read the signals</p>
-						<p class="cascade__statement"><strong>{agent.data.nerve}</strong> {agent.data.function}</p>
-						<div class="cascade__index"><span></span><p>One problem. One focused response.</p></div>
-					</div>
-					{cascadeImages.map((image, index) => (
-						<figure class="cascade-tile" data-cascade-tile data-speed={[-220, 165, -135, 210, 120][index]}>
-							<img src={image} alt="" loading="lazy" />
-							<figcaption>{cascadeLabels[index]}</figcaption>
-						</figure>
-					))}
-				</div>
-			</section>
+			<AgentCascadeSection {agent} {cascadeImages} {cascadeLabels} />
 
-			<section id="diagnosis" class="diagnosis stack-panel">
-				<div class="diagnosis__intro reveal">
-					<p class="section-label">The diagnosis</p>
-					<h2>See the problem before you build the agent.</h2>
-				</div>
-				<div class="diagnosis__steps">
-					<article class="diagnostic-step reveal">
-						<span class="diagnostic-step__number">01</span>
-						<h3>The signal</h3>
-						<p>{agent.data.openingFraming}</p>
-					</article>
-					<article class="diagnostic-step reveal">
-						<span class="diagnostic-step__number">02</span>
-						<h3>The business cost</h3>
-						<p>{agent.data.problem}</p>
-					</article>
-					<article class="diagnostic-step reveal">
-						<span class="diagnostic-step__number">03</span>
-						<h3>The agent response</h3>
-						<p>{agent.data.solution}</p>
-					</article>
-				</div>
-			</section>
+			<AgentDiagnosisSection {agent} />
 
-			<section id="pack" class="pack stack-panel">
-				<div class="pack__inner">
-					<header class="pack__header reveal">
-						<p class="section-label">Self-help pack</p>
-						<h2>Put the problem to the test.</h2>
-					</header>
-					<div class="pack__contents">
-						<article class="pack-item reveal"><span>01 / Frame</span><h3>A short cover note that names the issue.</h3></article>
-						<article class="pack-item reveal"><span>02 / Diagnose</span><h3>A diagnostic prompt to run in your assistant.</h3></article>
-						<article class="pack-item reveal"><span>03 / Question</span><h3>Agent knowledge for the follow-up conversation.</h3></article>
-					</div>
-					<div class="gate-workspace">
-						<div class="gate-workspace__copy reveal">
-							<h2>One knowledge pack. Ready for your assistant.</h2>
-							<p>Share your details and download one compressed pack containing the complete diagnosis.</p>
-							<div class="delivery-note">
-								<strong>Load it in two ways.</strong>
-								<p>Upload the ZIP directly if your assistant supports ZIP files. Otherwise, unzip it and upload the three files together.</p>
-							</div>
-						</div>
-						<div class="gate-surface reveal">
-							<form class="gate-form" data-pack-gate data-agent-slug={agent.id}>
-								<div class="gate-fields">
-									<label class="gate-label"><span>Name</span><input class="gate-input" name="name" autocomplete="name" required /></label>
-									<label class="gate-label"><span>Email</span><input class="gate-input" name="email" type="email" autocomplete="email" required /></label>
-								</div>
-								<label class="gate-checkbox"><input name="consent" type="checkbox" required /><span>I consent to Actai.Studio contacting me about this diagnostic pack and related AI direction.</span></label>
-								<p class="gate-privacy">We use these details to exchange the self-help pack for contact permission. Read the <a href="/privacy">privacy notice</a>.</p>
-								<button class="agent-button agent-button--unlock" type="submit">Unlock the pack</button>
-							</form>
-							<div class="unlock-panel" data-pack-unlock hidden>
-								<p>Your compressed ZIP pack is ready.</p>
-								<div class="unlock-panel__actions">
-									<a class="agent-button agent-button--download" href={zipHref} download data-pack-download>Download ZIP pack</a>
-									<button class="agent-button" type="button" data-open-tool="claude" data-pack-base={packBase}>Open in Claude</button>
-									<button class="agent-button" type="button" data-open-tool="chatgpt" data-pack-base={packBase}>Open in ChatGPT</button>
-								</div>
-								<p data-tool-note>Upload the ZIP directly where supported. If it is not accepted, unzip it and upload cover.md, prompt.md and agent-knowledge.md together. The assistant buttons also copy the pack text before opening a new chat.</p>
-							</div>
-						</div>
-					</div>
-					<footer class="agent-footer">
-						<p>© 2026 Act. All Rights Reserved.</p>
-						<a class="agent-nav__link agent-nav__link--primary" href={bookingHref}>Book a meeting</a>
-					</footer>
-				</div>
-			</section>
+			<AgentPackSection {agent} {zipHref} {packBase} {bookingHref} />
 		</main>
 
 		<script>

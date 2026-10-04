@@ -1,0 +1,29 @@
+---
+interface Props { faqs: any[] }
+const { faqs } = Astro.props;
+---
+<section id="faq" class="bg-black px-4 pb-16 pt-24 text-white sm:px-8 lg:px-10 lg:pb-20">
+				<div class="mx-auto grid max-w-[60rem] gap-10">
+					<div class="reveal">
+						<p class="w-fit rounded-lg bg-white/8 px-4 py-3 font-bold text-white/50">FAQ</p>
+						<h2 class="mt-6 text-[clamp(1.65rem,2.1vw,2.25rem)] font-bold leading-none text-white">
+							Frequently Asked Questions
+						</h2>
+					</div>
+					<div class="grid gap-4 lg:grid-cols-2 lg:items-start lg:gap-x-5">
+						{faqs.map(([question, answer], index) => (
+							<div class="faq-item reveal rounded-[1.25rem] bg-[#1b1b1b] p-7" data-faq data-open="false" style={`--delay: ${Math.min(index * 70, 240)}ms`}>
+								<button class="flex w-full items-start justify-between gap-8 text-left text-[1.1rem] font-bold leading-[1.18] text-white" type="button" aria-expanded="false">
+									<span>{question}</span>
+									<span class="faq-icon grid h-10 w-10 shrink-0 place-items-center rounded-full bg-black/35 text-[1.55rem] font-black leading-none text-white/88 transition">+</span>
+								</button>
+								<div class="faq-answer">
+									<div>
+										<p class="pt-6 text-[0.9rem] font-bold leading-[1.42] text-white/52">{answer}</p>
+									</div>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>

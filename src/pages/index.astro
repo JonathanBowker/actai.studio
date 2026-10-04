@@ -1,171 +1,26 @@
 ---
 import "../styles/global.css";
-import { getCollection } from "astro:content";
+import {
+	SiteHeader,
+	ContactPanel,
+	HeroSection,
+	LeadershipIntroSection,
+	LeadershipAreasSection,
+	PossibilitySection,
+	RippleEffectsSection,
+	ResultsSection,
+	DirectionSection,
+	CallToActionSection,
+	FaqSection,
+	FooterSection,
+} from "../components/sections";
 
-const bookingHref = "/meeting";
-const triageOrder = [
-	"chat-assistant",
-	"product-expert",
-	"process-automation",
-	"channel-partner-enablement",
-	"sales-practice-coach",
-	"document-knowledge-production",
-	"media",
-	"social-media-content",
-	"compliance-risk",
-	"workforce",
-	"analytical-insights",
-	"customer-success",
-	"accounts-payable",
-	"it-helpdesk",
-	"inventory-forecasting",
-	"bid-management",
-	"meeting-intelligence",
-	"contract-analysis",
-	"scheduling",
-	"localization",
-];
-const triageAgents = (await getCollection("agents")).sort((a, b) => triageOrder.indexOf(a.id) - triageOrder.indexOf(b.id));
-const indexedTriageAgents = triageAgents.map((agent, index) => ({ agent, index }));
-const triageRows = [
-	indexedTriageAgents.slice(0, 10),
-	indexedTriageAgents.slice(10, 20),
-];
+const bookingHref = "/contact";
 
-const featureTabs = [
-	{
-		number: "01",
-		label: "Engage",
-		navHint: "For one-off AI & data strategy support",
-		title: "Engage",
-		copy: "A block of director time covering preparation, a live Agent in the Room session with you, face to face where useful, and written output afterward. You leave with a decided AI direction and a scoped spec ready to move into Enable.",
-		image: "/images/business-workflow-tasks.svg",
-	},
-	{
-		number: "02",
-		label: "Enable",
-		navHint: "Monthly subscription for growing companies",
-		title: "Enable",
-		copy: "Monthly support turns AI direction into delivery. We keep priorities clear, shape and test agents, and build against the agreed direction.",
-		image: "/images/agentic-use-case.svg",
-	},
-	{
-		number: "03",
-		label: "Extend",
-		navHint: "Annual subscription for larger companies",
-		title: "Extend",
-		copy: "A board-level partnership for a wider AI programme. We account-manage direction, director time and build capacity across the work that matters.",
-		image: "/images/trusted-agent.svg",
-	},
-];
-
-const leadershipSectors = [
-	{ label: "Strategy & Direction", image: "/fixa-assets/WXKx26vqrAI7XfrXAgsHkTeOeV0.webp" },
-	{ label: "Operations", image: "/images/act-hero-cinematic.png" },
-	{ label: "Sales & Pipeline", image: "/fixa-assets/herovideo-poster.jpg" },
-	{ label: "Customer Service", image: "/fixa-assets/K6oVlqJ1SryJzVBte2yxIFoGqI.webp" },
-	{ label: "Finance & Reporting", image: "/fixa-assets/MpwLfV3BL41ih4BTUbGjwjVEyU.webp" },
-	{ label: "People & HR", image: "/fixa-assets/tC5phDS1LNYMA1wQWaeq9OsGW18.webp" },
-	{ label: "Media Generation", image: "/fixa-assets/kZW1dq5Sqd0rvMulTBXHA3l3Jd4.webp" },
-	{ label: "Procurement", image: "/fixa-assets/wdiyf3RainSE2ei21wGTmn1A8QQ.webp" },
-	{ label: "Risk & Compliance", image: "/fixa-assets/sj6JNlwzLQYdJHUI6xdUTxyaw.webp" },
-	{ label: "Knowledge Management", image: "/fixa-assets/xaO4Cqoe5QhlisikpQ3p47J9Zdw.png" },
-	{ label: "Data & Insight", image: "/fixa-assets/KrDXRisTbXaEqR76RQpP0QRTTQo.png" },
-	{ label: "Project Delivery", image: "/fixa-assets/WXKx26vqrAI7XfrXAgsHkTeOeV0.webp" },
-	{ label: "Training & Enablement", image: "/images/act-hero-cinematic.png" },
-	{ label: "Brand Management", image: "/fixa-assets/herovideo-poster.jpg" },
-	{ label: "Admin & Coordination", image: "/fixa-assets/MpwLfV3BL41ih4BTUbGjwjVEyU.webp" },
-	{ label: "Governance", image: "/fixa-assets/tC5phDS1LNYMA1wQWaeq9OsGW18.webp" },
-];
-
-const leadershipSectorColumns = [
-	leadershipSectors.filter((_, index) => index % 2 === 0),
-	leadershipSectors.filter((_, index) => index % 2 === 1),
-];
-
-const frameworkCards = [
-	{
-		title: "Find the problem worth solving",
-		displayTitle: "Problem Worth Solving",
-		copy: "Most businesses already have the knowledge. We sit with you to find where it's stuck, not just where AI sounds impressive.",
-		image: "/fixa-assets/WXKx26vqrAI7XfrXAgsHkTeOeV0.webp",
-		type: "phase",
-		overlay: { type: "list", title: "Discovery focus", active: "Business pressure", items: ["Hidden context", "Repeated work", "Decision drag"] },
-	},
-	{
-		title: "Scope the agent framework",
-		displayTitle: "Scope the Framework",
-		copy: "We measure success by what changes, not by what looks impressive. One clear job, defined before anything gets built.",
-		image: "/images/act-hero-cinematic.png",
-		type: "goal",
-		overlay: { type: "metric", title: "Scope lock", value: "01", action: "One job, clear edge" },
-	},
-	{
-		title: "Build the agent around the job",
-		displayTitle: "Build Around the Job",
-		copy: "The skills it needs, the parameters it needs to work within, and proof it's ready before it touches real work in production.",
-		image: "/fixa-assets/herovideo-poster.jpg",
-		type: "goal",
-		overlay: { type: "list", title: "Agent framework", active: "Skills", items: ["Parameters", "Evidence", "Production proof"] },
-	},
-	{
-		title: "Keep evidence, not impressions",
-		displayTitle: "Keep Evidence",
-		copy: "Every agent we shape leaves a trail, what it did, why, and what changed. Judged on outcomes, not demos.",
-		image: "/fixa-assets/K6oVlqJ1SryJzVBte2yxIFoGqI.webp",
-		type: "results",
-		overlay: { type: "results", title: "Proof trail", rows: [["Action log", "On"], ["Source trail", "On"], ["Human review", "On"]] },
-	},
-	{
-		title: "Cut through scattered documents",
-		displayTitle: "Cut Through Documents",
-		copy: "Give teams a private route to the knowledge already sitting in static files, that knows the business context and the right next question.",
-		image: "/fixa-assets/tC5phDS1LNYMA1wQWaeq9OsGW18.webp",
-		type: "phase",
-		overlay: { type: "list", title: "Knowledge base", active: "Policies", items: ["Playbooks", "Client notes", "Team rules"] },
-	},
-	{
-		title: "Keep governance provable",
-		displayTitle: "Prove Governance",
-		copy: "Build review points, evidence trails and escalation rules in from the start, so sensitive work stays accountable, not just compliant on paper.",
-		image: "/images/agentic-use-case.svg",
-		type: "phase",
-		overlay: { type: "results", title: "Governance checks", rows: [["Escalation", "Set"], ["Review loop", "Set"], ["Audit trail", "Set"]] },
-	},
-	{
-		title: "Lock the brief before you spend",
-		displayTitle: "Lock the Brief",
-		copy: "Storyboard, cast and shot list agreed and signed off first. Nothing gets generated until the plan is right.",
-		image: "/fixa-assets/MpwLfV3BL41ih4BTUbGjwjVEyU.webp",
-		type: "phase",
-		overlay: { type: "list", title: "Creative brief", active: "Storyboard", items: ["Cast", "Shot list", "Approval gate"] },
-	},
-	{
-		title: "Prepare for what's next",
-		displayTitle: "Prepare What's Next",
-		copy: "Whether that's succession, an exit, or simply scaling past one person holding all the knowledge in their head.",
-		image: "/images/agentic-use-case-2.svg",
-		type: "results",
-		overlay: { type: "metric", title: "Continuity", value: "Next", action: "Knowledge ready" },
-	},
-	{
-		title: "Catch drift before it ships",
-		displayTitle: "Catch Drift Early",
-		copy: "Check imagery, copy and tone against the guidelines automatically, so brand compliance isn't a bottleneck or an afterthought.",
-		image: "/images/agentic-use-case.svg",
-		type: "results",
-		overlay: { type: "results", title: "Brand checks", rows: [["Tone", "Pass"], ["Visual rules", "Pass"], ["Risk flag", "Clear"]] },
-	},
-];
-
-const useCaseArt = [
-	"/images/use-case-shapes/shape-01.jpg",
-	"/images/use-case-shapes/shape-02.jpg",
-	"/images/use-case-shapes/shape-03.jpg",
-	"/images/use-case-shapes/shape-04.jpg",
-	"/images/use-case-shapes/shape-05.jpg",
-	"/images/use-case-shapes/shape-06.jpg",
-];
+const useCaseImages = Array.from(
+	{ length: 6 },
+	(_, index) => `/images/use-case-shapes/shape-${String(index + 1).padStart(2, "0")}.jpg`,
+);
 
 const caseStudies = [
 	{
@@ -275,6 +130,19 @@ const caseStudies = [
 	},
 ];
 
+const leadershipSectors = caseStudies.map((study, index) => ({
+	kicker: study.kicker,
+	title: study.title,
+	points: study.points,
+	image: useCaseImages[index % useCaseImages.length],
+	number: index + 1,
+}));
+
+const leadershipSectorColumns = [
+	leadershipSectors.filter((_, index) => index % 2 === 0),
+	leadershipSectors.filter((_, index) => index % 2 === 1),
+];
+
 const caseStudyFilters = [
 	{ label: "All sectors", value: "all" },
 	{ label: "Regulated work", value: "regulated" },
@@ -286,76 +154,46 @@ const caseStudyFilters = [
 
 const resultStats = [
 	{
-		value: "£475k",
-		countTo: 475,
-		prefix: "£",
-		suffix: "k",
-		label: "Average potential saved per year for a midcap after one 4hr workshop.",
-	},
-	{
-		value: "100%",
-		countTo: 100,
-		prefix: "",
-		suffix: "%",
-		label: "Feel more confident with AI and their capability to move faster while staying safe.",
-	},
-	{
-		value: "100%",
-		countTo: 100,
-		prefix: "",
-		suffix: "%",
-		label: "Feel more optimistic about the future of their business and workforce.",
-	},
-	{
-		value: "9.2/10",
-		countTo: 9.2,
+		value: "10/10",
+		countTo: 10,
 		prefix: "",
 		suffix: "/10",
-		label: "How likely clients are to recommend Act AI's services to another business.",
-	},
-];
-
-const pathwayCards = [
-	{
-		title: "Engage",
-		stage: "Stage 1: Direction",
-		copy: "Sit down with an with an AI director for one live Agent in the Room session. Leave with a decision, not a deck, and a scoped plan to act on.",
-		priceLabel: "Start with",
-		price: "Agent in the Room",
-		action: "Book a meeting",
-		shape: "half",
+		label: "Likelihood people who go through Agent in the Room would use it again.",
 	},
 	{
-		title: "Enable",
-		stage: "Stage 2: Delivery",
-		copy: "We build the agents. Monthly capacity against your agreed plan, shipping working agents into your business, working with you every month.",
-		priceLabel: "Move into",
-		price: "Ongoing delivery",
-		action: "Book a meeting",
-		shape: "hourglass",
+		value: "80%",
+		countTo: 80,
+		prefix: "",
+		suffix: "%",
+		label: "Average time given back to your people across agentic processes.",
 	},
 	{
-		title: "Extend",
-		stage: "Stage 3: Partnership",
-		copy: "An AI director embedded at board level, for six months or more, setting strategic direction across your whole programme, not a single project.",
-		priceLabel: "Build towards",
-		price: "AI partnership",
-		action: "Book a meeting",
-		shape: "orbit",
+		value: "£100,000",
+		countTo: 100000,
+		prefix: "£",
+		suffix: "",
+		label: "Typical enterprise entry point value when skilled people stop doing process work.",
+	},
+	{
+		value: "100+",
+		countTo: 100,
+		prefix: "",
+		suffix: "+",
+		label: "Cross-sector skills approved and ready to power agents.",
 	},
 ];
 
 const faqs = [
-	["What's the difference between ongoing direction and project-based work?", "Ongoing direction gives you a senior AI or creative lead inside the business rhythm. Project-based work is more contained: one defined business case, one agent framework, one build or proof loop. We can help with either, but we always start by finding the scope that is actually worth doing."],
-	["What counts as one active agent or use case at a time?", "One active use case means we focus on a single business problem before moving to the next. That could be a knowledge agent, reporting workflow, review process, client handover or internal tool. Focused work leads to clearer decisions and safer results."],
-	["How does communication work during a project?", "We keep communication direct and practical. Most work happens through planned working sessions, shared notes and clear decision points. The aim is not more meetings; it is making sure the right people can make the right calls at the right time."],
-	["How do review rounds work?", "Review is built into the process. We test the business case, the agent framework, the outputs and the governance points before anything is treated as production-ready. The work improves through evidence, not endless opinion loops."],
-	["Can I pause or cancel ongoing support?", "Yes. Fractional support should fit the needs of the business. If priorities change, we can pause, reshape or stop the work cleanly. The goal is useful direction and delivery, not locking you into something that no longer fits."],
-	["What if I need more support than the plan includes?", "If the work expands, we will say so early and explain why. Sometimes the right answer is a larger scope, and sometimes it is holding the line. No hidden fees, no surprise work, and no pressure to build more than the business needs."],
-	["Do you only advise, or can you build the agent too?", "Both. We can define the strategy and framework, then help build the working system. That can include agent instructions, knowledge structure, review loops, interface direction, governance and implementation support."],
-	["Do you work with startups?", "Yes, where the problem is real and the team is ready to work clearly. We are especially useful for ambitious scale-ups and mid-caps that need AI direction, operational clarity and practical systems without building a large internal function first."],
-	["How much does a typical project cost?", "It depends on scope. A focused discovery is different from a production agent, fractional leadership seat or wider governance programme. We define the shape first, then give a clear recommendation before any larger commitment."],
-	["How fast will we see progress?", "Most teams can get useful clarity quickly. A first meeting can identify whether to explore, avoid or scope next. Timelines for build work depend on access to knowledge, decision-makers, data and the level of review needed before production."],
+	["What is Agent in the Room?", "Agent in the Room is a live working session with an ACT director. We examine where time is being lost, identify the business problem worth solving and leave you with a decided AI direction and a clearly scoped plan, not another slide deck."],
+	["Do we need to know which agent we want before we speak?", "No. Start with the pressure, delay or repeated work inside the business. We help uncover the right use case, test whether AI is appropriate and define what a useful agent would need to know and do."],
+	["Do you only advise, or do you build the agents too?", "We do both. ACT can set the direction, structure the knowledge and build working agents into your business. Delivery can include agent instructions, knowledge architecture, workflows, review points, governance and implementation support."],
+	["What kinds of work can an agent take on?", "Agents are most useful where skilled people lose time searching for information, repeating answers, preparing documents, checking rules or moving work between systems. The right agent supports judgement and removes process work rather than pretending every task should be automated."],
+	["Can an agent use our existing business knowledge?", "Yes. We shape approved documents, guidance, processes and expert knowledge into a clear source for the agent. Its scope, sources and escalation points are defined so people can understand where an answer came from and when human review is required."],
+	["How do you manage risk, security and governance?", "Risk is designed into the work from the beginning. We define access, approved knowledge, boundaries, review points and escalation rules before an agent is treated as ready. The level of control is matched to the sensitivity of the work and your existing policies."],
+	["What is an ACT knowledge pack?", "A knowledge pack is a compressed ZIP containing the diagnosis, agent prompt and supporting knowledge for a specific use case. It can be uploaded directly to a compatible chat assistant or unzipped and loaded as individual files."],
+	["Will this replace our people?", "The aim is to give skilled people time back. Agents handle repeatable process work, retrieve context and prepare outputs so your team can spend more time applying judgement, building relationships and making decisions."],
+	["Who do you work with?", "We work directly with business leaders in mid-caps, scale-ups and larger organisations. ACT is most useful when there is a real operational problem, access to the people who understand it and a willingness to turn business knowledge into a working capability."],
+	["How do we get started?", "Start with a conversation. In 30 minutes, we can understand where time is being lost, what has already been tried and whether there is a valuable next step. If there is, we will recommend a clear scope before asking you to commit to delivery."],
 ];
 ---
 
@@ -368,7 +206,7 @@ const faqs = [
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content="actai.studio designs practical agentic systems from business knowledge, clear scope and governance." />
 		<title>actai.studio</title>
-		<style>
+		<style is:global>
 			:root {
 				--cream: #ebe9e4;
 				--paper: #f6f4ef;
@@ -397,30 +235,62 @@ const faqs = [
 			}
 
 			.nav-pill {
-				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+				opacity: 0;
+				transform: translateY(-100%);
+				transition: opacity 220ms ease, transform 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 320ms;
+				visibility: hidden;
+			}
+
+			.contact-trigger[data-scroll-contact] {
+				opacity: 0;
+				transform: translateY(-1rem);
+				transition: background 180ms ease, color 180ms ease, opacity 220ms ease, transform 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 320ms;
+				visibility: hidden;
+			}
+
+			body[data-nav-visible="true"] .nav-pill,
+			body[data-nav-visible="true"] .contact-trigger[data-scroll-contact] {
+				opacity: 1;
+				transform: translateY(0);
+				visibility: visible;
 			}
 
 			.site-menu {
-				display: grid;
-				grid-template-rows: 0fr;
-				opacity: 0;
-				pointer-events: none;
-				transform: translateY(-0.5rem);
-				transition:
-					grid-template-rows 260ms cubic-bezier(0.16, 1, 0.3, 1),
-					opacity 220ms ease,
-					transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+				display: flex;
+				justify-content: center;
 			}
 
 			.site-menu[data-open="true"] {
-				grid-template-rows: 1fr;
-				opacity: 1;
-				pointer-events: auto;
-				transform: translateY(0);
+				display: flex;
 			}
 
-			.site-menu > div {
-				overflow: hidden;
+			.site-menu-links {
+				align-items: center;
+				display: flex;
+				justify-content: center;
+				padding: 0.45rem;
+				white-space: nowrap;
+			}
+
+			.site-menu-link {
+				border-radius: 0.5rem;
+				color: #5f6270;
+				font-size: 1rem;
+				font-weight: 600;
+				padding: 0.75rem 0.9rem;
+				text-decoration: none;
+				transition: background 160ms ease, color 160ms ease;
+			}
+
+			.menu-toggle {
+				display: none;
+			}
+
+			.site-menu-link:hover,
+			.site-menu-link:focus-visible {
+				background: rgba(17, 17, 15, 0.07);
+				color: #11110f;
 			}
 
 			.menu-icon {
@@ -1226,7 +1096,73 @@ const faqs = [
 				transform: translateY(0.08em) rotate(1.5deg);
 			}
 
+			@media (max-width: 1050px) {
+				.nav-pill {
+					grid-template-columns: 1fr auto;
+				}
+
+				.site-menu {
+					background: rgba(255, 255, 255, 0.97);
+					border-bottom: 1px solid rgba(17, 17, 15, 0.08);
+					box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+					display: grid;
+					grid-template-rows: 0fr;
+					grid-column: 1 / -1;
+					grid-row: 2;
+					left: 0;
+					opacity: 0;
+					pointer-events: none;
+					position: absolute;
+					top: 100%;
+					transform: translateY(-0.5rem);
+					transition:
+						grid-template-rows 260ms cubic-bezier(0.16, 1, 0.3, 1),
+						opacity 220ms ease,
+						transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+					width: 100%;
+				}
+
+				.site-menu[data-open="true"] {
+					display: grid;
+					grid-template-rows: 1fr;
+					opacity: 1;
+					pointer-events: auto;
+					transform: translateY(0);
+				}
+
+				.site-menu > div {
+					overflow: hidden;
+				}
+
+				.site-menu-links {
+					align-items: stretch;
+					display: grid;
+					margin: 0 auto;
+					max-width: 30rem;
+					padding: 0.75rem;
+					white-space: normal;
+				}
+
+				.menu-toggle {
+					display: grid;
+					grid-column: 2;
+					grid-row: 1;
+					margin-right: 10rem;
+				}
+			}
+
 			@media (max-width: 760px) {
+				.contact-trigger[data-scroll-contact] {
+					opacity: 1;
+					transform: none;
+					visibility: visible;
+				}
+
+				.menu-toggle {
+					margin-right: 0;
+				}
+
+
 				.triage-vertical-grid {
 					display: none;
 				}
@@ -1324,858 +1260,20 @@ const faqs = [
 		</style>
 	</head>
 	<body>
-		<header class="nav-pill fixed left-1/2 top-8 z-50 flex -translate-x-1/2 items-center gap-9 rounded-2xl bg-white/92 px-4 py-3 text-[#11110f] glass">
-			<a href="/" class="flex h-8 items-center text-base font-black uppercase tracking-[-0.01em] text-[#11110f] no-underline" aria-label="actai.studio">
-				ACTAI.STUDIO
-			</a>
-			<button class="grid h-8 w-8 place-items-center rounded-full text-2xl leading-none" type="button" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
-				<span class="menu-icon" data-menu-icon data-open="false" aria-hidden="true"></span>
-			</button>
-			<nav class="site-menu absolute left-0 right-0 top-[calc(100%+.5rem)] rounded-2xl bg-white/92 text-[#11110f] shadow-2xl glass" data-menu-panel data-open="false" aria-label="Main menu">
-				<div>
-					<div class="grid gap-1 p-3 font-bold">
-						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#process">Process</a>
-						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#use-cases">Use Cases</a>
-						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#direction">Direction</a>
-						<a class="rounded-xl px-4 py-3 text-current no-underline transition hover:bg-black/8" href="#faq">FAQ</a>
-						<a class="mt-1 rounded-xl bg-[#11110f] px-4 py-3 text-center text-white no-underline transition hover:bg-[#dfff42] hover:text-black" href={bookingHref}>Book a meeting</a>
-					</div>
-				</div>
-			</nav>
-		</header>
-
-		<button class="contact-trigger fixed right-10 top-8 z-50 inline-flex h-14 items-center gap-3 rounded-2xl bg-white/92 px-5 font-bold text-[#11110f] transition hover:bg-[#dfff42]" type="button" data-contact-open>
-			<span aria-hidden="true">✦</span>
-			<span>Get in touch</span>
-		</button>
-
-		<div class="contact-layer" data-contact-layer data-open="false" aria-hidden="true">
-			<div class="contact-scrim" aria-hidden="true"></div>
-			<aside class="contact-panel" role="dialog" aria-modal="true" aria-labelledby="contact-title">
-				<button class="contact-close" type="button" data-contact-close>
-					<span aria-hidden="true">&times;</span>
-					<span>Close</span>
-				</button>
-				<h2 id="contact-title" class="max-w-[12ch] text-[clamp(2.85rem,4.4vw,3.6rem)] font-bold leading-[0.98]">
-					Let's put the future to work for your business.
-				</h2>
-
-				<form class="mt-10 grid gap-6" data-contact-form>
-					<fieldset class="grid gap-3 border-0 p-0">
-						<legend class="mb-3 text-[0.95rem] font-bold text-white/48">Select type</legend>
-						<div class="flex flex-wrap gap-2">
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="route" value="Project based" checked />
-								<span>Project based</span>
-							</label>
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="route" value="Retainer model" />
-								<span>Retainer model</span>
-							</label>
-						</div>
-					</fieldset>
-
-					<div class="grid gap-3">
-						<label class="text-[0.95rem] font-bold text-white/48" for="contact-name">Personal info</label>
-						<div class="grid gap-2 sm:grid-cols-2">
-							<input id="contact-name" class="contact-control" name="name" type="text" placeholder="Your name" autocomplete="name" required />
-							<input class="contact-control" name="email" type="email" placeholder="Email" autocomplete="email" required />
-						</div>
-					</div>
-
-					<fieldset class="hidden gap-3 border-0 p-0" data-retainer-fields>
-						<div class="mb-3 flex items-center justify-between gap-4">
-							<legend class="text-[0.95rem] font-bold text-white/48">Select plan</legend>
-							<a class="font-bold text-white underline underline-offset-4" href="#process">About plans</a>
-						</div>
-						<div class="flex flex-wrap gap-2">
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="plan" value="Engage" checked />
-								<span>Engage</span>
-							</label>
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="plan" value="Enable" />
-								<span>Enable</span>
-							</label>
-							<label class="contact-option">
-								<input class="sr-only" type="radio" name="plan" value="Extend" />
-								<span>Extend</span>
-							</label>
-						</div>
-					</fieldset>
-
-					<div class="grid gap-3">
-						<label class="text-[0.95rem] font-bold text-white/48" for="contact-details">Project details</label>
-						<textarea id="contact-details" class="contact-control min-h-[7.5rem] resize-none" name="details" placeholder="Tell us where AI could help, what is stuck, or what you want to understand." required></textarea>
-					</div>
-
-					<button class="contact-submit mt-4" type="submit">Submit</button>
-					<p class="text-center text-[0.9rem] font-bold leading-tight text-white/48">
-						By sending this, you're starting a direct conversation with our directors.
-					</p>
-				</form>
-			</aside>
-
-			<div class="contact-confirm" data-contact-confirm data-open="false" role="alertdialog" aria-modal="true" aria-labelledby="contact-confirm-title">
-				<p id="contact-confirm-title" class="mx-auto max-w-[10ch] text-[2rem] font-bold leading-[1]">
-					Forgot to press submit?
-				</p>
-				<div class="mt-8 grid grid-cols-2 gap-3">
-					<button class="rounded-xl bg-white/12 px-4 py-3 font-bold text-white transition hover:bg-white/18" type="button" data-contact-discard>
-						× Close anyway
-					</button>
-					<button class="rounded-xl bg-white/12 px-4 py-3 font-bold text-white transition hover:bg-white/18" type="button" data-contact-resume>
-						↗ Back to form
-					</button>
-				</div>
-			</div>
-		</div>
+<SiteHeader />
+<ContactPanel />
 
 		<main class="bg-[#ebe9e4]">
-			<section class="relative grid min-h-screen place-items-center overflow-hidden px-4 py-24 text-center text-white">
-				<img class="absolute inset-0 h-full w-full scale-105 object-cover" src="/fixa-assets/herovideo-poster.jpg" alt="" />
-				<iframe
-					class="hero-video-frame border-0"
-					src="/fixa-assets/wXQXtViozUbKjC61PdWpw2.html"
-					title="Hero video"
-					allow="autoplay; fullscreen; picture-in-picture"
-					loading="eager"
-					aria-hidden="true"
-					tabindex="-1"
-				></iframe>
-				<div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/24 to-black/60"></div>
-				<div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,transparent_0_24rem,rgba(0,0,0,.32)_46rem)]"></div>
-
-				<div class="relative z-10 grid max-w-[82rem] place-items-center gap-7">
-					<p class="max-w-[34rem] text-[clamp(1rem,1.5vw,1.25rem)] leading-[1.15] text-white/84">
-						Act. is an AI studio that finds the time you're losing, and gives it back. Not another vendor.
-					</p>
-					<h1 class="hero-title max-w-[13ch] font-normal">
-						Intelligence needs direction
-					</h1>
-					<div class="mt-8 flex max-w-[40rem] flex-col items-center justify-center gap-3 rounded-2xl bg-black/58 p-2 text-left shadow-2xl glass sm:flex-row">
-						<p class="px-4 text-[1rem] font-medium leading-tight text-white">
-							Finding exactly what you need.<br />
-							No hidden agenda, no hype, no tech-speak.
-						</p>
-						<a href={bookingHref} class="inline-flex h-12 shrink-0 items-center rounded-xl bg-white px-6 font-bold text-black no-underline transition hover:bg-[#dfff42]">
-							Book a meeting
-						</a>
-					</div>
-				</div>
-			</section>
-
-			<section id="triage" class="stack-panel bg-[#f6f4ef] px-4 pb-32 pt-32 text-[#11110f] sm:px-8 lg:px-10 lg:pb-44 lg:pt-36">
-				<div class="mx-auto grid max-w-[96rem] gap-12 px-5 sm:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:gap-16 lg:px-10">
-					<div class="reveal lg:sticky lg:top-28 lg:pt-6">
-						<p class="w-fit rounded-lg bg-black/5 px-4 py-3 text-[1rem] font-bold text-[#77736a]">Agent triage</p>
-						<h2 class="mt-12 max-w-[17ch] text-[clamp(2.3rem,4vw,4.6rem)] font-bold leading-[0.98] text-[#11110f]">
-							Where is time being spent where it shouldn't be?
-						</h2>
-						<p class="mt-10 max-w-[22ch] text-[clamp(1.5rem,2.2vw,2.25rem)] font-bold leading-[1.08] text-[#8a8781]">
-							<span class="mr-1 inline-block rounded-md bg-white px-2 py-1 text-[#11110f]">Start with the pain.</span>
-							Each example opens a diagnostic page and
-							<span class="mx-1 inline-block rounded-md bg-white px-2 py-1 text-[#11110f]">self-help pack</span>
-							you can run in your own assistant.
-						</p>
-					</div>
-
-					<div class="triage-vertical-grid grid h-[38rem] grid-cols-2 gap-x-4 overflow-hidden sm:gap-x-5 lg:h-[42rem]" aria-label="Agent triage examples">
-						{triageRows.map((column, columnIndex) => (
-							<div class="triage-vertical-column grid h-[36rem] gap-7 overflow-y-auto pb-16 sm:gap-8 lg:h-[40rem]" data-sector-column aria-label={`Agent triage column ${columnIndex + 1}`}>
-								{[...column, ...column].map(({ agent, index }, itemIndex) => (
-									<article class="use-case-card triage-card triage-vertical-card" style={`--case-tilt: ${index % 2 === 0 ? "-5deg" : "5deg"}`} aria-hidden={itemIndex >= column.length ? "true" : undefined}>
-										<div class="use-case-shell relative overflow-hidden rounded-[1.55rem] p-4 sm:p-5">
-											<img class="use-case-art-image absolute inset-0 h-full w-full object-cover" src={useCaseArt[index % useCaseArt.length]} alt="" />
-											<div class="use-case-texture"></div>
-											<div class="use-case-content relative px-5 py-5 text-center sm:px-6 sm:py-6">
-												<div class="use-case-kicker flex items-center justify-between gap-4 text-white/82">
-													<p class="text-[0.7rem] font-bold uppercase tracking-[0.14em]">Example</p>
-													<p class="use-case-nav rounded-full px-3 py-1.5 text-[0.72rem] font-bold tabular-nums">{(index + 1).toString().padStart(2, "0")} / {triageAgents.length.toString().padStart(2, "0")}</p>
-												</div>
-												<div class="use-case-heading mx-auto grid max-w-[18rem] justify-items-center">
-													<h3 class="use-case-title font-bold text-white">{agent.data.nerve}</h3>
-												</div>
-												<div class="use-case-detail triage-detail mx-auto w-full max-w-[17.5rem] rounded-[1.05rem] p-3 text-left">
-													<p class="text-[0.88rem] font-bold leading-[1.28] text-white/84">{agent.data.cardCopy}</p>
-													<a href={`/agents/${agent.id}`} class="triage-action inline-flex min-h-11 w-full items-center justify-center rounded-xl px-4 text-center text-[0.9rem] font-bold no-underline transition" data-agent-card-click={agent.id} tabindex={itemIndex >= column.length ? "-1" : undefined}>That sounds like me</a>
-												</div>
-											</div>
-										</div>
-									</article>
-								))}
-							</div>
-						))}
-					</div>
-
-					<div class="use-case-track triage-mobile-track gap-6 overflow-x-auto pr-[12vw]" data-triage-mobile-track>
-						{triageAgents.map((agent, index) => (
-							<article class="use-case-card triage-card w-[min(86vw,31rem)] shrink-0" style={`--case-tilt: ${index % 2 === 0 ? "-5deg" : "5deg"}`}>
-								<div class="use-case-shell relative overflow-hidden rounded-[1.55rem] p-4 sm:p-5">
-									<img class="use-case-art-image absolute inset-0 h-full w-full object-cover" src={useCaseArt[index % useCaseArt.length]} alt="" />
-									<div class="use-case-texture"></div>
-									<div class="use-case-content relative px-5 py-5 text-center sm:px-6 sm:py-6">
-										<div class="use-case-kicker flex items-center justify-between gap-4 text-white/82">
-											<p class="text-[0.7rem] font-bold uppercase tracking-[0.14em]">Example</p>
-											<p class="use-case-nav rounded-full px-3 py-1.5 text-[0.72rem] font-bold tabular-nums">{(index + 1).toString().padStart(2, "0")} / {triageAgents.length.toString().padStart(2, "0")}</p>
-										</div>
-										<div class="use-case-heading mx-auto grid max-w-[18rem] justify-items-center"><h3 class="use-case-title font-bold text-white">{agent.data.nerve}</h3></div>
-										<div class="use-case-detail triage-detail mx-auto w-full max-w-[17.5rem] rounded-[1.05rem] p-3 text-left">
-											<p class="text-[0.88rem] font-bold leading-[1.28] text-white/84">{agent.data.cardCopy}</p>
-											<a href={`/agents/${agent.id}`} class="triage-action inline-flex min-h-11 w-full items-center justify-center rounded-xl px-4 text-center text-[0.9rem] font-bold no-underline transition" data-agent-card-click={agent.id}>That sounds like me</a>
-										</div>
-									</div>
-								</div>
-							</article>
-						))}
-					</div>
-				</div>
-			</section>
-
-			<section class="stack-panel bg-[#f6f4ef] px-4 pb-40 pt-24 text-[#11110f] sm:px-8 lg:px-10 lg:pb-56">
-				<div class="mx-auto grid max-w-[96rem] gap-20">
-					<div class="reveal p-5 text-[#11110f] sm:p-8 lg:p-10">
-						<div class="max-w-[88rem]">
-							<p class="w-fit rounded-lg bg-black/5 px-4 py-3 text-[#7a7770]">Leadership-friendly</p>
-							<h2 class="mt-10 max-w-[20ch] text-[clamp(2.6rem,5.7vw,6rem)] font-bold leading-[0.96]">
-								You – don’t need to understand AI.
-							</h2>
-							<p class="mt-6 max-w-[24ch] text-[clamp(2.6rem,5.7vw,6rem)] font-bold leading-[0.96] text-[#85827b]">
-								We – need to understand<br />
-								your business.
-							</p>
-							<p class="mt-10 max-w-[40rem] text-[1.1rem] font-bold leading-[1.28] text-[#6f6d68]">
-								We start with how your business works, then shape practical agents around the places they can actually help.
-							</p>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section class="stack-panel bg-[#11110f] px-4 pb-40 pt-24 text-white sm:px-8 lg:px-10 lg:pb-56">
-				<div class="mx-auto grid max-w-[96rem] gap-20">
-					<div class="reveal grid gap-12 overflow-hidden rounded-[2rem] bg-[#11110f] p-5 text-white sm:p-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:p-10">
-						<div class="lg:pr-12">
-							<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-white/50">The possibility</p>
-							<div class="mt-12 max-w-[17ch] text-[clamp(1.75rem,2.7vw,3rem)] font-bold leading-[1]">
-								<p>AI can do almost anything, but that's not the point.</p>
-								<p class="mt-8 text-white/68">What can AI really do for your business?</p>
-								<p class="mt-8 text-white">Find the time you're losing, and give it back.</p>
-							</div>
-						</div>
-
-						<div class="sector-grid sector-grid-dark grid h-[38rem] grid-cols-2 gap-x-4 overflow-hidden rounded-[1.6rem] bg-[#11110f] p-4 sm:gap-x-5 lg:h-[42rem]" aria-label="Business possibility sectors">
-							{leadershipSectorColumns.map((column) => (
-								<div class="sector-column grid h-[36rem] gap-7 overflow-y-auto pb-16 sm:gap-8 lg:h-[40rem]" data-sector-column>
-									{[...column, ...column].map((sector) => (
-										<figure>
-											<div class="relative aspect-[3/4] overflow-hidden rounded-[0.9rem] bg-black shadow-[0_20px_60px_rgba(0,0,0,0.26)]">
-												<img class="absolute inset-0 h-full w-full object-cover" src={sector.image} alt="" />
-												<div class="absolute inset-0 bg-gradient-to-b from-black/4 via-transparent to-black/18"></div>
-												<figcaption class="absolute bottom-0 left-0 right-0 bg-black px-3 py-3 text-center text-xs font-black uppercase leading-[1.05] tracking-[-0.01em] text-white sm:text-sm">
-													{sector.label}
-												</figcaption>
-											</div>
-										</figure>
-									))}
-								</div>
-							))}
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section class="stack-panel bg-[#f6f4ef] px-4 pb-40 pt-24 text-[#11110f] sm:px-8 lg:px-10 lg:pb-56">
-				<div class="reveal mx-auto grid max-w-[96rem] gap-14 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
-					<div class="frame-stack relative h-[38rem] overflow-hidden rounded-[1.6rem] bg-[#ebe9e4] p-4 sm:p-5 lg:h-[42rem]" data-frame-stack>
-						<div
-							class="frame-layer absolute left-1/2 top-1/2 aspect-[3/4] h-[88%] overflow-hidden rounded-[1.05rem] bg-black shadow-2xl"
-							data-frame-layer
-							style="--frame-delay: 0ms"
-						>
-							<img class="h-full w-full object-cover object-center" src="/fixa-assets/herovideo-poster.jpg" alt="" />
-							<div class="absolute left-1/2 top-1/2 w-[min(78%,17rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#e3ddd4]/90 p-3 shadow-2xl glass">
-								<div class="mb-2 flex items-center justify-between rounded-lg bg-[#d0c9bf] px-4 py-3 font-bold text-[#4d4942]">
-									<span>Voice note</span>
-									<span>)))</span>
-								</div>
-								<p class="rounded-lg bg-white/90 px-4 py-4 text-[1rem] font-bold leading-[1.18] text-[#2f2b25]">
-									Ask the agent where client handoffs are slowing down.
-								</p>
-							</div>
-						</div>
-						<div
-							class="frame-layer absolute left-1/2 top-1/2 z-[1] aspect-[3/4] h-[76%] overflow-hidden bg-black shadow-2xl"
-							data-frame-layer
-							style="--frame-delay: 130ms"
-						>
-							<img class="h-full w-full object-cover object-center" src="/images/act-hero-cinematic.png" alt="" />
-							<div class="absolute left-1/2 top-1/2 w-[min(78%,16rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#e3ddd4]/90 p-3 shadow-2xl glass">
-								<div class="mb-2 flex items-center justify-between rounded-lg bg-[#d0c9bf] px-4 py-3 font-bold text-[#4d4942]">
-									<span>Voice note</span>
-									<span>)))</span>
-								</div>
-								<p class="rounded-lg bg-white/90 px-4 py-4 text-[0.95rem] font-bold leading-[1.18] text-[#2f2b25]">
-									Ask what still depends on one person knowing the context.
-								</p>
-							</div>
-						</div>
-						<div
-							class="frame-layer absolute left-1/2 top-1/2 z-[2] aspect-[3/4] h-[64%] overflow-hidden bg-black shadow-2xl"
-							data-frame-layer
-							style="--frame-delay: 260ms"
-						>
-							<img class="h-full w-full object-cover object-center" src="/fixa-assets/MpwLfV3BL41ih4BTUbGjwjVEyU.webp" alt="" />
-							<div class="absolute left-1/2 top-1/2 w-[min(78%,14rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#e3ddd4]/90 p-3 shadow-2xl glass">
-								<div class="mb-2 flex items-center justify-between rounded-lg bg-[#d0c9bf] px-4 py-3 text-[0.9rem] font-bold text-[#4d4942]">
-									<span>Voice note</span>
-									<span>)))</span>
-								</div>
-								<p class="rounded-lg bg-white/90 px-4 py-4 text-[0.88rem] font-bold leading-[1.18] text-[#2f2b25]">
-									Ask which data definitions change between teams.
-								</p>
-							</div>
-						</div>
-						<div
-							class="frame-layer absolute left-1/2 top-1/2 z-[3] aspect-[3/4] h-[52%] overflow-hidden bg-black shadow-2xl"
-							data-frame-layer
-							style="--frame-delay: 410ms"
-						>
-							<img class="h-full w-full object-cover object-center" src="/fixa-assets/K6oVlqJ1SryJzVBte2yxIFoGqI.webp" alt="" />
-							<div class="absolute left-1/2 top-1/2 w-[min(82%,12rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#e3ddd4]/90 p-2 shadow-2xl glass">
-								<div class="mb-2 flex items-center justify-between rounded-lg bg-[#d0c9bf] px-3 py-2 text-[0.78rem] font-bold text-[#4d4942]">
-									<span>Voice note</span>
-									<span>)))</span>
-								</div>
-								<p class="rounded-lg bg-white/90 px-3 py-3 text-[0.78rem] font-bold leading-[1.16] text-[#2f2b25]">
-									Ask which exceptions need a controlled workflow.
-								</p>
-							</div>
-						</div>
-						<div
-							class="frame-layer absolute left-1/2 top-1/2 z-[4] aspect-[3/4] h-[42%] overflow-hidden bg-black shadow-2xl"
-							data-frame-layer
-							style="--frame-delay: 540ms"
-						>
-							<img class="h-full w-full object-cover object-center" src="/fixa-assets/WXKx26vqrAI7XfrXAgsHkTeOeV0.webp" alt="" />
-							<div class="absolute left-1/2 top-1/2 w-[min(78%,11rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#e3ddd4]/90 p-2 shadow-2xl glass">
-								<div class="mb-2 flex items-center justify-between rounded-lg bg-[#d0c9bf] px-2 py-2 text-[0.68rem] font-bold text-[#4d4942]">
-									<span>Voice note</span>
-									<span>)))</span>
-								</div>
-								<p class="rounded-lg bg-white/90 px-2 py-3 text-[0.68rem] font-bold leading-[1.14] text-[#2f2b25]">
-									Ask what the agent should confirm before acting.
-								</p>
-							</div>
-						</div>
-						<div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#f6f4ef]/28"></div>
-					</div>
-
-					<div class="lg:pl-10">
-						<p class="w-fit rounded-lg bg-black/5 px-4 py-3 text-[#7a7770]">The offer</p>
-						<div class="mt-12 max-w-[19ch] text-[clamp(1.75rem,2.7vw,3rem)] font-bold leading-[1]">
-							<p>
-								Talk to an agent fully briefed on your business.
-							</p>
-							<p class="mt-8 text-[#4d4b46]">
-								Ask it anything.
-								Put combined intelligence to the test.
-							</p>
-							<p class="mt-8 text-[#78746c]">
-								What happens next could change your business<br />
-								- forever.
-							</p>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section id="process" class="feature-panel stack-panel px-4 pb-28 pt-24 text-white sm:px-8 lg:px-10 lg:pb-36">
-				<div class="mx-auto grid max-w-[74rem] gap-12 lg:grid-cols-[0.72fr_1fr] lg:items-center">
-					<aside>
-						<div class="grid gap-14">
-							<div>
-								<h2 class="max-w-[16ch] text-[clamp(2.45rem,3.45vw,3.45rem)] font-normal leading-[0.98]">
-									Build AI around your business.
-								</h2>
-								<p class="mt-5 max-w-[22rem] text-[1.05rem] font-bold leading-tight text-white/58">
-									Start with one step. Prove it works. Then decide what's next.
-								</p>
-								<div class="mt-10 grid w-full gap-5">
-									{featureTabs.map((item, index) => (
-										<button
-											type="button"
-											class="feature-index flex w-full items-start gap-5 rounded-xl px-6 py-5 text-left font-bold transition hover:bg-black/42 hover:text-white"
-											data-feature-nav={index}
-											data-feature-target={`feature-${index}`}
-											data-active={index === 0 ? "true" : "false"}
-											aria-pressed={index === 0 ? "true" : "false"}
-										>
-											<span class="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-white/8 text-[0.82rem] text-white/52">{item.number}</span>
-											<span class="grid gap-1.5">
-												<span class="text-[1.16rem] leading-tight">{item.label}</span>
-												<span class="text-[0.88rem] leading-tight text-white/48">{item.navHint}</span>
-											</span>
-										</button>
-									))}
-								</div>
-							</div>
-							<div class="max-w-[18rem]">
-								<p class="font-medium leading-tight">
-									Finding exactly what you need.<br />
-									No hidden agenda, no hype, no tech-speak.
-								</p>
-								<a href={bookingHref} class="mt-4 inline-flex h-12 items-center rounded-xl bg-white px-6 font-bold text-black no-underline transition hover:bg-[#dfff42]">
-									Book a meeting
-								</a>
-							</div>
-						</div>
-					</aside>
-
-					<div class="feature-window">
-						<div class="feature-track grid justify-items-center gap-8 lg:gap-10" data-feature-track>
-							{featureTabs.map((item, index) => (
-								<article
-									id={`feature-${index}`}
-									class="vertical-card feature-card reveal grid content-start rounded-[1.7rem] p-6 lg:p-8 lg:pb-12"
-									data-feature-card={index}
-									style={`--delay: ${Math.min(index * 70, 210)}ms`}
-								>
-									<p class="mb-4 text-[0.82rem] font-bold text-white/42">{item.number}</p>
-									<h3 class="text-[clamp(1.55rem,2.1vw,2rem)] font-bold leading-tight">{item.title}</h3>
-									<p class="mt-2 text-[0.95rem] font-bold leading-tight text-white/48">{item.navHint}</p>
-									<div class="mx-auto mt-6 grid h-[10.6rem] w-[min(100%,16rem)] place-items-center overflow-hidden rounded-[1.4rem] bg-black/18">
-										<img class="h-full w-full object-contain" src={item.image} alt="" />
-									</div>
-									<p class="mt-6 text-[0.98rem] font-bold leading-[1.28] text-white/62">{item.copy}</p>
-								</article>
-							))}
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section id="use-cases" class="stack-panel bg-[#f6f4ef] px-4 pb-32 pt-32 text-[#11110f] sm:px-8 lg:px-10 lg:pb-44 lg:pt-36">
-				<div class="mx-auto grid max-w-[96rem] gap-10">
-					<div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
-						<div>
-							<p class="mb-6 w-fit rounded-lg bg-black/5 px-4 py-3 text-[1rem] font-bold text-[#77736a]">Use Cases</p>
-							<h2 class="max-w-[20ch] text-[clamp(2.2rem,4vw,4.2rem)] font-bold leading-[1] text-[#34312b]">
-							Let's find the time you're losing and get it back.
-							</h2>
-						</div>
-						<div class="flex items-center gap-3 justify-self-start lg:justify-self-end lg:pb-2">
-							<button class="grid h-12 w-12 place-items-center rounded-xl bg-white text-2xl font-bold leading-none text-[#11110f] shadow-sm transition hover:bg-[#dfff42]" type="button" aria-label="Scroll use cases left" data-use-case-scroll="-1">‹</button>
-							<button class="grid h-12 w-12 place-items-center rounded-xl bg-white text-2xl font-bold leading-none text-[#11110f] shadow-sm transition hover:bg-[#dfff42]" type="button" aria-label="Scroll use cases right" data-use-case-scroll="1">›</button>
-						</div>
-					</div>
-
-					<div class="use-case-track flex gap-6 overflow-x-auto pr-[12vw]" data-use-case-track>
-						{frameworkCards.map((card, index) => (
-							<article class="use-case-card reveal w-[min(86vw,31rem)] shrink-0" style={`--delay: ${index * 90}ms; --case-tilt: ${index % 2 === 0 ? "-5deg" : "5deg"}`}>
-								<div class="use-case-shell relative overflow-hidden rounded-[1.55rem] p-4 sm:p-5">
-									<img class="use-case-art-image absolute inset-0 h-full w-full object-cover" src={useCaseArt[index % useCaseArt.length]} alt="" />
-									<div class="use-case-texture"></div>
-									<div class="use-case-content relative px-5 py-5 text-center sm:px-6 sm:py-6">
-										<div class="use-case-kicker flex items-center justify-between gap-4 text-white/82">
-											<p class="text-[0.7rem] font-bold uppercase tracking-[0.14em]">Use Case</p>
-											<p class="use-case-nav rounded-full px-3 py-1.5 text-[0.72rem] font-bold tabular-nums">
-												{(index + 1).toString().padStart(2, "0")} / {frameworkCards.length.toString().padStart(2, "0")}
-											</p>
-										</div>
-
-										<div class="use-case-heading mx-auto grid max-w-[18rem] justify-items-center">
-											<h3 class="use-case-title font-bold text-white">{card.displayTitle}</h3>
-											<p class="use-case-copy mt-3 text-[0.86rem] font-bold leading-[1.28] text-white/82">{card.copy}</p>
-										</div>
-
-										<div class="use-case-detail mx-auto w-full max-w-[17.5rem] rounded-[1.05rem] p-2.5 text-left">
-											{card.overlay.type === "list" && (
-												<div>
-													<p class="use-case-menu-title text-[0.72rem] font-bold uppercase tracking-[0.12em] text-white/72">{card.overlay.title}</p>
-													<div class="use-case-menu-body text-[0.82rem] font-bold text-white/82">
-														<p class="use-case-menu-row text-white">{card.overlay.active}</p>
-														{card.overlay.items.slice(0, 2).map((item) => (
-															<p class="use-case-menu-muted">{item}</p>
-														))}
-													</div>
-												</div>
-											)}
-
-											{card.overlay.type === "metric" && (
-												<div>
-													<p class="use-case-menu-title text-[0.72rem] font-bold uppercase tracking-[0.12em] text-white/72">{card.overlay.title}</p>
-													<div class="use-case-menu-body text-center">
-														<div class="use-case-chart" aria-hidden="true">
-															<span style="height: 46%"></span>
-															<span style="height: 72%"></span>
-															<span style="height: 54%"></span>
-															<span style="height: 90%"></span>
-														</div>
-														<p class="mx-auto rounded-full bg-white/14 px-4 py-2 text-[0.78rem] font-bold text-white/82">{card.overlay.action}</p>
-													</div>
-												</div>
-											)}
-
-											{card.overlay.type === "results" && (
-												<div>
-													<p class="use-case-menu-title text-[0.72rem] font-bold uppercase tracking-[0.12em] text-white/72">{card.overlay.title}</p>
-													<div class="use-case-menu-body text-[0.82rem] font-bold text-white/84">
-														{card.overlay.rows.slice(0, 2).map(([label, value]) => (
-															<p class="use-case-menu-row"><span class="inline-flex items-center gap-2"><span class="use-case-status-dot"></span>{label}</span><span>{value}</span></p>
-														))}
-													</div>
-												</div>
-											)}
-										</div>
-									</div>
-								</div>
-							</article>
-						))}
-					</div>
-				</div>
-			</section>
-
-			<section id="pathway" class="stack-panel bg-[#ebe9e4] px-4 pb-36 pt-28 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48 lg:pt-36">
-				<div class="mx-auto grid max-w-[96rem] gap-14">
-					<div class="reveal mx-auto grid max-w-[56rem] justify-items-center gap-5 text-center">
-						<p class="w-fit rounded-lg bg-black/5 px-4 py-3 text-[1rem] font-bold text-[#77736a]">The pathway</p>
-						<h2 class="max-w-[18ch] text-[clamp(2.25rem,4vw,4.5rem)] font-bold leading-[0.96]">
-							A clear path from AI experiment to business advantage.
-						</h2>
-						<p class="max-w-[46rem] text-[clamp(1.02rem,1.35vw,1.2rem)] font-bold leading-[1.35] text-[#5f5b54]">
-							Start with one step. Prove it works. Then decide what comes next.
-						</p>
-					</div>
-
-					<div class="grid gap-5 lg:grid-cols-3">
-						{pathwayCards.map((card, index) => (
-							<article class="reveal grid min-h-[31rem] content-between rounded-[1.55rem] border border-[#11110f]/20 bg-[#f6f4ef] p-6 shadow-[0_22px_55px_rgba(17,17,15,0.08)] sm:p-8" style={`--delay: ${Math.min(index * 80, 240)}ms`}>
-								<div>
-									<div class="mb-10 grid h-16 place-items-center">
-										{card.shape === "half" && (
-											<div class="relative h-16 w-24" aria-hidden="true">
-												<span class="absolute left-3 top-0 h-16 w-8 rounded-l-full bg-[#11110f]"></span>
-												<span class="absolute right-3 top-0 h-16 w-8 rounded-r-full bg-[#dfff42]"></span>
-											</div>
-										)}
-										{card.shape === "hourglass" && (
-											<div class="relative grid h-16 w-24 place-items-center" aria-hidden="true">
-												<span class="absolute top-0 h-0 w-0 border-x-[1.9rem] border-t-[1.9rem] border-x-transparent border-t-[#dfff42]"></span>
-												<span class="absolute bottom-0 h-0 w-0 border-x-[1.9rem] border-b-[1.9rem] border-x-transparent border-b-[#11110f]"></span>
-											</div>
-										)}
-										{card.shape === "orbit" && (
-											<div class="relative h-16 w-24" aria-hidden="true">
-												<span class="absolute left-4 top-2 h-12 w-12 rounded-full bg-[#dfff42]"></span>
-												<span class="absolute left-9 top-4 h-8 w-8 rounded-full bg-[#11110f]"></span>
-												<span class="absolute right-4 top-2 h-12 w-6 rounded-r-full bg-[#8a6a2e]"></span>
-											</div>
-										)}
-									</div>
-									<h3 class="text-center text-[clamp(1.65rem,2vw,2.1rem)] font-bold leading-none">{card.title}</h3>
-									<p class="mx-auto mt-8 w-full rounded-full bg-[#e4e0d7] px-4 py-2 text-center text-[0.95rem] font-bold">{card.stage}</p>
-									<p class="mx-auto mt-7 max-w-[25rem] text-center text-[1rem] font-bold leading-[1.38] text-[#37342e]">{card.copy}</p>
-								</div>
-								<div class="mt-14 grid justify-items-center gap-5 text-center">
-									<p class="text-[0.95rem] font-bold leading-tight text-[#5f5b54]">
-										{card.priceLabel}<br />
-										<span class="text-[1.25rem] text-[#11110f]">{card.price}</span>
-									</p>
-									<a href={bookingHref} class="inline-flex h-12 w-full items-center justify-center rounded-xl bg-[#11110f] px-7 font-bold uppercase text-white no-underline transition hover:bg-[#dfff42] hover:text-[#11110f]">
-										{card.action}
-									</a>
-								</div>
-							</article>
-						))}
-					</div>
-				</div>
-			</section>
-
-			<section id="results" class="stack-panel bg-[#f6f4ef] px-4 pb-36 pt-28 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48 lg:pt-36">
-				<div class="mx-auto grid max-w-[96rem] gap-14 lg:grid-cols-[0.42fr_1fr] lg:gap-20">
-					<div class="reveal">
-						<p class="mb-6 w-fit rounded-lg bg-black/5 px-4 py-3 text-[1rem] font-bold text-[#77736a]">The proof</p>
-						<h2 class="max-w-[12ch] text-[clamp(2.25rem,3.6vw,4rem)] font-bold leading-[0.98]">
-							Proven results
-						</h2>
-					</div>
-
-					<div class="grid gap-x-12 gap-y-16 sm:grid-cols-2 lg:gap-x-16 lg:gap-y-24">
-						{resultStats.map((stat, index) => (
-							<article class="reveal grid gap-5" style={`--delay: ${Math.min(index * 80, 240)}ms`}>
-								<div class="flex items-start justify-between gap-6">
-									<p
-										class="text-[clamp(2.6rem,4.6vw,4.9rem)] font-bold leading-none tracking-[0]"
-										data-result-number
-										data-result-target={stat.countTo}
-										data-result-prefix={stat.prefix}
-										data-result-suffix={stat.suffix}
-										aria-label={stat.value}
-									>
-										{stat.value}
-									</p>
-									<span class="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-[#dfff42] text-[2rem] font-bold leading-none text-[#11110f]" aria-hidden="true">↑</span>
-								</div>
-								<div class="h-px w-full bg-[#11110f]"></div>
-								<p class="max-w-[27rem] text-[clamp(1.02rem,1.25vw,1.22rem)] font-bold leading-[1.28] text-[#292723]">
-									{stat.label}
-								</p>
-							</article>
-						))}
-					</div>
-
-					<div class="reveal lg:col-start-2">
-						<a href={bookingHref} class="mx-auto inline-flex h-12 w-fit items-center rounded-xl bg-[#11110f] px-7 font-bold uppercase text-white no-underline transition hover:bg-[#dfff42] hover:text-[#11110f]">
-							Book a meeting
-						</a>
-					</div>
-				</div>
-			</section>
-
-			<section id="case-studies" class="stack-panel hidden bg-[#11110f] px-4 pb-36 pt-24 text-white sm:px-8 lg:px-10 lg:pb-48" hidden>
-				<div class="mx-auto grid max-w-[86rem] gap-12">
-					<div class="reveal grid gap-8 lg:grid-cols-[0.38fr_1fr] lg:items-end">
-						<p class="h-fit w-fit rounded-lg bg-white/10 px-4 py-3 text-[1rem] font-bold text-white/58">Case Studies</p>
-						<div>
-							<h2 class="max-w-[18ch] text-[clamp(2.2rem,4vw,4.2rem)] font-bold leading-[1] text-white">
-								What focused agents can change.
-							</h2>
-							<p class="mt-6 max-w-[42rem] text-[clamp(1.05rem,1.5vw,1.3rem)] font-bold leading-[1.28] text-white/58">
-								Each study starts with one business pressure, one realistic scope and one agent designed around the work.
-							</p>
-						</div>
-					</div>
-
-					<div class="reveal relative z-30 flex justify-start">
-						<div class="case-filter relative z-30" data-case-filter>
-							<button
-								class="flex min-w-[15rem] items-center justify-between gap-6 rounded-2xl border border-white/10 bg-white px-4 py-3 text-left font-bold text-[#11110f] shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition hover:bg-[#dfff42]"
-								type="button"
-								aria-expanded="false"
-								data-case-filter-toggle
-							>
-								<span data-case-filter-label>All sectors</span>
-								<span class="text-xl leading-none">⌄</span>
-							</button>
-							<div class="absolute left-0 top-[calc(100%+.5rem)] z-50 hidden min-w-[18rem] rounded-2xl border border-white/10 bg-[#f6f4ef] p-2 text-[#11110f] shadow-[0_24px_70px_rgba(0,0,0,0.38)]" data-case-filter-menu>
-								{caseStudyFilters.map((filter) => (
-									<button
-										class="flex w-full items-center justify-between rounded-xl px-4 py-3 text-left font-bold transition hover:bg-black/8"
-										type="button"
-										data-case-filter-option={filter.value}
-										data-case-filter-name={filter.label}
-									>
-										<span>{filter.label}</span>
-									</button>
-								))}
-							</div>
-						</div>
-					</div>
-
-					<div class="relative z-0 grid gap-5 lg:grid-cols-3" data-case-grid>
-						{caseStudies.map((study, index) => (
-							<article
-								class="reveal grid min-h-[25rem] content-between rounded-[1.6rem] border border-white/10 bg-white/[0.06] p-7 shadow-[0_24px_70px_rgba(0,0,0,0.28)]"
-								style={`--delay: ${Math.min(index * 90, 270)}ms`}
-								data-case-extra={index > 2 ? "true" : undefined}
-								data-case-card
-								data-case-filter-value={study.filter}
-								hidden={index > 2}
-							>
-								<div>
-									<p class="mb-8 w-fit rounded-lg bg-white px-3 py-2 text-[0.78rem] font-black uppercase text-[#11110f]">{study.kicker}</p>
-									<h3 class="text-[clamp(1.65rem,2.3vw,2.35rem)] font-bold leading-[1] text-white">{study.title}</h3>
-									<p class="mt-5 text-[1.02rem] font-bold leading-[1.34] text-white/58">{study.copy}</p>
-								</div>
-								<div class="mt-10 grid gap-2">
-									{study.points.map((point) => (
-										<p class="rounded-lg bg-white/10 px-4 py-3 text-[0.96rem] font-bold text-white/72">{point}</p>
-									))}
-								</div>
-							</article>
-						))}
-					</div>
-					<div class="reveal flex justify-center">
-						<button
-							class="inline-flex h-12 items-center rounded-xl bg-white px-7 font-bold text-black transition hover:bg-[#dfff42]"
-							type="button"
-							data-case-reveal
-						>
-							More case studies
-						</button>
-					</div>
-				</div>
-			</section>
-
-			<section id="direction" class="stack-panel bg-[#ebe9e4] px-4 pb-36 pt-24 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48">
-				<div
-					class="reveal mx-auto grid min-h-[46rem] max-w-[96rem] gap-10 rounded-[1.4rem] p-6 sm:p-8 lg:grid-cols-[0.75fr_1fr_1fr] lg:grid-rows-[auto_1fr_auto] lg:p-10"
-				>
-					<p class="text-[1rem] font-black uppercase leading-none">The direction</p>
-
-					<div class="lg:col-span-2">
-						<h2 class="max-w-[18ch] text-[clamp(2.3rem,4.3vw,4.7rem)] font-bold leading-[0.96]">
-							We take on direction, not just the advice.
-						</h2>
-						<p class="mt-6 max-w-[50rem] text-[clamp(1.05rem,1.5vw,1.28rem)] font-bold leading-[1.28] text-[#5f5b54]">
-							AI and creative thinking, backed by practice, driven by outcomes, not reports.
-						</p>
-					</div>
-
-					<div class="grid content-start gap-8 border-y border-black/40 py-10 lg:row-span-2 lg:-mt-16 lg:border-y-0 lg:py-0">
-						<div>
-							<p class="max-w-[13ch] text-[clamp(1.85rem,2.85vw,3.05rem)] font-bold leading-[0.92]">
-								Two Directors.<br />
-								<span class="italic">One Direction.</span>
-							</p>
-						</div>
-						<p class="max-w-[16ch] text-[clamp(1.15rem,1.65vw,1.75rem)] font-bold leading-[1.08]">
-							You bring the business.<br />
-							We bring the agentic skills.<br />
-							Together, we make the future work.
-						</p>
-						<a href={bookingHref} class="mt-2 inline-flex h-12 w-fit items-center rounded-xl bg-black px-7 font-bold uppercase text-white no-underline transition hover:bg-[#dfff42] hover:text-black">
-							Book a meeting
-						</a>
-					</div>
-
-					<article class="grid content-start gap-7 border-t border-black/40 pt-10 lg:border-t-0 lg:pt-0">
-						<div>
-							<p class="text-[clamp(2rem,3vw,3.2rem)] font-bold leading-[0.9]">Jonny Bowker</p>
-							<h3 class="text-[clamp(1.7rem,2.65vw,2.85rem)] font-bold leading-[0.96]">AI Director, Strategy</h3>
-						</div>
-						<p class="max-w-[31rem] text-[1.03rem] font-bold leading-[1.34] text-[#5f5b54]">
-							Jonny Bowker is a Law Society of Scotland accredited AI Expert and practitioner, working across Fortune 500 companies and mid-caps. He structures problems into solutions through Agent in the Room, a live design tree methodology for solving business problems, and directs ambitious scale-ups through the same thinking.
-						</p>
-						<p class="mt-auto max-w-[24rem] border-t border-black/28 pt-4 text-[0.95rem] font-bold leading-[1.25]">
-							Growing the tree of the concept.
-						</p>
-					</article>
-
-					<article class="grid content-start gap-7 border-t border-black/40 pt-10 lg:border-t-0 lg:pt-0">
-						<div>
-							<p class="text-[clamp(2rem,3vw,3.2rem)] font-bold leading-[0.9]">Mark Chatelier</p>
-							<h3 class="text-[clamp(1.7rem,2.65vw,2.85rem)] font-bold leading-[0.96]">AI Director, Discovery</h3>
-						</div>
-						<p class="max-w-[31rem] text-[1.03rem] font-bold leading-[1.34] text-[#5f5b54]">
-							Mark Chatelier is an AI generalist who leads discovery through creative thinking and direction, drawing on two decades leading creative teams on global accounts including HSBC, Audi and Vodafone. He listens first, then leads the conversation toward the real problem, applying the same discipline wherever it actually sits.
-						</p>
-						<p class="mt-auto max-w-[24rem] border-t border-black/28 pt-4 text-[0.95rem] font-bold leading-[1.25]">
-							Shaping branches into direction.
-						</p>
-					</article>
-				</div>
-			</section>
-
-			<section class="stack-panel overflow-hidden bg-[radial-gradient(circle_at_42%_10%,rgba(255,130,0,0.95),rgba(255,83,16,0.92)_26%,rgba(117,28,31,0.98)_78%),linear-gradient(120deg,#e60026,#ff6a00_45%,#6d1b21)] px-6 py-16 text-white sm:px-10 lg:px-16 lg:py-20">
-					<div class="mx-auto grid max-w-[74rem] gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
-						<div class="reveal grid content-center gap-7">
-							<p class="w-fit rounded-full bg-white/16 px-4 py-2 text-[0.9rem] font-bold text-white/82">Act.Studio</p>
-							<div class="grid gap-5">
-								<h2 class="max-w-[16ch] text-[clamp(2.2rem,4vw,4.25rem)] font-bold leading-[1]">
-									Talk to us, and avoid the wrong path.
-								</h2>
-								<p class="max-w-[38rem] text-[clamp(1rem,1.35vw,1.25rem)] font-bold leading-[1.35] text-white/78">
-									Book a conversation with our directors to find out what AI can really do for your business.
-								</p>
-							</div>
-							<a href={bookingHref} class="inline-flex h-12 w-full items-center justify-center rounded-xl bg-white px-7 font-bold text-black no-underline transition hover:bg-[#dfff42] sm:w-fit">
-								Book a meeting
-							</a>
-						</div>
-						<div class="reveal cta-line grid justify-start gap-0 text-[clamp(3.6rem,8.2vw,8.2rem)] font-bold leading-[0.86] tracking-[0] lg:justify-end">
-							<div class="flex items-center gap-[0.12em]">
-								<span>Let's</span>
-								<svg class="cta-pill h-[0.9em] w-[0.9em]" viewBox="0 0 64 64" aria-hidden="true">
-									<defs>
-										<linearGradient id="cta-star-gradient-a" x1="4" x2="60" y1="4" y2="60" gradientUnits="userSpaceOnUse">
-											<stop stop-color="#e60026" />
-											<stop offset="0.48" stop-color="#ff6a00" />
-											<stop offset="1" stop-color="#6d1b21" />
-										</linearGradient>
-									</defs>
-									<path fill="url(#cta-star-gradient-a)" d="M31.7 3.5c1 0 1.8.6 2.1 1.5l5.5 17.1c.2.7.8 1.3 1.5 1.5L58 29.1c.9.3 1.5 1.1 1.5 2.1s-.6 1.8-1.5 2.1l-17.2 5.5c-.7.2-1.3.8-1.5 1.5l-5.5 17.2c-.3.9-1.1 1.5-2.1 1.5s-1.8-.6-2.1-1.5l-5.5-17.2c-.2-.7-.8-1.3-1.5-1.5L5.5 33.3c-.9-.3-1.5-1.1-1.5-2.1s.6-1.8 1.5-2.1l17.1-5.5c.7-.2 1.3-.8 1.5-1.5L29.6 5c.3-.9 1.1-1.5 2.1-1.5Z" />
-									<path fill="url(#cta-star-gradient-a)" d="M49.8 4.4c.7 0 1.3.4 1.5 1.1l1.8 5.6c.1.4.4.7.8.8l5.6 1.8c.7.2 1.1.8 1.1 1.5s-.4 1.3-1.1 1.5l-5.6 1.8c-.4.1-.7.4-.8.8l-1.8 5.6c-.2.7-.8 1.1-1.5 1.1s-1.3-.4-1.5-1.1l-1.8-5.6c-.1-.4-.4-.7-.8-.8l-5.6-1.8c-.7-.2-1.1-.8-1.1-1.5s.4-1.3 1.1-1.5l5.6-1.8c.4-.1.7-.4.8-.8l1.8-5.6c.2-.7.8-1.1 1.5-1.1Z" />
-								</svg>
-							</div>
-							<div class="flex items-center gap-[0.12em]">
-								<svg class="cta-pill cta-pill-alt h-[0.9em] w-[0.9em]" viewBox="0 0 64 64" aria-hidden="true">
-									<defs>
-										<linearGradient id="cta-star-gradient-b" x1="4" x2="60" y1="4" y2="60" gradientUnits="userSpaceOnUse">
-											<stop stop-color="#e60026" />
-											<stop offset="0.48" stop-color="#ff6a00" />
-											<stop offset="1" stop-color="#6d1b21" />
-										</linearGradient>
-									</defs>
-									<path fill="url(#cta-star-gradient-b)" d="M31.7 3.5c1 0 1.8.6 2.1 1.5l5.5 17.1c.2.7.8 1.3 1.5 1.5L58 29.1c.9.3 1.5 1.1 1.5 2.1s-.6 1.8-1.5 2.1l-17.2 5.5c-.7.2-1.3.8-1.5 1.5l-5.5 17.2c-.3.9-1.1 1.5-2.1 1.5s-1.8-.6-2.1-1.5l-5.5-17.2c-.2-.7-.8-1.3-1.5-1.5L5.5 33.3c-.9-.3-1.5-1.1-1.5-2.1s.6-1.8 1.5-2.1l17.1-5.5c.7-.2 1.3-.8 1.5-1.5L29.6 5c.3-.9 1.1-1.5 2.1-1.5Z" />
-									<path fill="url(#cta-star-gradient-b)" d="M49.8 4.4c.7 0 1.3.4 1.5 1.1l1.8 5.6c.1.4.4.7.8.8l5.6 1.8c.7.2 1.1.8 1.1 1.5s-.4 1.3-1.1 1.5l-5.6 1.8c-.4.1-.7.4-.8.8l-1.8 5.6c-.2.7-.8 1.1-1.5 1.1s-1.3-.4-1.5-1.1l-1.8-5.6c-.1-.4-.4-.7-.8-.8l-5.6-1.8c-.7-.2-1.1-.8-1.1-1.5s.4-1.3 1.1-1.5l5.6-1.8c.4-.1.7-.4.8-.8l1.8-5.6c.2-.7.8-1.1 1.5-1.1Z" />
-								</svg>
-								<span>talk</span>
-							</div>
-							<div>agents.</div>
-						</div>
-					</div>
-			</section>
-
-			<section id="faq" class="bg-black px-4 pb-16 pt-24 text-white sm:px-8 lg:px-10 lg:pb-20">
-				<div class="mx-auto grid max-w-[60rem] gap-10">
-					<h2 class="reveal text-[clamp(1.65rem,2.1vw,2.25rem)] font-bold leading-none text-white">
-						Frequently Asked Questions
-					</h2>
-					<div class="grid gap-4 lg:grid-cols-2 lg:items-start lg:gap-x-5">
-						{faqs.map(([question, answer], index) => (
-							<div class="faq-item reveal rounded-[1.25rem] bg-[#1b1b1b] p-7" data-faq data-open="false" style={`--delay: ${Math.min(index * 70, 240)}ms`}>
-								<button class="flex w-full items-start justify-between gap-8 text-left text-[1.1rem] font-bold leading-[1.18] text-white" type="button" aria-expanded="false">
-									<span>{question}</span>
-									<span class="faq-icon grid h-10 w-10 shrink-0 place-items-center rounded-full bg-black/35 text-[1.55rem] font-black leading-none text-white/88 transition">+</span>
-								</button>
-								<div class="faq-answer">
-									<div>
-										<p class="pt-6 text-[0.9rem] font-bold leading-[1.42] text-white/52">{answer}</p>
-									</div>
-								</div>
-							</div>
-						))}
-					</div>
-				</div>
-			</section>
-
-			<footer class="relative overflow-hidden bg-black px-4 pb-0 pt-8 text-white sm:px-8 lg:px-10 lg:pt-10">
-				<div class="relative z-10 grid min-h-[24rem] w-full gap-10 bg-black p-8 text-white md:grid-cols-[1fr_1fr_0.7fr]">
-					<div class="grid content-between gap-10">
-						<div>
-							<p class="text-[1.7rem] font-bold">Act.</p>
-							<p class="mt-10 font-bold text-white/55">Get a useful recommendation.<br />No spam. No noise.</p>
-							<a href={bookingHref} class="mt-6 inline-flex h-12 items-center rounded-xl bg-white px-6 font-bold text-black no-underline transition hover:bg-[#dfff42]">
-								Book a meeting
-							</a>
-						</div>
-						<p class="text-white/42">© 2026 Act. All Rights Reserved.</p>
-					</div>
-					<div>
-						<p class="mb-5 font-bold text-white/38">Information</p>
-						<div class="grid gap-2 font-bold">
-							<a class="text-white no-underline" href="/">Home</a>
-							<a class="text-white no-underline" href="#process">Process</a>
-							<a class="text-white no-underline" href="#use-cases">Use Cases</a>
-							<a class="text-white no-underline" href="#direction">Direction</a>
-							<a class="text-white no-underline" href="#faq">FAQ</a>
-						</div>
-						<p class="mb-3 mt-10 font-bold text-white/38">Contact</p>
-						<a class="font-bold text-white no-underline" href="mailto:hello@actai.studio">hello@actai.studio</a>
-					</div>
-					<div>
-						<p class="mb-5 font-bold text-white/38">Social</p>
-						<div class="grid gap-2 font-bold">
-							<a class="text-white no-underline" href="https://www.linkedin.com/company/advanced-analytica/" target="_blank" rel="noreferrer">LinkedIn</a>
-						</div>
-					</div>
-				</div>
-				<div class="pointer-events-none relative z-0 -mt-8 grid justify-center overflow-hidden">
-					<img class="w-[min(76vw,52rem)]" src="/logos/ACT_White.svg" alt="" aria-hidden="true" />
-				</div>
-			</footer>
+			<HeroSection />
+			<LeadershipIntroSection />
+			<LeadershipAreasSection {leadershipSectorColumns} />
+			<PossibilitySection />
+			<RippleEffectsSection />
+			<DirectionSection {bookingHref} />
+			<ResultsSection {resultStats} {bookingHref} />
+			<CallToActionSection {bookingHref} />
+			<FaqSection {faqs} />
+			<FooterSection {bookingHref} />
 		</main>
 
 		<script>
@@ -2268,12 +1366,40 @@ const faqs = [
 				if (menuIcon) menuIcon.dataset.open = String(open);
 			};
 
+			let navScrollFrame;
+			const syncScrollHeader = () => {
+				navScrollFrame = undefined;
+				const visible = window.scrollY > 40;
+				document.body.dataset.navVisible = String(visible);
+				if (!visible) setMenuOpen(false);
+			};
+
+			window.addEventListener("scroll", () => {
+				if (navScrollFrame) return;
+				navScrollFrame = window.requestAnimationFrame(syncScrollHeader);
+			}, { passive: true });
+			syncScrollHeader();
+
 			menuToggle?.addEventListener("click", () => {
 				setMenuOpen(menuPanel?.dataset.open !== "true");
 			});
 
 			menuPanel?.querySelectorAll("a").forEach((link) => {
 				link.addEventListener("click", () => setMenuOpen(false));
+			});
+
+			document.addEventListener("click", (event) => {
+				if (menuPanel?.dataset.open !== "true") return;
+				if (event.target instanceof Node && !menuToggle?.contains(event.target) && !menuPanel.contains(event.target)) {
+					setMenuOpen(false);
+				}
+			});
+
+			document.addEventListener("keydown", (event) => {
+				if (event.key === "Escape" && menuPanel?.dataset.open === "true") {
+					setMenuOpen(false);
+					menuToggle?.focus();
+				}
 			});
 
 			const contactLayer = document.querySelector("[data-contact-layer]");

@@ -1,0 +1,59 @@
+---
+interface Props { pathwayCards: any[]; bookingHref: string }
+const { pathwayCards, bookingHref } = Astro.props;
+---
+<section id="pathway" class="stack-panel bg-[#ebe9e4] px-4 pb-36 pt-28 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48 lg:pt-36">
+				<div class="mx-auto grid max-w-[96rem] gap-14">
+					<div class="reveal mx-auto grid max-w-[56rem] justify-items-center gap-5 text-center">
+						<p class="w-fit rounded-lg bg-black/5 px-4 py-3 text-[1rem] font-bold text-[#77736a]">The pathway</p>
+						<h2 class="max-w-[18ch] text-[clamp(2.25rem,4vw,4.5rem)] font-bold leading-[0.96]">
+							A clear path from AI experiment to business advantage.
+						</h2>
+						<p class="max-w-[46rem] text-[clamp(1.02rem,1.35vw,1.2rem)] font-bold leading-[1.35] text-[#5f5b54]">
+							Start with one step. Prove it works. Then decide what comes next.
+						</p>
+					</div>
+
+					<div class="grid gap-5 lg:grid-cols-3">
+						{pathwayCards.map((card, index) => (
+							<article class="reveal grid min-h-[31rem] content-between rounded-[1.55rem] border border-[#11110f]/20 bg-[#f6f4ef] p-6 shadow-[0_22px_55px_rgba(17,17,15,0.08)] sm:p-8" style={`--delay: ${Math.min(index * 80, 240)}ms`}>
+								<div>
+									<div class="mb-10 grid h-16 place-items-center">
+										{card.shape === "half" && (
+											<div class="relative h-16 w-24" aria-hidden="true">
+												<span class="absolute left-3 top-0 h-16 w-8 rounded-l-full bg-[#11110f]"></span>
+												<span class="absolute right-3 top-0 h-16 w-8 rounded-r-full bg-[#dfff42]"></span>
+											</div>
+										)}
+										{card.shape === "hourglass" && (
+											<div class="relative grid h-16 w-24 place-items-center" aria-hidden="true">
+												<span class="absolute top-0 h-0 w-0 border-x-[1.9rem] border-t-[1.9rem] border-x-transparent border-t-[#dfff42]"></span>
+												<span class="absolute bottom-0 h-0 w-0 border-x-[1.9rem] border-b-[1.9rem] border-x-transparent border-b-[#11110f]"></span>
+											</div>
+										)}
+										{card.shape === "orbit" && (
+											<div class="relative h-16 w-24" aria-hidden="true">
+												<span class="absolute left-4 top-2 h-12 w-12 rounded-full bg-[#dfff42]"></span>
+												<span class="absolute left-9 top-4 h-8 w-8 rounded-full bg-[#11110f]"></span>
+												<span class="absolute right-4 top-2 h-12 w-6 rounded-r-full bg-[#8a6a2e]"></span>
+											</div>
+										)}
+									</div>
+									<h3 class="text-center text-[clamp(1.65rem,2vw,2.1rem)] font-bold leading-none">{card.title}</h3>
+									<p class="mx-auto mt-8 w-full rounded-full bg-[#e4e0d7] px-4 py-2 text-center text-[0.95rem] font-bold">{card.stage}</p>
+									<p class="mx-auto mt-7 max-w-[25rem] text-center text-[1rem] font-bold leading-[1.38] text-[#37342e]">{card.copy}</p>
+								</div>
+								<div class="mt-14 grid justify-items-center gap-5 text-center">
+									<p class="text-[0.95rem] font-bold leading-tight text-[#5f5b54]">
+										{card.priceLabel}<br />
+										<span class="text-[1.25rem] text-[#11110f]">{card.price}</span>
+									</p>
+									<a href={bookingHref} class="inline-flex h-12 w-full items-center justify-center rounded-xl bg-[#11110f] px-7 font-bold uppercase text-white no-underline transition hover:bg-[#dfff42] hover:text-[#11110f]">
+										{card.action}
+									</a>
+								</div>
+							</article>
+						))}
+					</div>
+				</div>
+			</section>
