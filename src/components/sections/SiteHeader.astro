@@ -1,17 +1,263 @@
-<header class="nav-pill fixed inset-x-0 top-0 z-50 grid h-[4.5rem] grid-cols-[1fr_auto_1fr] items-center border-b border-black/8 bg-white/95 px-5 text-[#11110f] glass sm:px-8" data-scroll-header>
-	<a href="/" class="flex h-10 items-center justify-self-start text-base font-black uppercase tracking-[-0.01em] text-[#11110f] no-underline" aria-label="actai.studio">
-		ACTAI.STUDIO
+---
+interface Props {
+	revealOnScroll?: boolean;
+	showContactLink?: boolean;
+}
+
+const { revealOnScroll = false, showContactLink = true } = Astro.props;
+---
+
+<header
+	class="nav-pill glass"
+	data-site-header
+	data-scroll-header={revealOnScroll ? "true" : undefined}
+	data-reveal-on-scroll={String(revealOnScroll)}
+	data-has-contact={String(showContactLink)}
+>
+	<a href="/" class="site-brand" aria-label="ACT home">
+		<img src="/act-logo.svg" alt="ACT" />
 	</a>
 	<nav class="site-menu" data-menu-panel data-open="false" aria-label="Main menu">
 		<div>
 			<div class="site-menu-links">
-				<a class="site-menu-link" href="#results">Results</a>
-				<a class="site-menu-link" href="#direction">About us</a>
-				<a class="site-menu-link" href="#faq">FAQ</a>
+				<a class="site-menu-link" href="/#use-cases">Use cases</a>
+				<a class="site-menu-link" href="/#offer">The method</a>
+				<a class="site-menu-link" href="/#ripple-effects">The governance</a>
+				<a class="site-menu-link" href="/#results">Results</a>
+				<a class="site-menu-link" href="/#direction">About us</a>
+				<a class="site-menu-link" href="/#faq">FAQ</a>
+				{showContactLink && <a class="site-menu-link site-menu-contact" href="/contact">Get in touch</a>}
 			</div>
 		</div>
 	</nav>
-	<button class="menu-toggle h-10 w-10 place-items-center justify-self-end rounded-lg border border-black/10 text-2xl leading-none" type="button" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
+	{showContactLink && <a class="site-contact-link" href="/contact">Get in touch</a>}
+	<button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
 		<span class="menu-icon" data-menu-icon data-open="false" aria-hidden="true"></span>
 	</button>
 </header>
+
+<style>
+	.nav-pill {
+		align-items: center;
+		background: rgba(17, 17, 15, 0.96);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+		color: white;
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
+		height: 4.5rem;
+		left: 0;
+		position: fixed;
+		right: 0;
+		top: 0;
+		z-index: 50;
+	}
+
+	.nav-pill[data-reveal-on-scroll="true"] {
+		opacity: 0;
+		transform: translateY(-100%);
+		transition: opacity 220ms ease, transform 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 320ms;
+		visibility: hidden;
+	}
+
+	:global(body[data-nav-visible="true"]) .nav-pill[data-reveal-on-scroll="true"] {
+		opacity: 1;
+		transform: translateY(0);
+		visibility: visible;
+	}
+
+	.site-brand {
+		align-items: center;
+		align-self: stretch;
+		background: #11110f;
+		display: flex;
+		justify-self: start;
+		min-width: 11rem;
+		padding: 0 2rem;
+	}
+
+	.site-brand img {
+		filter: brightness(0) invert(1);
+		width: 5.25rem;
+	}
+
+	.site-menu {
+		display: flex;
+		justify-content: center;
+	}
+
+	.site-menu-links {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+		padding: 0.45rem;
+		white-space: nowrap;
+	}
+
+	.site-menu-link {
+		border-radius: 0.5rem;
+		color: rgba(255, 255, 255, 0.66);
+		font-size: 1rem;
+		font-weight: 600;
+		padding: 0.75rem 0.9rem;
+		text-decoration: none;
+		transition: background 160ms ease, color 160ms ease;
+	}
+
+	.site-menu-link:hover,
+	.site-menu-link:focus-visible {
+		background: rgba(255, 255, 255, 0.1);
+		color: white;
+	}
+
+	.site-menu-contact { display: none; }
+
+	.site-contact-link {
+		align-items: center;
+		background: white;
+		border-radius: 0.75rem;
+		color: #11110f;
+		display: inline-flex;
+		font-weight: 700;
+		height: 3rem;
+		justify-content: center;
+		justify-self: end;
+		margin-right: 2rem;
+		padding: 0 1.25rem;
+		text-decoration: none;
+		transition: background 180ms ease;
+	}
+
+	.site-contact-link:hover,
+	.site-contact-link:focus-visible { background: #dfff42; }
+
+	.menu-toggle {
+		align-items: center;
+		background: transparent;
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		border-radius: 0.5rem;
+		color: white;
+		display: none;
+		height: 2.5rem;
+		justify-content: center;
+		justify-self: end;
+		margin-right: 1.25rem;
+		width: 2.5rem;
+	}
+
+	.menu-icon,
+	.menu-icon::before,
+	.menu-icon::after {
+		background: currentColor;
+		border-radius: 999px;
+		display: block;
+		height: 2px;
+		transition: transform 200ms ease, opacity 160ms ease;
+		width: 14px;
+	}
+
+	.menu-icon { position: relative; }
+
+	.menu-icon::before,
+	.menu-icon::after {
+		content: "";
+		left: 0;
+		position: absolute;
+	}
+
+	.menu-icon::before { top: -5px; }
+	.menu-icon::after { top: 5px; }
+	.menu-icon[data-open="true"] { background: transparent; }
+	.menu-icon[data-open="true"]::before { transform: translateY(5px) rotate(45deg); }
+	.menu-icon[data-open="true"]::after { transform: translateY(-5px) rotate(-45deg); }
+
+	@media (max-width: 1120px) {
+		.nav-pill { grid-template-columns: 1fr auto auto; }
+
+		.site-menu {
+			background: rgba(17, 17, 15, 0.99);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+			box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+			display: grid;
+			grid-column: 1 / -1;
+			grid-row: 2;
+			grid-template-rows: 0fr;
+			left: 0;
+			opacity: 0;
+			pointer-events: none;
+			position: absolute;
+			top: 100%;
+			transform: translateY(-0.5rem);
+			transition: grid-template-rows 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease, transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+			width: 100%;
+		}
+
+		.site-menu[data-open="true"] {
+			grid-template-rows: 1fr;
+			opacity: 1;
+			pointer-events: auto;
+			transform: translateY(0);
+		}
+
+		.site-menu > div { overflow: hidden; }
+
+		.site-menu-links {
+			align-items: stretch;
+			display: grid;
+			margin: 0 auto;
+			max-width: 30rem;
+			padding: 0.75rem;
+			white-space: normal;
+		}
+
+		.nav-pill > .menu-toggle {
+			display: flex;
+			grid-row: 1;
+			position: relative;
+			z-index: 2;
+		}
+	}
+
+	@media (max-width: 760px) {
+		.site-brand {
+			min-width: 9.5rem;
+			padding: 0 1.25rem;
+		}
+
+		.site-contact-link { display: none; }
+		.site-menu-contact { color: white; display: block; }
+		.nav-pill { grid-template-columns: 1fr auto; }
+		.nav-pill > .menu-toggle { grid-column: 2; grid-row: 1; }
+	}
+</style>
+
+<script>
+	document.querySelectorAll("[data-site-header]").forEach((header) => {
+		if (!(header instanceof HTMLElement) || header.dataset.initialised === "true") return;
+		header.dataset.initialised = "true";
+		const toggle = header.querySelector("[data-menu-toggle]");
+		const panel = header.querySelector("[data-menu-panel]");
+		const icon = header.querySelector("[data-menu-icon]");
+
+		const setOpen = (open: boolean) => {
+			if (!(toggle instanceof HTMLElement) || !(panel instanceof HTMLElement)) return;
+			panel.dataset.open = String(open);
+			toggle.setAttribute("aria-expanded", String(open));
+			toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+			if (icon instanceof HTMLElement) icon.dataset.open = String(open);
+		};
+
+		toggle?.addEventListener("click", () => setOpen(panel instanceof HTMLElement && panel.dataset.open !== "true"));
+		panel?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setOpen(false)));
+		document.addEventListener("click", (event) => {
+			if (!(panel instanceof HTMLElement) || panel.dataset.open !== "true") return;
+			if (event.target instanceof Node && !toggle?.contains(event.target) && !panel.contains(event.target)) setOpen(false);
+		});
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape" && panel instanceof HTMLElement && panel.dataset.open === "true") {
+				setOpen(false);
+				if (toggle instanceof HTMLElement) toggle.focus();
+			}
+		});
+	});
+</script>

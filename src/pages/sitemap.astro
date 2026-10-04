@@ -4,8 +4,8 @@ import { getCollection } from "astro:content";
 import {
 	SitemapDirectorySection,
 	SitemapFooterSection,
-	SitemapHeaderSection,
 	SitemapHeroSection,
+	SiteHeader,
 } from "../components/sections";
 
 const bookingHref = "/contact";
@@ -59,8 +59,8 @@ const groups = [
 			html, body { background: #f6f4ef; color: #11110f; }
 		</style>
 	</head>
-	<body>
-		<SitemapHeaderSection {bookingHref} />
+	<body class="pt-[4.5rem]">
+		<SiteHeader />
 		<main>
 			<SitemapHeroSection />
 			<SitemapDirectorySection {groups} />

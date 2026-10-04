@@ -275,7 +275,7 @@ const faqs = [
 
 			.site-menu-link {
 				border-radius: 0.5rem;
-				color: #5f6270;
+				color: rgba(255, 255, 255, 0.66);
 				font-size: 1rem;
 				font-weight: 600;
 				padding: 0.75rem 0.9rem;
@@ -289,8 +289,8 @@ const faqs = [
 
 			.site-menu-link:hover,
 			.site-menu-link:focus-visible {
-				background: rgba(17, 17, 15, 0.07);
-				color: #11110f;
+				background: rgba(255, 255, 255, 0.1);
+				color: #ffffff;
 			}
 
 			.menu-icon {
@@ -1102,8 +1102,8 @@ const faqs = [
 				}
 
 				.site-menu {
-					background: rgba(255, 255, 255, 0.97);
-					border-bottom: 1px solid rgba(17, 17, 15, 0.08);
+					background: rgba(17, 17, 15, 0.98);
+					border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 					box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 					display: grid;
 					grid-template-rows: 0fr;
@@ -1260,7 +1260,7 @@ const faqs = [
 		</style>
 	</head>
 	<body>
-<SiteHeader />
+<SiteHeader revealOnScroll showContactLink={false} />
 <ContactPanel />
 
 		<main class="bg-[#ebe9e4]">
@@ -1379,28 +1379,6 @@ const faqs = [
 				navScrollFrame = window.requestAnimationFrame(syncScrollHeader);
 			}, { passive: true });
 			syncScrollHeader();
-
-			menuToggle?.addEventListener("click", () => {
-				setMenuOpen(menuPanel?.dataset.open !== "true");
-			});
-
-			menuPanel?.querySelectorAll("a").forEach((link) => {
-				link.addEventListener("click", () => setMenuOpen(false));
-			});
-
-			document.addEventListener("click", (event) => {
-				if (menuPanel?.dataset.open !== "true") return;
-				if (event.target instanceof Node && !menuToggle?.contains(event.target) && !menuPanel.contains(event.target)) {
-					setMenuOpen(false);
-				}
-			});
-
-			document.addEventListener("keydown", (event) => {
-				if (event.key === "Escape" && menuPanel?.dataset.open === "true") {
-					setMenuOpen(false);
-					menuToggle?.focus();
-				}
-			});
 
 			const contactLayer = document.querySelector("[data-contact-layer]");
 			const contactPanel = document.querySelector(".contact-panel");

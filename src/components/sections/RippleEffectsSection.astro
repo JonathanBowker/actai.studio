@@ -22,7 +22,7 @@ const rings = Array.from({ length: ringCount }, (_, index) => {
 		fromRotation: `${direction * -0.22}deg`,
 		toRotation: `${direction * 0.38}deg`,
 		delay: `${index * -0.41}s`,
-		duration: `${5.8 + (index % 3) * 0.55}s`,
+		duration: `${3.9 + (index % 3) * 0.38}s`,
 	};
 });
 
@@ -34,7 +34,7 @@ const rings = Array.from({ length: ringCount }, (_, index) => {
 				<div>
 					<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-white/50">The governance</p>
 					<div class="mt-12 max-w-[19ch] text-[clamp(1.75rem,2.7vw,3rem)] font-bold leading-[1]">
-						<h2>The process never changes in isolation.</h2>
+						<h2>The layers never change in isolation.</h2>
 						<p class="mt-8 text-white/68">Change one layer, and all the other layers change too.</p>
 						<p class="mt-8 text-white/44">Make a change. The agent orchestrates what happens next.</p>
 					</div>
@@ -61,9 +61,11 @@ const rings = Array.from({ length: ringCount }, (_, index) => {
 					<span>Finding / effect</span>
 				</div>
 				<figcaption class="absolute bottom-0 left-0 max-w-[28rem] p-5 text-white sm:p-7">
-					<p class="text-xs font-bold uppercase text-[#dfff42]">The ripple</p>
-					<p class="mt-3 text-[clamp(1.5rem,3vw,2.6rem)] font-bold leading-[0.98] [text-wrap:balance]">
-						Find the change. Trace what it changes next.
+					<p class="text-xs font-bold uppercase text-[#dfff42]">The governance</p>
+					<p class="mt-3 text-[clamp(1.35rem,2.65vw,2.4rem)] font-bold leading-[0.98]">
+						<span class="block whitespace-nowrap">The agent manages</span>
+						<span class="block whitespace-nowrap">governance with</span>
+						<span class="block whitespace-nowrap">ripple effect technology.</span>
 					</p>
 					</figcaption>
 				</figure>

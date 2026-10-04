@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { ContactFormSection, ContactIntroSection, ContactPageHeader, SitemapFooterSection } from "../components/sections";
+import { ContactFormSection, ContactIntroSection, SiteHeader, SitemapFooterSection } from "../components/sections";
 
 const emailHref = "mailto:hello@actai.studio?subject=Act.%20AI%20contact";
 const bookingHref = "/contact";
@@ -23,8 +23,8 @@ const bookingHref = "/contact";
 			}
 		</style>
 	</head>
-	<body>
-		<ContactPageHeader {bookingHref} />
+	<body class="pt-[4.5rem]">
+		<SiteHeader />
 
 		<main>
 			<ContactIntroSection />

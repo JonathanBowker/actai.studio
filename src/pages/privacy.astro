@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { PrivacyContentSection } from "../components/sections";
+import { PrivacyContentSection, SiteHeader } from "../components/sections";
 ---
 
 <html lang="en">
@@ -12,7 +12,8 @@ import { PrivacyContentSection } from "../components/sections";
 		<meta name="description" content="Actai.Studio privacy notice." />
 		<title>Privacy Notice | Actai.Studio</title>
 	</head>
-	<body class="bg-[#ebe9e4] text-[#11110f]">
+	<body class="bg-[#ebe9e4] pt-[4.5rem] text-[#11110f]">
+		<SiteHeader />
 		<main class="mx-auto grid min-h-screen max-w-[58rem] content-center gap-8 px-4 py-20 sm:px-8">
 			<PrivacyContentSection />
 		</main>

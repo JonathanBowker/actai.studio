@@ -1,6 +1,6 @@
 ---
 import "../../styles/global.css";
-import { AgentCascadeSection, AgentDiagnosisSection, AgentHeroSection, AgentPackSection, AgentPageNav } from "../../components/sections";
+import { AgentCascadeSection, AgentDiagnosisSection, AgentHeroSection, AgentPackSection, SiteHeader } from "../../components/sections";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
@@ -166,8 +166,8 @@ const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index 
 		</style>
 	</head>
 	<body>
+		<SiteHeader />
 		<main class="agent-page">
-			<AgentPageNav {bookingHref} />
 
 			<AgentHeroSection {agent} {heroImage} />
 
