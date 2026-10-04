@@ -20,12 +20,13 @@ const { revealOnScroll = false, showContactLink = true } = Astro.props;
 	<nav class="site-menu" data-menu-panel data-open="false" aria-label="Main menu">
 		<div>
 			<div class="site-menu-links">
-				<a class="site-menu-link" href="/#use-cases">Use cases</a>
-				<a class="site-menu-link" href="/#offer">The method</a>
+				<a class="site-menu-link" href="/#possibility">The possibility</a>
+				<a class="site-menu-link" href="/#method">The method</a>
+				<a class="site-menu-link" href="/#process">The process</a>
+				<a class="site-menu-link" href="/#practice">The practice</a>
 				<a class="site-menu-link" href="/#ripple-effects">The governance</a>
-				<a class="site-menu-link" href="/#results">Results</a>
-				<a class="site-menu-link" href="/#direction">About us</a>
-				<a class="site-menu-link" href="/#faq">FAQ</a>
+				<a class="site-menu-link" href="/#direction">The direction</a>
+				<a class="site-menu-link" href="/#results">The proof</a>
 				{showContactLink && <a class="site-menu-link site-menu-contact" href="/contact">BEGIN THE CONVERSATION</a>}
 			</div>
 		</div>
@@ -171,7 +172,7 @@ const { revealOnScroll = false, showContactLink = true } = Astro.props;
 	.menu-icon[data-open="true"]::before { transform: translateY(5px) rotate(45deg); }
 	.menu-icon[data-open="true"]::after { transform: translateY(-5px) rotate(-45deg); }
 
-	@media (max-width: 1120px) {
+	@media (max-width: 1480px) {
 		.nav-pill { grid-template-columns: 1fr auto auto; }
 
 		.site-menu {
