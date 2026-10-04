@@ -1,4 +1,5 @@
 export { default as SiteHeader } from "./SiteHeader.astro";
+export { default as ScrollToneController } from "./ScrollToneController.astro";
 export { default as ContactPanel } from "./ContactPanel.astro";
 export { default as HeroSection } from "./HeroSection.astro";
 export { default as LeadershipIntroSection } from "./LeadershipIntroSection.astro";

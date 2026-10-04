@@ -28,15 +28,15 @@ const rings = Array.from({ length: ringCount }, (_, index) => {
 
 ---
 
-	<section id="ripple-effects" class="bg-[#11110f] px-4 py-24 text-white sm:px-8 lg:px-10 lg:py-36" data-ripple-section>
+	<section id="ripple-effects" class="bg-[#11110f] px-4 py-24 text-white sm:px-8 lg:px-10 lg:py-36" data-ripple-section data-scroll-tone-section>
 		<div class="mx-auto max-w-[96rem]">
 			<div class="reveal grid gap-14 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-14">
 				<div>
 					<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-white/50">The governance</p>
-					<div class="mt-12 max-w-[19ch] text-[clamp(1.75rem,2.7vw,3rem)] font-bold leading-[1]">
-						<h2>It starts narrow, resolving one decision at a time.</h2>
-						<p class="mt-8 text-white/68">It builds the frontier outward, never past what it can see.</p>
-						<p class="mt-8 text-white/44">Every answer ripples back, keeping the frontier current and governed.</p>
+					<div class="mt-12 max-w-[19ch] text-[clamp(1.75rem,2.7vw,3rem)] font-bold leading-[1]" data-governance-copy>
+						<h2 data-scroll-tone-line>It starts narrow, resolving one decision at a time.</h2>
+						<p class="mt-8" data-scroll-tone-line>It builds the frontier outward, never past what’s been decided.</p>
+						<p class="mt-8" data-scroll-tone-line>Every answer ripples back, keeping the frontier current and governed.</p>
 					</div>
 				</div>
 

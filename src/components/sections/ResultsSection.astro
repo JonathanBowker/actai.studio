@@ -2,11 +2,11 @@
 interface Props { resultStats: any[]; bookingHref: string }
 const { resultStats, bookingHref } = Astro.props;
 ---
-<section id="results" class="stack-panel bg-[#f6f4ef] px-4 pb-36 pt-28 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48 lg:pt-36">
+<section id="results" class="stack-panel bg-[#f6f4ef] px-4 pb-36 pt-28 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48 lg:pt-36" data-scroll-tone-section data-scroll-tone-theme="ink">
 				<div class="mx-auto grid max-w-[96rem] gap-14 lg:grid-cols-[0.42fr_1fr] lg:gap-20">
 					<div class="reveal">
 						<p class="mb-6 w-fit rounded-lg bg-black/5 px-4 py-3 text-[1rem] font-bold text-[#77736a]">The proof</p>
-						<h2 class="max-w-[12ch] text-[clamp(2.25rem,3.6vw,4rem)] font-bold leading-[0.98]">
+						<h2 class="max-w-[12ch] text-[clamp(2.25rem,3.6vw,4rem)] font-bold leading-[0.98]" data-scroll-tone-line>
 							Proven results
 						</h2>
 					</div>
@@ -22,13 +22,14 @@ const { resultStats, bookingHref } = Astro.props;
 										data-result-prefix={stat.prefix}
 										data-result-suffix={stat.suffix}
 										aria-label={stat.value}
+										data-scroll-tone-line
 									>
 										{stat.value}
 									</p>
 									<span class="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-[#dfff42] text-[2rem] font-bold leading-none text-[#11110f]" aria-hidden="true">↑</span>
 								</div>
 								<div class="h-px w-full bg-[#11110f]"></div>
-								<p class="max-w-[27rem] text-[clamp(1.02rem,1.25vw,1.22rem)] font-bold leading-[1.28] text-[#292723]">
+								<p class="max-w-[27rem] text-[clamp(1.02rem,1.25vw,1.22rem)] font-bold leading-[1.28]" data-scroll-tone-line>
 									{stat.label}
 								</p>
 							</article>

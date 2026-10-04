@@ -1,0 +1,58 @@
+<style is:global>
+	[data-scroll-tone-line] {
+		color: #fff;
+		opacity: var(--scroll-tone-opacity, 0.28);
+		transition: opacity 120ms linear;
+		will-change: opacity;
+	}
+
+	[data-scroll-tone-section][data-scroll-tone-theme="ink"] [data-scroll-tone-line] {
+		color: #11110f;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		[data-scroll-tone-line] {
+			opacity: 1;
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	const toneSections = [...document.querySelectorAll("[data-scroll-tone-section]")];
+	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+	let toneFrame = 0;
+
+	const syncScrollTones = () => {
+		toneFrame = 0;
+		toneSections.forEach((section) => {
+			const bounds = section.getBoundingClientRect();
+			const lines = [...section.querySelectorAll("[data-scroll-tone-line]")];
+			const steps = lines.map((line, index) => {
+				if (!(line instanceof HTMLElement)) return index;
+				const explicitStep = Number(line.dataset.scrollToneStep);
+				return Number.isFinite(explicitStep) ? explicitStep : index;
+			});
+			const finalStep = Math.max(0, ...steps);
+			const travel = bounds.height + window.innerHeight * 0.6;
+			const progress = Math.max(0, Math.min(1, (window.innerHeight * 0.85 - bounds.top) / travel));
+			const stagger = finalStep > 0 ? 0.56 / finalStep : 0;
+			const duration = lines.length > 4 ? 0.2 : 0.28;
+
+			lines.forEach((line, index) => {
+				if (!(line instanceof HTMLElement)) return;
+				const lineProgress = Math.max(0, Math.min(1, (progress - (0.04 + steps[index] * stagger)) / duration));
+				line.style.setProperty("--scroll-tone-opacity", String(0.28 + lineProgress * 0.72));
+			});
+		});
+	};
+
+	if (!reducedMotion.matches && toneSections.length) {
+		window.addEventListener("scroll", () => {
+			if (toneFrame) return;
+			toneFrame = window.requestAnimationFrame(syncScrollTones);
+		}, { passive: true });
+		window.addEventListener("resize", syncScrollTones, { passive: true });
+		syncScrollTones();
+	}
+</script>
