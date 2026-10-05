@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 }
 
 const { agent } = Astro.props;
-const bookingHref = "/contact";
+const bookingHref = "/meeting";
 const packBase = `/packs/${agent.id}`;
 const zipHref = `${packBase}/${agent.id}-triage-pack.zip`;
 const heroArt = [

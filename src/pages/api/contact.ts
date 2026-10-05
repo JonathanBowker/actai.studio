@@ -7,7 +7,7 @@ export const prerender = false;
 const CONTACT_EMAIL = "hello@actai.studio";
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
-const ALLOWED_STARTING_POINTS = new Set(["AI direction", "Agent diagnostic", "Agent delivery", "Not sure yet"]);
+const ALLOWED_STARTING_POINTS = new Set(["Agent in the Room", "AI direction", "Agent diagnostic", "Agent delivery", "Not sure yet", "Something else"]);
 const rateLimitSalt = randomBytes(32);
 const requestCounts = new Map<string, { count: number; resetAt: number }>();
 let rateLimitChecks = 0;
@@ -126,7 +126,7 @@ export const POST = (async ({ request }) => {
 		`Job title: ${submission.role}`,
 		`Company: ${submission.company}`,
 		`Work email: ${submission.email}`,
-		`Starting point: ${submission.startingPoint}`,
+		`Enquiry type: ${submission.startingPoint}`,
 		"",
 		"Details:",
 		submission.details,
