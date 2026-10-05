@@ -34,9 +34,12 @@
 				return Number.isFinite(explicitStep) ? explicitStep : index;
 			});
 			const finalStep = Math.max(0, ...steps);
+			const spreadAttribute = section.getAttribute("data-scroll-tone-spread");
+			const configuredSpread = spreadAttribute === null ? Number.NaN : Number(spreadAttribute);
+			const revealSpread = Number.isFinite(configuredSpread) && configuredSpread >= 0 ? configuredSpread : 0.56;
 			const travel = bounds.height + window.innerHeight * 0.6;
 			const progress = Math.max(0, Math.min(1, (window.innerHeight * 0.85 - bounds.top) / travel));
-			const stagger = finalStep > 0 ? 0.56 / finalStep : 0;
+			const stagger = finalStep > 0 ? revealSpread / finalStep : 0;
 			const duration = lines.length > 4 ? 0.2 : 0.28;
 
 			lines.forEach((line, index) => {
