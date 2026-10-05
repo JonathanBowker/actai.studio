@@ -3,22 +3,13 @@ interface Props {
 	path?: string;
 }
 
+import { isReviewStaging } from "../lib/siteEnvironment";
+
 const productionOrigin = "https://actai.studio";
 const rawPath = Astro.props.path ?? Astro.url.pathname;
 const canonicalPath = rawPath.startsWith("/") ? rawPath : `/${rawPath}`;
 const canonicalUrl = new URL(canonicalPath, productionOrigin).toString();
-const configuredUrl = import.meta.env.PUBLIC_SITE_URL ?? import.meta.env.SITE ?? "";
-let configuredHost = "";
-
-try {
-	configuredHost = configuredUrl ? new URL(configuredUrl).hostname : "";
-} catch {
-	configuredHost = "";
-}
-
-const isStagingBuild =
-	import.meta.env.PUBLIC_SITE_ENV === "staging" ||
-	configuredHost.endsWith("ondigitalocean.app");
+const isStagingBuild = isReviewStaging(Astro.url);
 ---
 
 <link rel="canonical" href={canonicalUrl} />

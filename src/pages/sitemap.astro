@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import SeoGuard from "../components/SeoGuard.astro";
+import { isReviewStaging } from "../lib/siteEnvironment";
 import { getCollection } from "astro:content";
 import {
 	SitemapDirectorySection,
@@ -10,7 +11,7 @@ import {
 } from "../components/sections";
 
 const bookingHref = "/contact";
-const showReviewPlaceholders = import.meta.env.PUBLIC_SITE_ENV === "staging";
+const showReviewPlaceholders = isReviewStaging(Astro.url);
 const agents = (await getCollection("agents")).sort((a, b) => a.data.name.localeCompare(b.data.name, "en-GB"));
 const groups = [
 	{
@@ -68,6 +69,6 @@ const groups = [
 			<SitemapHeroSection />
 			<SitemapDirectorySection {groups} />
 		</main>
-		<SitemapFooterSection {bookingHref} {showReviewPlaceholders} />
+		<SitemapFooterSection {bookingHref} />
 	</body>
 </html>

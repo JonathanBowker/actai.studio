@@ -2,17 +2,11 @@
 import "../../styles/global.css";
 import SeoGuard from "../../components/SeoGuard.astro";
 import { AgentCascadeSection, AgentDiagnosisSection, AgentHeroSection, AgentPackSection, SiteHeader } from "../../components/sections";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getEntry } from "astro:content";
 
-export async function getStaticPaths() {
-	const agents = await getCollection("agents");
-	return agents.map((agent) => ({ params: { slug: agent.id }, props: { agent } }));
-}
-
-type Props = { agent: CollectionEntry<"agents"> };
-const { agent } = Astro.props;
+const agent = Astro.params.slug ? await getEntry("agents", Astro.params.slug) : undefined;
+if (!agent) return Astro.redirect("/sitemap");
 const bookingHref = "/contact";
-const showReviewPlaceholders = import.meta.env.PUBLIC_SITE_ENV === "staging";
 const packBase = `/packs/${agent.id}`;
 const zipHref = `${packBase}/${agent.id}-triage-pack.zip`;
 const heroArt = [
@@ -178,7 +172,7 @@ const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index 
 
 			<AgentDiagnosisSection {agent} />
 
-			<AgentPackSection {agent} {zipHref} {packBase} {bookingHref} {showReviewPlaceholders} />
+			<AgentPackSection {agent} {zipHref} {packBase} {bookingHref} />
 		</main>
 
 		<script>

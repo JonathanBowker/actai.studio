@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import SeoGuard from "../components/SeoGuard.astro";
+import { isReviewStaging } from "../lib/siteEnvironment";
 import {
 	SiteHeader,
 	ScrollToneController,
@@ -18,7 +19,7 @@ import {
 } from "../components/sections";
 
 const bookingHref = "/contact";
-const showReviewPlaceholders = import.meta.env.PUBLIC_SITE_ENV === "staging";
+const showReviewPlaceholders = isReviewStaging(Astro.url);
 
 const useCaseImages = Array.from(
 	{ length: 6 },
@@ -1266,7 +1267,7 @@ const faqs = [
 			{showReviewPlaceholders && <ResultsSection {resultStats} {bookingHref} />}
 			<CallToActionSection {bookingHref} />
 			<FaqSection {faqs} />
-			<FooterSection {bookingHref} {showReviewPlaceholders} />
+			<FooterSection {bookingHref} />
 		</main>
 
 		<script>

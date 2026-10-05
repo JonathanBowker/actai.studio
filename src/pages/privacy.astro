@@ -3,7 +3,6 @@ import "../styles/global.css";
 import SeoGuard from "../components/SeoGuard.astro";
 import { PrivacyContentSection, SiteHeader, SitemapFooterSection } from "../components/sections";
 const bookingHref = "/contact";
-const showReviewPlaceholders = import.meta.env.PUBLIC_SITE_ENV === "staging";
 ---
 
 <html lang="en">
@@ -21,6 +20,6 @@ const showReviewPlaceholders = import.meta.env.PUBLIC_SITE_ENV === "staging";
 		<main class="mx-auto grid min-h-screen max-w-[58rem] content-center gap-8 px-4 py-20 sm:px-8">
 			<PrivacyContentSection />
 		</main>
-		<SitemapFooterSection {bookingHref} {showReviewPlaceholders} />
+		<SitemapFooterSection {bookingHref} />
 	</body>
 </html>

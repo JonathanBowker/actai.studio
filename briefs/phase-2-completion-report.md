@@ -17,7 +17,7 @@ The integrated review branch is `review/phase-2-integration`. The staging app is
 | T1-T5 | Complete | Canonicals, staging noindex, page metadata, privacy disclosures, naming and carousel accessibility are in place. |
 | T6 | Complete | Lighthouse was rerun against staging and the production build. Results are below. |
 | T7 | Reported | Event plumbing exists, but no analytics provider or analytics script is installed. |
-| T8 | Part complete | Staging shows legal placeholders. Production hides them. The company number, registered office and place of registration are still required. |
+| T8 | Closed by decision | Company number, registered office and place-of-registration lines were removed from every footer. |
 
 ## Contact delivery test
 
@@ -72,11 +72,9 @@ Amazon SES reports production access enabled, sending enabled, DKIM successful a
 
 ## Domain
 
-DigitalOcean now treats `actai.studio` as the app's primary domain. Route 53 change `C08916871699DMDYPSE1Y` is live with the DigitalOcean App Platform A and AAAA records. DNS resolves correctly. HTTPS certificate issuance was still pending at the end of this run, so the DigitalOcean staging hostname remains the verified test URL until TLS becomes active.
+DigitalOcean now treats `actai.studio` as the app's primary domain. Route 53 change `C08916871699DMDYPSE1Y` is live with the DigitalOcean App Platform A and AAAA records. DNS resolves correctly and the managed HTTPS certificate is active. The Node server selects production or staging behaviour from the request hostname, so `actai.studio` hides review placeholders and permits indexing while the DigitalOcean hostname shows placeholders and emits `noindex,nofollow`.
 
 ## Remaining inputs
 
 - Confirm the final C6 sectors.
-- Supply the registered company number, registered office and place of registration for T8.
 - Supply sources, a client quote and a case study before C4 can appear in production.
-- Confirm the pending DigitalOcean certificate has become active before treating `https://actai.studio` as ready.

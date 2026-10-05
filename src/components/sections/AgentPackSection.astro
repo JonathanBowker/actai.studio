@@ -1,6 +1,6 @@
 ---
-interface Props { agent: any; zipHref: string; packBase: string; bookingHref: string; showReviewPlaceholders?: boolean }
-const { agent, zipHref, packBase, bookingHref, showReviewPlaceholders = false } = Astro.props;
+interface Props { agent: any; zipHref: string; packBase: string; bookingHref: string }
+const { agent, zipHref, packBase, bookingHref } = Astro.props;
 ---
 <section id="pack" class="pack stack-panel">
 	<div class="pack__inner">
@@ -46,9 +46,6 @@ const { agent, zipHref, packBase, bookingHref, showReviewPlaceholders = false } 
 		<footer class="agent-footer">
 			<div>
 				<p>© 2026 Advanced Analytica Limited. All Rights Reserved.</p>
-				{showReviewPlaceholders && <p>Company number: [company number needed]</p>}
-				{showReviewPlaceholders && <p>Registered office: [registered office needed]</p>}
-				{showReviewPlaceholders && <p>Registered in: [place of registration needed]</p>}
 			</div>
 			<a class="agent-nav__link agent-nav__link--primary" href={bookingHref}>REQUEST A 30-MINUTE CALL</a>
 		</footer>

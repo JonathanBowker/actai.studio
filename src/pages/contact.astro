@@ -4,7 +4,6 @@ import SeoGuard from "../components/SeoGuard.astro";
 import { ContactFormSection, ContactIntroSection, SiteHeader, SitemapFooterSection } from "../components/sections";
 
 const bookingHref = "/contact";
-const showReviewPlaceholders = import.meta.env.PUBLIC_SITE_ENV === "staging";
 ---
 
 <html lang="en">
@@ -32,6 +31,6 @@ const showReviewPlaceholders = import.meta.env.PUBLIC_SITE_ENV === "staging";
 			<ContactIntroSection />
 			<ContactFormSection />
 		</main>
-		<SitemapFooterSection {bookingHref} {showReviewPlaceholders} />
+		<SitemapFooterSection {bookingHref} />
 	</body>
 </html>
