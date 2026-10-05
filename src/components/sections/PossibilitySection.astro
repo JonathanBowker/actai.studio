@@ -23,8 +23,8 @@ interface Props { bookingHref: string }
 const { bookingHref } = Astro.props;
 ---
 
-<section id="agent-in-the-room" class="stack-panel relative bg-[#262722] px-4 pb-40 pt-24 text-white sm:px-8 lg:px-10 lg:pb-56" data-scroll-tone-section data-scroll-tone-spread="0.18">
-	<span id="method" class="pointer-events-none absolute left-0 top-0" aria-hidden="true"></span>
+<section id="agent-in-the-room" class="agent-in-room-target stack-panel relative bg-[#262722] px-4 pb-40 pt-24 text-white sm:px-8 lg:px-10 lg:pb-56" data-scroll-tone-section data-scroll-tone-spread="0.18">
+	<span id="method" class="agent-in-room-target pointer-events-none absolute left-0 top-0" aria-hidden="true"></span>
 	<div class="reveal mx-auto grid max-w-[96rem] gap-14">
 		<div class="grid gap-8 lg:grid-cols-[0.42fr_1fr] lg:items-start lg:gap-14">
 			<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-[0.9rem] font-bold text-white/65">AGENT IN THE ROOM™</p>
@@ -37,32 +37,32 @@ const { bookingHref } = Astro.props;
 		</div>
 
 		<ol class="grid border-t border-white/20 md:grid-cols-2">
-			<li class="grid min-h-[18rem] content-between gap-10 border-b border-white/20 py-8 md:border-r md:px-8 md:first:pl-0">
+			<li class="grid min-h-[18rem] content-start gap-10 border-b border-white/20 py-8 md:border-r md:pl-0 md:pr-8">
 				<span class="text-sm font-bold text-[#dfff42]">01</span>
 				<div>
 					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The call.</h3>
-					<p class="mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">Thirty minutes, recorded. We steer the conversation until we've got a clear brief, not just notes.</p>
+					<p class="agent-step-copy mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">Thirty minutes, recorded. We steer the conversation until we land on the real problem, not just notes.</p>
 				</div>
 			</li>
-			<li class="grid min-h-[18rem] content-between gap-10 border-b border-white/20 py-8 md:px-8 md:last:pr-0">
+			<li class="grid min-h-[18rem] content-start gap-10 border-b border-white/20 py-8 md:pl-8 md:pr-0">
 				<span class="text-sm font-bold text-[#dfff42]">02</span>
 				<div>
 					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The preparation.</h3>
-					<p class="mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">If you want to go ahead, we programme and prepare the agent on your brief.</p>
+					<p class="agent-step-copy mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">If you choose to go ahead, we programme and prepare the agent on your brief, ready for the workshop.</p>
 				</div>
 			</li>
-			<li class="grid min-h-[22rem] content-between gap-10 border-b border-white/20 py-8 md:border-r md:px-8 md:first:pl-0">
+			<li class="grid min-h-[22rem] content-start gap-10 border-b border-white/20 py-8 md:border-r md:pl-0 md:pr-8">
 				<span class="text-sm font-bold text-[#dfff42]">03</span>
 				<div>
 					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The workshop.</h3>
-					<p class="mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">Face to face, wherever suits the conversation. One or two of our experts join your people, with the agent we've prepared. It questions the room one question at a time. You answer. We steer. AI-led, expert-driven.</p>
+					<p class="agent-step-copy mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">Face to face, wherever suits the conversation. One or two of our experts join your people, with the agent we've prepared. It questions the room one question at a time. You answer. We steer. AI-led, expert-driven.</p>
 				</div>
 			</li>
-			<li class="grid min-h-[22rem] content-between gap-10 border-b border-white/20 py-8 md:px-8 md:last:pr-0">
+			<li class="grid min-h-[22rem] content-start gap-10 border-b border-white/20 py-8 md:pl-8 md:pr-0">
 				<span class="text-sm font-bold text-[#dfff42]">04</span>
 				<div>
 					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The build.</h3>
-					<p class="mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">What we agree goes to our labs, where we build it.</p>
+					<p class="agent-step-copy mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">What we agree goes to our labs, where we build it.</p>
 				</div>
 			</li>
 		</ol>
@@ -112,6 +112,15 @@ const { bookingHref } = Astro.props;
 </section>
 
 <style>
+	.agent-in-room-target {
+		scroll-margin-top: 4.5rem;
+	}
+
+	.agent-step-copy {
+		text-wrap: balance;
+		text-wrap: pretty;
+	}
+
 	.design-tree-shell::before,
 	.design-tree-shell::after {
 		content: "";
