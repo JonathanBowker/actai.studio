@@ -227,109 +227,6 @@ const faqs = [
 				-webkit-backdrop-filter: blur(22px) saturate(1.1);
 			}
 
-			.nav-pill {
-				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-				opacity: 0;
-				transform: translateY(-100%);
-				transition: opacity 220ms ease, transform 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 320ms;
-				visibility: hidden;
-			}
-
-			.contact-trigger[data-scroll-contact] {
-				opacity: 0;
-				transform: translateY(-1rem);
-				transition: background 180ms ease, color 180ms ease, opacity 220ms ease, transform 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 320ms;
-				visibility: hidden;
-			}
-
-			body[data-nav-visible="true"] .nav-pill,
-			body[data-nav-visible="true"] .contact-trigger[data-scroll-contact] {
-				opacity: 1;
-				transform: translateY(0);
-				visibility: visible;
-			}
-
-			.site-menu {
-				display: flex;
-				justify-content: center;
-			}
-
-			.site-menu[data-open="true"] {
-				display: flex;
-			}
-
-			.site-menu-links {
-				align-items: center;
-				display: flex;
-				justify-content: center;
-				padding: 0.45rem;
-				white-space: nowrap;
-			}
-
-			.site-menu-link {
-				border-radius: 0.5rem;
-				color: rgba(255, 255, 255, 0.66);
-				font-size: 1rem;
-				font-weight: 600;
-				padding: 0.75rem 0.9rem;
-				text-decoration: none;
-				transition: background 160ms ease, color 160ms ease;
-			}
-
-			.menu-toggle {
-				display: none;
-			}
-
-			.site-menu-link:hover,
-			.site-menu-link:focus-visible {
-				background: rgba(255, 255, 255, 0.1);
-				color: #ffffff;
-			}
-
-			.menu-icon {
-				position: relative;
-			}
-
-			.menu-icon,
-			.menu-icon::before,
-			.menu-icon::after {
-				background: currentColor;
-				border-radius: 999px;
-				display: block;
-				height: 2px;
-				transition:
-					transform 200ms ease,
-					opacity 160ms ease;
-				width: 14px;
-			}
-
-			.menu-icon::before,
-			.menu-icon::after {
-				content: "";
-				left: 0;
-				position: absolute;
-			}
-
-			.menu-icon::before {
-				top: -5px;
-			}
-
-			.menu-icon::after {
-				top: 5px;
-			}
-
-			.menu-icon[data-open="true"] {
-				background: transparent;
-			}
-
-			.menu-icon[data-open="true"]::before {
-				transform: translateY(5px) rotate(45deg);
-			}
-
-			.menu-icon[data-open="true"]::after {
-				transform: translateY(-5px) rotate(-45deg);
-			}
-
 			body[data-contact-open="true"] {
 				overflow: hidden;
 			}
@@ -1089,73 +986,7 @@ const faqs = [
 				transform: translateY(0.08em) rotate(1.5deg);
 			}
 
-			@media (max-width: 1050px) {
-				.nav-pill {
-					grid-template-columns: 1fr auto;
-				}
-
-				.site-menu {
-					background: rgba(17, 17, 15, 0.98);
-					border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-					box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-					display: grid;
-					grid-template-rows: 0fr;
-					grid-column: 1 / -1;
-					grid-row: 2;
-					left: 0;
-					opacity: 0;
-					pointer-events: none;
-					position: absolute;
-					top: 100%;
-					transform: translateY(-0.5rem);
-					transition:
-						grid-template-rows 260ms cubic-bezier(0.16, 1, 0.3, 1),
-						opacity 220ms ease,
-						transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
-					width: 100%;
-				}
-
-				.site-menu[data-open="true"] {
-					display: grid;
-					grid-template-rows: 1fr;
-					opacity: 1;
-					pointer-events: auto;
-					transform: translateY(0);
-				}
-
-				.site-menu > div {
-					overflow: hidden;
-				}
-
-				.site-menu-links {
-					align-items: stretch;
-					display: grid;
-					margin: 0 auto;
-					max-width: 30rem;
-					padding: 0.75rem;
-					white-space: normal;
-				}
-
-				.menu-toggle {
-					display: grid;
-					grid-column: 2;
-					grid-row: 1;
-					margin-right: 10rem;
-				}
-			}
-
 			@media (max-width: 760px) {
-				.contact-trigger[data-scroll-contact] {
-					opacity: 1;
-					transform: none;
-					visibility: visible;
-				}
-
-				.menu-toggle {
-					margin-right: 0;
-				}
-
-
 				.triage-vertical-grid {
 					display: none;
 				}
@@ -1253,8 +1084,8 @@ const faqs = [
 			}
 		</style>
 	</head>
-	<body>
-<SiteHeader revealOnScroll showContactLink={false} />
+	<body class="pt-[4.5rem]">
+<SiteHeader />
 <ScrollToneController />
 
 		<main class="bg-[#ebe9e4]">
@@ -1297,31 +1128,6 @@ const faqs = [
 			}, { threshold: 0.12 });
 
 			revealItems.forEach((item) => observer.observe(item));
-
-			const menuToggle = document.querySelector("[data-menu-toggle]");
-			const menuPanel = document.querySelector("[data-menu-panel]");
-			const menuIcon = document.querySelector("[data-menu-icon]");
-			const setMenuOpen = (open) => {
-				if (!menuToggle || !menuPanel) return;
-				menuPanel.dataset.open = String(open);
-				menuToggle.setAttribute("aria-expanded", String(open));
-				menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-				if (menuIcon) menuIcon.dataset.open = String(open);
-			};
-
-			let navScrollFrame;
-			const syncScrollHeader = () => {
-				navScrollFrame = undefined;
-				const visible = window.scrollY > 40;
-				document.body.dataset.navVisible = String(visible);
-				if (!visible) setMenuOpen(false);
-			};
-
-			window.addEventListener("scroll", () => {
-				if (navScrollFrame) return;
-				navScrollFrame = window.requestAnimationFrame(syncScrollHeader);
-			}, { passive: true });
-			syncScrollHeader();
 
 			const caseCards = [...document.querySelectorAll("[data-case-card]")];
 			const caseRevealButton = document.querySelector("[data-case-reveal]");
@@ -1376,13 +1182,6 @@ const faqs = [
 			});
 
 			updateCaseCards();
-
-			window.addEventListener("keydown", (event) => {
-				if (event.key === "Escape") {
-					setMenuOpen(false);
-					if (contactLayer?.dataset.open === "true") requestContactClose();
-				}
-			});
 
 			const featureNavItems = [...document.querySelectorAll("[data-feature-nav]")];
 			const featureCards = [...document.querySelectorAll("[data-feature-card]")];
