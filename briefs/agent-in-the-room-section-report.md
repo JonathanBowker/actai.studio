@@ -6,118 +6,123 @@ Date: 5 October 2026
 
 ### Diff summary
 
-- Kept the hero headline, subline and one primary call button.
-- Kept `See Agent in the Room` below the button and linked it to `#agent-in-the-room`.
-- Retained the 55% black hero scrim. Lighthouse reports 100 accessibility and passes the contrast audit.
-- Replaced the Method introduction with the locked heading, lead and four ordered steps.
-- Added `#method` as an alias at the same section position.
-- Kept the existing carousel captions unchanged and changed its visible caption to `Inside the session`.
-- Kept the closing line and call button.
-- Updated the main navigation, footer and sitemap to use Agent in the Room and the new anchor.
+- Kept the hero headline, subline, single call button and `See Agent in the Room` link.
+- Kept the link target as `#agent-in-the-room` and the legacy `#method` alias.
+- Retained the 55% black hero scrim, which passes the Lighthouse contrast audit.
+- Updated the four-step section to the locked call, preparation, workshop and build process.
+- Removed the video call option from the section and renamed its visible caption `Inside the workshop`.
+- Updated the sitemap summary to use the same four-step terminology.
+- Left the eight carousel captions unchanged pending P1 approval.
 
 ### Files touched
 
-- `src/components/sections/HeroSection.astro`
 - `src/components/sections/PossibilitySection.astro`
-- `src/components/sections/SiteHeader.astro`
-- `src/components/sections/FooterSection.astro`
 - `src/pages/sitemap.astro`
+- `briefs/agent-in-the-room-section-report.md`
 
 ### Conflicts found
 
-The instruction to keep Astro fully static conflicts with the approved SES form and hostname-based production safeguards. The contact endpoint needs Node, while the shared DigitalOcean deployment needs request-host detection to separate production from staging. I kept Astro and added no dependencies, but did not remove the Node runtime.
+The instruction to keep Astro static conflicts with the approved SES contact form. Its server endpoint requires the existing Node adapter. I kept the approved Node deployment and added no dependencies.
 
-The unchanged carousel still contains old internal-flow language, including `interrogates the technical problem`. Jonny's current bio still says `live design tree methodology`. Both conflict with the new hard rules, but P1 and P4 explicitly say not to edit before approval.
+The unchanged carousel contains `interrogates the technical problem`, and Jonny's bio says `live design tree methodology`. Both breach the hard rules, but P1 and P4 say to propose before editing.
+
+The FAQ still defines Agent in the Room as a `session`. This conflicts with the locked public term `workshop`, but P2 says to propose before editing.
+
+No workshop-related video call option appears elsewhere. Two references to video calls occur in the Meeting Intelligence diagnostic. They describe the client's ordinary meetings, not Agent in the Room, so they should remain.
 
 ## P1 carousel captions
 
 ### Option A: direct sequence
 
-1. We bring the agreed brief into the room.
-2. The agent asks one clear question.
-3. Your people answer from experience.
-4. Our experts keep the session focused.
-5. The agent asks the next question.
-6. The room adds the context that matters.
+1. We bring the agreed brief into the workshop.
+2. Your people and our experts gather in the room.
+3. The prepared agent joins the conversation.
+4. The agent asks one clear question.
+5. Your people answer from experience.
+6. Our experts keep the workshop focused.
 7. We agree what should happen next.
 8. The agreed direction moves to the build.
 
 ### Option B: client perspective
 
 1. Everyone starts from the same brief.
-2. The first question opens the conversation.
-3. Your people bring the business context.
-4. We keep each answer tied to the problem.
-5. The room works through one question at a time.
-6. Different perspectives make the direction clearer.
+2. We meet face to face for the workshop.
+3. The prepared agent joins your people.
+4. One clear question opens the conversation.
+5. Your people bring the business context.
+6. We keep each answer tied to the problem.
 7. We agree the direction together.
 8. Our labs take forward what the room agrees.
 
-Recommendation: Option A. It follows the locked process without exposing internal mechanics.
+Recommendation: Option A. It follows the public process in a direct sequence.
 
 ## P2 FAQ
 
-The first answer conflicts because it names one ACT director, omits the brief and says nothing about the route to build.
+The first answer conflicts with the locked process. It calls the product a session, mentions only one director, and omits the call, preparation and build.
 
 ### Answer one, option A
 
-`Agent in the Room™ is an AI-led, expertise-driven working session. One or two of our experts join your people with an agent programmed on your brief. It questions the room one question at a time. We steer the session, agree the direction and take that work to our labs.`
+`Agent in the Room™ begins with a recorded 30-minute call that gives us a clear brief. If you continue, we prepare an agent on that brief. We then bring it into a face-to-face workshop with your people and one or two of our experts. What we agree goes to our labs, where we build it.`
 
 ### Answer one, option B
 
-`Agent in the Room™ turns a clear brief into a working session with your people. We programme an agent on the brief, then bring it into the room with one or two experts. The agent questions the room one question at a time while we steer the session. What we agree goes to our labs to be built.`
+`Agent in the Room™ is a face-to-face workshop built around a brief agreed during a recorded 30-minute call. If you continue, we prepare the agent before the workshop. One or two of our experts join your people and steer the conversation. What we agree goes to our labs, where we build it.`
 
-Recommendation: Option B. It explains the product through the same four-stage process as the section.
+Recommendation: Option A. It explains all four steps in order.
 
 `Do we need to know which agent we want before we speak?` does not conflict. It correctly starts with the business problem rather than a chosen agent. I recommend leaving it unchanged.
 
-`How do we get started?` is incomplete. It says the call produces a scope, while the locked process says it produces the brief. It also omits recording and transcription.
+`How do we get started?` conflicts with the locked process. It says the call produces a scope rather than the brief, and does not disclose recording.
 
 ### Getting started, option A
 
-`Request a 30-minute call. We record and transcribe it, then steer the conversation until we've got a clear brief. If you decide to continue, we programme the agent and arrange the session.`
+`Request a 30-minute call. We record and transcribe it, then steer the conversation until we've got a clear brief. If you continue, we prepare the agent and arrange the face-to-face workshop.`
 
 ### Getting started, option B
 
-`Start with a 30-minute call. We use the conversation to define the problem and create the brief. You then decide whether we programme the agent and arrange the session.`
+`Start with a recorded 30-minute call. We use the conversation to define the problem and create the brief. You then decide whether we prepare the agent and arrange the face-to-face workshop.`
 
-Recommendation: Option A, once P3 is complete.
+Recommendation: Option A, once the P3 privacy wording is approved.
 
 ## P3 recording and privacy
 
 ### Contact statement, option A
 
-`We record and transcribe the 30-minute call. We use the transcript to prepare the brief and programme the agent if you decide to continue.`
+`We record and transcribe the 30-minute call. We use the transcript to agree your brief and prepare the agent if you continue.`
 
 ### Contact statement, option B
 
-`This call is recorded and transcribed. We use the transcript to agree your brief. If you continue, we also use it to brief the AI agent.`
+`This call is recorded and transcribed. We use the transcript to create your brief. If you continue, we also use it to prepare the AI agent.`
 
-Recommendation: Option B. It separates the immediate purpose from the optional next stage.
+Recommendation: Option B. It separates the immediate purpose from the optional next step.
 
 ### Privacy wording, option A
 
-`We record and transcribe the first 30-minute call. We use the recording and transcript to define your brief and, if you continue, to brief the AI agent. [Recording and transcription provider: Jonny to confirm] and [AI provider: Jonny to confirm] process this information for us. We keep it for [retention period: Jonny to confirm]. Our lawful basis is [Jonny to confirm].`
+`We record and transcribe the first 30-minute call. We use the recording and transcript to define your brief and, if you continue, prepare the AI agent. [Recording and transcription provider: Jonny to confirm] and [AI provider: Jonny to confirm] process this information for us. We keep it for [retention period: Jonny to confirm]. Our lawful basis is [Jonny to confirm].`
+
+`The face-to-face workshop may include confidential or sensitive business information. We use that information to agree what should be built. [Workshop information retention: Jonny to confirm]. [Workshop information lawful basis: Jonny to confirm].`
 
 ### Privacy wording, option B
 
-`Before the first call, we explain that it will be recorded and transcribed. [Recording and transcription provider: Jonny to confirm] processes the call. We use the transcript to create your brief. If you continue, [AI provider: Jonny to confirm] also processes it to brief the agent. We keep the recording and transcript for [retention period: Jonny to confirm]. Our lawful basis is [Jonny to confirm].`
+`Before the first call, we explain that it will be recorded and transcribed. [Recording and transcription provider: Jonny to confirm] processes the call. We use the transcript to create your brief. If you continue, [AI provider: Jonny to confirm] also processes it to prepare the agent. We keep the recording and transcript for [retention period: Jonny to confirm]. Our lawful basis is [Jonny to confirm].`
 
-Recommendation: Option B. It gives each provider and purpose a clear place without inventing legal details.
+`People may discuss confidential or sensitive business information during the face-to-face workshop. We use it to direct the agreed build. [Whether workshop information is recorded or retained: Jonny to confirm]. [Workshop information lawful basis: Jonny to confirm].`
 
-The privacy notice should also identify any international transfer and its safeguard. The ICO requires privacy information to state the lawful basis, recipients, retention information and applicable international transfers. See the [ICO right-to-be-informed guidance](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/the-right-to-be-informed/what-privacy-information-should-we-provide/) and [ICO lawful-basis guidance](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/).
+Recommendation: Option B. It distinguishes each provider, purpose and unresolved decision.
+
+The final notice must name the providers and state where they process and store data. Any international transfer and safeguard also needs confirming.
 
 ## P4 director bio
 
 ### Option A
 
-`Through Agent in the Room™, he turns business problems into clear briefs and directs what gets built.`
+`Jonny Bowker is a Law Society of Scotland accredited AI Expert and practitioner. He has worked across Fortune 500 companies and mid-caps. Through Agent in the Room™, he turns business problems into clear briefs and directs what gets built.`
 
 ### Option B
 
-`He leads Agent in the Room™, shaping business pressure into a clear brief and a practical direction for the build.`
+`Jonny Bowker is a Law Society of Scotland accredited AI Expert and practitioner, working across Fortune 500 companies and mid-caps. He leads Agent in the Room™, shaping business pressure into a clear brief and a practical direction for the build.`
 
-Recommendation: Option A. It is plainer and maps directly to Jonny's role in the locked process.
+Recommendation: Option A. It is plainer, avoids the banned word in the current bio and keeps every sentence within the copy limit.
 
 ## Inputs and omissions
 
@@ -126,5 +131,5 @@ Recommendation: Option A. It is plainer and maps directly to Jonny's role in the
 - Confirm where each provider processes and stores the data.
 - Confirm the retention period and lawful basis with legal advice.
 - Confirm whether participants can take the call without recording.
-- Confirm whether the on-site or video session is also recorded. The locked process only says the first call is recorded.
+- Confirm whether workshop information is recorded or otherwise retained.
 - Add an operational notice before recording begins, not only website copy.
