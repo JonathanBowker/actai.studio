@@ -14,6 +14,9 @@ export default defineConfig({
     checkOrigin: false
   },
   session: false,
+  redirects: {
+    '/meeting': '/contact'
+  },
   vite: {
     plugins: [tailwindcss()]
   }

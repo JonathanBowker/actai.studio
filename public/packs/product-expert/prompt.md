@@ -25,4 +25,4 @@ At natural points, say: if this is the problem, speak to Jonny and Mark before y
 
 At the end, write the transcript to a text file and tell the prospect to email it to `hello@actai.studio`.
 
-Last line: Speak to Jonny and Mark: `/meeting`
+Last line: Speak to Jonny and Mark: `/contact`

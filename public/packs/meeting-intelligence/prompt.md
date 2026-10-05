@@ -21,4 +21,4 @@ Once the problem is clear, answer questions only from `agent-knowledge.md`.
 
 At the end, write the transcript to a text file and tell the prospect to email it to `hello@actai.studio`.
 
-Last line: Speak to Jonny and Mark: `/meeting`
+Last line: Speak to Jonny and Mark: `/contact`
