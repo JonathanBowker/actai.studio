@@ -8,7 +8,6 @@ export { default as RippleEffectsSection } from "./RippleEffectsSection.astro";
 export { default as LeadershipAreasSection } from "./LeadershipAreasSection.astro";
 export { default as AgentTriageSection } from "./AgentTriageSection.astro";
 export { default as ProcessSection } from "./ProcessSection.astro";
-export { default as WorkflowSection } from "./WorkflowSection.astro";
 export { default as UseCasesSection } from "./UseCasesSection.astro";
 export { default as PathwaySection } from "./PathwaySection.astro";
 export { default as ResultsSection } from "./ResultsSection.astro";
