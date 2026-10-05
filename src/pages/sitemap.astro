@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import SeoGuard from "../components/SeoGuard.astro";
 import { getCollection } from "astro:content";
 import {
 	SitemapDirectorySection,
@@ -54,6 +55,7 @@ const groups = [
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content="A complete directory of ACT's pages, agent diagnostics and site information." />
+		<SeoGuard />
 		<title>Site map | actai.studio</title>
 		<style is:global>
 			html, body { background: #f6f4ef; color: #11110f; }

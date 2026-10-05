@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import SeoGuard from "../components/SeoGuard.astro";
 import { ContactFormSection, ContactIntroSection, SiteHeader, SitemapFooterSection } from "../components/sections";
 
 const bookingHref = "/contact";
@@ -13,6 +14,7 @@ const bookingHref = "/contact";
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content="Contact Act. AI for clear guidance on where to start with AI in your business." />
+		<SeoGuard />
 		<title>Contact | actai.studio</title>
 		<style is:global>
 			html,
