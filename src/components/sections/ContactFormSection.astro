@@ -1,7 +1,4 @@
 ---
-interface Props { emailHref: string }
-const { emailHref } = Astro.props;
-
 const nextSteps = [
 	{ number: "01", title: "We read your note", copy: "We look at the business context, the pressure you are trying to resolve and what you need AI to make possible." },
 	{ number: "02", title: "30-minute conversation", copy: "We talk through where time, consistency or control is being lost and whether an agentic approach is the right route." },
@@ -11,7 +8,7 @@ const nextSteps = [
 
 <section class="bg-[#ebe9e4] px-5 py-20 text-[#11110f] sm:px-8 lg:px-10 lg:py-28">
 	<div class="mx-auto grid min-w-0 max-w-[88rem] gap-16 lg:grid-cols-[1.08fr_0.82fr] lg:items-start">
-		<form class="min-w-0 rounded-lg border border-black/10 bg-[#f6f4ef] p-6 sm:p-9 lg:p-11" action={emailHref} method="post" enctype="text/plain">
+		<form class="min-w-0 rounded-lg border border-black/10 bg-[#f6f4ef] p-6 sm:p-9 lg:p-11" action="/api/contact" method="post" data-contact-page-form>
 			<div class="mb-10 flex items-end justify-between gap-6 border-b border-black/12 pb-7">
 				<div>
 					<p class="text-sm font-bold uppercase tracking-[0.12em] text-[#77736a]">Start the conversation</p>
@@ -37,7 +34,10 @@ const nextSteps = [
 				<textarea class="min-h-[9rem] min-w-0 w-full resize-y rounded-lg border border-black/15 bg-white p-4 text-base font-bold outline-none transition focus:border-black" name="details" placeholder="Tell us what is taking too long, where work is stuck, or what you need AI to make clearer." required></textarea>
 			</label>
 
-			<button class="mt-7 inline-flex h-13 w-full items-center justify-center rounded-lg bg-[#11110f] px-6 text-sm font-bold text-white transition hover:bg-[#dfff42] hover:text-black" type="submit">BEGIN THE CONVERSATION</button>
+			<label class="contact-honeypot" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+
+			<button class="mt-7 inline-flex h-13 w-full items-center justify-center rounded-lg bg-[#11110f] px-6 text-sm font-bold text-white transition hover:bg-[#dfff42] hover:text-black disabled:cursor-wait disabled:opacity-65" type="submit" data-contact-submit>BEGIN THE CONVERSATION</button>
+			<p class="mt-4 text-center text-sm font-bold" data-contact-status aria-live="polite"></p>
 			<p class="mt-4 text-center text-sm font-bold text-[#89857d]">We'll reply within one business day. No commitment required.</p>
 		</form>
 
@@ -66,3 +66,57 @@ const nextSteps = [
 		</aside>
 	</div>
 </section>
+
+<style>
+	.contact-honeypot {
+		position: absolute;
+		left: -10000px;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
+</style>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>("[data-contact-page-form]");
+	const submitButton = form?.querySelector<HTMLButtonElement>("[data-contact-submit]");
+	const status = form?.querySelector<HTMLElement>("[data-contact-status]");
+
+	form?.addEventListener("submit", async (event) => {
+		event.preventDefault();
+		if (!submitButton || !status) return;
+
+		submitButton.disabled = true;
+		submitButton.textContent = "SENDING...";
+		status.textContent = "";
+
+		try {
+			const response = await fetch(form.action, {
+				method: "POST",
+				body: new FormData(form),
+				headers: { Accept: "application/json" },
+			});
+			const result = await response.json();
+
+			if (!response.ok || !result.ok) {
+				throw new Error(result.message || "We could not send your note.");
+			}
+
+			form.reset();
+			status.className = "mt-4 text-center text-sm font-bold text-[#315c00]";
+			status.textContent = result.message;
+		} catch (error) {
+			const message = error instanceof Error ? error.message : "We could not send your note.";
+			status.className = "mt-4 text-center text-sm font-bold text-[#9f2626]";
+			status.replaceChildren(document.createTextNode(`${message} Email `));
+			const emailLink = document.createElement("a");
+			emailLink.href = "mailto:hello@actai.studio";
+			emailLink.textContent = "hello@actai.studio";
+			emailLink.className = "underline";
+			status.append(emailLink, ".");
+		} finally {
+			submitButton.disabled = false;
+			submitButton.textContent = "BEGIN THE CONVERSATION";
+		}
+	});
+</script>

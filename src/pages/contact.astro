@@ -2,7 +2,6 @@
 import "../styles/global.css";
 import { ContactFormSection, ContactIntroSection, SiteHeader, SitemapFooterSection } from "../components/sections";
 
-const emailHref = "mailto:hello@actai.studio?subject=Act.%20AI%20contact";
 const bookingHref = "/contact";
 ---
 
@@ -28,7 +27,7 @@ const bookingHref = "/contact";
 
 		<main>
 			<ContactIntroSection />
-			<ContactFormSection {emailHref} />
+			<ContactFormSection />
 		</main>
 		<SitemapFooterSection {bookingHref} />
 	</body>
