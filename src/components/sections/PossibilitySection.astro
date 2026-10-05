@@ -22,26 +22,58 @@ interface Props { bookingHref: string }
 const { bookingHref } = Astro.props;
 ---
 
-<section id="agent-in-the-room" class="stack-panel bg-[#262722] px-4 pb-40 pt-24 text-white sm:px-8 lg:px-10 lg:pb-56" data-scroll-tone-section data-scroll-tone-spread="0.18">
+<section id="agent-in-the-room" class="stack-panel relative bg-[#262722] px-4 pb-40 pt-24 text-white sm:px-8 lg:px-10 lg:pb-56" data-scroll-tone-section data-scroll-tone-spread="0.18">
+	<span id="method" class="pointer-events-none absolute left-0 top-0" aria-hidden="true"></span>
 	<div class="reveal mx-auto grid max-w-[96rem] gap-14">
 		<div class="grid gap-8 lg:grid-cols-[0.42fr_1fr] lg:items-start lg:gap-14">
-			<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-[0.9rem] font-bold text-white/65">AGENT IN THE ROOM</p>
+			<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-[0.9rem] font-bold text-white/65">AGENT IN THE ROOM™</p>
 			<div class="max-w-[34rem]">
-				<h2 class="text-[clamp(2.25rem,4vw,4.5rem)] font-bold leading-[0.96]" data-scroll-tone-line>Start with a live session, not a deck.</h2>
+				<h2 class="text-[clamp(2.25rem,4vw,4.5rem)] font-bold leading-[0.96]" data-scroll-tone-line>Start with a conversation, not a deck.</h2>
 				<p class="mt-8 text-[clamp(1rem,1.45vw,1.2rem)] font-bold leading-[1.4] text-white/82" data-scroll-tone-line>
-					Agent in the Room™ is a live working session. An AI agent, briefed on your business, joins the room through a speaker. Your people and our director question it together. You leave with a scoped AI direction.
+					It starts with a call. We record it and steer it, so by the end we know what the problem is. That becomes the brief.
 				</p>
 			</div>
 		</div>
 
-		<p class="text-sm font-bold uppercase text-white/65">What happens in the session</p>
+		<ol class="grid border-t border-white/20 md:grid-cols-2">
+			<li class="grid min-h-[18rem] content-between gap-10 border-b border-white/20 py-8 md:border-r md:px-8 md:first:pl-0">
+				<span class="text-sm font-bold text-[#dfff42]">01</span>
+				<div>
+					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The call.</h3>
+					<p class="mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">Thirty minutes, recorded. We steer the conversation until we've got a clear brief, not just notes.</p>
+				</div>
+			</li>
+			<li class="grid min-h-[18rem] content-between gap-10 border-b border-white/20 py-8 md:px-8 md:last:pr-0">
+				<span class="text-sm font-bold text-[#dfff42]">02</span>
+				<div>
+					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The decision.</h3>
+					<p class="mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">If you want to go ahead, we programme the agent on your brief.</p>
+				</div>
+			</li>
+			<li class="grid min-h-[22rem] content-between gap-10 border-b border-white/20 py-8 md:border-r md:px-8 md:first:pl-0">
+				<span class="text-sm font-bold text-[#dfff42]">03</span>
+				<div>
+					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The session.</h3>
+					<p class="mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">We come to you. One or two of our experts join your people in the room, with the agent we've briefed. It questions the room one question at a time. You answer. We steer. It's AI-led and expertise-driven. Video call if that suits you better.</p>
+				</div>
+			</li>
+			<li class="grid min-h-[22rem] content-between gap-10 border-b border-white/20 py-8 md:px-8 md:last:pr-0">
+				<span class="text-sm font-bold text-[#dfff42]">04</span>
+				<div>
+					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The build.</h3>
+					<p class="mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">What we agree goes to our labs, where we build it.</p>
+				</div>
+			</li>
+		</ol>
+
+		<p class="text-sm font-bold uppercase text-white/65">Inside the session</p>
 		<div class="design-tree-shell relative h-[38rem] overflow-hidden rounded-[1.6rem] bg-[#10110f] sm:h-[40rem] lg:h-[42rem]" data-design-tree-carousel>
 			<div class="design-tree-header absolute left-5 right-5 top-5 z-20 flex items-center justify-between text-[0.68rem] font-bold uppercase text-white/55 sm:left-7 sm:right-7 sm:top-7 sm:text-xs">
-				<span>Agent in the Room™</span>
+				<span>Agent in the Room</span>
 				<span class="rounded-lg bg-white/10 px-3 py-2 backdrop-blur-md" data-design-tree-count>01 / 08</span>
 			</div>
 
-			<div class="design-tree-viewport absolute inset-x-0 bottom-20 top-16" role="region" aria-label="Agent in the Room™ conversation stages" aria-roledescription="carousel">
+			<div class="design-tree-viewport absolute inset-x-0 bottom-20 top-16" role="region" aria-label="Agent in the Room conversation stages" aria-roledescription="carousel">
 				{conversationSteps.map((step, index) => (
 					<div
 					class="design-tree-card absolute left-1/2 top-1/2 overflow-hidden bg-[#11110f] text-white shadow-[0_24px_70px_rgba(17,17,15,0.22)]"
