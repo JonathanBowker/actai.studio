@@ -14,19 +14,11 @@ const sessionSlides = [
 	"The agent turns the agreed direction into a clear technical brief for our engineering team.",
 ];
 
-const sessionImages = [
-	"/fixa-assets/herovideo-poster.jpg",
-	"/images/act-hero-cinematic.png",
-	"/fixa-assets/MpwLfV3BL41ih4BTUbGjwjVEyU.webp",
-	"/fixa-assets/K6oVlqJ1SryJzVBte2yxIFoGqI.webp",
-	"/fixa-assets/WXKx26vqrAI7XfrXAgsHkTeOeV0.webp",
-];
 ---
 
-<section id="process" class="agent-in-room-target stack-panel relative bg-[#262722] px-4 pb-40 pt-24 text-white sm:px-8 lg:px-10 lg:pb-48" data-scroll-tone-section data-scroll-tone-spread="0.18">
-	<span id="agent-in-the-room" class="agent-in-room-target pointer-events-none absolute left-0 top-0" aria-hidden="true"></span>
+<section id="agent-in-the-room" class="agent-in-room-target stack-panel relative bg-[#050505] px-4 pb-0 pt-24 text-white sm:px-8 lg:px-10" data-scroll-tone-section data-scroll-tone-spread="0.18">
 	<span id="method" class="agent-in-room-target pointer-events-none absolute left-0 top-0" aria-hidden="true"></span>
-	<div class="reveal mx-auto grid max-w-[96rem] gap-14 p-5 sm:p-8 lg:p-10">
+	<div class="reveal mx-auto grid max-w-[96rem] gap-16 px-1 pt-5 sm:px-4 sm:pt-8 lg:px-6 lg:pt-10">
 		<div class="grid justify-items-center gap-8 text-center">
 			<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-[0.9rem] font-bold text-white/65">AGENT IN THE ROOM™</p>
 			<div class="max-w-[48rem]">
@@ -37,64 +29,62 @@ const sessionImages = [
 			</div>
 		</div>
 
-		<ol class="grid border-t border-white/20 md:grid-cols-2" aria-label="Agent in the Room process">
-			<li class="grid min-h-[18rem] content-start gap-10 border-b border-white/20 py-8 md:border-r md:pr-8">
-				<span class="text-sm font-bold text-[#dfff42]">01</span>
-				<div>
+		<ol class="stage-grid grid border-t border-white/30 md:grid-cols-2" aria-label="Agent in the Room process">
+			<li class="stage-pair grid min-h-[19rem] content-center justify-items-center gap-3 border-b border-white/30 px-5 py-12 text-center md:border-r md:px-10">
+				<span class="text-sm font-bold text-white/72">01</span>
+				<div class="grid justify-items-center">
 					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The call.</h3>
-					<p class="agent-step-copy mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">Thirty minutes, recorded. We steer the conversation until we land on the real problem, not just notes.</p>
+					<p class="agent-step-copy mt-6 max-w-[30rem] font-bold leading-[1.4] text-white/75">Thirty minutes, recorded. We steer the conversation until we land on the real problem, not just notes.</p>
 				</div>
 			</li>
-			<li class="grid min-h-[18rem] content-start gap-10 border-b border-white/20 py-8 md:pl-8">
-				<span class="text-sm font-bold text-[#dfff42]">02</span>
-				<div>
+			<li class="stage-pair grid min-h-[19rem] content-center justify-items-center gap-3 border-b border-white/30 px-5 py-12 text-center md:px-10">
+				<span class="text-sm font-bold text-white/72">02</span>
+				<div class="grid justify-items-center">
 					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The prep.</h3>
-					<p class="agent-step-copy mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">If you choose to go ahead, we programme and prepare the agent on your brief, ready for the AIR session.</p>
+					<p class="agent-step-copy mt-6 max-w-[30rem] font-bold leading-[1.4] text-white/75">If you choose to go ahead, we programme and prepare the agent on your brief, ready for the AIR session.</p>
 				</div>
 			</li>
-			<li class="grid gap-10 border-b border-white/20 py-10 md:col-span-2">
-				<div class="grid gap-7 md:grid-cols-[4rem_1fr] md:gap-8">
-					<span class="text-sm font-bold text-[#dfff42]">03</span>
-					<div>
+			<li class="grid justify-items-center gap-12 border-b border-white/30 px-0 py-20 text-center md:col-span-2 md:py-24">
+				<div class="grid justify-items-center gap-3 px-5">
+					<span class="text-sm font-bold text-white/72">03</span>
+					<div class="grid justify-items-center">
 						<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The AIR session.</h3>
-						<p class="agent-step-copy mt-4 max-w-[54rem] font-bold leading-[1.4] text-white/75">Face to face, wherever suits the conversation. One or two of our experts join your people, with the agent we've prepared. It questions the room one question at a time. You answer. We steer. AI-led, expert-driven.</p>
+						<p class="agent-step-copy mt-6 max-w-[52rem] font-bold leading-[1.4] text-white/75">Face to face, wherever suits the conversation. One or two of our experts join your people, with the agent we've prepared. It questions the room one question at a time. You answer. We steer. AI-led, expert-driven.</p>
 					</div>
 				</div>
 
-				<div class="grid gap-6">
-					<div class="flex items-center justify-between gap-5">
-						<p class="text-sm font-bold uppercase text-white/65">Inside the session</p>
+				<div class="air-carousel grid w-full max-w-[72rem] gap-5 text-left">
+					<div class="flex items-center justify-between gap-5 px-1">
+						<p class="text-sm font-bold uppercase text-white/65">Inside the AIR session</p>
 						<div class="flex gap-2">
 							<button class="action-pill grid h-12 w-12 place-items-center bg-white text-xl font-bold text-[#11110f] transition hover:bg-[#dfff42]" type="button" aria-label="Previous AIR session interaction" data-use-case-scroll="-1">←</button>
 							<button class="action-pill grid h-12 w-12 place-items-center bg-white text-xl font-bold text-[#11110f] transition hover:bg-[#dfff42]" type="button" aria-label="Next AIR session interaction" data-use-case-scroll="1">→</button>
 						</div>
 					</div>
-					<div class="air-session-track flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 pr-[12vw]" data-use-case-track role="region" aria-label="What happens inside the AIR session" aria-roledescription="carousel">
+					<div class="air-session-track flex snap-x snap-mandatory gap-5 overflow-x-auto pb-3" data-use-case-track role="region" aria-label="What happens inside the AIR session" aria-roledescription="carousel">
 						{sessionSlides.map((slide, index) => (
-							<article class="use-case-card relative aspect-[4/3] w-[min(82vw,32rem)] shrink-0 snap-start overflow-hidden rounded-lg bg-[#11110f]" aria-label={`Interaction ${index + 1} of ${sessionSlides.length}`}>
-								<img class="absolute inset-0 h-full w-full object-cover" src={sessionImages[index % sessionImages.length]} alt="" />
-								<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10"></div>
-								<div class="relative flex h-full flex-col justify-end p-6 sm:p-8">
-									<p class="text-xs font-bold uppercase text-[#dfff42]">Interaction {String(index + 1).padStart(2, "0")}</p>
-									<p class="mt-3 max-w-[22ch] text-[clamp(1.2rem,2.1vw,1.75rem)] font-bold leading-[1.15] [text-wrap:balance]">{slide}</p>
+							<article class="air-slide grid min-h-[22rem] w-full shrink-0 snap-start place-items-center overflow-hidden rounded-lg bg-[#f4f3ef] p-8 text-center text-[#11110f] sm:min-h-[28rem] sm:p-12" aria-label={`Interaction ${index + 1} of ${sessionSlides.length}`}>
+								<div class="grid max-w-[48rem] justify-items-center gap-7">
+									<p class="text-xs font-bold uppercase text-black/55">Interaction {String(index + 1).padStart(2, "0")}</p>
+									<p class="text-[clamp(1.75rem,4vw,3.75rem)] font-bold leading-[1.18] [text-wrap:balance]">{slide}</p>
 								</div>
 							</article>
 						))}
 					</div>
 				</div>
 			</li>
-			<li class="grid gap-7 border-b border-white/20 py-10 md:col-span-2 md:grid-cols-[4rem_1fr] md:gap-8">
-				<span class="text-sm font-bold text-[#dfff42]">04</span>
-				<div>
+			<li class="build-stage relative grid min-h-[31rem] content-center justify-items-center gap-3 overflow-hidden px-5 py-24 text-center md:col-span-2">
+				<span class="relative text-sm font-bold text-white/72">04</span>
+				<div class="relative grid justify-items-center">
 					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The build.</h3>
-					<p class="agent-step-copy mt-4 max-w-[44rem] font-bold leading-[1.4] text-white/75">What we agree goes to our studio, where we build, test and deploy it.</p>
+					<p class="agent-step-copy mt-6 max-w-[44rem] font-bold leading-[1.4] text-white/75">What we agree goes to our studio, where we build, test and deploy it.</p>
 					{/* Draft for Mark to review. */}
 					<p class="agent-step-copy mt-4 max-w-[44rem] font-bold leading-[1.4] text-white" data-review-status="draft">The result is a working capability that changes how your business operates and builds operational capacity.</p>
 				</div>
 			</li>
 		</ol>
 
-		<div class="grid justify-items-center gap-5 pt-4 text-center">
+		<div class="grid justify-items-center gap-5 pb-32 text-center lg:pb-40">
 			<p class="text-[clamp(1.5rem,2.4vw,2.5rem)] font-bold leading-[1.3]" data-scroll-tone-line>It starts with a 30-minute call.</p>
 			<a class="action-pill inline-flex h-12 items-center justify-center bg-white px-6 font-bold text-[#11110f] no-underline transition hover:bg-[#dfff42]" href={bookingHref}>Request a 30-minute call</a>
 		</div>
@@ -113,6 +103,24 @@ const sessionImages = [
 	.air-session-track {
 		scrollbar-color: rgba(255, 255, 255, 0.34) transparent;
 		scrollbar-width: thin;
+	}
+
+	.build-stage::before {
+		background: radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.14) 38%, transparent 72%);
+		content: "";
+		inset: 0;
+		pointer-events: none;
+		position: absolute;
+	}
+
+	@media (max-width: 767px) {
+		.stage-pair {
+			min-height: 16rem;
+		}
+
+		.air-slide {
+			width: calc(100vw - 2.5rem);
+		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
