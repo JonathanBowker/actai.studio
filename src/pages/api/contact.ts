@@ -150,6 +150,6 @@ export const POST = (async ({ request }) => {
 		if (!result.MessageId) throw new Error("SES did not confirm the message");
 		return json({ ok: true, message: "Thank you. Your note has been sent." });
 	} catch {
-		return json({ ok: false, message: "We could not send your note.", contactEmail: CONTACT_EMAIL }, 503);
+		return json({ ok: false, message: "We could not send your note.", contactEmail: CONTACT_EMAIL }, 424);
 	}
 }) satisfies APIRoute;
