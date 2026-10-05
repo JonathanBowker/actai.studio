@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server',
+  site: 'https://actai.studio',
   adapter: node({
     mode: 'standalone',
     bodySizeLimit: 32 * 1024

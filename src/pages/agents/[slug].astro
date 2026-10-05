@@ -2,10 +2,14 @@
 import "../../styles/global.css";
 import SeoGuard from "../../components/SeoGuard.astro";
 import { AgentCascadeSection, AgentDiagnosisSection, AgentHeroSection, AgentPackSection, SiteHeader } from "../../components/sections";
-import { getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 
-const agent = Astro.params.slug ? await getEntry("agents", Astro.params.slug) : undefined;
-if (!agent) return Astro.redirect("/sitemap");
+export async function getStaticPaths() {
+	const agents = await getCollection("agents");
+	return agents.map((agent) => ({ params: { slug: agent.id }, props: { agent } }));
+}
+
+const { agent } = Astro.props;
 const bookingHref = "/contact";
 const packBase = `/packs/${agent.id}`;
 const zipHref = `${packBase}/${agent.id}-triage-pack.zip`;
