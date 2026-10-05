@@ -8,14 +8,13 @@ interface Props {
 		number: number;
 	};
 	total: number;
-	hiddenCopy: boolean;
 }
 
-const { sector, total, hiddenCopy } = Astro.props;
+const { sector, total } = Astro.props;
 const isManufacturingImage = sector.image.endsWith("manufacturing-neon.png");
 ---
 
-<a class="block text-white no-underline" href="/sitemap#agent-diagnostics" aria-hidden={hiddenCopy ? "true" : undefined} tabindex={hiddenCopy ? "-1" : undefined} data-loop-copy={hiddenCopy ? "true" : undefined}>
+<a class="block text-white no-underline" href="/sitemap#agent-diagnostics">
 	<figure>
 		<div class="relative aspect-[3/4] overflow-hidden rounded-[0.9rem] bg-black">
 			<img

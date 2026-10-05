@@ -1,62 +1,45 @@
----
-interface Props { bookingHref: string }
-const { bookingHref } = Astro.props;
----
-<section id="direction" class="stack-panel bg-[#ebe9e4] px-4 pb-36 pt-24 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48" data-scroll-tone-section data-scroll-tone-theme="ink">
-				<div
-					class="reveal mx-auto grid min-h-[46rem] max-w-[96rem] gap-10 rounded-[1.4rem] p-6 sm:p-8 lg:grid-cols-[0.75fr_1fr_1fr] lg:grid-rows-[auto_1fr_auto] lg:p-10"
-				>
-					<div class="grid justify-items-center text-center lg:col-span-3">
-						<p class="w-fit rounded-lg border border-black/45 px-8 py-3 text-[0.9rem] font-bold text-[#11110f]">THE DIRECTION</p>
-						<h2 class="section-headline mt-10 max-w-[18ch] text-[clamp(2.3rem,4.3vw,4.7rem)]" data-scroll-tone-line>
-							We direct your AI, and deliver the results.
-						</h2>
-						<p class="mx-auto mt-6 max-w-[50rem] text-[clamp(1.05rem,1.5vw,1.28rem)] font-bold leading-[1.28]" data-scroll-tone-line>
-							AI and creative thinking, backed by practice, driven by outcomes, not reports.
-						</p>
-					</div>
+<section id="direction" class="stack-panel bg-white px-4 pb-36 pt-24 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48" data-scroll-tone-section data-scroll-tone-theme="ink">
+	<div class="reveal mx-auto grid max-w-[96rem] gap-y-12 p-6 sm:p-8 lg:grid-cols-8 lg:gap-x-6 lg:gap-y-0 lg:p-10">
+		<header class="grid justify-items-center text-center lg:col-span-8">
+			<p class="w-fit rounded-lg border border-black/45 px-8 py-3 text-[0.9rem] font-bold text-[#11110f]">THE DIRECTION</p>
+			<h2 class="section-headline mt-20 max-w-[17ch] text-[clamp(2.75rem,5vw,5rem)]">
+				We direct your AI,<br />and deliver the results.
+			</h2>
+			<p class="mx-auto mt-14 max-w-[42rem] text-[clamp(1.05rem,1.5vw,1.28rem)] font-bold leading-[1.28]">
+				AI and creative thinking, backed by practice, driven by outcomes, not reports.
+			</p>
+		</header>
 
-					<div class="grid content-start gap-8 border-y border-black/40 py-10 lg:row-span-2 lg:border-y-0 lg:py-0">
-						<div>
-							<p class="max-w-[13ch] text-[clamp(1.85rem,2.85vw,3.05rem)] font-bold leading-[0.92]" data-scroll-tone-line>
-								Two Directors.<br />
-								<span class="italic">One Direction.</span>
-							</p>
-						</div>
-						<p class="max-w-[16ch] text-[clamp(1.15rem,1.65vw,1.75rem)] font-bold leading-[1.08]" data-scroll-tone-line>
-							You bring the business.<br />
-							We bring practical AI experience.<br />
-							Together, we make the future work.
-						</p>
-						<a href={bookingHref} class="action-pill mt-2 inline-flex h-12 w-fit items-center bg-black px-7 font-bold uppercase text-white no-underline transition hover:bg-[#dfff42] hover:text-black">
-							Request a 30-minute call
-						</a>
-					</div>
+		<article class="mt-20 grid content-start gap-8 lg:col-span-3 lg:col-start-2 lg:mt-32">
+			<div>
+				<p class="text-[clamp(1.8rem,2.1vw,2.25rem)] font-bold">Jonny Bowker</p>
+				<h3 class="text-[clamp(1.65rem,2vw,2.2rem)] font-bold">AI Director | Strategy</h3>
+			</div>
+			<p class="max-w-[26rem] text-[clamp(1rem,1.25vw,1.2rem)] font-bold leading-[1.34]">
+				Jonny Bowker is a Law Society of Scotland accredited AI Expert and practitioner. He has worked across Fortune 500 companies and mid-caps, spanning many sectors and functions. Through his Agent in the Room™ methodology, he turns business problems into clear briefs and directs what gets built.
+			</p>
+			<p class="max-w-[26rem] text-[clamp(1rem,1.25vw,1.2rem)] font-bold">
+				Finds the problem worth solving.
+			</p>
+		</article>
 
-					<article class="grid content-start gap-7 border-t border-black/40 pt-10 lg:border-t-0 lg:pt-0">
-						<div data-scroll-tone-line data-scroll-tone-step="4">
-							<p class="text-[clamp(2rem,3vw,3.2rem)] font-bold leading-[0.9]">Jonny Bowker</p>
-							<h3 class="text-[clamp(1.7rem,2.65vw,2.85rem)] font-bold leading-[0.96]">AI Director, Strategy</h3>
-						</div>
-						<p class="max-w-[31rem] text-[1.03rem] font-bold leading-[1.34]" data-scroll-tone-line data-scroll-tone-step="5">
-							Jonny Bowker is a Law Society of Scotland accredited AI Expert and practitioner. He has worked across Fortune 500 companies and mid-caps, spanning many sectors and functions. Through his Agent in the Room™ methodology, he turns business problems into clear briefs and directs what gets built.
-						</p>
-						<p class="mt-auto max-w-[24rem] border-t border-black/28 pt-4 text-[0.95rem] font-bold leading-[1.25]" data-scroll-tone-line data-scroll-tone-step="6">
-							Finds the problem worth solving.
-						</p>
-					</article>
+		<article class="mt-12 grid content-start gap-8 border-t border-black/30 pt-12 lg:col-span-3 lg:col-start-5 lg:mt-32 lg:border-t-0 lg:pt-0">
+			<div>
+				<p class="text-[clamp(1.8rem,2.1vw,2.25rem)] font-bold">Mark Chatelier</p>
+				<h3 class="text-[clamp(1.65rem,2vw,2.2rem)] font-bold">AI Director | Discovery</h3>
+			</div>
+			<p class="max-w-[26rem] text-[clamp(1rem,1.25vw,1.2rem)] font-bold leading-[1.34]">
+				Mark Chatelier is an AI generalist who leads discovery through creative thinking and direction, drawing on two decades leading creative teams on global accounts including HSBC, Audi and Vodafone. He listens first, then leads the conversation toward the real problem, applying the same discipline wherever it actually sits.
+			</p>
+			<p class="max-w-[26rem] text-[clamp(1rem,1.25vw,1.2rem)] font-bold">
+				Shapes the brief before build starts.
+			</p>
+		</article>
 
-					<article class="grid content-start gap-7 border-t border-black/40 pt-10 lg:border-t-0 lg:pt-0">
-						<div data-scroll-tone-line data-scroll-tone-step="4">
-							<p class="text-[clamp(2rem,3vw,3.2rem)] font-bold leading-[0.9]">Mark Chatelier</p>
-							<h3 class="text-[clamp(1.7rem,2.65vw,2.85rem)] font-bold leading-[0.96]">AI Director, Discovery</h3>
-						</div>
-						<p class="max-w-[31rem] text-[1.03rem] font-bold leading-[1.34]" data-scroll-tone-line data-scroll-tone-step="5">
-							Mark Chatelier is an AI generalist who leads discovery through creative thinking and direction, drawing on two decades leading creative teams on global accounts including HSBC, Audi and Vodafone. He listens first, then leads the conversation toward the real problem, applying the same discipline wherever it actually sits.
-						</p>
-						<p class="mt-auto max-w-[24rem] border-t border-black/28 pt-4 text-[0.95rem] font-bold leading-[1.25]" data-scroll-tone-line data-scroll-tone-step="6">
-							Shapes the brief before build starts.
-						</p>
-					</article>
-				</div>
-			</section>
+		<div class="mt-16 grid justify-items-center text-center lg:col-span-4 lg:col-start-3 lg:mt-16">
+			<p class="max-w-[42rem] text-[clamp(1.05rem,1.45vw,1.25rem)] font-bold leading-[1.28]">
+				You bring the business. We bring practical AI experience.<br />Together, we make the future work.
+			</p>
+		</div>
+	</div>
+</section>

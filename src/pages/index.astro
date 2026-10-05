@@ -133,7 +133,7 @@ const caseStudies = [
 	},
 ];
 
-const leadershipSectors = caseStudies.map((study, index) => ({
+const leadershipSectors = caseStudies.slice(0, 8).map((study, index) => ({
 	kicker: study.kicker,
 	title: study.title,
 	points: study.points,
@@ -144,8 +144,8 @@ const leadershipSectors = caseStudies.map((study, index) => ({
 }));
 
 const leadershipSectorColumns = [
-	leadershipSectors.filter((_, index) => index % 2 === 0),
-	leadershipSectors.filter((_, index) => index % 2 === 1),
+	leadershipSectors.slice(0, 4),
+	leadershipSectors.slice(4, 8),
 ];
 
 const caseStudyFilters = [
@@ -442,16 +442,6 @@ const faqs = [
 
 			.hero-title {
 				font-size: clamp(3.6rem, 7.2vw, 8.2rem);
-			}
-
-			.hero-video-frame {
-				height: max(100vh, calc(100vw / 1.6985));
-				left: 50%;
-				pointer-events: none;
-				position: absolute;
-				top: 50%;
-				transform: translate(-50%, -50%);
-				width: max(100vw, calc(100vh * 1.6985));
 			}
 
 			.hero-script {
@@ -930,9 +920,11 @@ const faqs = [
 
 			.sector-column {
 				-webkit-overflow-scrolling: touch;
+				overflow-anchor: none;
 				overscroll-behavior-y: contain;
 				scrollbar-width: none;
 				touch-action: pan-y;
+				will-change: scroll-position;
 			}
 
 			.sector-column::-webkit-scrollbar {
@@ -1261,23 +1253,19 @@ const faqs = [
 					if (sectorMotionStarted) return;
 					sectorMotionStarted = true;
 
-					const getSectorLoopPoint = (column) => {
-						const duplicateStart = column.querySelector('[data-loop-copy="true"]');
+					const getSectorStep = (column) => {
 						const firstCard = column.firstElementChild;
-						return duplicateStart instanceof HTMLElement
-							? duplicateStart.offsetTop - (firstCard instanceof HTMLElement ? firstCard.offsetTop : 0)
-							: Math.max(0, column.scrollHeight / 2);
+						const secondCard = firstCard?.nextElementSibling;
+						if (!(firstCard instanceof HTMLElement)) return 0;
+						if (secondCard instanceof HTMLElement) return secondCard.offsetTop - firstCard.offsetTop;
+						return firstCard.offsetHeight;
 					};
 
 					const scrollState = sectorColumns.map((column, index) => {
-						const loopPoint = getSectorLoopPoint(column);
-						const continuous = column instanceof HTMLElement && column.dataset.sectorLoop === "continuous";
-						const direction = continuous ? 1 : (index % 2 === 0 ? 1 : -1);
-						column.scrollTop = continuous ? 0 : (direction > 0 ? loopPoint * 0.06 : loopPoint * 0.72);
+						const step = getSectorStep(column);
+						column.scrollTop = index % 2 === 0 ? 0 : step * 0.45;
 						return {
 							column,
-							direction,
-							pauseUntil: 0,
 						};
 					});
 
@@ -1287,28 +1275,20 @@ const faqs = [
 						lastTick = time;
 
 						scrollState.forEach((state) => {
-							const loopPoint = getSectorLoopPoint(state.column);
-							if (!loopPoint || time < state.pauseUntil) return;
+							const step = getSectorStep(state.column);
+							if (!step) return;
 
-							state.column.scrollTop += state.direction * delta * 0.064;
-							if (state.direction > 0 && state.column.scrollTop >= loopPoint) {
-								state.column.scrollTop %= loopPoint;
-							}
-							if (state.direction < 0 && state.column.scrollTop <= 0) {
-								state.column.scrollTop += loopPoint;
+							state.column.scrollTop += delta * 0.08;
+							while (state.column.scrollTop >= step && state.column.children.length > 1) {
+								const firstCard = state.column.firstElementChild;
+								if (!firstCard) break;
+								state.column.append(firstCard);
+								state.column.scrollTop -= step;
 							}
 						});
 
 						requestAnimationFrame(animateSectorColumns);
 					};
-
-					scrollState.forEach((state) => {
-						["wheel", "touchstart", "pointerdown"].forEach((eventName) => {
-							state.column.addEventListener(eventName, () => {
-								state.pauseUntil = performance.now() + 2600;
-							}, { passive: true });
-						});
-					});
 
 					requestAnimationFrame(animateSectorColumns);
 				};

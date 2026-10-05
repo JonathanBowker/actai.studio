@@ -2,12 +2,12 @@
 interface Props { bookingHref: string }
 const { bookingHref } = Astro.props;
 ---
-<section class="stack-panel overflow-hidden bg-[radial-gradient(circle_at_42%_10%,rgba(255,130,0,0.95),rgba(255,83,16,0.92)_26%,rgba(117,28,31,0.98)_78%),linear-gradient(120deg,#e60026,#ff6a00_45%,#6d1b21)] px-6 py-16 text-white sm:px-10 lg:px-16 lg:py-20">
-					<div class="mx-auto grid max-w-[74rem] gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
-						<div class="reveal grid content-center gap-7">
+<section class="stack-panel overflow-hidden bg-[radial-gradient(circle_at_42%_10%,rgba(255,130,0,0.95),rgba(255,83,16,0.92)_26%,rgba(117,28,31,0.98)_78%),linear-gradient(120deg,#e60026,#ff6a00_45%,#6d1b21)] px-4 py-16 text-white sm:px-8 lg:px-10 lg:py-20">
+					<div class="mx-auto grid max-w-[96rem] gap-12 p-5 sm:p-8 lg:grid-cols-8 lg:items-center lg:gap-x-6 lg:p-10">
+						<div class="reveal grid content-center gap-7 lg:col-span-3 lg:col-start-2">
 							<p class="w-fit rounded-lg bg-white/16 px-4 py-3 text-[0.9rem] font-bold text-white/82">THE CONVERSATION</p>
 							<div class="grid gap-5">
-								<h2 class="section-headline max-w-[16ch] text-[clamp(2.2rem,4vw,4.25rem)]">
+								<h2 class="max-w-[16ch] text-left text-[clamp(2.2rem,4vw,4.25rem)] font-bold tracking-[-0.025em]">
 									Talk to us, and find the value AI can deliver.
 								</h2>
 								<p class="max-w-[38rem] text-[clamp(1rem,1.35vw,1.25rem)] font-bold leading-[1.35] text-white/78">
@@ -18,7 +18,7 @@ const { bookingHref } = Astro.props;
 								Request a 30-minute call
 							</a>
 						</div>
-						<div class="reveal cta-line grid justify-start gap-0 text-[clamp(3.6rem,8.2vw,8.2rem)] font-bold leading-[0.86] tracking-[0] lg:justify-end">
+						<div class="reveal cta-line grid justify-start gap-0 text-[clamp(3.6rem,8.2vw,8.2rem)] font-bold leading-[0.86] tracking-[0] lg:col-span-3 lg:col-start-5 lg:justify-end">
 							<div class="flex items-center gap-[0.12em]">
 								<span>Let's</span>
 								<svg class="cta-pill h-[0.9em] w-[0.9em]" viewBox="0 0 64 64" aria-hidden="true">
