@@ -6,7 +6,7 @@ const { resultStats, bookingHref } = Astro.props;
 				<div class="mx-auto grid max-w-[96rem] gap-14 lg:grid-cols-[0.42fr_1fr] lg:gap-20">
 					<div class="reveal">
 						<p class="mb-6 w-fit rounded-lg bg-black/5 px-4 py-3 text-[0.9rem] font-bold text-[#77736a]">RESULTS</p>
-						<h2 class="max-w-[12ch] text-[clamp(2.25rem,3.6vw,4rem)] font-bold leading-[0.98]" data-scroll-tone-line>
+						<h2 class="section-headline max-w-[12ch] text-[clamp(2.25rem,3.6vw,4rem)]" data-scroll-tone-line>
 							Results
 						</h2>
 					</div>
@@ -37,7 +37,7 @@ const { resultStats, bookingHref } = Astro.props;
 							<p class="rounded-lg border border-black/15 p-5 font-bold">[Client quote needed]</p>
 							<p class="rounded-lg border border-black/15 p-5 font-bold">[Case study needed]</p>
 						</div>
-						<a href={bookingHref} class="mx-auto inline-flex h-12 w-fit items-center rounded-xl bg-[#11110f] px-7 font-bold uppercase text-white no-underline transition hover:bg-[#dfff42] hover:text-[#11110f]">
+						<a href={bookingHref} class="action-pill mx-auto inline-flex h-12 w-fit items-center bg-[#11110f] px-7 font-bold uppercase text-white no-underline transition hover:bg-[#dfff42] hover:text-[#11110f]">
 							Request a 30-minute call
 						</a>
 					</div>

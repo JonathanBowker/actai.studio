@@ -1,56 +1,123 @@
 ---
-const processSteps = [
-	{
-		number: "01",
-		name: "DISCOVER",
-		copy: "Find where the business creates value and where work is getting in the way.",
-	},
-	{
-		number: "02",
-		name: "DEFINE",
-		copy: "Agree the problem, the outcome and the boundaries before anything is built.",
-	},
-	{
-		number: "03",
-		name: "DIRECT",
-		copy: "Give the agent the context, decisions and governance it needs to act well.",
-	},
-	{
-		number: "04",
-		name: "BUILD",
-		copy: "Shape the capability around the way your business actually works.",
-	},
-	{
-		number: "05",
-		name: "RUN",
-		copy: "Put it to work, review what changes and keep the whole picture current.",
-	},
+interface Props { bookingHref: string }
+const { bookingHref } = Astro.props;
+
+const sessionSlides = [
+	"We bring the agreed brief into the session.",
+	"Your people bring their business context.",
+	"The prepared agent asks a clear question.",
+	"The room answers from experience.",
+	"Our experts keep the conversation focused.",
+	"You provide the details of your specific needs for context.",
+	"We agree what should happen next.",
+	"The agreed direction moves to the build.",
+	"The agent turns the agreed direction into a clear technical brief for our engineering team.",
+];
+
+const sessionImages = [
+	"/fixa-assets/herovideo-poster.jpg",
+	"/images/act-hero-cinematic.png",
+	"/fixa-assets/MpwLfV3BL41ih4BTUbGjwjVEyU.webp",
+	"/fixa-assets/K6oVlqJ1SryJzVBte2yxIFoGqI.webp",
+	"/fixa-assets/WXKx26vqrAI7XfrXAgsHkTeOeV0.webp",
 ];
 ---
 
-<section id="process" class="stack-panel bg-[#ebe9e4] px-4 pb-40 pt-24 text-[#11110f] sm:px-8 lg:px-10 lg:pb-48" data-scroll-tone-section data-scroll-tone-theme="ink">
+<section id="process" class="agent-in-room-target stack-panel relative bg-[#262722] px-4 pb-40 pt-24 text-white sm:px-8 lg:px-10 lg:pb-48" data-scroll-tone-section data-scroll-tone-spread="0.18">
+	<span id="agent-in-the-room" class="agent-in-room-target pointer-events-none absolute left-0 top-0" aria-hidden="true"></span>
+	<span id="method" class="agent-in-room-target pointer-events-none absolute left-0 top-0" aria-hidden="true"></span>
 	<div class="reveal mx-auto grid max-w-[96rem] gap-14 p-5 sm:p-8 lg:p-10">
-		<div class="grid gap-8 lg:grid-cols-[0.42fr_1fr] lg:items-end lg:gap-14">
-			<p class="w-fit rounded-lg bg-black/5 px-4 py-3 text-[0.9rem] font-bold text-[#77736a]">THE PROCESS</p>
-			<h2 class="max-w-[18ch] text-[clamp(2.25rem,4vw,4.5rem)] font-bold leading-[0.96]" data-scroll-tone-line>
-				From first question to working capability.
-			</h2>
+		<div class="grid justify-items-center gap-8 text-center">
+			<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-[0.9rem] font-bold text-white/65">AGENT IN THE ROOM™</p>
+			<div class="max-w-[48rem]">
+				<h2 class="section-headline text-[clamp(2.25rem,4vw,4.5rem)]" data-scroll-tone-line>Start with a conversation, not a deck.</h2>
+				<p class="mx-auto mt-8 max-w-[40rem] text-[clamp(1rem,1.45vw,1.2rem)] font-bold leading-[1.4] text-white/82" data-scroll-tone-line>
+					It starts with a call. We record it and steer it, so by the end we know what the problem is. That becomes the brief.
+				</p>
+			</div>
 		</div>
 
-		<ol class="grid border-y border-black/25 sm:grid-cols-5" aria-label="The Act process">
-			{processSteps.map((step, index) => (
-				<li class="relative grid min-h-[15rem] content-between gap-8 border-b border-black/25 py-7 sm:min-h-[19rem] sm:grid-rows-[auto_1fr] sm:content-normal sm:gap-0 sm:border-b-0 sm:border-r sm:px-5 sm:py-8 sm:last:border-r-0 lg:px-7" data-scroll-tone-line>
-					<div class="flex items-center justify-between gap-4">
-						<span class="text-xs font-bold">{step.number}</span>
-						{index < processSteps.length - 1 && <span class="text-xl font-bold sm:hidden" aria-hidden="true">↓</span>}
+		<ol class="grid border-t border-white/20 md:grid-cols-2" aria-label="Agent in the Room process">
+			<li class="grid min-h-[18rem] content-start gap-10 border-b border-white/20 py-8 md:border-r md:pr-8">
+				<span class="text-sm font-bold text-[#dfff42]">01</span>
+				<div>
+					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The call.</h3>
+					<p class="agent-step-copy mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">Thirty minutes, recorded. We steer the conversation until we land on the real problem, not just notes.</p>
+				</div>
+			</li>
+			<li class="grid min-h-[18rem] content-start gap-10 border-b border-white/20 py-8 md:pl-8">
+				<span class="text-sm font-bold text-[#dfff42]">02</span>
+				<div>
+					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The prep.</h3>
+					<p class="agent-step-copy mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">If you choose to go ahead, we programme and prepare the agent on your brief, ready for the AIR session.</p>
+				</div>
+			</li>
+			<li class="grid gap-10 border-b border-white/20 py-10 md:col-span-2">
+				<div class="grid gap-7 md:grid-cols-[4rem_1fr] md:gap-8">
+					<span class="text-sm font-bold text-[#dfff42]">03</span>
+					<div>
+						<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The AIR session.</h3>
+						<p class="agent-step-copy mt-4 max-w-[54rem] font-bold leading-[1.4] text-white/75">Face to face, wherever suits the conversation. One or two of our experts join your people, with the agent we've prepared. It questions the room one question at a time. You answer. We steer. AI-led, expert-driven.</p>
 					</div>
-					<div class="sm:pt-28">
-						<h3 class="text-[clamp(1.4rem,2vw,2rem)] font-bold leading-none">{step.name}</h3>
-						<p class="mt-4 max-w-[18rem] text-[0.95rem] font-bold leading-[1.3]">{step.copy}</p>
+				</div>
+
+				<div class="grid gap-6">
+					<div class="flex items-center justify-between gap-5">
+						<p class="text-sm font-bold uppercase text-white/65">Inside the session</p>
+						<div class="flex gap-2">
+							<button class="action-pill grid h-12 w-12 place-items-center bg-white text-xl font-bold text-[#11110f] transition hover:bg-[#dfff42]" type="button" aria-label="Previous AIR session interaction" data-use-case-scroll="-1">←</button>
+							<button class="action-pill grid h-12 w-12 place-items-center bg-white text-xl font-bold text-[#11110f] transition hover:bg-[#dfff42]" type="button" aria-label="Next AIR session interaction" data-use-case-scroll="1">→</button>
+						</div>
 					</div>
-					{index < processSteps.length - 1 && <span class="absolute -right-3 top-8 z-10 hidden h-6 w-6 place-items-center bg-[#ebe9e4] text-lg font-bold sm:grid" aria-hidden="true">→</span>}
-				</li>
-			))}
+					<div class="air-session-track flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 pr-[12vw]" data-use-case-track role="region" aria-label="What happens inside the AIR session" aria-roledescription="carousel">
+						{sessionSlides.map((slide, index) => (
+							<article class="use-case-card relative aspect-[4/3] w-[min(82vw,32rem)] shrink-0 snap-start overflow-hidden rounded-lg bg-[#11110f]" aria-label={`Interaction ${index + 1} of ${sessionSlides.length}`}>
+								<img class="absolute inset-0 h-full w-full object-cover" src={sessionImages[index % sessionImages.length]} alt="" />
+								<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10"></div>
+								<div class="relative flex h-full flex-col justify-end p-6 sm:p-8">
+									<p class="text-xs font-bold uppercase text-[#dfff42]">Interaction {String(index + 1).padStart(2, "0")}</p>
+									<p class="mt-3 max-w-[22ch] text-[clamp(1.2rem,2.1vw,1.75rem)] font-bold leading-[1.15] [text-wrap:balance]">{slide}</p>
+								</div>
+							</article>
+						))}
+					</div>
+				</div>
+			</li>
+			<li class="grid gap-7 border-b border-white/20 py-10 md:col-span-2 md:grid-cols-[4rem_1fr] md:gap-8">
+				<span class="text-sm font-bold text-[#dfff42]">04</span>
+				<div>
+					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The build.</h3>
+					<p class="agent-step-copy mt-4 max-w-[44rem] font-bold leading-[1.4] text-white/75">What we agree goes to our studio, where we build, test and deploy it.</p>
+					{/* Draft for Mark to review. */}
+					<p class="agent-step-copy mt-4 max-w-[44rem] font-bold leading-[1.4] text-white" data-review-status="draft">The result is a working capability that changes how your business operates and builds operational capacity.</p>
+				</div>
+			</li>
 		</ol>
+
+		<div class="grid justify-items-center gap-5 pt-4 text-center">
+			<p class="text-[clamp(1.5rem,2.4vw,2.5rem)] font-bold leading-[1.3]" data-scroll-tone-line>It starts with a 30-minute call.</p>
+			<a class="action-pill inline-flex h-12 items-center justify-center bg-white px-6 font-bold text-[#11110f] no-underline transition hover:bg-[#dfff42]" href={bookingHref}>Request a 30-minute call</a>
+		</div>
 	</div>
 </section>
+
+<style>
+	.agent-in-room-target {
+		scroll-margin-top: 4.5rem;
+	}
+
+	.agent-step-copy {
+		text-wrap: pretty;
+	}
+
+	.air-session-track {
+		scrollbar-color: rgba(255, 255, 255, 0.34) transparent;
+		scrollbar-width: thin;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.air-session-track {
+			scroll-behavior: auto;
+		}
+	}
+</style>

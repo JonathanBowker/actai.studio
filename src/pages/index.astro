@@ -8,7 +8,6 @@ import {
 	HeroSection,
 	LeadershipIntroSection,
 	LeadershipAreasSection,
-	PossibilitySection,
 	ProcessSection,
 	RippleEffectsSection,
 	ResultsSection,
@@ -291,7 +290,7 @@ const faqs = [
 			.contact-close {
 				background: rgba(255, 255, 255, 0.14);
 				border: 0;
-				border-radius: 0.8rem;
+				border-radius: 9999px;
 				color: white;
 				cursor: pointer;
 				align-items: center;
@@ -371,7 +370,7 @@ const faqs = [
 			.contact-submit {
 				background: white;
 				border: 0;
-				border-radius: 0.9rem;
+				border-radius: 9999px;
 				color: #11110f;
 				cursor: pointer;
 				font: inherit;
@@ -441,8 +440,6 @@ const faqs = [
 
 			.hero-title {
 				font-size: clamp(3.6rem, 7.2vw, 8.2rem);
-				line-height: 1.04;
-				letter-spacing: 0;
 			}
 
 			.hero-video-frame {
@@ -1091,8 +1088,7 @@ const faqs = [
 		<main class="bg-[#ebe9e4]">
 			<HeroSection />
 			<LeadershipIntroSection />
-			<PossibilitySection {bookingHref} />
-			<ProcessSection />
+			<ProcessSection {bookingHref} />
 			<LeadershipAreasSection {leadershipSectorColumns} />
 			<RippleEffectsSection />
 			<DirectionSection {bookingHref} />
@@ -1318,17 +1314,12 @@ const faqs = [
 					});
 				};
 
-				document.querySelectorAll("[data-use-case-scroll]").forEach((button) => {
+				track.parentElement?.querySelectorAll("[data-use-case-scroll]").forEach((button) => {
 					button.addEventListener("click", () => {
 						scrollByCard(Number(button.dataset.useCaseScroll || 1));
 					});
 				});
 
-				track.addEventListener("wheel", (event) => {
-					if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-					track.scrollLeft += event.deltaY;
-					event.preventDefault();
-				}, { passive: false });
 			});
 
 			const triageTracks = [...document.querySelectorAll("[data-triage-track]")];

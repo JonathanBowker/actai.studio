@@ -1,4 +1,4 @@
-<button class="contact-trigger fixed right-5 top-3 z-50 inline-flex h-12 items-center gap-3 rounded-xl bg-white px-5 font-bold text-[#11110f] transition hover:bg-[#dfff42] sm:right-8" type="button" data-contact-open data-scroll-contact>
+<button class="action-pill contact-trigger fixed right-5 top-3 z-50 inline-flex h-12 items-center gap-3 bg-white px-5 font-bold text-[#11110f] transition hover:bg-[#dfff42] sm:right-8" type="button" data-contact-open data-scroll-contact>
 	<span aria-hidden="true">✦</span>
 	<span>Get in touch</span>
 </button>
@@ -6,7 +6,7 @@
 <div class="contact-layer" data-contact-layer data-open="false" aria-hidden="true">
 	<div class="contact-scrim" aria-hidden="true"></div>
 	<aside class="contact-panel" role="dialog" aria-modal="true" aria-labelledby="contact-title">
-		<button class="contact-close" type="button" data-contact-close>
+		<button class="action-pill contact-close" type="button" data-contact-close>
 			<span aria-hidden="true">&times;</span>
 			<span>Close</span>
 		</button>
@@ -63,7 +63,7 @@
 				<textarea id="contact-details" class="contact-control min-h-[7.5rem] resize-none" name="details" placeholder="Tell us where AI could help, what is stuck, or what you want to understand." required></textarea>
 			</div>
 
-			<button class="contact-submit mt-4" type="submit">Submit</button>
+			<button class="action-pill contact-submit mt-4" type="submit">Submit</button>
 			<p class="text-center text-[0.9rem] font-bold leading-tight text-white/48">
 				By sending this, you're starting a direct conversation with our directors.
 			</p>
@@ -75,10 +75,10 @@
 			Forgot to press submit?
 		</p>
 		<div class="mt-8 grid grid-cols-2 gap-3">
-			<button class="rounded-xl bg-white/12 px-4 py-3 font-bold text-white transition hover:bg-white/18" type="button" data-contact-discard>
+			<button class="action-pill bg-white/12 px-4 py-3 font-bold text-white transition hover:bg-white/18" type="button" data-contact-discard>
 				× Close anyway
 			</button>
-			<button class="rounded-xl bg-white/12 px-4 py-3 font-bold text-white transition hover:bg-white/18" type="button" data-contact-resume>
+			<button class="action-pill bg-white/12 px-4 py-3 font-bold text-white transition hover:bg-white/18" type="button" data-contact-resume>
 				↗ Back to form
 			</button>
 		</div>

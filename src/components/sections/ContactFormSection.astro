@@ -50,7 +50,7 @@ const buttonLabel = isCall ? "Send call request" : "Send message";
 
 			<label class="contact-honeypot" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
 
-			<button class="mt-7 inline-flex h-13 w-full items-center justify-center rounded-lg bg-[#11110f] px-6 text-sm font-bold text-white transition hover:bg-[#dfff42] hover:text-black disabled:cursor-wait disabled:opacity-65" type="submit" data-contact-submit data-default-label={buttonLabel}>{buttonLabel}</button>
+			<button class="action-pill mt-7 inline-flex h-13 w-full items-center justify-center bg-[#11110f] px-6 text-sm font-bold text-white transition hover:bg-[#dfff42] hover:text-black disabled:cursor-wait disabled:opacity-65" type="submit" data-contact-submit data-default-label={buttonLabel}>{buttonLabel}</button>
 			<p class="mt-4 text-center text-sm font-bold" data-contact-status aria-live="polite"></p>
 			<p class="mt-4 text-center text-sm font-bold text-[#89857d]">{isCall ? "No commitment required." : "Your details are used only to respond to your enquiry."}</p>
 		</form>
