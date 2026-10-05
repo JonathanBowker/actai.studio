@@ -8,17 +8,16 @@ const mobileSectors = leadershipSectorColumns.flat().sort((a, b) => a.number - b
 ---
 <section id="practice" class="stack-panel bg-white px-4 pb-40 pt-24 text-[#11110f] sm:px-8 lg:px-10 lg:pb-56" data-scroll-tone-section data-scroll-tone-theme="ink">
 				<div class="mx-auto grid max-w-[96rem] gap-20">
-					<div class="reveal grid gap-12 overflow-hidden rounded-[2rem] bg-white p-5 text-[#11110f] sm:p-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:p-10">
-						<div class="lg:pr-12">
-							<p class="w-fit rounded-lg bg-black/5 px-4 py-3 text-[0.9rem] font-bold text-[#77736a]">THE PRACTICE</p>
-							<div class="mt-12 max-w-[17ch] text-[clamp(1.75rem,2.7vw,3rem)] font-bold leading-[1]">
-								<p class="section-headline" data-scroll-tone-line>Where AI earns its place.</p>
-								<p class="mt-8" data-scroll-tone-line>What matters is where AI creates value and where people stay in control.</p>
-								<p class="mt-8" data-scroll-tone-line>Agents bring capability, which builds operational capacity.</p>
-							</div>
+					<div class="reveal grid gap-y-12 overflow-hidden rounded-[2rem] bg-white p-5 text-[#11110f] sm:p-8 lg:grid-cols-9 lg:gap-x-6 lg:p-10">
+						<p class="w-fit justify-self-center rounded-lg border border-black/45 bg-white px-8 py-3 text-[0.9rem] font-bold text-[#11110f] lg:col-span-9">THE PRACTICE</p>
+						<h2 class="section-headline text-[clamp(2.25rem,4vw,4.5rem)] lg:col-span-9" data-scroll-tone-line>Where AI earns its place.</h2>
+
+						<div class="max-w-[20rem] self-center text-[clamp(1.55rem,2.15vw,2.35rem)] font-bold leading-[1.08] lg:col-span-3 lg:col-start-2">
+							<p data-scroll-tone-line>What matters is where AI creates value and where people stay in control.</p>
+							<p class="mt-8" data-scroll-tone-line>Agents bring capability, which builds operational capacity.</p>
 						</div>
 
-						<div class="sector-grid grid h-[38rem] grid-cols-1 overflow-hidden rounded-[1.6rem] bg-white p-4 sm:hidden" aria-label="Business use cases">
+						<div class="sector-grid grid h-[38rem] grid-cols-1 overflow-hidden rounded-[1.6rem] bg-white p-4 lg:col-span-4 lg:col-start-5 sm:hidden" aria-label="Business use cases">
 							<div class="sector-column grid h-[36rem] gap-7 overflow-y-auto pb-16" data-sector-column data-sector-loop="continuous">
 								{[...mobileSectors, ...mobileSectors].map((sector, itemIndex) => (
 									<UseCaseSectorCard sector={sector} total={useCaseTotal} hiddenCopy={itemIndex >= mobileSectors.length} />
@@ -26,7 +25,7 @@ const mobileSectors = leadershipSectorColumns.flat().sort((a, b) => a.number - b
 							</div>
 						</div>
 
-						<div class="sector-grid hidden h-[38rem] grid-cols-2 gap-x-5 overflow-hidden rounded-[1.6rem] bg-white p-4 sm:grid lg:h-[42rem]" aria-label="Business use cases">
+						<div class="sector-grid hidden h-[38rem] grid-cols-2 gap-x-5 overflow-hidden rounded-[1.6rem] bg-white p-4 sm:grid lg:col-span-4 lg:col-start-5 lg:h-[42rem]" aria-label="Business use cases">
 							{leadershipSectorColumns.map((column) => (
 								<div class="sector-column grid h-[36rem] gap-7 overflow-y-auto pb-16 sm:gap-8 lg:h-[40rem]" data-sector-column>
 									{[...column, ...column].map((sector, itemIndex) => (
