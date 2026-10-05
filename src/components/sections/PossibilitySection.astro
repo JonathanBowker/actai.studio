@@ -17,21 +17,24 @@ const conversationImages = [
 	"/fixa-assets/K6oVlqJ1SryJzVBte2yxIFoGqI.webp",
 	"/fixa-assets/WXKx26vqrAI7XfrXAgsHkTeOeV0.webp",
 ];
+
+interface Props { bookingHref: string }
+const { bookingHref } = Astro.props;
 ---
 
-<section id="method" class="stack-panel bg-[#262722] px-4 pb-40 pt-24 text-white sm:px-8 lg:px-10 lg:pb-56" data-scroll-tone-section data-scroll-tone-spread="0.18">
+<section id="agent-in-the-room" class="stack-panel bg-[#262722] px-4 pb-40 pt-24 text-white sm:px-8 lg:px-10 lg:pb-56" data-scroll-tone-section data-scroll-tone-spread="0.18">
 	<div class="reveal mx-auto grid max-w-[96rem] gap-14">
 		<div class="grid gap-8 lg:grid-cols-[0.42fr_1fr] lg:items-start lg:gap-14">
-			<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-[0.9rem] font-bold text-white/50">THE METHOD</p>
-			<div class="max-w-[24ch] text-[clamp(1.75rem,2.7vw,3rem)] font-bold leading-[1]">
-				<p data-scroll-tone-line>Layered interaction with an agent briefed on your business case.</p>
-				<p class="mt-8" data-scroll-tone-line>
-					Ask it anything.
-					Put our expert-led direction to the test in conversation.
+			<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-[0.9rem] font-bold text-white/65">AGENT IN THE ROOM</p>
+			<div class="max-w-[34rem]">
+				<h2 class="text-[clamp(2.25rem,4vw,4.5rem)] font-bold leading-[0.96]" data-scroll-tone-line>Start with a live session, not a deck.</h2>
+				<p class="mt-8 text-[clamp(1rem,1.45vw,1.2rem)] font-bold leading-[1.4] text-white/82" data-scroll-tone-line>
+					Agent in the Room™ is a live working session. An AI agent, briefed on your business, joins the room through a speaker. Your people and our director question it together. You leave with a scoped AI direction.
 				</p>
 			</div>
 		</div>
 
+		<p class="text-sm font-bold uppercase text-white/65">What happens in the session</p>
 		<div class="design-tree-shell relative h-[38rem] overflow-hidden rounded-[1.6rem] bg-[#10110f] sm:h-[40rem] lg:h-[42rem]" data-design-tree-carousel>
 			<div class="design-tree-header absolute left-5 right-5 top-5 z-20 flex items-center justify-between text-[0.68rem] font-bold uppercase text-white/55 sm:left-7 sm:right-7 sm:top-7 sm:text-xs">
 				<span>Agent in the Room™</span>
@@ -66,6 +69,11 @@ const conversationImages = [
 					<button class="design-tree-control" type="button" aria-label="Next conversation stage" data-design-tree-next>↓</button>
 				</div>
 			</div>
+		</div>
+
+		<div class="grid justify-items-center gap-5 pt-4 text-center">
+			<p class="text-[clamp(1.5rem,2.4vw,2.5rem)] font-bold leading-none" data-scroll-tone-line>It starts with a 30-minute call.</p>
+			<a class="inline-flex h-12 items-center justify-center rounded-lg bg-white px-6 font-bold text-[#11110f] no-underline transition hover:bg-[#dfff42]" href={bookingHref}>Request a 30-minute call</a>
 		</div>
 	</div>
 </section>
