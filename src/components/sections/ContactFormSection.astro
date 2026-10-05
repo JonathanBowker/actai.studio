@@ -1,7 +1,7 @@
 ---
 const nextSteps = [
 	{ number: "01", title: "We read your note", copy: "We look at the business context, the pressure you are trying to resolve and what you need AI to make possible." },
-	{ number: "02", title: "30-minute conversation", copy: "We talk through where time, consistency or control is being lost and whether an agentic approach is the right route." },
+	{ number: "02", title: "30-minute conversation", copy: "We talk through where time, consistency or control is being lost and whether AI is the right route." },
 	{ number: "03", title: "Clear next step", copy: "You leave with a recommendation: what to explore, what to avoid and what needs to be scoped next." },
 ];
 ---
@@ -12,7 +12,7 @@ const nextSteps = [
 			<div class="mb-10 flex items-end justify-between gap-6 border-b border-black/12 pb-7">
 				<div>
 					<p class="text-sm font-bold uppercase tracking-[0.12em] text-[#77736a]">Start the conversation</p>
-					<h2 class="mt-3 text-[clamp(1.8rem,3vw,2.7rem)] font-bold leading-none">Book a 30-minute call</h2>
+					<h2 class="mt-3 text-[clamp(1.8rem,3vw,2.7rem)] font-bold leading-none">Request a 30-minute call</h2>
 				</div>
 				<span class="hidden h-3 w-3 rounded-full bg-[#dfff42] sm:block" aria-hidden="true"></span>
 			</div>
@@ -36,7 +36,7 @@ const nextSteps = [
 
 			<label class="contact-honeypot" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
 
-			<button class="mt-7 inline-flex h-13 w-full items-center justify-center rounded-lg bg-[#11110f] px-6 text-sm font-bold text-white transition hover:bg-[#dfff42] hover:text-black disabled:cursor-wait disabled:opacity-65" type="submit" data-contact-submit>BEGIN THE CONVERSATION</button>
+			<button class="mt-7 inline-flex h-13 w-full items-center justify-center rounded-lg bg-[#11110f] px-6 text-sm font-bold text-white transition hover:bg-[#dfff42] hover:text-black disabled:cursor-wait disabled:opacity-65" type="submit" data-contact-submit>Send call request</button>
 			<p class="mt-4 text-center text-sm font-bold" data-contact-status aria-live="polite"></p>
 			<p class="mt-4 text-center text-sm font-bold text-[#89857d]">We'll reply within one business day. No commitment required.</p>
 		</form>
@@ -116,7 +116,7 @@ const nextSteps = [
 			status.append(emailLink, ".");
 		} finally {
 			submitButton.disabled = false;
-			submitButton.textContent = "BEGIN THE CONVERSATION";
+			submitButton.textContent = "Send call request";
 		}
 	});
 </script>

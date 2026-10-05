@@ -10,21 +10,22 @@ import {
 } from "../components/sections";
 
 const bookingHref = "/contact";
+const showReviewPlaceholders = import.meta.env.PUBLIC_SITE_ENV === "staging";
 const agents = (await getCollection("agents")).sort((a, b) => a.data.name.localeCompare(b.data.name, "en-GB"));
 const groups = [
 	{
 		label: "Start here",
 		links: [
-			{ label: "Home", href: "/", note: "ACT's direction, approach and evidence." },
-			{ label: "Results", href: "/#results", note: "The outcomes our work is designed to create." },
-			{ label: "About us", href: "/#direction", note: "Meet the directors behind ACT." },
+			{ label: "Home", href: "/", note: "Act AI Studio's direction and approach." },
+			...(showReviewPlaceholders ? [{ label: "Results", href: "/#results", note: "Evidence placeholders under review." }] : []),
+			{ label: "About us", href: "/#direction", note: "Meet the directors behind Act AI Studio." },
 			{ label: "Frequently asked questions", href: "/#faq", note: "Practical answers about working together." },
 		],
 	},
 	{
-		label: "Talk to ACT",
+		label: "Talk to Act AI Studio",
 		links: [
-			{ label: "Begin the conversation", href: bookingHref, note: "Start with a direct conversation." },
+			{ label: "Request a 30-minute call", href: bookingHref, note: "Start with a direct conversation." },
 			{ label: "Contact", href: "/contact", note: "Send us the business context and your question." },
 		],
 	},
@@ -40,7 +41,7 @@ const groups = [
 	{
 		label: "Site information",
 		links: [
-			{ label: "Privacy notice", href: "/privacy", note: "How ACT handles the information you share." },
+			{ label: "Privacy notice", href: "/privacy", note: "How Act AI Studio handles the information you share." },
 			{ label: "Site map", href: "/sitemap", note: "You are here." },
 		],
 	},
@@ -54,9 +55,9 @@ const groups = [
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="A complete directory of ACT's pages, agent diagnostics and site information." />
+		<meta name="description" content="A complete directory of Act AI Studio pages, agent diagnostics and site information." />
 		<SeoGuard />
-		<title>Site map | actai.studio</title>
+		<title>Site map | Act AI Studio</title>
 		<style is:global>
 			html, body { background: #f6f4ef; color: #11110f; }
 		</style>
@@ -67,6 +68,6 @@ const groups = [
 			<SitemapHeroSection />
 			<SitemapDirectorySection {groups} />
 		</main>
-		<SitemapFooterSection {bookingHref} />
+		<SitemapFooterSection {bookingHref} {showReviewPlaceholders} />
 	</body>
 </html>

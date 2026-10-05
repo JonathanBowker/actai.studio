@@ -14,24 +14,23 @@ const { revealOnScroll = false, showContactLink = true } = Astro.props;
 	data-reveal-on-scroll={String(revealOnScroll)}
 	data-has-contact={String(showContactLink)}
 >
-	<a href="/" class="site-brand" aria-label="ACT home">
-		<img src="/act-logo.svg" alt="ACT" />
+	<a href="/" class="site-brand" aria-label="Act AI Studio home">
+		<img src="/act-logo.svg" alt="Act AI Studio" />
 	</a>
 	<nav class="site-menu" data-menu-panel data-open="false" aria-label="Main menu">
 		<div>
 			<div class="site-menu-links">
-				<a class="site-menu-link" href="/#possibility">The possibility</a>
-				<a class="site-menu-link" href="/#method">The method</a>
-				<a class="site-menu-link" href="/#process">The process</a>
-				<a class="site-menu-link" href="/#practice">The practice</a>
-				<a class="site-menu-link" href="/#ripple-effects">The governance</a>
-				<a class="site-menu-link" href="/#direction">The direction</a>
-				<a class="site-menu-link" href="/#results">The proof</a>
-				{showContactLink && <a class="site-menu-link site-menu-contact" href="/contact">BEGIN THE CONVERSATION</a>}
+				<a class="site-menu-link" href="/#method">Agent in the Room™</a>
+				<a class="site-menu-link" href="/#process">Process</a>
+				<a class="site-menu-link" href="/#practice">Use cases</a>
+				<a class="site-menu-link" href="/#governance">Governance</a>
+				<a class="site-menu-link" href="/#direction">Team</a>
+				<a class="site-menu-link" href="/#faq">FAQ</a>
+				{showContactLink && <a class="site-menu-link site-menu-contact" href="/contact">Request a 30-minute call</a>}
 			</div>
 		</div>
 	</nav>
-	{showContactLink && <a class="site-contact-link" href="/contact">BEGIN THE CONVERSATION</a>}
+	{showContactLink && <a class="site-contact-link" href="/contact">Request a 30-minute call</a>}
 	<button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
 		<span class="menu-icon" data-menu-icon data-open="false" aria-hidden="true"></span>
 	</button>

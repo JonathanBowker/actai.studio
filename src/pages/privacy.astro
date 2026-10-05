@@ -1,7 +1,9 @@
 ---
 import "../styles/global.css";
 import SeoGuard from "../components/SeoGuard.astro";
-import { PrivacyContentSection, SiteHeader } from "../components/sections";
+import { PrivacyContentSection, SiteHeader, SitemapFooterSection } from "../components/sections";
+const bookingHref = "/contact";
+const showReviewPlaceholders = import.meta.env.PUBLIC_SITE_ENV === "staging";
 ---
 
 <html lang="en">
@@ -10,14 +12,15 @@ import { PrivacyContentSection, SiteHeader } from "../components/sections";
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
-		<meta name="description" content="Actai.Studio privacy notice." />
+		<meta name="description" content="How Act AI Studio handles information shared through this website." />
 		<SeoGuard />
-		<title>Privacy Notice | Actai.Studio</title>
+		<title>Privacy notice | Act AI Studio</title>
 	</head>
 	<body class="bg-[#ebe9e4] pt-[4.5rem] text-[#11110f]">
 		<SiteHeader />
 		<main class="mx-auto grid min-h-screen max-w-[58rem] content-center gap-8 px-4 py-20 sm:px-8">
 			<PrivacyContentSection />
 		</main>
+		<SitemapFooterSection {bookingHref} {showReviewPlaceholders} />
 	</body>
 </html>

@@ -9,8 +9,8 @@ const useCaseTotal = leadershipSectorColumns.flat().length;
 						<div class="lg:pr-12">
 							<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-[0.9rem] font-bold text-white/50">THE PRACTICE</p>
 							<div class="mt-12 max-w-[17ch] text-[clamp(1.75rem,2.7vw,3rem)] font-bold leading-[1]">
-								<p data-scroll-tone-line>The possibilities are infinite.</p>
-								<p class="mt-8" data-scroll-tone-line>AI can do almost anything. What matters is where it creates value for your business.</p>
+								<p data-scroll-tone-line>Where AI earns its place.</p>
+								<p class="mt-8" data-scroll-tone-line>What matters is where AI creates value and where people stay in control.</p>
 								<p class="mt-8" data-scroll-tone-line>See where directed agents can change the work.</p>
 							</div>
 						</div>
@@ -18,7 +18,8 @@ const useCaseTotal = leadershipSectorColumns.flat().length;
 						<div class="sector-grid sector-grid-dark grid h-[38rem] grid-cols-2 gap-x-4 overflow-hidden rounded-[1.6rem] bg-[#11110f] p-4 sm:gap-x-5 lg:h-[42rem]" aria-label="Business use cases">
 							{leadershipSectorColumns.map((column) => (
 								<div class="sector-column grid h-[36rem] gap-7 overflow-y-auto pb-16 sm:gap-8 lg:h-[40rem]" data-sector-column>
-									{[...column, ...column].map((sector) => (
+									{[...column, ...column].map((sector, itemIndex) => (
+										<a class="block text-white no-underline" href="/sitemap#agent-diagnostics" aria-hidden={itemIndex >= column.length ? "true" : undefined} tabindex={itemIndex >= column.length ? "-1" : undefined}>
 										<figure>
 											<div class="relative aspect-[3/4] overflow-hidden rounded-[0.9rem] bg-black shadow-[0_20px_60px_rgba(0,0,0,0.26)]">
 												<img class="absolute inset-0 h-full w-full object-cover" src={sector.image} alt="" />
@@ -44,6 +45,7 @@ const useCaseTotal = leadershipSectorColumns.flat().length;
 												</div>
 											</div>
 										</figure>
+										</a>
 									))}
 								</div>
 							))}

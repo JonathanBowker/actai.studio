@@ -1,38 +1,42 @@
 ---
-interface Props { bookingHref: string }
-const { bookingHref } = Astro.props;
+interface Props { bookingHref: string; showReviewPlaceholders?: boolean }
+const { bookingHref, showReviewPlaceholders = false } = Astro.props;
 ---
 <footer class="relative overflow-hidden bg-black px-4 pb-0 pt-8 text-white sm:px-8 lg:px-10 lg:pt-10" data-scroll-tone-section>
 				<div class="relative z-10 grid min-h-[24rem] w-full gap-10 bg-black p-8 text-white md:grid-cols-[1fr_1fr_0.7fr]">
 					<div class="grid content-between gap-10">
 						<div>
-							<p class="text-[1.7rem] font-bold" data-scroll-tone-line>Act.</p>
-							<p class="mt-10 font-bold" data-scroll-tone-line>Get a useful recommendation.<br />No spam. No noise.</p>
+							<p class="text-[1.7rem] font-bold">Act.</p>
+							<p class="mt-10 font-bold">Get a useful recommendation.<br />No spam. No noise.</p>
 							<a href={bookingHref} class="mt-6 inline-flex h-12 items-center rounded-xl bg-white px-6 font-bold text-black no-underline transition hover:bg-[#dfff42]">
-								BEGIN THE CONVERSATION
+								Request a 30-minute call
 							</a>
 						</div>
-						<p data-scroll-tone-line>© 2026 Advanced Analytica Limited. All Rights Reserved.</p>
+						<div class="grid gap-2">
+							<p>© 2026 Advanced Analytica Limited. All Rights Reserved.</p>
+							{showReviewPlaceholders && <p>Company number: [company number needed]</p>}
+							{showReviewPlaceholders && <p>Registered office: [registered office needed]</p>}
+							{showReviewPlaceholders && <p>Registered in: [place of registration needed]</p>}
+						</div>
 					</div>
 					<div>
-						<p class="mb-5 font-bold" data-scroll-tone-line>Information</p>
+						<p class="mb-5 font-bold">Information</p>
 					<div class="grid gap-2 font-bold">
 						<a class="text-white no-underline" href="/">Home</a>
-						<a class="text-white no-underline" href="#possibility">The possibility</a>
-						<a class="text-white no-underline" href="#method">The method</a>
-						<a class="text-white no-underline" href="#process">The process</a>
-						<a class="text-white no-underline" href="#practice">The practice</a>
-						<a class="text-white no-underline" href="#ripple-effects">The governance</a>
-						<a class="text-white no-underline" href="#direction">The direction</a>
-						<a class="text-white no-underline" href="#results">The proof</a>
-						<a class="text-white no-underline" href="#faq">The questions</a>
+						<a class="text-white no-underline" href="#method">Agent in the Room™</a>
+						<a class="text-white no-underline" href="#process">Process</a>
+						<a class="text-white no-underline" href="#practice">Use cases</a>
+						<a class="text-white no-underline" href="#governance">Governance</a>
+						<a class="text-white no-underline" href="#direction">Team</a>
+						<a class="text-white no-underline" href="#faq">FAQ</a>
 						<a class="text-white no-underline" href="/sitemap">Site map</a>
+						<a class="text-white no-underline" href="/privacy">Privacy</a>
 						</div>
-						<p class="mb-3 mt-10 font-bold" data-scroll-tone-line>Contact</p>
+						<p class="mb-3 mt-10 font-bold">Contact</p>
 						<a class="font-bold text-white no-underline" href="mailto:hello@actai.studio">hello@actai.studio</a>
 					</div>
 					<div>
-						<p class="mb-5 font-bold" data-scroll-tone-line>Social</p>
+						<p class="mb-5 font-bold">Social</p>
 						<div class="grid gap-2 font-bold">
 							<a class="text-white no-underline" href="https://www.linkedin.com/company/advancedanalytica/" target="_blank" rel="noreferrer">LinkedIn</a>
 						</div>

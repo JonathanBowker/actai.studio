@@ -12,6 +12,7 @@ export async function getStaticPaths() {
 type Props = { agent: CollectionEntry<"agents"> };
 const { agent } = Astro.props;
 const bookingHref = "/contact";
+const showReviewPlaceholders = import.meta.env.PUBLIC_SITE_ENV === "staging";
 const packBase = `/packs/${agent.id}`;
 const zipHref = `${packBase}/${agent.id}-triage-pack.zip`;
 const heroArt = [
@@ -34,9 +35,9 @@ const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
-		<meta name="description" content={`${agent.data.name}: a diagnostic self-help pack from Actai.Studio.`} />
+		<meta name="description" content={`${agent.data.name}: a diagnostic self-help pack from Act AI Studio.`} />
 		<SeoGuard path={`/agents/${agent.id}`} />
-		<title>{agent.data.name} | Actai.Studio</title>
+		<title>{agent.data.name} | Act AI Studio</title>
 		<style is:global>
 			:root { --cream:#ebe9e4; --paper:#f6f4ef; --ink:#11110f; --muted:#77736a; --lime:#dfff42; }
 			html, body { background:var(--ink); }
@@ -177,7 +178,7 @@ const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index 
 
 			<AgentDiagnosisSection {agent} />
 
-			<AgentPackSection {agent} {zipHref} {packBase} {bookingHref} />
+			<AgentPackSection {agent} {zipHref} {packBase} {bookingHref} {showReviewPlaceholders} />
 		</main>
 
 		<script>
@@ -191,11 +192,8 @@ const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index 
 			if (storageKey && localStorage.getItem(storageKey) === "unlocked") unlockPanel?.removeAttribute("hidden");
 			gate?.addEventListener("submit", (event) => {
 				event.preventDefault();
-				const formData = new FormData(gate);
-				const submission = { agentSlug:gate.dataset.agentSlug, name:formData.get("name"), email:formData.get("email"), consent:formData.get("consent") === "on", timestamp:new Date().toISOString() };
 				localStorage.setItem(storageKey, "unlocked");
-				localStorage.setItem(`${storageKey}:submission`, JSON.stringify(submission));
-				trackPackEvent("pack_gate_submit", submission);
+				trackPackEvent("pack_gate_submit", { agentSlug:gate.dataset.agentSlug });
 				unlockPanel?.removeAttribute("hidden");
 				unlockPanel?.scrollIntoView({ behavior:"smooth", block:"center" });
 			});

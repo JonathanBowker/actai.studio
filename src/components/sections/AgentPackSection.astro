@@ -1,6 +1,6 @@
 ---
-interface Props { agent: any; zipHref: string; packBase: string; bookingHref: string }
-const { agent, zipHref, packBase, bookingHref } = Astro.props;
+interface Props { agent: any; zipHref: string; packBase: string; bookingHref: string; showReviewPlaceholders?: boolean }
+const { agent, zipHref, packBase, bookingHref, showReviewPlaceholders = false } = Astro.props;
 ---
 <section id="pack" class="pack stack-panel">
 	<div class="pack__inner">
@@ -28,7 +28,7 @@ const { agent, zipHref, packBase, bookingHref } = Astro.props;
 						<label class="gate-label"><span>Name</span><input class="gate-input" name="name" autocomplete="name" required /></label>
 						<label class="gate-label"><span>Email</span><input class="gate-input" name="email" type="email" autocomplete="email" required /></label>
 					</div>
-					<label class="gate-checkbox"><input name="consent" type="checkbox" required /><span>I consent to Actai.Studio contacting me about this diagnostic pack and related AI direction.</span></label>
+					<label class="gate-checkbox"><input name="consent" type="checkbox" required /><span>I consent to Act AI Studio contacting me about this diagnostic pack and related AI direction.</span></label>
 					<p class="gate-privacy">We use these details to exchange the self-help pack for contact permission. Read the <a href="/privacy">privacy notice</a>.</p>
 					<button class="agent-button agent-button--unlock" type="submit">Unlock the pack</button>
 				</form>
@@ -44,8 +44,13 @@ const { agent, zipHref, packBase, bookingHref } = Astro.props;
 			</div>
 		</div>
 		<footer class="agent-footer">
-			<p>© 2026 Advanced Analytica Limited. All Rights Reserved.</p>
-			<a class="agent-nav__link agent-nav__link--primary" href={bookingHref}>BEGIN THE CONVERSATION</a>
+			<div>
+				<p>© 2026 Advanced Analytica Limited. All Rights Reserved.</p>
+				{showReviewPlaceholders && <p>Company number: [company number needed]</p>}
+				{showReviewPlaceholders && <p>Registered office: [registered office needed]</p>}
+				{showReviewPlaceholders && <p>Registered in: [place of registration needed]</p>}
+			</div>
+			<a class="agent-nav__link agent-nav__link--primary" href={bookingHref}>REQUEST A 30-MINUTE CALL</a>
 		</footer>
 	</div>
 </section>

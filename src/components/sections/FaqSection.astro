@@ -19,7 +19,10 @@ const { faqs } = Astro.props;
 								</button>
 								<div class="faq-answer">
 									<div>
-										<p class="pt-6 text-[0.9rem] font-bold leading-[1.42] text-white/52">{answer}</p>
+										<p class="pt-6 text-[0.9rem] font-bold leading-[1.42] text-white/52">
+											{answer}
+											{question === "What is an Act AI Studio knowledge pack?" && <a class="mt-4 block text-white underline" href="/sitemap#agent-diagnostics">Browse agent diagnostics.</a>}
+										</p>
 									</div>
 								</div>
 							</div>

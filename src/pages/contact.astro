@@ -4,6 +4,7 @@ import SeoGuard from "../components/SeoGuard.astro";
 import { ContactFormSection, ContactIntroSection, SiteHeader, SitemapFooterSection } from "../components/sections";
 
 const bookingHref = "/contact";
+const showReviewPlaceholders = import.meta.env.PUBLIC_SITE_ENV === "staging";
 ---
 
 <html lang="en">
@@ -13,9 +14,9 @@ const bookingHref = "/contact";
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="Contact Act. AI for clear guidance on where to start with AI in your business." />
+		<meta name="description" content="Request a 30-minute call with Act AI Studio to find where AI can create value in your business." />
 		<SeoGuard />
-		<title>Contact | actai.studio</title>
+		<title>Request a call | Act AI Studio</title>
 		<style is:global>
 			html,
 			body {
@@ -31,6 +32,6 @@ const bookingHref = "/contact";
 			<ContactIntroSection />
 			<ContactFormSection />
 		</main>
-		<SitemapFooterSection {bookingHref} />
+		<SitemapFooterSection {bookingHref} {showReviewPlaceholders} />
 	</body>
 </html>

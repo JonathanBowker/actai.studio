@@ -4,7 +4,6 @@ import SeoGuard from "../components/SeoGuard.astro";
 import {
 	SiteHeader,
 	ScrollToneController,
-	ContactPanel,
 	HeroSection,
 	LeadershipIntroSection,
 	LeadershipAreasSection,
@@ -19,6 +18,7 @@ import {
 } from "../components/sections";
 
 const bookingHref = "/contact";
+const showReviewPlaceholders = import.meta.env.PUBLIC_SITE_ENV === "staging";
 
 const useCaseImages = Array.from(
 	{ length: 6 },
@@ -157,45 +157,33 @@ const caseStudyFilters = [
 
 const resultStats = [
 	{
-		value: "10/10",
-		countTo: 10,
-		prefix: "",
-		suffix: "/10",
-		label: "Likelihood people who go through Agent in the Room would use it again.",
+		value: "[Measure needed]",
+		label: "Agent in the Room™ outcome measure, pending a verified source.",
 	},
 	{
-		value: "80%",
-		countTo: 80,
-		prefix: "",
-		suffix: "%",
-		label: "Average time given back to your people across agentic processes.",
+		value: "[Measure needed]",
+		label: "Time returned to teams, pending a verified source.",
 	},
 	{
-		value: "£100,000",
-		countTo: 100000,
-		prefix: "£",
-		suffix: "",
-		label: "Typical enterprise entry point value when skilled people stop doing process work.",
+		value: "[Evidence needed]",
+		label: "Business value evidence, pending a verified source.",
 	},
 	{
-		value: "100+",
-		countTo: 100,
-		prefix: "",
-		suffix: "+",
-		label: "Cross-sector skills approved and ready to power agents.",
+		value: "[Evidence needed]",
+		label: "Delivery evidence, pending a verified source.",
 	},
 ];
 
 const faqs = [
-	["What is Agent in the Room?", "Agent in the Room is a live working session with an ACT director. We examine where time is being lost, identify the business problem worth solving and leave you with a decided AI direction and a clearly scoped plan, not another slide deck."],
+	["What is Agent in the Room™?", "Agent in the Room™ is a live working session. An AI agent, briefed on your business, joins the room through a speaker. Your people and our director question it together. You leave with a scoped AI direction."],
 	["Do we need to know which agent we want before we speak?", "No. Start with the pressure, delay or repeated work inside the business. We help uncover the right use case, test whether AI is appropriate and define what a useful agent would need to know and do."],
-	["Do you only advise, or do you build the agents too?", "We do both. ACT can set the direction, structure the knowledge and build working agents into your business. Delivery can include agent instructions, knowledge architecture, workflows, review points, governance and implementation support."],
+	["Do you only advise, or do you build the agents too?", "We do both. Act AI Studio can set the direction, structure the knowledge and build working agents into your business. Delivery can include agent instructions, knowledge architecture, workflows, review points, governance and implementation support."],
 	["What kinds of work can an agent take on?", "Agents are most useful where skilled people lose time searching for information, repeating answers, preparing documents, checking rules or moving work between systems. The right agent supports judgement and removes process work rather than pretending every task should be automated."],
 	["Can an agent use our existing business knowledge?", "Yes. We shape approved documents, guidance, processes and expert knowledge into a clear source for the agent. Its scope, sources and escalation points are defined so people can understand where an answer came from and when human review is required."],
 	["How do you manage risk, security and governance?", "Risk is designed into the work from the beginning. We define access, approved knowledge, boundaries, review points and escalation rules before an agent is treated as ready. The level of control is matched to the sensitivity of the work and your existing policies."],
-	["What is an ACT knowledge pack?", "A knowledge pack is a compressed ZIP containing the diagnosis, agent prompt and supporting knowledge for a specific use case. It can be uploaded directly to a compatible chat assistant or unzipped and loaded as individual files."],
+	["What is an Act AI Studio knowledge pack?", "A knowledge pack is a compressed ZIP containing the diagnosis, agent prompt and supporting knowledge for a specific use case. It can be uploaded directly to a compatible chat assistant or unzipped and loaded as individual files."],
 	["Will this replace our people?", "The aim is to give skilled people time back. Agents handle repeatable process work, retrieve context and prepare outputs so your team can spend more time applying judgement, building relationships and making decisions."],
-	["Who do you work with?", "We work directly with business leaders in mid-caps, scale-ups and larger organisations. ACT is most useful when there is a real operational problem, access to the people who understand it and a willingness to turn business knowledge into a working capability."],
+	["Who do you work with?", "We work directly with business leaders in mid-caps, scale-ups and larger businesses. Act AI Studio is most useful when there is a real operational problem, access to the people who understand it and a willingness to turn business knowledge into a working capability."],
 	["How do we get started?", "Start with a conversation. In 30 minutes, we can understand where time is being lost, what has already been tried and whether there is a valuable next step. If there is, we will recommend a clear scope before asking you to commit to delivery."],
 ];
 ---
@@ -207,9 +195,9 @@ const faqs = [
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="actai.studio designs practical agentic systems from business knowledge, clear scope and governance." />
+		<meta name="description" content="Act AI Studio finds where AI creates value in your business, then shapes and builds the right agent." />
 		<SeoGuard />
-		<title>actai.studio</title>
+		<title>Act AI Studio | Find the value before building the agent</title>
 		<style is:global>
 			:root {
 				--cream: #ebe9e4;
@@ -1265,7 +1253,6 @@ const faqs = [
 	</head>
 	<body>
 <SiteHeader revealOnScroll showContactLink={false} />
-<ContactPanel />
 <ScrollToneController />
 
 		<main class="bg-[#ebe9e4]">
@@ -1276,10 +1263,10 @@ const faqs = [
 			<LeadershipAreasSection {leadershipSectorColumns} />
 			<RippleEffectsSection />
 			<DirectionSection {bookingHref} />
-			<ResultsSection {resultStats} {bookingHref} />
+			{showReviewPlaceholders && <ResultsSection {resultStats} {bookingHref} />}
 			<CallToActionSection {bookingHref} />
 			<FaqSection {faqs} />
-			<FooterSection {bookingHref} />
+			<FooterSection {bookingHref} {showReviewPlaceholders} />
 		</main>
 
 		<script>
@@ -1295,58 +1282,6 @@ const faqs = [
 			});
 
 			const revealItems = document.querySelectorAll(".reveal");
-			const resultNumbers = document.querySelectorAll("[data-result-number]");
-			const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-			const formatResultNumber = (number, prefix = "", suffix = "", target = number) => {
-				const decimals = Number.isInteger(target) ? 0 : 1;
-				return `${prefix}${number.toLocaleString("en-GB", {
-					maximumFractionDigits: decimals,
-					minimumFractionDigits: decimals,
-				})}${suffix}`;
-			};
-			const animateResultNumber = (item) => {
-				if (item.dataset.resultAnimated === "true") return;
-				item.dataset.resultAnimated = "true";
-
-				const target = Number(item.dataset.resultTarget || 0);
-				const prefix = item.dataset.resultPrefix || "";
-				const suffix = item.dataset.resultSuffix || "";
-				const duration = 1100;
-				const startTime = performance.now();
-
-				if (prefersReducedMotion || target === 0) {
-					item.textContent = formatResultNumber(target, prefix, suffix, target);
-					return;
-				}
-
-				const tick = (time) => {
-					const progress = Math.min((time - startTime) / duration, 1);
-					const eased = 1 - Math.pow(1 - progress, 3);
-					item.textContent = formatResultNumber(target * eased, prefix, suffix, target);
-					if (progress < 1) requestAnimationFrame(tick);
-				};
-
-				item.textContent = formatResultNumber(0, prefix, suffix, target);
-				requestAnimationFrame(tick);
-			};
-
-			resultNumbers.forEach((item) => {
-				const target = Number(item.dataset.resultTarget || 0);
-				const prefix = item.dataset.resultPrefix || "";
-				const suffix = item.dataset.resultSuffix || "";
-				item.textContent = formatResultNumber(0, prefix, suffix, target);
-			});
-
-			const resultObserver = new IntersectionObserver((entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						animateResultNumber(entry.target);
-						resultObserver.unobserve(entry.target);
-					}
-				});
-			}, { threshold: 0.35 });
-
-			resultNumbers.forEach((item) => resultObserver.observe(item));
 
 			const observer = new IntersectionObserver((entries) => {
 				entries.forEach((entry) => {
@@ -1385,105 +1320,6 @@ const faqs = [
 				navScrollFrame = window.requestAnimationFrame(syncScrollHeader);
 			}, { passive: true });
 			syncScrollHeader();
-
-			const contactLayer = document.querySelector("[data-contact-layer]");
-			const contactPanel = document.querySelector(".contact-panel");
-			const contactForm = document.querySelector("[data-contact-form]");
-			const contactConfirm = document.querySelector("[data-contact-confirm]");
-			const contactName = document.querySelector("#contact-name");
-			const retainerFields = [...document.querySelectorAll("[data-retainer-fields]")];
-			let contactDirty = false;
-
-			const syncContactType = () => {
-				const route = contactForm?.querySelector("input[name='route']:checked")?.value || "Project based";
-				const retainer = route === "Retainer model";
-				retainerFields.forEach((field) => {
-					field.classList.toggle("hidden", !retainer);
-					field.classList.toggle("grid", retainer);
-				});
-			};
-
-			const setContactOpen = (open) => {
-				if (!contactLayer) return;
-				contactLayer.dataset.open = String(open);
-				contactLayer.setAttribute("aria-hidden", String(!open));
-				document.body.dataset.contactOpen = String(open);
-				if (open) {
-					setMenuOpen(false);
-					window.setTimeout(() => contactName?.focus(), 220);
-				} else {
-					if (contactConfirm) contactConfirm.dataset.open = "false";
-					contactLayer.dataset.confirmOpen = "false";
-				}
-			};
-
-			const requestContactClose = () => {
-				if (contactDirty) {
-					if (contactConfirm) contactConfirm.dataset.open = "true";
-					if (contactLayer) contactLayer.dataset.confirmOpen = "true";
-					return;
-				}
-				setContactOpen(false);
-			};
-
-			document.querySelectorAll("[data-contact-open]").forEach((button) => {
-				button.addEventListener("click", () => setContactOpen(true));
-			});
-
-			document.querySelectorAll("[data-contact-close]").forEach((button) => {
-				button.addEventListener("click", requestContactClose);
-			});
-
-			contactLayer?.addEventListener("click", (event) => {
-				const target = event.target;
-				if (target === contactLayer || target?.classList?.contains("contact-scrim")) {
-					requestContactClose();
-				}
-			});
-
-			contactForm?.addEventListener("input", () => {
-				contactDirty = true;
-				syncContactType();
-			});
-
-			contactForm?.addEventListener("change", syncContactType);
-			syncContactType();
-
-			document.querySelector("[data-contact-resume]")?.addEventListener("click", () => {
-				if (contactConfirm) contactConfirm.dataset.open = "false";
-				if (contactLayer) contactLayer.dataset.confirmOpen = "false";
-				contactName?.focus();
-			});
-
-			document.querySelector("[data-contact-discard]")?.addEventListener("click", () => {
-				contactDirty = false;
-				contactForm?.reset();
-				setContactOpen(false);
-			});
-
-			contactForm?.addEventListener("submit", (event) => {
-				event.preventDefault();
-				const formData = new FormData(contactForm);
-				const route = formData.get("route") || "Engage";
-				const plan = formData.get("plan") || "";
-				const name = formData.get("name") || "";
-				const email = formData.get("email") || "";
-				const details = formData.get("details") || "";
-				const subject = encodeURIComponent(`Actai.Studio enquiry: ${route}`);
-				const body = encodeURIComponent([
-					`Type: ${route}`,
-					`Plan: ${plan}`,
-					`Name: ${name}`,
-					`Email: ${email}`,
-					"",
-					"Project details:",
-					String(details),
-				].join("\n"));
-				window.location.href = `mailto:hello@actai.studio?subject=${subject}&body=${body}`;
-				contactDirty = false;
-				contactForm.reset();
-				setContactOpen(false);
-			});
 
 			const caseCards = [...document.querySelectorAll("[data-case-card]")];
 			const caseRevealButton = document.querySelector("[data-case-reveal]");
