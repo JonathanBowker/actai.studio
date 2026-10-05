@@ -21,9 +21,9 @@ The integrated review branch is `review/phase-2-integration`. The staging app is
 
 ## Contact delivery test
 
-A real staging request was sent through:
+A final real request was sent through the production hostname after deployment:
 
-`POST https://actai-studio-6muso.ondigitalocean.app/api/contact`
+`POST https://actai.studio/api/contact`
 
 Result:
 
