@@ -3,7 +3,7 @@ interface Props { bookingHref: string }
 const { bookingHref } = Astro.props;
 ---
 <footer class="relative overflow-hidden bg-black px-4 pb-0 pt-8 text-white sm:px-8 lg:px-10 lg:pt-10" data-scroll-tone-section>
-				<div class="relative z-10 grid min-h-[24rem] w-full gap-10 bg-black p-8 text-white md:grid-cols-[1fr_1fr_0.7fr]">
+				<div class="relative z-10 grid min-h-[24rem] w-full gap-10 bg-black p-8 text-white md:grid-cols-2 lg:grid-cols-[0.9fr_0.65fr_1.35fr_0.5fr]">
 					<div class="grid content-between gap-10">
 						<div>
 							<p class="text-[1.7rem] font-bold">Act.</p>
@@ -11,9 +11,6 @@ const { bookingHref } = Astro.props;
 							<a href={bookingHref} class="mt-6 inline-flex h-12 items-center rounded-xl bg-white px-6 font-bold text-black no-underline transition hover:bg-[#dfff42]">
 								Request a 30-minute call
 							</a>
-							<p class="mt-6 max-w-[34rem] text-sm font-bold leading-[1.45] text-white/65">
-								Act AI Studio is the outreach and AI engagement arm of Advanced Analytica, a UK-based business. We build the agents we use. After your first conversation, we prepare one on your brief and bring it to the AIR workshop.
-							</p>
 						</div>
 						<div class="grid gap-2">
 							<p>© 2026 Advanced Analytica Limited. All Rights Reserved.</p>
@@ -34,6 +31,14 @@ const { bookingHref } = Astro.props;
 						</div>
 						<p class="mb-3 mt-10 font-bold">Contact</p>
 						<a class="font-bold text-white no-underline" href="mailto:hello@actai.studio">hello@actai.studio</a>
+					</div>
+					<div>
+						<p class="mb-5 font-bold">Advanced Analytica</p>
+						<div class="grid max-w-[36rem] gap-5 text-sm font-bold leading-[1.45] text-white/65">
+							<p>Act AI Studio is the outreach and AI engagement arm of Advanced Analytica, a UK-based business.</p>
+							<p>Most businesses are sitting on knowledge they can't use at speed. The people who hold it are busy, the documents that contain it are static, and the processes built around it weren't designed for AI.</p>
+							<p>Advanced Analytica turns that knowledge into governed agentic systems that work in production. We bring the strategy, the specification, and the AI skills, so the business can move fast and stay safe.</p>
+						</div>
 					</div>
 					<div>
 						<p class="mb-5 font-bold">Social</p>
