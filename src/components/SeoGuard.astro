@@ -1,0 +1,37 @@
+---
+interface Props {
+	path?: string;
+}
+
+const productionOrigin = "https://actai.studio";
+const rawPath = Astro.props.path ?? Astro.url.pathname;
+const canonicalPath = rawPath.startsWith("/") ? rawPath : `/${rawPath}`;
+const canonicalUrl = new URL(canonicalPath, productionOrigin).toString();
+const configuredUrl = import.meta.env.PUBLIC_SITE_URL ?? import.meta.env.SITE ?? "";
+let configuredHost = "";
+
+try {
+	configuredHost = configuredUrl ? new URL(configuredUrl).hostname : "";
+} catch {
+	configuredHost = "";
+}
+
+const isStagingBuild =
+	import.meta.env.PUBLIC_SITE_ENV === "staging" ||
+	configuredHost.endsWith("ondigitalocean.app");
+---
+
+<link rel="canonical" href={canonicalUrl} />
+<meta name="robots" content={isStagingBuild ? "noindex,nofollow" : "index,follow"} />
+<script is:inline>
+	(() => {
+		if (!location.hostname.endsWith("ondigitalocean.app")) return;
+		let robots = document.querySelector('meta[name="robots"]');
+		if (!robots) {
+			robots = document.createElement("meta");
+			robots.setAttribute("name", "robots");
+			document.head.appendChild(robots);
+		}
+		robots.setAttribute("content", "noindex,nofollow");
+	})();
+</script>

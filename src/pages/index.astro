@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import SeoGuard from "../components/SeoGuard.astro";
 import {
 	SiteHeader,
 	ScrollToneController,
@@ -207,6 +208,7 @@ const faqs = [
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content="actai.studio designs practical agentic systems from business knowledge, clear scope and governance." />
+		<SeoGuard />
 		<title>actai.studio</title>
 		<style is:global>
 			:root {

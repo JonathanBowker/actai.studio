@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import SeoGuard from "../components/SeoGuard.astro";
 import { MeetingBookingSection, MeetingHeroSection, SiteHeader } from "../components/sections";
 
 const bookingHref = "/contact";
@@ -35,6 +36,7 @@ const nextSteps = [
 			name="description"
 			content="Book a face to face meeting with Act to discuss where AI can make a real difference in your business."
 		/>
+		<SeoGuard />
 		<title>Begin the conversation | actai.studio</title>
 	</head>
 	<body class="min-h-screen pt-[var(--header-height)]">
