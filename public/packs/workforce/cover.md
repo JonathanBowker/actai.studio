@@ -14,4 +14,4 @@ Hiring, onboarding and skills gaps drain time before work starts.
 
 ## Talk to Jonny and Mark
 
-Book a meeting: `/meeting`
+Request a 30-minute call: `/contact`

@@ -14,4 +14,4 @@ Action items fall through the cracks after video calls.
 
 ## Talk to Jonny and Mark
 
-Book a meeting: `/meeting`
+Request a 30-minute call: `/contact`

@@ -1,27 +1,9 @@
 ---
 import "../styles/global.css";
-import { MeetingBookingSection, MeetingHeroSection, SiteHeader } from "../components/sections";
+import SeoGuard from "../components/SeoGuard.astro";
+import { ContactFormSection, ContactIntroSection, SiteHeader, SitemapFooterSection } from "../components/sections";
 
-const bookingHref = "/contact";
-const buttonClass = "inline-flex h-10 items-center justify-center border border-ink bg-acid px-3 text-xs leading-none text-ink no-underline transition-colors hover:bg-ink hover:text-paper sm:px-4 sm:text-sm";
-
-const nextSteps = [
-	{
-		label: "01",
-		title: "We read your note",
-		body: "We look at the business context, the pressure you are trying to resolve and what you want AI to make possible.",
-	},
-	{
-		label: "02",
-		title: "30-minute conversation",
-		body: "We talk through where you are, what is getting in the way and whether an agentic approach is the right route.",
-	},
-	{
-		label: "03",
-		title: "Clear next step",
-		body: "You leave with a recommendation: what to explore, what to avoid and what would need to be scoped next.",
-	},
-];
+const bookingHref = "/meeting";
 ---
 
 <html lang="en">
@@ -31,19 +13,23 @@ const nextSteps = [
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<meta
-			name="description"
-			content="Book a face to face meeting with Act to discuss where AI can make a real difference in your business."
-		/>
-		<title>Begin the conversation | actai.studio</title>
+		<meta name="description" content="Request a 30-minute call with Act AI Studio to find where AI can create value in your business." />
+		<SeoGuard />
+		<title>Request a call | Act AI Studio</title>
+		<style is:global>
+			html,
+			body {
+				background: #f6f4ef;
+				color: #11110f;
+			}
+		</style>
 	</head>
-	<body class="min-h-screen pt-[var(--header-height)]">
-		<SiteHeader />
-
+	<body class="pt-[var(--header-height)]">
+		<SiteHeader showContactLink={false} />
 		<main>
-			<MeetingHeroSection />
-
-			<MeetingBookingSection {bookingHref} {buttonClass} {nextSteps} />
+			<ContactIntroSection mode="call" />
+			<ContactFormSection mode="call" />
 		</main>
+		<SitemapFooterSection {bookingHref} />
 	</body>
 </html>

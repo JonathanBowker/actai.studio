@@ -1,13 +1,14 @@
 ---
 import "../styles/global.css";
+import "../styles/index/index.css";
+import SeoGuard from "../components/SeoGuard.astro";
+import { isReviewStaging } from "../lib/siteEnvironment";
 import {
 	SiteHeader,
 	ScrollToneController,
-	ContactPanel,
 	HeroSection,
 	LeadershipIntroSection,
 	LeadershipAreasSection,
-	PossibilitySection,
 	ProcessSection,
 	RippleEffectsSection,
 	ResultsSection,
@@ -17,7 +18,8 @@ import {
 	FooterSection,
 } from "../components/sections";
 
-const bookingHref = "/contact";
+const bookingHref = "/meeting";
+const showReviewPlaceholders = isReviewStaging(Astro.url);
 
 const useCaseImages = Array.from(
 	{ length: 6 },
@@ -132,17 +134,19 @@ const caseStudies = [
 	},
 ];
 
-const leadershipSectors = caseStudies.map((study, index) => ({
+const leadershipSectors = caseStudies.slice(0, 8).map((study, index) => ({
 	kicker: study.kicker,
 	title: study.title,
 	points: study.points,
-	image: useCaseImages[index % useCaseImages.length],
+	image: study.kicker === "Manufacturing & Supply"
+		? "/images/use-case-shapes/manufacturing-neon.png"
+		: useCaseImages[index % useCaseImages.length],
 	number: index + 1,
 }));
 
 const leadershipSectorColumns = [
-	leadershipSectors.filter((_, index) => index % 2 === 0),
-	leadershipSectors.filter((_, index) => index % 2 === 1),
+	leadershipSectors.slice(0, 4),
+	leadershipSectors.slice(4, 8),
 ];
 
 const caseStudyFilters = [
@@ -156,45 +160,33 @@ const caseStudyFilters = [
 
 const resultStats = [
 	{
-		value: "10/10",
-		countTo: 10,
-		prefix: "",
-		suffix: "/10",
-		label: "Likelihood people who go through Agent in the Room would use it again.",
+		value: "[Measure needed]",
+		label: "Agent in the Room™ outcome measure, pending a verified source.",
 	},
 	{
-		value: "80%",
-		countTo: 80,
-		prefix: "",
-		suffix: "%",
-		label: "Average time given back to your people across agentic processes.",
+		value: "[Measure needed]",
+		label: "Time returned to teams, pending a verified source.",
 	},
 	{
-		value: "£100,000",
-		countTo: 100000,
-		prefix: "£",
-		suffix: "",
-		label: "Typical enterprise entry point value when skilled people stop doing process work.",
+		value: "[Evidence needed]",
+		label: "Business value evidence, pending a verified source.",
 	},
 	{
-		value: "100+",
-		countTo: 100,
-		prefix: "",
-		suffix: "+",
-		label: "Cross-sector skills approved and ready to power agents.",
+		value: "[Evidence needed]",
+		label: "Delivery evidence, pending a verified source.",
 	},
 ];
 
 const faqs = [
-	["What is Agent in the Room?", "Agent in the Room is a live working session with an ACT director. We examine where time is being lost, identify the business problem worth solving and leave you with a decided AI direction and a clearly scoped plan, not another slide deck."],
+	["What is Agent in the Room™?", "Agent in the Room™ is a live working session. An AI agent, briefed on your business, joins the room through a speaker. Your people and our director question it together. You leave with a scoped AI direction."],
 	["Do we need to know which agent we want before we speak?", "No. Start with the pressure, delay or repeated work inside the business. We help uncover the right use case, test whether AI is appropriate and define what a useful agent would need to know and do."],
-	["Do you only advise, or do you build the agents too?", "We do both. ACT can set the direction, structure the knowledge and build working agents into your business. Delivery can include agent instructions, knowledge architecture, workflows, review points, governance and implementation support."],
+	["Do you only advise, or do you build the agents too?", "We do both. Act AI Studio can set the direction, structure the knowledge and build working agents into your business. Delivery can include agent instructions, knowledge architecture, workflows, review points, governance and implementation support."],
 	["What kinds of work can an agent take on?", "Agents are most useful where skilled people lose time searching for information, repeating answers, preparing documents, checking rules or moving work between systems. The right agent supports judgement and removes process work rather than pretending every task should be automated."],
 	["Can an agent use our existing business knowledge?", "Yes. We shape approved documents, guidance, processes and expert knowledge into a clear source for the agent. Its scope, sources and escalation points are defined so people can understand where an answer came from and when human review is required."],
 	["How do you manage risk, security and governance?", "Risk is designed into the work from the beginning. We define access, approved knowledge, boundaries, review points and escalation rules before an agent is treated as ready. The level of control is matched to the sensitivity of the work and your existing policies."],
-	["What is an ACT knowledge pack?", "A knowledge pack is a compressed ZIP containing the diagnosis, agent prompt and supporting knowledge for a specific use case. It can be uploaded directly to a compatible chat assistant or unzipped and loaded as individual files."],
+	["What is an Act AI Studio knowledge pack?", "A knowledge pack is a compressed ZIP containing the diagnosis, agent prompt and supporting knowledge for a specific use case. It can be uploaded directly to a compatible chat assistant or unzipped and loaded as individual files."],
 	["Will this replace our people?", "The aim is to give skilled people time back. Agents handle repeatable process work, retrieve context and prepare outputs so your team can spend more time applying judgement, building relationships and making decisions."],
-	["Who do you work with?", "We work directly with business leaders in mid-caps, scale-ups and larger organisations. ACT is most useful when there is a real operational problem, access to the people who understand it and a willingness to turn business knowledge into a working capability."],
+	["Who do you work with?", "We work directly with business leaders in mid-caps, scale-ups and larger businesses. Act AI Studio is most useful when there is a real operational problem, access to the people who understand it and a willingness to turn business knowledge into a working capability."],
 	["How do we get started?", "Start with a conversation. In 30 minutes, we can understand where time is being lost, what has already been tried and whether there is a valuable next step. If there is, we will recommend a clear scope before asking you to commit to delivery."],
 ];
 ---
@@ -206,1075 +198,22 @@ const faqs = [
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="actai.studio designs practical agentic systems from business knowledge, clear scope and governance." />
-		<title>actai.studio</title>
-		<style is:global>
-			:root {
-				--cream: #ebe9e4;
-				--paper: #f6f4ef;
-				--ink: #11110f;
-				--muted: #77736a;
-				--dark: #131412;
-				--olive: #1e291d;
-				--gold: #8a6a2e;
-				--lime: #dfff42;
-			}
-
-			html {
-				background: var(--cream);
-				scroll-behavior: smooth;
-			}
-
-			body {
-				background: var(--cream);
-				color: var(--ink);
-				overflow-x: clip;
-			}
-
-			.glass {
-				backdrop-filter: blur(22px) saturate(1.1);
-				-webkit-backdrop-filter: blur(22px) saturate(1.1);
-			}
-
-			.nav-pill {
-				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-				opacity: 0;
-				transform: translateY(-100%);
-				transition: opacity 220ms ease, transform 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 320ms;
-				visibility: hidden;
-			}
-
-			.contact-trigger[data-scroll-contact] {
-				opacity: 0;
-				transform: translateY(-1rem);
-				transition: background 180ms ease, color 180ms ease, opacity 220ms ease, transform 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 320ms;
-				visibility: hidden;
-			}
-
-			body[data-nav-visible="true"] .nav-pill,
-			body[data-nav-visible="true"] .contact-trigger[data-scroll-contact] {
-				opacity: 1;
-				transform: translateY(0);
-				visibility: visible;
-			}
-
-			.site-menu {
-				display: flex;
-				justify-content: center;
-			}
-
-			.site-menu[data-open="true"] {
-				display: flex;
-			}
-
-			.site-menu-links {
-				align-items: center;
-				display: flex;
-				justify-content: center;
-				padding: 0.45rem;
-				white-space: nowrap;
-			}
-
-			.site-menu-link {
-				border-radius: 0.5rem;
-				color: rgba(255, 255, 255, 0.66);
-				font-size: 1rem;
-				font-weight: 600;
-				padding: 0.75rem 0.9rem;
-				text-decoration: none;
-				transition: background 160ms ease, color 160ms ease;
-			}
-
-			.menu-toggle {
-				display: none;
-			}
-
-			.site-menu-link:hover,
-			.site-menu-link:focus-visible {
-				background: rgba(255, 255, 255, 0.1);
-				color: #ffffff;
-			}
-
-			.menu-icon {
-				position: relative;
-			}
-
-			.menu-icon,
-			.menu-icon::before,
-			.menu-icon::after {
-				background: currentColor;
-				border-radius: 999px;
-				display: block;
-				height: 2px;
-				transition:
-					transform 200ms ease,
-					opacity 160ms ease;
-				width: 14px;
-			}
-
-			.menu-icon::before,
-			.menu-icon::after {
-				content: "";
-				left: 0;
-				position: absolute;
-			}
-
-			.menu-icon::before {
-				top: -5px;
-			}
-
-			.menu-icon::after {
-				top: 5px;
-			}
-
-			.menu-icon[data-open="true"] {
-				background: transparent;
-			}
-
-			.menu-icon[data-open="true"]::before {
-				transform: translateY(5px) rotate(45deg);
-			}
-
-			.menu-icon[data-open="true"]::after {
-				transform: translateY(-5px) rotate(-45deg);
-			}
-
-			body[data-contact-open="true"] {
-				overflow: hidden;
-			}
-
-			body[data-contact-open="true"] main,
-			body[data-contact-open="true"] .nav-pill,
-			body[data-contact-open="true"] .contact-trigger {
-				filter: blur(11px);
-				pointer-events: none;
-				transform: translateZ(0);
-				transition: filter 220ms ease;
-				user-select: none;
-			}
-
-			.contact-trigger {
-				box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
-			}
-
-			.contact-layer {
-				display: grid;
-				inset: 0;
-				opacity: 0;
-				pointer-events: none;
-				position: fixed;
-				transition: opacity 220ms ease;
-				z-index: 80;
-			}
-
-			.contact-layer[data-open="true"] {
-				opacity: 1;
-				pointer-events: auto;
-			}
-
-			.contact-scrim {
-				background: rgba(0, 0, 0, 0.52);
-				inset: 0;
-				position: absolute;
-			}
-
-			.contact-panel {
-				align-self: stretch;
-				background: #171717;
-				border: 1px solid rgba(255, 255, 255, 0.06);
-				border-radius: 1.8rem;
-				box-shadow: 0 32px 90px rgba(0, 0, 0, 0.48);
-				color: white;
-				justify-self: end;
-				margin: 0.25rem 0.45rem 0.25rem 0;
-				max-height: calc(100vh - 0.5rem);
-				overflow-y: auto;
-				padding: clamp(2.5rem, 3vw, 2.95rem);
-				position: relative;
-				transform: translateX(2rem);
-				transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
-				width: min(42rem, calc(100vw - 1rem));
-			}
-
-			.contact-layer[data-open="true"] .contact-panel {
-				transform: translateX(0);
-			}
-
-			.contact-close {
-				background: rgba(255, 255, 255, 0.14);
-				border: 0;
-				border-radius: 0.8rem;
-				color: white;
-				cursor: pointer;
-				align-items: center;
-				display: inline-flex;
-				gap: 0.5rem;
-				font: inherit;
-				font-weight: 700;
-				padding: 0.72rem 1rem;
-				position: absolute;
-				right: 1rem;
-				top: 1rem;
-				transform: none;
-				transition:
-					background 180ms ease,
-					opacity 180ms ease,
-					transform 180ms ease;
-				z-index: 2;
-			}
-
-			.contact-layer[data-confirm-open="true"] .contact-close {
-				opacity: 0;
-				pointer-events: none;
-			}
-
-			.contact-close:hover {
-				background: rgba(255, 255, 255, 0.2);
-				transform: translateY(-0.08rem);
-			}
-
-			.contact-control {
-				background: #242424;
-				border: 0;
-				border-radius: 0.9rem;
-				color: white;
-				font: inherit;
-				font-weight: 700;
-				min-width: 0;
-				outline: 0;
-				min-height: 2.75rem;
-				padding: 0.84rem 1rem;
-				width: 100%;
-			}
-
-			.contact-control::placeholder {
-				color: rgba(255, 255, 255, 0.42);
-			}
-
-			.contact-control:focus,
-			.contact-option input:focus-visible + span,
-			.contact-submit:focus-visible,
-			.contact-close:focus-visible {
-				outline: 2px solid white;
-				outline-offset: 3px;
-			}
-
-			.contact-option span {
-				background: #242424;
-				border-radius: 999px;
-				color: rgba(255, 255, 255, 0.52);
-				cursor: pointer;
-				display: inline-flex;
-				font-weight: 700;
-				min-height: 2.85rem;
-				padding: 0.78rem 1rem;
-				transition:
-					background 180ms ease,
-					color 180ms ease,
-					box-shadow 180ms ease;
-			}
-
-			.contact-option input:checked + span {
-				background: white;
-				box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.12);
-				color: #11110f;
-			}
-
-			.contact-submit {
-				background: white;
-				border: 0;
-				border-radius: 0.9rem;
-				color: #11110f;
-				cursor: pointer;
-				font: inherit;
-				font-weight: 800;
-				min-height: 3.15rem;
-				transition:
-					background 180ms ease,
-					color 180ms ease,
-					transform 180ms ease;
-			}
-
-			.contact-submit:hover {
-				background: var(--lime);
-				transform: translateY(-1px);
-			}
-
-			.contact-confirm {
-				background: #1b1b1b;
-				border-radius: 1.7rem;
-				box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
-				color: white;
-				left: min(26rem, 34vw);
-				opacity: 0;
-				padding: 2.1rem 1.25rem 1.25rem;
-				pointer-events: none;
-				position: fixed;
-				text-align: center;
-				top: 43%;
-				transform: translate(-50%, -50%) scale(0.98);
-				transition:
-					opacity 180ms ease,
-					transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
-				width: min(22rem, calc(100vw - 2rem));
-				z-index: 90;
-			}
-
-			.contact-confirm[data-open="true"] {
-				opacity: 1;
-				pointer-events: auto;
-				transform: translate(-50%, -50%) scale(1);
-			}
-
-			.rounded-sheet {
-				border-radius: 3.4rem 3.4rem 0 0;
-			}
-
-			.stack-panel {
-				border-radius: 3.4rem 3.4rem 0 0;
-				box-shadow: 0 -32px 80px rgba(0, 0, 0, 0.16);
-				margin-top: -5.6rem;
-				position: relative;
-			}
-
-			.reveal {
-				opacity: 0;
-				transform: translateY(30px);
-				transition:
-					opacity 780ms cubic-bezier(0.16, 1, 0.3, 1),
-					transform 780ms cubic-bezier(0.16, 1, 0.3, 1);
-				transition-delay: var(--delay, 0ms);
-			}
-
-			.reveal.is-visible {
-				opacity: 1;
-				transform: translateY(0);
-			}
-
-			.hero-title {
-				font-size: clamp(3.6rem, 7.2vw, 8.2rem);
-				line-height: 1.04;
-				letter-spacing: 0;
-			}
-
-			.hero-video-frame {
-				height: max(100vh, calc(100vw / 1.6985));
-				left: 50%;
-				pointer-events: none;
-				position: absolute;
-				top: 50%;
-				transform: translate(-50%, -50%);
-				width: max(100vw, calc(100vh * 1.6985));
-			}
-
-			.hero-script {
-				font-family: var(--font-sans);
-				font-style: italic;
-				font-weight: 400;
-			}
-
-			.feature-panel {
-				background:
-					radial-gradient(circle at 24% 30%, rgba(138, 106, 46, 0.78), transparent 0 34rem),
-					radial-gradient(circle at 78% 20%, rgba(48, 74, 42, 0.72), transparent 0 35rem),
-					linear-gradient(120deg, #4a3418, #142017 66%);
-			}
-
-			.vertical-card {
-				background: rgba(255, 255, 255, 0.045);
-				border: 1px solid rgba(255, 255, 255, 0.12);
-			}
-
-			.feature-index {
-				background: rgba(0, 0, 0, 0.18);
-				border: 1px solid rgba(255, 255, 255, 0.06);
-				color: rgba(255, 255, 255, 0.43);
-				cursor: pointer;
-				text-align: left;
-			}
-
-			.feature-index[data-active="true"] {
-				background: rgba(0, 0, 0, 0.38);
-				border-color: rgba(255, 255, 255, 0.36);
-				box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
-				color: white;
-			}
-
-			.feature-track {
-				-webkit-overflow-scrolling: touch;
-				overscroll-behavior-y: contain;
-				padding-bottom: 5rem;
-				padding-top: 0;
-				scrollbar-width: none;
-			}
-
-			.feature-track::-webkit-scrollbar {
-				display: none;
-			}
-
-			.feature-window {
-				position: relative;
-			}
-
-			.feature-window::before,
-			.feature-window::after {
-				content: "";
-				left: 0;
-				pointer-events: none;
-				position: absolute;
-				right: 0;
-				z-index: 10;
-			}
-
-			.feature-card {
-				max-width: 34.75rem;
-				min-height: 31rem;
-				scroll-margin-top: 8rem;
-				width: 100%;
-			}
-
-			@media (min-width: 1024px) {
-				.feature-window {
-					height: 40rem;
-					overflow: hidden;
-				}
-
-				.feature-window::before {
-					background: linear-gradient(180deg, rgba(33, 42, 26, 0.98) 0%, rgba(33, 42, 26, 0) 100%);
-					height: 5rem;
-					top: 0;
-				}
-
-				.feature-window::after {
-					background: linear-gradient(0deg, rgba(36, 29, 18, 0.98) 0%, rgba(36, 29, 18, 0) 100%);
-					bottom: 0;
-					height: 4rem;
-				}
-
-				.feature-track {
-					height: 100%;
-					overflow-y: auto;
-					padding-bottom: 6rem;
-					padding-top: 1rem;
-				}
-
-				.feature-card {
-					min-height: 31rem;
-					scroll-margin-top: 2rem;
-				}
-			}
-
-			.use-case-track {
-				-webkit-overflow-scrolling: touch;
-				background: transparent !important;
-				box-shadow: none !important;
-				scroll-snap-type: x proximity;
-				scrollbar-width: none;
-			}
-
-			.use-case-track::-webkit-scrollbar {
-				display: none;
-			}
-
-			.use-case-card {
-				background: transparent;
-				box-shadow: none;
-				color: white;
-				scroll-snap-align: start;
-			}
-
-			.use-case-shell {
-				aspect-ratio: 15 / 16;
-			}
-
-			.use-case-card:nth-child(3n + 1) {
-				--case-glow-a: rgba(255, 78, 24, 0.34);
-				--case-glow-b: rgba(255, 179, 34, 0.3);
-				--case-glow-c: rgba(87, 8, 23, 0.42);
-				--case-haze: rgba(182, 171, 181, 0.34);
-			}
-
-			.use-case-card:nth-child(3n + 2) {
-				--case-glow-a: rgba(97, 120, 255, 0.34);
-				--case-glow-b: rgba(213, 136, 255, 0.28);
-				--case-glow-c: rgba(20, 32, 62, 0.44);
-				--case-haze: rgba(190, 199, 210, 0.34);
-			}
-
-			.use-case-card:nth-child(3n) {
-				--case-glow-a: rgba(56, 213, 170, 0.3);
-				--case-glow-b: rgba(237, 236, 142, 0.28);
-				--case-glow-c: rgba(28, 43, 34, 0.46);
-				--case-haze: rgba(179, 186, 178, 0.32);
-			}
-
-			.use-case-shell {
-				background: transparent;
-				box-shadow: none;
-				isolation: isolate;
-			}
-
-			.use-case-art-image {
-				filter: saturate(1.08) contrast(0.98);
-				object-position: center 42%;
-				opacity: 1;
-				transform: scale(1.28);
-				z-index: 0;
-			}
-
-			.use-case-texture,
-			.use-case-shell::before,
-			.use-case-shell::after {
-				content: "";
-				inset: 0;
-				pointer-events: none;
-				position: absolute;
-			}
-
-			.use-case-texture {
-				background:
-					radial-gradient(circle at 34% 40%, var(--case-glow-a) 0 11rem, transparent 24rem),
-					radial-gradient(circle at 72% 36%, var(--case-glow-b) 0 9rem, transparent 22rem),
-					radial-gradient(circle at 42% 74%, var(--case-glow-c) 0 11rem, transparent 23rem),
-					linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.03));
-				filter: blur(22px) saturate(1.18);
-				mix-blend-mode: screen;
-				opacity: 0.28;
-				transform: scale(1.14) rotate(var(--case-tilt, 0deg));
-				z-index: 1;
-			}
-
-			.use-case-shell::before {
-				background:
-					radial-gradient(circle at 20% 92%, rgba(255, 255, 255, 0.12), transparent 22rem),
-					linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.32));
-				z-index: 2;
-			}
-
-			.use-case-shell::after {
-				background: linear-gradient(150deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.01) 44%, rgba(255, 255, 255, 0.08));
-				z-index: 3;
-			}
-
-			.use-case-content {
-				background: transparent;
-				box-shadow: none;
-				height: 100%;
-				z-index: 4;
-			}
-
-			.use-case-kicker {
-				left: 1rem;
-				position: absolute;
-				right: 1rem;
-				top: 1rem;
-			}
-
-			.use-case-kicker > p {
-				font-size: 0.78rem;
-			}
-
-			.use-case-nav {
-				background: rgba(255, 255, 255, 0.12);
-				box-shadow:
-					inset 0 1px 10px rgba(255, 255, 255, 0.16),
-					0 8px 24px rgba(0, 0, 0, 0.08);
-			}
-
-			.use-case-title {
-				font-size: clamp(1.8rem, 2.4vw, 2.3rem);
-				line-height: 0.98;
-				margin-inline: auto;
-				max-width: 14ch;
-				text-align: center;
-				text-wrap: balance;
-			}
-
-			.use-case-heading {
-				align-content: start;
-				left: 1rem;
-				max-width: none;
-				min-height: auto;
-				padding-top: 0;
-				position: absolute;
-				right: 1rem;
-				top: 4.5rem;
-			}
-
-			.use-case-copy {
-				font-size: clamp(0.96rem, 1.2vw, 1.08rem);
-				line-height: 1.3;
-				margin-inline: auto;
-				max-width: 31ch;
-				text-align: center;
-				text-wrap: balance;
-			}
-
-			.use-case-detail {
-				backdrop-filter: blur(14px) saturate(1.08);
-				-webkit-backdrop-filter: blur(14px) saturate(1.08);
-				background:
-					linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)),
-					rgba(255, 255, 255, 0.1);
-				border: 1px solid rgba(255, 255, 255, 0.28);
-				bottom: 0.9rem;
-				box-shadow:
-					0 18px 60px rgba(0, 0, 0, 0.12),
-					inset 0 1px 14px rgba(255, 255, 255, 0.16),
-					inset 0 -18px 34px rgba(0, 0, 0, 0.08);
-				display: grid;
-				left: 50%;
-				max-width: calc(100% - 2rem);
-				min-height: 8.4rem;
-				position: absolute;
-				transform: translateX(-50%);
-			}
-
-			.use-case-menu-title {
-				font-size: 0.78rem;
-				margin-bottom: 0.65rem;
-				text-align: center;
-			}
-
-			.use-case-menu-body {
-				align-content: start;
-				display: grid;
-				font-size: 0.92rem;
-				gap: 0.45rem;
-			}
-
-			.use-case-menu-row {
-				align-items: center;
-				background: rgba(255, 255, 255, 0.14);
-				border-radius: 0.55rem;
-				display: flex;
-				justify-content: space-between;
-				min-height: 2.05rem;
-				padding: 0.48rem 0.75rem;
-			}
-
-			.use-case-menu-muted {
-				padding: 0.32rem 0.75rem;
-			}
-
-			.use-case-chart {
-				align-items: end;
-				display: grid;
-				gap: 0.35rem;
-				grid-template-columns: repeat(4, minmax(0, 1fr));
-				height: 3.2rem;
-				margin-inline: auto;
-				width: min(100%, 11rem);
-			}
-
-			.use-case-chart span {
-				background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.22));
-				border-radius: 999px 999px 0.35rem 0.35rem;
-				display: block;
-				min-height: 0.7rem;
-			}
-
-			.use-case-status-dot {
-				background: rgba(255, 255, 255, 0.78);
-				border-radius: 999px;
-				height: 0.48rem;
-				width: 0.48rem;
-			}
-
-			.triage-detail {
-				align-content: space-between;
-				gap: 0.8rem;
-				min-height: 10.5rem;
-			}
-
-			.triage-card .use-case-title {
-				font-size: clamp(1.45rem, 2vw, 2rem);
-				max-width: 17ch;
-			}
-
-			.triage-card .use-case-shell {
-				aspect-ratio: 4 / 5;
-			}
-
-			.triage-vertical-grid {
-				align-self: start;
-				position: relative;
-			}
-
-			.triage-vertical-grid::before,
-			.triage-vertical-grid::after {
-				content: "";
-				left: 0;
-				pointer-events: none;
-				position: absolute;
-				right: 0;
-				z-index: 2;
-			}
-
-			.triage-vertical-grid::before {
-				background: linear-gradient(180deg, #f6f4ef 0%, rgba(246, 244, 239, 0) 100%);
-				height: 5rem;
-				top: 0;
-			}
-
-			.triage-vertical-grid::after {
-				background: linear-gradient(0deg, #f6f4ef 0%, rgba(246, 244, 239, 0.88) 30%, rgba(246, 244, 239, 0) 100%);
-				bottom: 0;
-				height: 8rem;
-			}
-
-			.triage-vertical-column {
-				-webkit-overflow-scrolling: touch;
-				overscroll-behavior-y: contain;
-				scrollbar-width: none;
-			}
-
-			.triage-vertical-column::-webkit-scrollbar {
-				display: none;
-			}
-
-			.triage-vertical-card {
-				width: 100%;
-			}
-
-			.triage-vertical-card .use-case-title {
-				font-size: clamp(1.05rem, 1.25vw, 1.35rem);
-				line-height: 1.05;
-			}
-
-			.triage-vertical-card .use-case-shell {
-				aspect-ratio: 4 / 5;
-				border-radius: 0.9rem;
-			}
-
-			.triage-vertical-card .triage-detail {
-				min-height: 8.6rem;
-			}
-
-			.triage-vertical-card .triage-detail > p {
-				font-size: 0.78rem;
-				line-height: 1.22;
-			}
-
-			.triage-vertical-card .triage-action {
-				font-size: 0.82rem;
-			}
-
-			.triage-mobile-track {
-				display: none;
-			}
-
-			.triage-action {
-				background: white;
-				color: #11110f;
-			}
-
-			.triage-action:hover {
-				background: #dfff42;
-			}
-
-			.proof-card {
-				background: #f7f6f2;
-				border: 1px solid rgba(17, 17, 15, 0.05);
-				box-shadow: 0 18px 50px rgba(17, 17, 15, 0.05);
-			}
-
-			.proof-card:nth-child(2) {
-				border-color: color-mix(in srgb, var(--accent) 82%, white);
-			}
-
-			.frame-layer {
-				opacity: 0;
-				transform: translate(-50%, calc(64% + var(--frame-peek, 0px))) scale(0.9);
-				transform-origin: center;
-				transition:
-					opacity 920ms cubic-bezier(0.16, 1, 0.3, 1),
-					transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
-				transition-delay: var(--frame-delay, 0ms);
-			}
-
-			.reveal.is-visible .frame-layer {
-				opacity: 1;
-				transform: translate(-50%, calc(-50% + var(--frame-peek, 0px))) scale(1);
-			}
-
-			.reveal.frame-ready .frame-layer {
-				transition-delay: 0ms;
-			}
-
-			.frame-stack {
-				touch-action: pan-y;
-			}
-
-			.sector-grid {
-				align-items: start;
-				position: relative;
-			}
-
-			.sector-grid::before,
-			.sector-grid::after {
-				content: "";
-				left: 0;
-				pointer-events: none;
-				position: absolute;
-				right: 0;
-				z-index: 4;
-			}
-
-			.sector-grid::before {
-				background: linear-gradient(180deg, #f6f4ef 0%, rgba(246, 244, 239, 0.92) 36%, rgba(246, 244, 239, 0) 100%);
-				height: 8rem;
-				top: 0;
-			}
-
-			.sector-grid::after {
-				background: linear-gradient(0deg, #f6f4ef 0%, rgba(246, 244, 239, 0.92) 36%, rgba(246, 244, 239, 0) 100%);
-				bottom: 0;
-				height: 8rem;
-			}
-
-			.sector-grid-dark::before {
-				background: linear-gradient(180deg, #11110f 0%, rgba(17, 17, 15, 0.92) 36%, rgba(17, 17, 15, 0) 100%);
-			}
-
-			.sector-grid-dark::after {
-				background: linear-gradient(0deg, #11110f 0%, rgba(17, 17, 15, 0.92) 36%, rgba(17, 17, 15, 0) 100%);
-			}
-
-			.sector-column {
-				-webkit-overflow-scrolling: touch;
-				overscroll-behavior-y: contain;
-				scrollbar-width: none;
-				touch-action: pan-y;
-			}
-
-			.sector-column::-webkit-scrollbar {
-				display: none;
-			}
-
-			.sector-column:nth-child(2) {
-				transform: translateY(5rem);
-			}
-
-			.footer-word {
-				background: linear-gradient(180deg, #686868 0%, #686868 42%, rgba(104, 104, 104, 0) 92%);
-				-webkit-background-clip: text;
-				background-clip: text;
-				color: transparent;
-			}
-
-			.faq-answer {
-				display: grid;
-				grid-template-rows: 0fr;
-				transition: grid-template-rows 260ms ease;
-			}
-
-			.faq-answer > div {
-				overflow: hidden;
-			}
-
-			.faq-item[data-open="true"] .faq-answer {
-				grid-template-rows: 1fr;
-			}
-
-			.faq-item[data-open="true"] .faq-icon {
-				transform: rotate(180deg);
-			}
-
-			.cta-pill {
-				transform: translateY(0);
-				transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
-			}
-
-			.reveal:not(.is-visible) .cta-pill {
-				transform: translateY(0.45em);
-			}
-
-			.cta-line:hover .cta-pill {
-				transform: translateY(-0.08em) rotate(-1.5deg);
-			}
-
-			.cta-line:hover .cta-pill-alt {
-				transform: translateY(0.08em) rotate(1.5deg);
-			}
-
-			@media (max-width: 1050px) {
-				.nav-pill {
-					grid-template-columns: 1fr auto;
-				}
-
-				.site-menu {
-					background: rgba(17, 17, 15, 0.98);
-					border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-					box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-					display: grid;
-					grid-template-rows: 0fr;
-					grid-column: 1 / -1;
-					grid-row: 2;
-					left: 0;
-					opacity: 0;
-					pointer-events: none;
-					position: absolute;
-					top: 100%;
-					transform: translateY(-0.5rem);
-					transition:
-						grid-template-rows 260ms cubic-bezier(0.16, 1, 0.3, 1),
-						opacity 220ms ease,
-						transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
-					width: 100%;
-				}
-
-				.site-menu[data-open="true"] {
-					display: grid;
-					grid-template-rows: 1fr;
-					opacity: 1;
-					pointer-events: auto;
-					transform: translateY(0);
-				}
-
-				.site-menu > div {
-					overflow: hidden;
-				}
-
-				.site-menu-links {
-					align-items: stretch;
-					display: grid;
-					margin: 0 auto;
-					max-width: 30rem;
-					padding: 0.75rem;
-					white-space: normal;
-				}
-
-				.menu-toggle {
-					display: grid;
-					grid-column: 2;
-					grid-row: 1;
-					margin-right: 10rem;
-				}
-			}
-
-			@media (max-width: 760px) {
-				.contact-trigger[data-scroll-contact] {
-					opacity: 1;
-					transform: none;
-					visibility: visible;
-				}
-
-				.menu-toggle {
-					margin-right: 0;
-				}
-
-
-				.triage-vertical-grid {
-					display: none;
-				}
-
-				.triage-mobile-track {
-					display: flex;
-				}
-
-				body[data-contact-open="true"] main,
-				body[data-contact-open="true"] .nav-pill,
-				body[data-contact-open="true"] .contact-trigger {
-					filter: blur(7px);
-				}
-
-				.contact-trigger {
-					bottom: 1rem;
-					left: auto;
-					padding: 0;
-					right: 1rem;
-					top: auto;
-					transform: none;
-					width: 3.5rem;
-				}
-
-				.contact-trigger span:last-child {
-					clip: rect(0 0 0 0);
-					clip-path: inset(50%);
-					height: 1px;
-					overflow: hidden;
-					position: absolute;
-					white-space: nowrap;
-					width: 1px;
-				}
-
-				.contact-panel {
-					align-self: end;
-					border-radius: 1.6rem 1.6rem 0 0;
-					margin: 0;
-					max-height: 92vh;
-					padding: 1.35rem;
-					width: 100%;
-				}
-
-				.contact-close {
-					right: 1rem;
-					top: 1rem;
-				}
-
-				.contact-confirm {
-					left: 50%;
-					top: 50%;
-				}
-
-				.rounded-sheet {
-					border-radius: 2rem 2rem 0 0;
-				}
-
-				.stack-panel {
-					border-radius: 2rem 2rem 0 0;
-					margin-top: -2.8rem;
-				}
-
-				.hero-title {
-					font-size: clamp(2.8rem, 13vw, 4.4rem);
-				}
-			}
-
-			@media (prefers-reduced-motion: reduce) {
-				html {
-					scroll-behavior: auto;
-				}
-
-				.reveal {
-					opacity: 1;
-					transform: none;
-					transition: none;
-				}
-
-				.frame-layer {
-					opacity: 1;
-					transform: translate(-50%, -50%) scale(1);
-					transition: none;
-				}
-
-				.cta-pill,
-				.reveal:not(.is-visible) .cta-pill,
-				.cta-line:hover .cta-pill,
-				.cta-line:hover .cta-pill-alt,
-				.contact-panel,
-				.contact-layer {
-					transform: none;
-					transition: none;
-				}
-			}
-		</style>
+		<meta name="description" content="Act AI Studio finds where AI creates value in your business, then shapes and builds the right agent." />
+		<SeoGuard />
+		<title>Act AI Studio | Find the value before building the agent</title>
 	</head>
-	<body>
-<SiteHeader revealOnScroll showContactLink={false} />
-<ContactPanel />
+	<body class="pt-[var(--header-height)]">
+<SiteHeader />
 <ScrollToneController />
 
 		<main class="bg-[#ebe9e4]">
 			<HeroSection />
 			<LeadershipIntroSection />
-			<PossibilitySection />
-			<ProcessSection />
+			<ProcessSection {bookingHref} />
 			<LeadershipAreasSection {leadershipSectorColumns} />
 			<RippleEffectsSection />
 			<DirectionSection {bookingHref} />
-			<ResultsSection {resultStats} {bookingHref} />
+			{showReviewPlaceholders && <ResultsSection {resultStats} {bookingHref} />}
 			<CallToActionSection {bookingHref} />
 			<FaqSection {faqs} />
 			<FooterSection {bookingHref} />
@@ -1293,58 +232,6 @@ const faqs = [
 			});
 
 			const revealItems = document.querySelectorAll(".reveal");
-			const resultNumbers = document.querySelectorAll("[data-result-number]");
-			const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-			const formatResultNumber = (number, prefix = "", suffix = "", target = number) => {
-				const decimals = Number.isInteger(target) ? 0 : 1;
-				return `${prefix}${number.toLocaleString("en-GB", {
-					maximumFractionDigits: decimals,
-					minimumFractionDigits: decimals,
-				})}${suffix}`;
-			};
-			const animateResultNumber = (item) => {
-				if (item.dataset.resultAnimated === "true") return;
-				item.dataset.resultAnimated = "true";
-
-				const target = Number(item.dataset.resultTarget || 0);
-				const prefix = item.dataset.resultPrefix || "";
-				const suffix = item.dataset.resultSuffix || "";
-				const duration = 1100;
-				const startTime = performance.now();
-
-				if (prefersReducedMotion || target === 0) {
-					item.textContent = formatResultNumber(target, prefix, suffix, target);
-					return;
-				}
-
-				const tick = (time) => {
-					const progress = Math.min((time - startTime) / duration, 1);
-					const eased = 1 - Math.pow(1 - progress, 3);
-					item.textContent = formatResultNumber(target * eased, prefix, suffix, target);
-					if (progress < 1) requestAnimationFrame(tick);
-				};
-
-				item.textContent = formatResultNumber(0, prefix, suffix, target);
-				requestAnimationFrame(tick);
-			};
-
-			resultNumbers.forEach((item) => {
-				const target = Number(item.dataset.resultTarget || 0);
-				const prefix = item.dataset.resultPrefix || "";
-				const suffix = item.dataset.resultSuffix || "";
-				item.textContent = formatResultNumber(0, prefix, suffix, target);
-			});
-
-			const resultObserver = new IntersectionObserver((entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						animateResultNumber(entry.target);
-						resultObserver.unobserve(entry.target);
-					}
-				});
-			}, { threshold: 0.35 });
-
-			resultNumbers.forEach((item) => resultObserver.observe(item));
 
 			const observer = new IntersectionObserver((entries) => {
 				entries.forEach((entry) => {
@@ -1358,130 +245,6 @@ const faqs = [
 			}, { threshold: 0.12 });
 
 			revealItems.forEach((item) => observer.observe(item));
-
-			const menuToggle = document.querySelector("[data-menu-toggle]");
-			const menuPanel = document.querySelector("[data-menu-panel]");
-			const menuIcon = document.querySelector("[data-menu-icon]");
-			const setMenuOpen = (open) => {
-				if (!menuToggle || !menuPanel) return;
-				menuPanel.dataset.open = String(open);
-				menuToggle.setAttribute("aria-expanded", String(open));
-				menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-				if (menuIcon) menuIcon.dataset.open = String(open);
-			};
-
-			let navScrollFrame;
-			const syncScrollHeader = () => {
-				navScrollFrame = undefined;
-				const visible = window.scrollY > 40;
-				document.body.dataset.navVisible = String(visible);
-				if (!visible) setMenuOpen(false);
-			};
-
-			window.addEventListener("scroll", () => {
-				if (navScrollFrame) return;
-				navScrollFrame = window.requestAnimationFrame(syncScrollHeader);
-			}, { passive: true });
-			syncScrollHeader();
-
-			const contactLayer = document.querySelector("[data-contact-layer]");
-			const contactPanel = document.querySelector(".contact-panel");
-			const contactForm = document.querySelector("[data-contact-form]");
-			const contactConfirm = document.querySelector("[data-contact-confirm]");
-			const contactName = document.querySelector("#contact-name");
-			const retainerFields = [...document.querySelectorAll("[data-retainer-fields]")];
-			let contactDirty = false;
-
-			const syncContactType = () => {
-				const route = contactForm?.querySelector("input[name='route']:checked")?.value || "Project based";
-				const retainer = route === "Retainer model";
-				retainerFields.forEach((field) => {
-					field.classList.toggle("hidden", !retainer);
-					field.classList.toggle("grid", retainer);
-				});
-			};
-
-			const setContactOpen = (open) => {
-				if (!contactLayer) return;
-				contactLayer.dataset.open = String(open);
-				contactLayer.setAttribute("aria-hidden", String(!open));
-				document.body.dataset.contactOpen = String(open);
-				if (open) {
-					setMenuOpen(false);
-					window.setTimeout(() => contactName?.focus(), 220);
-				} else {
-					if (contactConfirm) contactConfirm.dataset.open = "false";
-					contactLayer.dataset.confirmOpen = "false";
-				}
-			};
-
-			const requestContactClose = () => {
-				if (contactDirty) {
-					if (contactConfirm) contactConfirm.dataset.open = "true";
-					if (contactLayer) contactLayer.dataset.confirmOpen = "true";
-					return;
-				}
-				setContactOpen(false);
-			};
-
-			document.querySelectorAll("[data-contact-open]").forEach((button) => {
-				button.addEventListener("click", () => setContactOpen(true));
-			});
-
-			document.querySelectorAll("[data-contact-close]").forEach((button) => {
-				button.addEventListener("click", requestContactClose);
-			});
-
-			contactLayer?.addEventListener("click", (event) => {
-				const target = event.target;
-				if (target === contactLayer || target?.classList?.contains("contact-scrim")) {
-					requestContactClose();
-				}
-			});
-
-			contactForm?.addEventListener("input", () => {
-				contactDirty = true;
-				syncContactType();
-			});
-
-			contactForm?.addEventListener("change", syncContactType);
-			syncContactType();
-
-			document.querySelector("[data-contact-resume]")?.addEventListener("click", () => {
-				if (contactConfirm) contactConfirm.dataset.open = "false";
-				if (contactLayer) contactLayer.dataset.confirmOpen = "false";
-				contactName?.focus();
-			});
-
-			document.querySelector("[data-contact-discard]")?.addEventListener("click", () => {
-				contactDirty = false;
-				contactForm?.reset();
-				setContactOpen(false);
-			});
-
-			contactForm?.addEventListener("submit", (event) => {
-				event.preventDefault();
-				const formData = new FormData(contactForm);
-				const route = formData.get("route") || "Engage";
-				const plan = formData.get("plan") || "";
-				const name = formData.get("name") || "";
-				const email = formData.get("email") || "";
-				const details = formData.get("details") || "";
-				const subject = encodeURIComponent(`Actai.Studio enquiry: ${route}`);
-				const body = encodeURIComponent([
-					`Type: ${route}`,
-					`Plan: ${plan}`,
-					`Name: ${name}`,
-					`Email: ${email}`,
-					"",
-					"Project details:",
-					String(details),
-				].join("\n"));
-				window.location.href = `mailto:hello@actai.studio?subject=${subject}&body=${body}`;
-				contactDirty = false;
-				contactForm.reset();
-				setContactOpen(false);
-			});
 
 			const caseCards = [...document.querySelectorAll("[data-case-card]")];
 			const caseRevealButton = document.querySelector("[data-case-reveal]");
@@ -1536,13 +299,6 @@ const faqs = [
 			});
 
 			updateCaseCards();
-
-			window.addEventListener("keydown", (event) => {
-				if (event.key === "Escape") {
-					setMenuOpen(false);
-					if (contactLayer?.dataset.open === "true") requestContactClose();
-				}
-			});
 
 			const featureNavItems = [...document.querySelectorAll("[data-feature-nav]")];
 			const featureCards = [...document.querySelectorAll("[data-feature-card]")];
@@ -1624,13 +380,19 @@ const faqs = [
 					if (sectorMotionStarted) return;
 					sectorMotionStarted = true;
 
+					const getSectorStep = (column) => {
+						const firstCard = column.firstElementChild;
+						const secondCard = firstCard?.nextElementSibling;
+						if (!(firstCard instanceof HTMLElement)) return 0;
+						if (secondCard instanceof HTMLElement) return secondCard.offsetTop - firstCard.offsetTop;
+						return firstCard.offsetHeight;
+					};
+
 					const scrollState = sectorColumns.map((column, index) => {
-						const loopPoint = Math.max(0, column.scrollHeight / 2);
-						column.scrollTop = index % 2 === 0 ? loopPoint * 0.06 : loopPoint * 0.72;
+						const step = getSectorStep(column);
+						column.scrollTop = index % 2 === 0 ? 0 : step * 0.45;
 						return {
 							column,
-							direction: index % 2 === 0 ? 1 : -1,
-							pauseUntil: 0,
 						};
 					});
 
@@ -1640,28 +402,20 @@ const faqs = [
 						lastTick = time;
 
 						scrollState.forEach((state) => {
-							const loopPoint = Math.max(0, state.column.scrollHeight / 2);
-							if (!loopPoint || time < state.pauseUntil) return;
+							const step = getSectorStep(state.column);
+							if (!step) return;
 
-							state.column.scrollTop += state.direction * delta * 0.064;
-							if (state.direction > 0 && state.column.scrollTop >= loopPoint) {
-								state.column.scrollTop -= loopPoint;
-							}
-							if (state.direction < 0 && state.column.scrollTop <= 0) {
-								state.column.scrollTop += loopPoint;
+							state.column.scrollTop += delta * 0.08;
+							while (state.column.scrollTop >= step && state.column.children.length > 1) {
+								const firstCard = state.column.firstElementChild;
+								if (!firstCard) break;
+								state.column.append(firstCard);
+								state.column.scrollTop -= step;
 							}
 						});
 
 						requestAnimationFrame(animateSectorColumns);
 					};
-
-					scrollState.forEach((state) => {
-						["wheel", "touchstart", "pointerdown"].forEach((eventName) => {
-							state.column.addEventListener(eventName, () => {
-								state.pauseUntil = performance.now() + 2600;
-							}, { passive: true });
-						});
-					});
 
 					requestAnimationFrame(animateSectorColumns);
 				};
@@ -1679,17 +433,12 @@ const faqs = [
 					});
 				};
 
-				document.querySelectorAll("[data-use-case-scroll]").forEach((button) => {
+				track.parentElement?.querySelectorAll("[data-use-case-scroll]").forEach((button) => {
 					button.addEventListener("click", () => {
 						scrollByCard(Number(button.dataset.useCaseScroll || 1));
 					});
 				});
 
-				track.addEventListener("wheel", (event) => {
-					if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-					track.scrollLeft += event.deltaY;
-					event.preventDefault();
-				}, { passive: false });
 			});
 
 			const triageTracks = [...document.querySelectorAll("[data-triage-track]")];

@@ -1,164 +1,25 @@
----
-const ringCount = 12;
-const rings = Array.from({ length: ringCount }, (_, index) => {
-	const inner = index === 0 ? 0 : (index / ringCount) * 82;
-	const outer = ((index + 1) / ringCount) * 82;
-	const feather = 0.8;
-	const mask = index === 0
-		? `radial-gradient(circle at 52% 43%, #000 0%, #000 ${outer}%, transparent ${outer + feather}%)`
-		: `radial-gradient(circle at 52% 43%, transparent 0%, transparent ${inner}%, #000 ${inner + feather}%, #000 ${outer}%, transparent ${outer + feather}%)`;
-	const direction = index % 2 === 0 ? 1 : -1;
-	const distance = 0.6 + (index % 4) * 0.34;
+<section id="governance" class="governance-target relative bg-[#11110f] px-4 py-24 text-white sm:px-8 lg:px-10 lg:pb-56 lg:pt-20" data-scroll-tone-section data-scroll-tone-spread="0.34">
+	<span id="ripple-effects" class="governance-target absolute top-0" aria-hidden="true"></span>
+	<div class="mx-auto max-w-[96rem] lg:px-10">
+		<div class="reveal grid gap-y-12 lg:grid-cols-8 lg:gap-x-6 lg:gap-y-0">
+			<p class="w-fit justify-self-center rounded-lg border border-white/55 px-8 py-3 text-[0.9rem] font-bold text-white/75 lg:col-span-8">THE GOVERNANCE</p>
+			<h2 class="section-headline mt-12 max-w-[18ch] text-[clamp(2.75rem,5vw,5rem)] leading-[1.08] lg:col-span-8" data-scroll-tone-line>Your policies<br />set the boundaries.</h2>
 
-	return {
-		index,
-		mask,
-		fromX: `${direction * -distance}%`,
-		fromY: `${direction * distance * 0.45}%`,
-		toX: `${direction * distance}%`,
-		toY: `${direction * -distance * 0.45}%`,
-		fromScale: 1 + (index % 3) * 0.006,
-		toScale: 1.026 + (index % 4) * 0.011,
-		fromRotation: `${direction * -0.22}deg`,
-		toRotation: `${direction * 0.38}deg`,
-		delay: `${index * -0.41}s`,
-		duration: `${3.9 + (index % 3) * 0.38}s`,
-	};
-});
-
----
-
-	<section id="ripple-effects" class="bg-[#11110f] px-4 py-24 text-white sm:px-8 lg:px-10 lg:py-36" data-ripple-section data-scroll-tone-section>
-		<div class="mx-auto max-w-[96rem]">
-			<div class="reveal grid gap-14 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-14">
-				<div>
-					<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-[0.9rem] font-bold text-white/50">THE GOVERNANCE</p>
-					<div class="mt-12 max-w-[19ch] text-[clamp(1.75rem,2.7vw,3rem)] font-bold leading-[1]" data-governance-copy>
-						<h2 data-scroll-tone-line>It starts narrow, resolving one decision at a time.</h2>
-						<p class="mt-8" data-scroll-tone-line>It builds the frontier outward, never past what’s been decided.</p>
-						<p class="mt-8" data-scroll-tone-line>Every answer ripples back, keeping the frontier current and governed.</p>
-					</div>
-				</div>
-
-				<figure class="ripple-stage relative mx-auto h-[38rem] w-full overflow-hidden rounded-[1.6rem] bg-[#11110f] shadow-[0_28px_90px_rgba(17,17,15,0.14)] sm:h-[40rem] lg:h-[42rem] lg:justify-self-end">
-				<img class="absolute inset-0 h-full w-full object-cover" src="/images/use-case-shapes/shape-05.jpg" alt="A blurred figure moving behind glass" />
-				<div class="absolute inset-0 bg-black/8"></div>
-				<div class="absolute inset-0" aria-hidden="true">
-					{rings.map((ring) => (
-						<div
-							class="ripple-ring absolute inset-0 overflow-hidden"
-							data-ripple-ring
-							data-index={ring.index}
-							style={`-webkit-mask-image: ${ring.mask}; mask-image: ${ring.mask}; --ring-from-x: ${ring.fromX}; --ring-from-y: ${ring.fromY}; --ring-to-x: ${ring.toX}; --ring-to-y: ${ring.toY}; --ring-from-scale: ${ring.fromScale}; --ring-to-scale: ${ring.toScale}; --ring-from-rotation: ${ring.fromRotation}; --ring-to-rotation: ${ring.toRotation}; --ripple-delay: ${ring.delay}; --ripple-duration: ${ring.duration};`}
-						>
-							<img class="h-full w-full object-cover" src="/images/use-case-shapes/shape-05.jpg" alt="" />
-						</div>
-					))}
-				</div>
-
-				<div class="absolute inset-x-0 top-0 flex items-center justify-between p-5 text-xs font-bold uppercase text-white/70 sm:p-7">
-					<span>Agent in the Room</span>
-					<span>Finding / effect</span>
-				</div>
-				<figcaption class="absolute bottom-0 left-0 max-w-[28rem] p-5 text-white sm:p-7">
-					<p class="text-xs font-bold uppercase text-[#dfff42]">THE GOVERNANCE</p>
-					<p class="mt-3 text-[clamp(1.35rem,2.65vw,2.4rem)] font-bold leading-[0.98] [text-wrap:balance]">
-						Governance that moves with every answer.
-					</p>
-					</figcaption>
-				</figure>
+			<div class="mt-12 max-w-[22rem] text-left text-[clamp(1.45rem,2vw,2.2rem)] font-bold leading-[1.16] lg:col-span-2 lg:col-start-2 lg:mt-32">
+				<p class="[text-wrap:pretty]" data-scroll-tone-line>We shape the agent around approved knowledge, review points and escalation routes.</p>
+				<p class="mt-7 [text-wrap:pretty]" data-scroll-tone-line>Every agent stays governed by your policies and clear human decisions.</p>
 			</div>
+
+			<figure class="relative mx-auto mt-4 aspect-square w-full overflow-hidden rounded-[1.6rem] bg-[#e8ebee] lg:col-span-3 lg:col-start-5 lg:mt-12">
+				<img class="h-full w-full object-cover" src="/images/governance-glass-head.png" alt="A transparent glass head in profile" />
+			</figure>
 		</div>
-	</section>
+	</div>
+</section>
 
 <style>
-	.ripple-stage {
-		isolation: isolate;
+	.governance-target {
+		scroll-margin-top: var(--header-height);
 	}
 
-	.ripple-stage::after {
-		background: linear-gradient(180deg, transparent 45%, rgba(17, 17, 15, 0.78) 100%);
-		content: "";
-		inset: 0;
-		pointer-events: none;
-		position: absolute;
-		z-index: 1;
-	}
-
-	.ripple-ring {
-		animation: radial-ripple var(--ripple-duration) cubic-bezier(0.45, 0, 0.55, 1) var(--ripple-delay) infinite alternate;
-		filter: saturate(1.08) contrast(1.03);
-		transform: translate(var(--ring-from-x), var(--ring-from-y)) rotate(var(--ring-from-rotation)) scale(var(--ring-from-scale));
-		transform-origin: 52% 43%;
-		will-change: transform;
-	}
-
-	.ripple-ring > img {
-		transform: translate(var(--ripple-follow-x, 0%), var(--ripple-follow-y, 0%)) scale(1.045);
-		transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
-		will-change: transform;
-	}
-
-	@keyframes radial-ripple {
-		from {
-			transform: translate(var(--ring-from-x), var(--ring-from-y)) rotate(var(--ring-from-rotation)) scale(var(--ring-from-scale));
-		}
-
-		to {
-			transform: translate(var(--ring-to-x), var(--ring-to-y)) rotate(var(--ring-to-rotation)) scale(var(--ring-to-scale));
-		}
-	}
-
-	.ripple-stage > div:last-of-type,
-	.ripple-stage figcaption {
-		z-index: 3;
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.ripple-ring {
-			animation: none;
-			transform: none !important;
-		}
-
-		.ripple-ring > img {
-			transform: scale(1.02);
-			transition: none;
-		}
-	}
 </style>
-
-<script>
-	document.querySelectorAll("[data-ripple-section]").forEach((section) => {
-		const stage = section.querySelector(".ripple-stage");
-		const rings = [...section.querySelectorAll("[data-ripple-ring]")];
-		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-		let pointerFrame = 0;
-
-		if (!stage || reducedMotion.matches) return;
-
-		const setPointerPosition = (clientX, clientY) => {
-			const bounds = stage.getBoundingClientRect();
-			const x = Math.max(-1, Math.min(1, ((clientX - bounds.left) / bounds.width - 0.5) * 2));
-			const y = Math.max(-1, Math.min(1, ((clientY - bounds.top) / bounds.height - 0.5) * 2));
-
-			rings.forEach((ring, index) => {
-				const direction = index % 2 === 0 ? 1 : -1;
-				const depth = 0.38 + (index % 5) * 0.17;
-				ring.style.setProperty("--ripple-follow-x", `${x * direction * depth}%`);
-				ring.style.setProperty("--ripple-follow-y", `${y * depth * 0.45}%`);
-			});
-		};
-
-		stage.addEventListener("pointermove", (event) => {
-			window.cancelAnimationFrame(pointerFrame);
-			pointerFrame = window.requestAnimationFrame(() => setPointerPosition(event.clientX, event.clientY));
-		}, { passive: true });
-
-		stage.addEventListener("pointerleave", () => {
-			rings.forEach((ring) => {
-				ring.style.setProperty("--ripple-follow-x", "0%");
-				ring.style.setProperty("--ripple-follow-y", "0%");
-			});
-		});
-	});
-</script>

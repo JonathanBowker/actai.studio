@@ -14,4 +14,4 @@ Leads, forms and inboxes eat hours and still go cold.
 
 ## Talk to Jonny and Mark
 
-Book a meeting: `/meeting`
+Request a 30-minute call: `/contact`

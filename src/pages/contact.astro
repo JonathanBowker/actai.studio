@@ -1,9 +1,9 @@
 ---
 import "../styles/global.css";
+import SeoGuard from "../components/SeoGuard.astro";
 import { ContactFormSection, ContactIntroSection, SiteHeader, SitemapFooterSection } from "../components/sections";
 
-const emailHref = "mailto:hello@actai.studio?subject=Act.%20AI%20contact";
-const bookingHref = "/contact";
+const bookingHref = "/meeting";
 ---
 
 <html lang="en">
@@ -13,8 +13,9 @@ const bookingHref = "/contact";
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="Contact Act. AI for clear guidance on where to start with AI in your business." />
-		<title>Contact | actai.studio</title>
+		<meta name="description" content="Contact Act AI Studio about your business, AI direction or an agent project." />
+		<SeoGuard />
+		<title>Contact | Act AI Studio</title>
 		<style is:global>
 			html,
 			body {
@@ -23,12 +24,12 @@ const bookingHref = "/contact";
 			}
 		</style>
 	</head>
-	<body class="pt-[4.5rem]">
-		<SiteHeader />
+	<body class="pt-[var(--header-height)]">
+		<SiteHeader showContactLink={false} />
 
 		<main>
 			<ContactIntroSection />
-			<ContactFormSection {emailHref} />
+			<ContactFormSection />
 		</main>
 		<SitemapFooterSection {bookingHref} />
 	</body>

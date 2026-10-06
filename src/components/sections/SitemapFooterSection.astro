@@ -8,10 +8,13 @@ const { bookingHref } = Astro.props;
 		<div>
 			<p class="text-[2rem] font-bold">Act.</p>
 			<p class="mt-5 max-w-[30rem] font-bold leading-tight text-white/50">Find where time is being lost, decide what AI should do, and put it to work.</p>
+			<div class="mt-5 grid gap-1 text-sm font-bold text-white/50">
+				<p>© 2026 Advanced Analytica Limited. All Rights Reserved.</p>
+			</div>
 		</div>
 		<div class="flex flex-wrap items-center gap-5 font-bold">
 			<a class="text-white/60 no-underline transition hover:text-white" href="/privacy">Privacy</a>
-			<a class="inline-flex h-12 items-center rounded-lg bg-white px-5 text-sm text-black no-underline transition hover:bg-[#dfff42]" href={bookingHref}>BEGIN THE CONVERSATION</a>
+			<a class="action-pill inline-flex h-12 items-center bg-white px-5 text-sm text-black no-underline transition hover:bg-[#dfff42]" href={bookingHref}>Request a 30-minute call</a>
 		</div>
 	</div>
 </footer>

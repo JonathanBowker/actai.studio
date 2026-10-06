@@ -28,24 +28,26 @@ const { agent, zipHref, packBase, bookingHref } = Astro.props;
 						<label class="gate-label"><span>Name</span><input class="gate-input" name="name" autocomplete="name" required /></label>
 						<label class="gate-label"><span>Email</span><input class="gate-input" name="email" type="email" autocomplete="email" required /></label>
 					</div>
-					<label class="gate-checkbox"><input name="consent" type="checkbox" required /><span>I consent to Actai.Studio contacting me about this diagnostic pack and related AI direction.</span></label>
+					<label class="gate-checkbox"><input name="consent" type="checkbox" required /><span>I consent to Act AI Studio contacting me about this diagnostic pack and related AI direction.</span></label>
 					<p class="gate-privacy">We use these details to exchange the self-help pack for contact permission. Read the <a href="/privacy">privacy notice</a>.</p>
-					<button class="agent-button agent-button--unlock" type="submit">Unlock the pack</button>
+					<button class="action-pill agent-button agent-button--unlock" type="submit">Unlock the pack</button>
 				</form>
 				<div class="unlock-panel" data-pack-unlock hidden>
 					<p>Your compressed ZIP pack is ready.</p>
 					<div class="unlock-panel__actions">
-						<a class="agent-button agent-button--download" href={zipHref} download data-pack-download>Download ZIP pack</a>
-						<button class="agent-button" type="button" data-open-tool="claude" data-pack-base={packBase}>Open in Claude</button>
-						<button class="agent-button" type="button" data-open-tool="chatgpt" data-pack-base={packBase}>Open in ChatGPT</button>
+						<a class="action-pill agent-button agent-button--download" href={zipHref} download data-pack-download>Download ZIP pack</a>
+						<button class="action-pill agent-button" type="button" data-open-tool="claude" data-pack-base={packBase}>Open in Claude</button>
+						<button class="action-pill agent-button" type="button" data-open-tool="chatgpt" data-pack-base={packBase}>Open in ChatGPT</button>
 					</div>
 					<p data-tool-note>Upload the ZIP directly where supported. If it is not accepted, unzip it and upload cover.md, prompt.md and agent-knowledge.md together. The assistant buttons also copy the pack text before opening a new chat.</p>
 				</div>
 			</div>
 		</div>
 		<footer class="agent-footer">
-			<p>© 2026 Advanced Analytica Limited. All Rights Reserved.</p>
-			<a class="agent-nav__link agent-nav__link--primary" href={bookingHref}>BEGIN THE CONVERSATION</a>
+			<div>
+				<p>© 2026 Advanced Analytica Limited. All Rights Reserved.</p>
+			</div>
+			<a class="action-pill agent-nav__link agent-nav__link--primary" href={bookingHref}>REQUEST A 30-MINUTE CALL</a>
 		</footer>
 	</div>
 </section>

@@ -1,13 +1,14 @@
 ---
 const conversationSteps = [
-	"You discuss the process topic.",
-	"The expert refines the definition.",
-	"The agent confirms it has understood.",
-	"The agent starts the discovery process.",
-	"The expert interrogates the technical problem.",
-	"You add the details that change the context to your needs.",
-	"We all agree on the finding, and the agent locks it down.",
-	"The agent moves to the next layer.",
+	"We bring the agreed brief into the session.",
+	"Your people bring their business context.",
+	"The prepared agent asks a clear question.",
+	"The room answers from experience.",
+	"Our experts keep the conversation focused.",
+	"You provide the details of your specific needs for context.",
+	"We agree what should happen next.",
+	"The agreed direction moves to the build.",
+	"The agent turns the agreed direction into a clear technical brief for our engineering team.",
 ];
 
 const conversationImages = [
@@ -17,30 +18,65 @@ const conversationImages = [
 	"/fixa-assets/K6oVlqJ1SryJzVBte2yxIFoGqI.webp",
 	"/fixa-assets/WXKx26vqrAI7XfrXAgsHkTeOeV0.webp",
 ];
+
+interface Props { bookingHref: string }
+const { bookingHref } = Astro.props;
 ---
 
-<section id="method" class="stack-panel bg-[#262722] px-4 pb-40 pt-24 text-white sm:px-8 lg:px-10 lg:pb-56" data-scroll-tone-section>
+<section id="agent-in-the-room" class="agent-in-room-target stack-panel relative bg-[#262722] px-4 pb-40 pt-24 text-white sm:px-8 lg:px-10 lg:pb-56" data-scroll-tone-section data-scroll-tone-spread="0.18">
+	<span id="method" class="agent-in-room-target pointer-events-none absolute left-0 top-0" aria-hidden="true"></span>
 	<div class="reveal mx-auto grid max-w-[96rem] gap-14">
 		<div class="grid gap-8 lg:grid-cols-[0.42fr_1fr] lg:items-start lg:gap-14">
-			<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-[0.9rem] font-bold text-white/50">THE METHOD</p>
-			<div class="max-w-[24ch] text-[clamp(1.75rem,2.7vw,3rem)] font-bold leading-[1]">
-				<p data-scroll-tone-line>Layered interaction with an agent briefed on your business case.</p>
-				<p class="mt-8" data-scroll-tone-line>
-					Ask it anything.
-					Put our expert-led direction to the test in conversation.
+			<p class="w-fit rounded-lg bg-white/8 px-4 py-3 text-[0.9rem] font-bold text-white/65">AGENT IN THE ROOM™</p>
+			<div class="max-w-[34rem]">
+				<h2 class="text-[clamp(2.25rem,4vw,4.5rem)] font-bold leading-[0.96]" data-scroll-tone-line>Start with a conversation, not a deck.</h2>
+				<p class="mt-8 text-[clamp(1rem,1.45vw,1.2rem)] font-bold leading-[1.4] text-white/82" data-scroll-tone-line>
+					It starts with a call. We record it and steer it, so by the end we know what the problem is. That becomes the brief.
 				</p>
 			</div>
 		</div>
 
+		<ol class="grid border-t border-white/20 md:grid-cols-2">
+			<li class="grid min-h-[18rem] content-start gap-10 border-b border-white/20 py-8 md:border-r md:pl-0 md:pr-8">
+				<span class="text-sm font-bold text-[#dfff42]">01</span>
+				<div>
+					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The call.</h3>
+					<p class="agent-step-copy mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">Thirty minutes, recorded. We steer the conversation until we land on the real problem, not just notes.</p>
+				</div>
+			</li>
+			<li class="grid min-h-[18rem] content-start gap-10 border-b border-white/20 py-8 md:pl-8 md:pr-0">
+				<span class="text-sm font-bold text-[#dfff42]">02</span>
+				<div>
+					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The preparation.</h3>
+					<p class="agent-step-copy mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">If you choose to go ahead, we programme and prepare the agent on your brief, ready for the AIR session.</p>
+				</div>
+			</li>
+			<li class="grid min-h-[22rem] content-start gap-10 border-b border-white/20 py-8 md:border-r md:pl-0 md:pr-8">
+				<span class="text-sm font-bold text-[#dfff42]">03</span>
+				<div>
+					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The AIR session.</h3>
+					<p class="agent-step-copy mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">Face to face, wherever suits the conversation. One or two of our experts join your people, with the agent we've prepared. It questions the room one question at a time. You answer. We steer. AI-led, expert-driven.</p>
+				</div>
+			</li>
+			<li class="grid min-h-[22rem] content-start gap-10 border-b border-white/20 py-8 md:pl-8 md:pr-0">
+				<span class="text-sm font-bold text-[#dfff42]">04</span>
+				<div>
+					<h3 class="text-[clamp(1.5rem,2vw,2.25rem)] font-bold">The build.</h3>
+					<p class="agent-step-copy mt-4 max-w-[34rem] font-bold leading-[1.4] text-white/75">What we agree goes to our studio, where we build, test and deploy it.</p>
+				</div>
+			</li>
+		</ol>
+
+		<p class="text-sm font-bold uppercase text-white/65">Inside the session</p>
 		<div class="design-tree-shell relative h-[38rem] overflow-hidden rounded-[1.6rem] bg-[#10110f] sm:h-[40rem] lg:h-[42rem]" data-design-tree-carousel>
 			<div class="design-tree-header absolute left-5 right-5 top-5 z-20 flex items-center justify-between text-[0.68rem] font-bold uppercase text-white/55 sm:left-7 sm:right-7 sm:top-7 sm:text-xs">
 				<span>Agent in the Room</span>
-				<span class="rounded-lg bg-white/10 px-3 py-2 backdrop-blur-md" data-design-tree-count>01 / 08</span>
+				<span class="rounded-lg bg-white/10 px-3 py-2 backdrop-blur-md" data-design-tree-count>01 / {String(conversationSteps.length).padStart(2, "0")}</span>
 			</div>
 
 			<div class="design-tree-viewport absolute inset-x-0 bottom-20 top-16" role="region" aria-label="Agent in the Room conversation stages" aria-roledescription="carousel">
 				{conversationSteps.map((step, index) => (
-					<article
+					<div
 					class="design-tree-card absolute left-1/2 top-1/2 overflow-hidden bg-[#11110f] text-white shadow-[0_24px_70px_rgba(17,17,15,0.22)]"
 						data-design-tree-card
 						data-index={index}
@@ -54,22 +90,37 @@ const conversationImages = [
 								<p class="max-w-[19ch] text-[clamp(1.2rem,2.1vw,1.75rem)] font-bold leading-[1.04] [text-wrap:balance]">{step}</p>
 							</div>
 						</div>
-					</article>
+					</div>
 				))}
 			</div>
 
 			<div class="design-tree-footer absolute bottom-5 left-5 right-5 z-20 flex items-center justify-between sm:bottom-7 sm:left-7 sm:right-7">
 				<p class="max-w-[23ch] text-xs font-bold leading-tight text-white/48 sm:text-sm">A finding is agreed before the conversation moves deeper.</p>
 				<div class="flex gap-2">
-					<button class="design-tree-control" type="button" aria-label="Previous conversation stage" data-design-tree-previous>↑</button>
-					<button class="design-tree-control" type="button" aria-label="Next conversation stage" data-design-tree-next>↓</button>
+					<button class="action-pill design-tree-control" type="button" aria-label="Pause automatic carousel movement" aria-pressed="false" title="Pause automatic movement" data-design-tree-pause>Ⅱ</button>
+					<button class="action-pill design-tree-control" type="button" aria-label="Previous conversation stage" data-design-tree-previous>↑</button>
+					<button class="action-pill design-tree-control" type="button" aria-label="Next conversation stage" data-design-tree-next>↓</button>
 				</div>
 			</div>
+		</div>
+
+		<div class="grid justify-items-center gap-5 pt-4 text-center">
+			<p class="text-[clamp(1.5rem,2.4vw,2.5rem)] font-bold leading-none" data-scroll-tone-line>It starts with a 30-minute call.</p>
+			<a class="action-pill inline-flex h-12 items-center justify-center bg-white px-6 font-bold text-[#11110f] no-underline transition hover:bg-[#dfff42]" href={bookingHref}>Request a 30-minute call</a>
 		</div>
 	</div>
 </section>
 
 <style>
+	.agent-in-room-target {
+		scroll-margin-top: 4.5rem;
+	}
+
+	.agent-step-copy {
+		text-wrap: balance;
+		text-wrap: pretty;
+	}
+
 	.design-tree-shell::before,
 	.design-tree-shell::after {
 		content: "";
@@ -161,7 +212,7 @@ const conversationImages = [
 		align-items: center;
 		background: white;
 		border: 0;
-		border-radius: 0.65rem;
+		border-radius: 9999px;
 		color: #11110f;
 		cursor: pointer;
 		display: inline-flex;
@@ -208,11 +259,13 @@ const conversationImages = [
 		const count = carousel.querySelector("[data-design-tree-count]");
 		const previous = carousel.querySelector("[data-design-tree-previous]");
 		const next = carousel.querySelector("[data-design-tree-next]");
+		const pause = carousel.querySelector("[data-design-tree-pause]");
 		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 		let activeIndex = 0;
 		let startX = null;
 		let startY = null;
-		let paused = false;
+		let userPaused = reducedMotion.matches;
+		let interactionPaused = false;
 		let lastWheel = 0;
 		let moving = false;
 		const slideDuration = 1050;
@@ -235,7 +288,9 @@ const conversationImages = [
 				card.style.zIndex = String(10 - distance);
 				card.dataset.visible = String(distance <= 2);
 				card.dataset.active = String(distance === 0);
-				card.setAttribute("aria-hidden", String(distance > 2));
+				card.setAttribute("aria-hidden", String(distance !== 0));
+				card.setAttribute("role", distance === 0 ? "button" : "group");
+				card.setAttribute("tabindex", distance === 0 ? "0" : "-1");
 			});
 			if (count) count.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(cards.length).padStart(2, "0")}`;
 		};
@@ -296,6 +351,13 @@ const conversationImages = [
 
 		previous?.addEventListener("click", () => move(-1));
 		next?.addEventListener("click", () => move(1));
+		pause?.addEventListener("click", () => {
+			userPaused = !userPaused;
+			pause.textContent = userPaused ? "▶" : "Ⅱ";
+			pause.setAttribute("aria-pressed", String(userPaused));
+			pause.setAttribute("aria-label", userPaused ? "Resume automatic carousel movement" : "Pause automatic carousel movement");
+			pause.setAttribute("title", userPaused ? "Resume automatic movement" : "Pause automatic movement");
+		});
 		cards.forEach((card, index) => card.addEventListener("click", () => {
 			if (index === activeIndex) {
 				move(1);
@@ -303,6 +365,11 @@ const conversationImages = [
 			}
 			const offset = shortestOffset(index);
 			moveTo(index, offset >= 0 ? 1 : -1);
+		}));
+		cards.forEach((card) => card.addEventListener("keydown", (event) => {
+			if (event.key !== "Enter" && event.key !== " ") return;
+			event.preventDefault();
+			move(1);
 		}));
 
 		carousel.addEventListener("wheel", (event) => {
@@ -315,7 +382,7 @@ const conversationImages = [
 		carousel.addEventListener("touchstart", (event) => {
 			startX = event.touches[0]?.clientX ?? null;
 			startY = event.touches[0]?.clientY ?? null;
-			paused = true;
+			interactionPaused = true;
 		}, { passive: true });
 		carousel.addEventListener("touchend", (event) => {
 			const endX = event.changedTouches[0]?.clientX;
@@ -327,23 +394,23 @@ const conversationImages = [
 			if (Math.abs(distance) > 28) move(distance > 0 ? 1 : -1);
 			startX = null;
 			startY = null;
-			paused = false;
+			interactionPaused = false;
 		}, { passive: true });
 		carousel.addEventListener("touchcancel", () => {
 			startX = null;
 			startY = null;
-			paused = false;
+			interactionPaused = false;
 		}, { passive: true });
 
-		carousel.addEventListener("mouseenter", () => { paused = true; });
-		carousel.addEventListener("mouseleave", () => { paused = false; });
-		carousel.addEventListener("focusin", () => { paused = true; });
-		carousel.addEventListener("focusout", () => { paused = false; });
+		carousel.addEventListener("mouseenter", () => { interactionPaused = true; });
+		carousel.addEventListener("mouseleave", () => { interactionPaused = false; });
+		carousel.addEventListener("focusin", () => { interactionPaused = true; });
+		carousel.addEventListener("focusout", () => { interactionPaused = false; });
 
 		if (!reducedMotion.matches) {
 			window.setInterval(() => {
 				const bounds = carousel.getBoundingClientRect();
-				if (!paused && bounds.top < window.innerHeight && bounds.bottom > 0) move(1);
+				if (!userPaused && !interactionPaused && bounds.top < window.innerHeight && bounds.bottom > 0) move(1);
 			}, 3200);
 		}
 

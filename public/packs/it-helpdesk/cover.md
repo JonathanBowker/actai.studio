@@ -14,4 +14,4 @@ Simple software requests are burying your technical team.
 
 ## Talk to Jonny and Mark
 
-Book a meeting: `/meeting`
+Request a 30-minute call: `/contact`

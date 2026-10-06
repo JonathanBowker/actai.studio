@@ -14,4 +14,4 @@ It takes five emails just to find a 30-minute meeting window.
 
 ## Talk to Jonny and Mark
 
-Book a meeting: `/meeting`
+Request a 30-minute call: `/contact`
