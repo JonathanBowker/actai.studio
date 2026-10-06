@@ -366,7 +366,12 @@ const faqColumns = [
 			</nav>
 			<div class="footer-about">
 				<strong>Advanced Analytica</strong>
-				<p>Act AI Studio is the agentic AI practice of Advanced Analytica Limited. We help organisations identify where AI creates value, direct what gets built and keep every agent governed by human decisions.</p>
+				<div class="footer-about-copy">
+					<p>MOVE FAST. STAY SAFE.</p>
+					<p>Act AI Studio is the outreach and AI engagement arm of Advanced Analytica, a UK-based business.</p>
+					<p>Most businesses are sitting on knowledge they can't use at speed. The people who hold it are busy, the documents that contain it are static, and the processes built around it weren't designed for AI.</p>
+					<p>Advanced Analytica turns that knowledge into governed agentic systems that work in production. We bring the strategy, the specification, and the AI skills, so the business can move fast and stay safe.</p>
+				</div>
 			</div>
 			<div class="footer-social">
 				<a href="https://www.linkedin.com/company/advanced-analytica/" rel="noreferrer" target="_blank">LinkedIn</a>
@@ -1210,15 +1215,15 @@ const faqColumns = [
 	}
 
 	.footer-cta {
-		width: min(400px, 100%);
-		min-height: 68px;
-		padding-inline: 30px;
-		font-size: 20px;
 		white-space: nowrap;
 	}
 
-	.footer-about p {
-		margin-top: 70px;
+	.footer-about-copy {
+		margin-top: 24px;
+	}
+
+	.footer-about-copy p + p {
+		margin-top: 18px;
 	}
 
 	.footer-wordmark {
@@ -1281,11 +1286,6 @@ const faqColumns = [
 		.practice-copy,
 		.governance-copy p {
 			font-size: 36px;
-		}
-
-		.footer-cta {
-			padding-inline: 18px;
-			font-size: 16px;
 		}
 
 		.air-copy strong {
@@ -1463,7 +1463,7 @@ const faqColumns = [
 			margin-top: 48px;
 		}
 
-		.footer-about p {
+		.footer-about-copy {
 			margin-top: 28px;
 		}
 
