@@ -825,6 +825,8 @@ const faqColumns = [
 		gap: 20px;
 		height: 590px;
 		overflow: hidden;
+		-webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
+		mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
 	}
 
 	.use-case-column {
@@ -880,8 +882,10 @@ const faqColumns = [
 		position: absolute;
 		inset: 0;
 		background-image: var(--image);
+		background-color: #050505;
 		background-position: var(--position);
-		background-size: cover;
+		background-repeat: no-repeat;
+		background-size: 82% auto;
 		filter: contrast(1.08) saturate(1.12);
 		opacity: 0.96;
 		transform: scale(1);
@@ -894,7 +898,7 @@ const faqColumns = [
 	@media (hover: hover) and (pointer: fine) {
 		.use-case:hover .use-case-art {
 			filter: contrast(1.12) saturate(1.2);
-			transform: scale(1.14);
+			transform: scale(1.2);
 		}
 	}
 
