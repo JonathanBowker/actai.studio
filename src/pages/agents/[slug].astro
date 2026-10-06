@@ -34,7 +34,11 @@ const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index 
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="description" content={`${agent.data.name}: a diagnostic self-help pack from Act AI Studio.`} />
-		<SeoGuard path={`/agents/${agent.id}`} />
+		<SeoGuard
+			path={`/agents/${agent.id}`}
+			title={`${agent.data.name} | Act AI Studio`}
+			description={`${agent.data.name}: a diagnostic self-help pack from Act AI Studio.`}
+		/>
 		<title>{agent.data.name} | Act AI Studio</title>
 		<style is:global>
 			:root { --cream:#ebe9e4; --paper:#f6f4ef; --ink:#11110f; --muted:#77736a; --lime:#dfff42; }

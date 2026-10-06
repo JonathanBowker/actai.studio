@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import HomepageV3 from "../components/HomepageV3.astro";
+import SeoGuard from "../components/SeoGuard.astro";
 import ScrollToneController from "../components/sections/ScrollToneController.astro";
 ---
 
@@ -9,7 +10,11 @@ import ScrollToneController from "../components/sections/ScrollToneController.as
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<meta name="description" content="Act AI Studio finds where your business creates value and shapes AI to accelerate the delivery of it." />
+		<SeoGuard
+			path="/"
+			title="Act AI Studio | Intelligence needs direction"
+			description="Act AI Studio finds where your business creates value and shapes AI to accelerate the delivery of it."
+		/>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>Act AI Studio | Intelligence needs direction</title>
 	</head>

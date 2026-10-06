@@ -1,6 +1,8 @@
 ---
 interface Props {
 	path?: string;
+	title?: string;
+	description?: string;
 }
 
 import { isReviewStaging } from "../lib/siteEnvironment";
@@ -9,11 +11,30 @@ const productionOrigin = "https://actai.studio";
 const rawPath = Astro.props.path ?? Astro.url.pathname;
 const canonicalPath = rawPath.startsWith("/") ? rawPath : `/${rawPath}`;
 const canonicalUrl = new URL(canonicalPath, productionOrigin).toString();
+const socialImageUrl = new URL("/social-share.png", productionOrigin).toString();
+const title = Astro.props.title ?? "Act AI Studio";
+const description = Astro.props.description ?? "Act AI Studio finds where your business creates value and shapes AI to accelerate the delivery of it.";
 const isStagingBuild = isReviewStaging(Astro.url);
 ---
 
 <link rel="canonical" href={canonicalUrl} />
 <meta name="robots" content={isStagingBuild ? "noindex,nofollow" : "index,follow"} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Act AI Studio" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={socialImageUrl} />
+<meta property="og:image:secure_url" content={socialImageUrl} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Act. white logo on a black background" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImageUrl} />
+<meta name="twitter:image:alt" content="Act. white logo on a black background" />
 <script is:inline>
 	(() => {
 		if (!location.hostname.endsWith("ondigitalocean.app")) return;
