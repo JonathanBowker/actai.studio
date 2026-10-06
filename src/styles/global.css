@@ -40,7 +40,7 @@
   font-synthesis: none;
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
-  --header-height: 120px;
+  --header-height: 60px;
 }
 
 * {
@@ -59,38 +59,11 @@ body {
   color: var(--color-ink);
 }
 
-h1,
-h2,
-h3,
-h4 {
+:where(h1, h2, h3, h4, h5, h6, p, a, button, label, li, span, strong, small, input, textarea, select) {
   line-height: 1.1 !important;
 }
 
 ::selection {
   background: var(--color-ink);
   color: var(--color-paper);
-}
-
-.section-headline {
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
-  margin-inline: auto;
-  text-align: center;
-  text-wrap: balance;
-}
-
-.action-pill {
-  border-radius: 9999px !important;
-}
-
-.action-pill:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 3px;
-}
-
-@media (max-width: 1500px) {
-  :root {
-    --header-height: 72px;
-  }
 }
