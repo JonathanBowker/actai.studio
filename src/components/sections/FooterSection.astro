@@ -6,7 +6,11 @@ const { bookingHref } = Astro.props;
 				<div class="relative z-10 grid min-h-[24rem] w-full gap-10 bg-black p-8 text-white md:grid-cols-2 lg:grid-cols-[0.9fr_0.65fr_1.35fr_0.5fr]">
 					<div class="grid content-between gap-10">
 						<div>
-							<p class="text-[1.7rem] font-bold">Act.</p>
+							<img
+								class="-ml-7 h-20 w-auto"
+								src="/logos/ACT_White.svg"
+								alt="Act."
+							/>
 							<p class="mt-10 font-bold">Get a useful recommendation.<br />No spam. No noise.</p>
 							<a href={bookingHref} class="action-pill mt-6 inline-flex h-12 items-center bg-white px-6 font-bold text-black no-underline transition hover:bg-[#dfff42]">
 								Request a 30-minute call
