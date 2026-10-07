@@ -240,7 +240,7 @@ const faqColumns = [
 						<p data-scroll-tone-line>What matters is where AI creates value and where people stay in control.</p>
 						<p data-scroll-tone-line>Agents bring capability, which builds business capacity.</p>
 					</div>
-					<div class="use-case-grid" aria-label="Business use cases">
+					<div class="use-case-grid use-case-grid--desktop" aria-label="Business use cases">
 						{useCaseColumns.map((column) => (
 							<div class="use-case-column" data-practice-column>
 								{[false, true].map((duplicate) => (
@@ -265,6 +265,27 @@ const faqColumns = [
 								))}
 							</div>
 						))}
+					</div>
+					<div class="use-case-grid use-case-grid--compact" aria-label="Business use cases">
+						<div class="use-case-column" data-practice-column>
+							{[false, true].map((duplicate) => (
+								<div class="use-case-sequence" data-practice-loop-start={duplicate ? "true" : undefined} aria-hidden={duplicate ? "true" : undefined}>
+									{useCases.map((useCase, index) => (
+										<article class:list={["use-case", index === 0 || index === 3 ? "use-case-tall" : ""]} style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image})`}>
+											<div class="use-case-art" aria-hidden="true"></div>
+											<div class="use-case-meta"><span>Use case</span><span>{String(index + 1).padStart(2, "0")} / 04</span></div>
+											<div class="use-case-body">
+												<p>{useCase.sector}</p>
+												<h3>{useCase.title}</h3>
+											</div>
+											<div class="use-case-details">
+												{useCase.details.map((detail) => <span>{detail}</span>)}
+											</div>
+										</article>
+									))}
+								</div>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -832,6 +853,10 @@ const faqColumns = [
 		overflow: hidden;
 		-webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
 		mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
+	}
+
+	.use-case-grid--compact {
+		display: none;
 	}
 
 	.use-case-column {
@@ -1428,6 +1453,17 @@ const faqColumns = [
 			max-width: 580px;
 		}
 
+		.use-case-grid--desktop {
+			display: none;
+		}
+
+		.use-case-grid--compact {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr);
+			width: min(100%, 400px);
+			margin-inline: auto;
+		}
+
 		.director-grid {
 			gap: 64px;
 			margin-top: 90px;
@@ -1572,8 +1608,8 @@ const faqColumns = [
 			font-size: 31px;
 		}
 
-		.use-case-grid {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
+		.use-case-grid--compact {
+			grid-template-columns: minmax(0, 1fr);
 			gap: 12px;
 			height: 590px;
 		}
@@ -1839,12 +1875,11 @@ const faqColumns = [
 		const animatePracticeColumns = (time) => {
 			const delta = Math.min(34, time - lastPracticeTick);
 			lastPracticeTick = time;
-			const grid = practiceColumns[0]?.parentElement;
-			const bounds = grid?.getBoundingClientRect();
-			const isVisible = bounds && bounds.top < window.innerHeight && bounds.bottom > 0;
+			practiceStates.forEach((state) => {
+				const bounds = state.column.getBoundingClientRect();
+				const isVisible = state.column.offsetParent !== null && bounds.top < window.innerHeight && bounds.bottom > 0;
 
-			if (isVisible) {
-				practiceStates.forEach((state) => {
+				if (isVisible) {
 					const loopStart = state.column.querySelector("[data-practice-loop-start]");
 					const loopPoint = loopStart instanceof HTMLElement ? loopStart.offsetTop : state.column.scrollHeight / 2;
 					if (!loopPoint || time < state.pauseUntil) return;
@@ -1856,8 +1891,8 @@ const faqColumns = [
 					if (state.direction < 0 && state.column.scrollTop <= 0) {
 						state.column.scrollTop += loopPoint;
 					}
-				});
-			}
+				}
+			});
 
 			window.requestAnimationFrame(animatePracticeColumns);
 		};
