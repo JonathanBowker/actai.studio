@@ -1,10 +1,10 @@
 ---
-interface Props { mode?: "contact" | "call" }
-const { mode = "contact" } = Astro.props;
+interface Props { mode?: "contact" | "call"; theme?: "light" | "dark" }
+const { mode = "contact", theme = "light" } = Astro.props;
 const isCall = mode === "call";
 ---
 
-<section class="border-b border-black/10 bg-[#f6f4ef] px-5 py-12 text-[#11110f] sm:px-8 sm:py-14 lg:px-10 lg:py-16">
+<section class="contact-intro border-b border-black/10 bg-[#f6f4ef] px-5 py-12 text-[#11110f] sm:px-8 sm:py-14 lg:px-10 lg:py-16" data-theme={theme}>
 	<div class="mx-auto grid max-w-[88rem] gap-8 md:grid-cols-[0.95fr_1.05fr] md:items-start md:gap-16 lg:gap-24">
 		<h1 class="max-w-[14ch] text-[clamp(2.65rem,4.15vw,4rem)] font-bold leading-[0.96]">
 			{isCall ? "Let's find the value AI can deliver." : "Contact Act AI Studio."}
@@ -16,3 +16,18 @@ const isCall = mode === "call";
 		</p>
 	</div>
 </section>
+
+<style>
+	.contact-intro[data-theme="dark"] {
+		padding-top: clamp(5rem, 9vw, 9rem);
+		padding-bottom: clamp(7rem, 11vw, 11rem);
+		border-color: rgba(255, 255, 255, 0.12);
+		background: #050505;
+		color: #f7f7f5;
+	}
+
+	.contact-intro[data-theme="dark"] p {
+		color: rgba(255, 255, 255, 0.58);
+		font-weight: 400;
+	}
+</style>

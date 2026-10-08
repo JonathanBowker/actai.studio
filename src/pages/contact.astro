@@ -20,19 +20,19 @@ const bookingHref = "/meeting";
 		/>
 		<title>Contact | Act AI Studio</title>
 		<style is:global>
-			html,
-			body {
-				background: #f6f4ef;
-				color: #11110f;
+				html,
+				body {
+					background: #10100f;
+					color: #f7f7f5;
 			}
 		</style>
 	</head>
 	<body class="pt-[var(--header-height)]">
-		<SiteHeader showContactLink={false} />
+		<SiteHeader showContactLink={false} theme="dark" />
 
 		<main>
-			<ContactIntroSection />
-			<ContactFormSection />
+			<ContactIntroSection theme="dark" />
+			<ContactFormSection theme="dark" />
 		</main>
 		<SitemapFooterSection {bookingHref} />
 	</body>

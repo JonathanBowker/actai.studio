@@ -1,6 +1,6 @@
 ---
-interface Props { mode?: "contact" | "call" }
-const { mode = "contact" } = Astro.props;
+interface Props { mode?: "contact" | "call"; theme?: "light" | "dark" }
+const { mode = "contact", theme = "light" } = Astro.props;
 const isCall = mode === "call";
 const contactSteps = [
 	{ number: "01", title: "We read your message", copy: "We look at your question, the business context and what you need from us." },
@@ -19,9 +19,9 @@ const options = isCall
 const buttonLabel = isCall ? "Send call request" : "Send message";
 ---
 
-<section class="bg-[#ebe9e4] px-5 py-20 text-[#11110f] sm:px-8 lg:px-10 lg:py-28">
+<section class="contact-form-section bg-[#ebe9e4] px-5 py-20 text-[#11110f] sm:px-8 lg:px-10 lg:py-28" data-theme={theme}>
 	<div class="mx-auto grid min-w-0 max-w-[88rem] gap-16 lg:grid-cols-[1.08fr_0.82fr] lg:items-start">
-		<form class="min-w-0 rounded-lg border border-black/10 bg-[#f6f4ef] p-6 sm:p-9 lg:p-11" action="/api/contact" method="post" data-contact-page-form>
+		<form class="contact-card min-w-0 rounded-lg border border-black/10 bg-[#f6f4ef] p-6 sm:p-9 lg:p-11" action="/api/contact" method="post" data-contact-page-form>
 			<div class="mb-10 flex items-end justify-between gap-6 border-b border-black/12 pb-7">
 				<div>
 					<p class="text-sm font-bold uppercase tracking-[0.12em] text-[#77736a]">{isCall ? "Start the conversation" : "Send us a message"}</p>
@@ -81,12 +81,65 @@ const buttonLabel = isCall ? "Send call request" : "Send message";
 </section>
 
 <style>
+	.contact-form-section[data-theme="dark"] {
+		margin-top: -48px;
+		border-radius: 48px 48px 0 0;
+		background: #171715;
+		color: #f7f7f5;
+	}
+
+	.contact-form-section[data-theme="dark"] .contact-card {
+		border-color: rgba(255, 255, 255, 0.14);
+		background: #10100f;
+	}
+
+	.contact-form-section[data-theme="dark"] .contact-card > div:first-child,
+	.contact-form-section[data-theme="dark"] aside > div,
+	.contact-form-section[data-theme="dark"] aside [class*="border-t"] {
+		border-color: rgba(255, 255, 255, 0.18);
+	}
+
+	.contact-form-section[data-theme="dark"] :is(.text-\[\#77736a\], .text-\[\#89857d\], .text-\[\#5f5b54\]) {
+		color: rgba(255, 255, 255, 0.58);
+	}
+
+	.contact-form-section[data-theme="dark"] aside a {
+		color: #fff;
+		text-decoration-color: rgba(255, 255, 255, 0.32);
+	}
+
+	.contact-form-section[data-theme="dark"] [data-contact-submit] {
+		background: #fff;
+		color: #10100f;
+	}
+
+	.contact-form-section[data-theme="dark"] [data-contact-submit]:hover {
+		background: #dfff42;
+	}
+
+	.contact-form-section[data-theme="dark"] :is(input, select, textarea) {
+		background: #fff;
+		color: #11110f;
+	}
+
+	.contact-form-section[data-theme="dark"] :is(input, textarea)::placeholder {
+		color: #8a8883;
+		opacity: 1;
+	}
+
 	.contact-honeypot {
 		position: absolute;
 		left: -10000px;
 		width: 1px;
 		height: 1px;
 		overflow: hidden;
+	}
+
+	@media (max-width: 760px) {
+		.contact-form-section[data-theme="dark"] {
+			margin-top: -30px;
+			border-radius: 30px 30px 0 0;
+		}
 	}
 </style>
 
