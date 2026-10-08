@@ -2296,9 +2296,9 @@ const faqColumns = [
 			--section-pad-bottom: 6.875rem;
 			--section-overlap: 0px;
 			--type-display: clamp(1.875rem, 7.5vw, 2.625rem);
-			--type-subhead: clamp(1rem, 3.55vw, 1.25rem);
+			--type-subhead: 16pt;
 			--type-intro: var(--type-subhead);
-			--type-body-large: clamp(1rem, 3.4vw, 1.0625rem);
+			--type-body-large: 14pt;
 			--type-label: 0.9375rem;
 			--type-stage-title: var(--type-subhead);
 		}
@@ -2454,7 +2454,7 @@ const faqColumns = [
 
 		.air-descriptions p {
 			max-width: 310px;
-			font-size: 14px;
+			font-size: var(--type-body-large);
 			line-height: 1.35;
 		}
 
@@ -2756,6 +2756,14 @@ const faqColumns = [
 		.director-grid { gap: 24px; }
 		.director-grid article { padding-bottom: 40px; }
 		.director-grid article:last-child { padding-bottom: 0; }
+	}
+	@media (max-width: 620px) {
+		.footer-quote,
+		.use-case-body p,
+		.use-case-details span {
+			font-size: var(--type-body-large);
+			line-height: 1.4;
+		}
 	}
 </style>
 
