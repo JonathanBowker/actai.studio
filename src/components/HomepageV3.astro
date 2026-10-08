@@ -185,7 +185,7 @@ const faqColumns = [
 			<a href="#practice">The practice</a>
 			<a href="#governance">The governance</a>
 			<a href="#direction">The direction</a>
-			<a href="#footer">The Company</a>
+			<a href="#footer">The company</a>
 		</nav>
 
 		<a class="nav-cta" href="/contact">Request a 30 minute call</a>
@@ -198,7 +198,7 @@ const faqColumns = [
 				<a href="#practice">The practice</a>
 				<a href="#governance">The governance</a>
 				<a href="#direction">The direction</a>
-				<a href="#footer">The Company</a>
+				<a href="#footer">The company</a>
 				<a href="/contact">Request a 30 minute call</a>
 			</nav>
 		</details>
@@ -2453,17 +2453,11 @@ const faqColumns = [
 	updateSectionStack();
 
 	const alignSectionTarget = (target) => {
-		let correctionsRemaining = 3;
-		const align = () => {
-			updateSectionStack();
-			const header = document.querySelector(".site-header");
-			const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
-			const targetTop = window.scrollY + target.getBoundingClientRect().top - headerHeight - 16;
-			window.scrollTo({ top: Math.max(0, targetTop), behavior: "auto" });
-			correctionsRemaining -= 1;
-			if (correctionsRemaining > 0) window.requestAnimationFrame(align);
-		};
-		window.requestAnimationFrame(align);
+		const header = document.querySelector(".site-header");
+		const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
+		const targetTop = getLayoutTop(target) - headerHeight - 16;
+		window.scrollTo({ top: Math.max(0, targetTop), behavior: "auto" });
+		window.requestAnimationFrame(updateSectionStack);
 	};
 
 	document.querySelectorAll('.v3-page a[href^="#"]').forEach((anchor) => {
