@@ -636,10 +636,6 @@ const faqColumns = [
 		will-change: transform;
 	}
 
-	.section:target {
-		border-radius: 0;
-	}
-
 	.possibility {
 		z-index: 3;
 	}
@@ -1601,7 +1597,7 @@ const faqColumns = [
 
 	.site-footer {
 		--section-stack-hold: 0px;
-		min-height: 760px;
+		min-height: 860px;
 		margin-top: -48px;
 		padding: clamp(84px, 6vw, 112px) clamp(32px, 4.25vw, 68px) 72px;
 		position: relative;
@@ -2459,7 +2455,10 @@ const faqColumns = [
 	const alignSectionTarget = (target) => {
 		const header = document.querySelector(".site-header");
 		const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
-		const targetTop = getLayoutTop(target) - headerHeight;
+		const sectionCurve = target.matches(".section, .site-footer")
+			? Number.parseFloat(getComputedStyle(document.querySelector(".v3-page")).getPropertyValue("--round")) || 0
+			: 0;
+		const targetTop = getLayoutTop(target) + sectionCurve - headerHeight;
 		window.scrollTo({ top: Math.max(0, targetTop), behavior: "auto" });
 		window.requestAnimationFrame(updateSectionStack);
 	};
