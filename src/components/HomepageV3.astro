@@ -1415,7 +1415,8 @@ const faqColumns = [
 	}
 
 	.use-case-meta span:last-child {
-		padding: 10px 14px;
+		padding: 6px 10px;
+		font-size: 11px;
 		border: 1px solid var(--glass-rim);
 		border-radius: 999px;
 		background: var(--glass-surface);
@@ -1463,7 +1464,8 @@ const faqColumns = [
 
 	.use-case-details {
 		display: grid;
-		gap: 8px;
+		gap: 5px;
+		align-items: start;
 		margin-top: auto;
 		padding: 0;
 		border: 0;
@@ -1474,15 +1476,17 @@ const faqColumns = [
 	}
 
 	.use-case-details span {
-		padding: 13px 16px;
+		justify-self: start;
+		max-width: 100%;
+		padding: 7px 10px;
 		border: 1px solid rgb(var(--act-white-rgb) / 0.28);
 		border-radius: 9999px;
 		background: linear-gradient(135deg, rgb(var(--act-white-rgb) / 0.22), rgb(var(--act-white-rgb) / 0.08));
 		box-shadow: inset 0 1px 0 rgb(var(--act-white-rgb) / 0.36), 0 6px 16px rgba(2, 10, 20, 0.12);
 		backdrop-filter: blur(20px) saturate(1.35);
 		font-family: var(--font-sans);
-		font-size: 15px;
-		line-height: 1;
+		font-size: 11px;
+		line-height: 1.1;
 	}
 
 	.governance {
@@ -2492,10 +2496,6 @@ const faqColumns = [
 			font-size: 12px;
 		}
 
-		.use-case-meta span:last-child {
-			padding: 8px 12px;
-		}
-
 		.use-case-body h3 {
 			font-size: 28px;
 		}
@@ -2510,18 +2510,6 @@ const faqColumns = [
 			min-height: 24px;
 			max-width: 105px;
 			margin-bottom: 44px;
-		}
-
-		.use-case-details {
-			gap: 7px;
-			padding: 0;
-			border-radius: 0;
-		}
-
-		.use-case-details span {
-			padding: 12px 14px;
-			border-radius: 9999px;
-			font-size: 13px;
 		}
 
 		.governance-layout {
@@ -2668,7 +2656,7 @@ const faqColumns = [
 			padding-inline: 0;
 			flex-direction: row;
 			align-items: stretch;
-			gap: 16px;
+			gap: 12px;
 		}
 
 		.use-case {
@@ -2760,29 +2748,14 @@ const faqColumns = [
 		.director-grid article:last-child { padding-bottom: 0; }
 	}
 	@media (max-width: 720px), (pointer: coarse) and (max-width: 1180px) {
-		.use-case-carousel { margin-top: 48px; }
-		.use-case { padding: 20px; }
-		.use-case-body { top: 17%; left: 20px; right: 20px; }
+		.use-case-carousel { margin-top: 32px; }
+		.use-case { padding: 16px; }
+		.use-case-body { top: 17%; left: 16px; right: 16px; }
 		.use-case-body p { font-size: 12px; min-height: 24px; margin-bottom: 26px; }
 		.use-case-body h3 { font-size: clamp(20px, 5.5vw, 24px); line-height: 1.05; }
-		.use-case-details { gap: 6px; }
-		.use-case-details span { font-size: 12px; padding: 10px 12px; }
 	}
 	@media (max-width: 620px) {
 		.air-panel { aspect-ratio: 1; }
-	}
-	@media (max-width: 720px), (pointer: coarse) and (max-width: 1180px) {
-		.use-case-meta span:last-child,
-		.use-case-details span {
-			border: 0.5px solid rgb(var(--act-white-rgb) / 0.18);
-			background: linear-gradient(135deg, rgb(8 10 18 / 0.82), rgb(16 18 28 / 0.72));
-			box-shadow: inset 0 0.5px 0 rgb(var(--act-white-rgb) / 0.16);
-			backdrop-filter: blur(12px);
-			color: var(--act-white);
-		}
-		.use-case-meta span:last-child { padding: 6px 10px; font-size: 11px; }
-		.use-case-details { gap: 5px; align-items: start; }
-		.use-case-details span { justify-self: start; max-width: 100%; padding: 7px 10px; font-size: 11px; line-height: 1.1; }
 	}
 </style>
 
