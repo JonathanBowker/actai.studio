@@ -256,7 +256,7 @@ const faqColumns = [
 				<div class="air-carousel" aria-label="Agent in the Room interaction stages" aria-roledescription="carousel" data-air-carousel>
 					<div class="air-panel">
 						{airSlides.map((slide, index) => (
-							<article class="air-slide" data-air-slide aria-label={`Frame ${index + 1} of ${airSlides.length}`}>
+							<article class="air-slide" id={`air-slide-${index + 1}`} data-air-slide aria-label={`Frame ${index + 1} of ${airSlides.length}`}>
 								<img src={slide.image} alt="" />
 								<div class="air-copy">
 									<strong>{slide.label}</strong>
@@ -267,7 +267,7 @@ const faqColumns = [
 					</div>
 					<div class="carousel-dots" aria-label="Choose an AIR frame">
 						{airSlides.map((slide, index) => (
-							<button type="button" aria-label={`Show frame ${index + 1}`} data-air-dot>
+							<button type="button" aria-label={`Show frame ${index + 1}: ${slide.navName}`} aria-controls={`air-slide-${index + 1}`} aria-pressed={index === 0 ? "true" : "false"} data-air-dot>
 								<span>{slide.navNumber}</span>
 								{slide.navName && <span class="air-nav-name">{slide.navName}</span>}
 							</button>
@@ -930,6 +930,8 @@ const faqColumns = [
 		gap: 3px;
 		border-radius: 9999px;
 		background: #343434;
+		position: relative;
+		z-index: 5;
 	}
 
 	.carousel-dots button {
@@ -945,6 +947,7 @@ const faqColumns = [
 		font-weight: 700;
 		white-space: nowrap;
 		cursor: pointer;
+		touch-action: manipulation;
 		transition: background 180ms ease, color 180ms ease;
 	}
 
@@ -2432,6 +2435,7 @@ const faqColumns = [
 			dots.forEach((dot, index) => {
 				dot.dataset.active = String(index === activeIndex);
 				dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
+				dot.setAttribute("aria-pressed", String(index === activeIndex));
 			});
 			descriptions.forEach((description, index) => {
 				description.hidden = index !== activeIndex;
@@ -2494,6 +2498,7 @@ const faqColumns = [
 		};
 
 		dots.forEach((dot, index) => dot.addEventListener("click", () => {
+			paused = true;
 			let direction = index > activeIndex ? 1 : -1;
 			if (activeIndex === slides.length - 1 && index === 0) direction = 1;
 			moveTo(index, direction);
