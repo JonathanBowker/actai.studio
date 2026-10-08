@@ -367,10 +367,6 @@ const faqColumns = [
 						<h3>Jonny Bowker</h3>
 						<p class="director-role">AI Director | Strategy</p>
 						<p>Jonny Bowker is a Law Society of Scotland accredited AI Expert and practitioner. He has worked across Fortune 500 companies and mid-caps, spanning many sectors and functions. Through his Agent in the Room&trade; methodology, he turns business problems into clear briefs and directs what gets built.</p>
-						<blockquote>
-							<cite>On making business enjoyable</cite>
-							&ldquo;Just because it&rsquo;s a serious topic, it doesn&rsquo;t mean you have to be serious about the way you talk about it.&rdquo;
-						</blockquote>
 						<strong>Finds the problem worth solving.</strong>
 					</article>
 					<article data-scroll-tone-line>
@@ -439,6 +435,10 @@ const faqColumns = [
 				<div class="footer-about-copy">
 					<p>MOVE FAST. STAY SAFE.</p>
 					<p>Act AI Studio is the outreach and AI engagement arm of Advanced Analytica, a UK-based business.</p>
+					<blockquote class="footer-quote">
+						&ldquo;Just because it&rsquo;s a serious topic, it doesn&rsquo;t mean you have to be serious about the way you talk about it.&rdquo;
+						<cite>Jonny Bowker, on making business enjoyable</cite>
+					</blockquote>
 					<p>Most businesses are sitting on knowledge they can't use at speed. The people who hold it are busy, the documents that contain it are static, and the processes built around it weren't designed for AI.</p>
 					<p>Advanced Analytica turns that knowledge into governed agentic systems that work in production. We bring the strategy, the specification, and the AI skills, so the business can move fast and stay safe.</p>
 				</div>
@@ -1437,7 +1437,7 @@ const faqColumns = [
 	.director-grid article {
 		display: grid;
 		grid-template-columns: 280px minmax(0, 1fr);
-		grid-template-rows: auto auto auto auto;
+		grid-template-rows: auto auto 1fr;
 		column-gap: 96px;
 	}
 
@@ -1473,36 +1473,13 @@ const faqColumns = [
 	.director-grid strong {
 		display: block;
 		grid-column: 2;
-		grid-row: 4;
+		grid-row: 3;
 		margin-top: 30px;
 		font-family: var(--font-sans);
 		font-size: 25px;
 		font-weight: 700;
 		letter-spacing: -0.025em;
 		line-height: 1.3 !important;
-	}
-
-	.director-grid blockquote {
-		grid-column: 2;
-		grid-row: 3;
-		margin: 32px 0 0;
-		display: grid;
-		gap: 14px;
-		font-size: clamp(30px, 2.35vw, 45px);
-		font-weight: 600;
-		letter-spacing: -0.035em;
-		line-height: 1.08;
-	}
-
-	.director-grid blockquote cite {
-		font-family: var(--font-sans);
-		font-size: 13px;
-		font-style: normal;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		line-height: 1.2;
-		text-transform: uppercase;
-		color: rgba(255, 255, 255, 0.58);
 	}
 
 	.conversation {
@@ -1705,6 +1682,29 @@ const faqColumns = [
 
 	.footer-about-copy p + p {
 		margin-top: 18px;
+	}
+
+	.footer-quote {
+		margin: 24px 0;
+		padding-left: 16px;
+		border-left: 1px solid rgba(255, 255, 255, 0.34);
+		color: rgba(255, 255, 255, 0.86);
+		font-size: 21px;
+		font-weight: 500;
+		letter-spacing: -0.025em;
+		line-height: 1.18;
+	}
+
+	.footer-quote cite {
+		display: block;
+		margin-top: 12px;
+		color: rgba(255, 255, 255, 0.5);
+		font-size: 11px;
+		font-style: normal;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		line-height: 1.3;
+		text-transform: uppercase;
 	}
 
 	.footer-social {
@@ -2302,7 +2302,6 @@ const faqColumns = [
 		.director-grid h3,
 		.director-grid .director-role,
 		.director-grid p,
-		.director-grid blockquote,
 		.director-grid strong {
 			grid-column: 1;
 			grid-row: auto;
@@ -2323,11 +2322,6 @@ const faqColumns = [
 
 		.director-grid strong {
 			font-size: 16px;
-		}
-
-		.director-grid blockquote {
-			margin-top: 28px;
-			font-size: 27px;
 		}
 
 		.conversation {
