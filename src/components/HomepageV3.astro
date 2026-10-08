@@ -416,6 +416,10 @@ const faqColumns = [
 		<div class="footer-grid">
 			<div class="footer-primary">
 				<img src="/logos/ACT_White.svg" alt="Act." width="87" height="43" />
+				<blockquote class="footer-quote">
+					&ldquo;Just because it&rsquo;s a serious topic, it doesn&rsquo;t mean you have to be serious about the way you talk about it.&rdquo;
+					<cite>Jonny Bowker, on making business enjoyable</cite>
+				</blockquote>
 			</div>
 			<nav aria-label="Information">
 				<strong>Information</strong>
@@ -435,10 +439,6 @@ const faqColumns = [
 				<div class="footer-about-copy">
 					<p>MOVE FAST. STAY SAFE.</p>
 					<p>Act AI Studio is the outreach and AI engagement arm of Advanced Analytica, a UK-based business.</p>
-					<blockquote class="footer-quote">
-						&ldquo;Just because it&rsquo;s a serious topic, it doesn&rsquo;t mean you have to be serious about the way you talk about it.&rdquo;
-						<cite>Jonny Bowker, on making business enjoyable</cite>
-					</blockquote>
 					<p>Most businesses are sitting on knowledge they can't use at speed. The people who hold it are busy, the documents that contain it are static, and the processes built around it weren't designed for AI.</p>
 					<p>Advanced Analytica turns that knowledge into governed agentic systems that work in production. We bring the strategy, the specification, and the AI skills, so the business can move fast and stay safe.</p>
 				</div>
@@ -1685,7 +1685,8 @@ const faqColumns = [
 	}
 
 	.footer-quote {
-		margin: 24px 0;
+		max-width: 300px;
+		margin: 42px 0 0;
 		padding-left: 16px;
 		border-left: 1px solid rgba(255, 255, 255, 0.34);
 		color: rgba(255, 255, 255, 0.86);
