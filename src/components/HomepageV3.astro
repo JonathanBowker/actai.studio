@@ -442,6 +442,9 @@ const faqColumns = [
 				</a>
 			</div>
 		</div>
+		<div class="footer-wordmark" aria-hidden="true">
+			<img src="/logos/ACT_White.svg" alt="" />
+		</div>
 	</footer>
 </div>
 
@@ -1591,7 +1594,7 @@ const faqColumns = [
 
 	.site-footer {
 		--section-stack-hold: 0px;
-		min-height: 530px;
+		min-height: 900px;
 		margin-top: -48px;
 		padding: clamp(84px, 6vw, 112px) clamp(32px, 4.25vw, 68px) 72px;
 		position: relative;
@@ -1691,6 +1694,26 @@ const faqColumns = [
 	.footer-social a:focus-visible {
 		filter: brightness(1.35);
 		transform: translateY(-2px);
+	}
+
+	.footer-wordmark {
+		width: min(520px, 35vw);
+		aspect-ratio: 1200 / 501;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		overflow: hidden;
+		transform: translateX(-50%);
+	}
+
+	.footer-wordmark img {
+		width: 160%;
+		height: auto;
+		max-width: none;
+		position: absolute;
+		top: -58%;
+		left: -30%;
+		display: block;
 	}
 
 	.visually-hidden {
@@ -2003,6 +2026,15 @@ const faqColumns = [
 		.footer-about-copy {
 			margin-top: 28px;
 		}
+
+		.footer-wordmark {
+			width: min(520px, 78vw);
+			margin: 76px auto -1px;
+			position: relative;
+			bottom: auto;
+			left: auto;
+			transform: none;
+		}
 	}
 
 	@media (max-width: 620px) {
@@ -2305,6 +2337,10 @@ const faqColumns = [
 
 		.footer-about > strong {
 			font-size: 21px;
+		}
+
+		.footer-wordmark {
+			width: min(330px, 92vw);
 		}
 	}
 
