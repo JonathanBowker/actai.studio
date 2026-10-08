@@ -754,6 +754,13 @@ const faqColumns = [
 		column-gap: var(--grid-gap);
 	}
 
+	.section-inner > *,
+	.stage-grid > *,
+	.director-grid > *,
+	.faq-grid > * {
+		min-width: 0;
+	}
+
 	.narrow-center {
 		width: 100%;
 		max-width: none;
@@ -2028,7 +2035,7 @@ const faqColumns = [
 		}
 	}
 
-	@media (max-width: 920px) {
+	@media (max-width: 1180px) {
 		:global(html) {
 			scroll-padding-top: 66px;
 		}
@@ -2167,9 +2174,10 @@ const faqColumns = [
 		.practice-layout,
 		.governance-layout,
 		.director-grid,
-		.faq-grid,
-		.footer-grid {
-			grid-template-columns: 1fr;
+		.faq-grid {
+			width: 100%;
+			grid-column: 1 / -1;
+			grid-template-columns: minmax(0, 1fr);
 		}
 
 		.stage-grid {
@@ -2197,6 +2205,7 @@ const faqColumns = [
 
 		.practice-copy,
 		.governance-copy {
+			width: 100%;
 			max-width: 580px;
 			grid-column: 1;
 			justify-self: center;
@@ -2212,14 +2221,14 @@ const faqColumns = [
 			grid-column: 1;
 		}
 
-			.governance-visual {
-				min-height: 500px;
-				grid-column: 1;
-			}
+		.governance-visual {
+			min-height: 500px;
+			grid-column: 1;
+		}
 
-			.director-grid {
-				gap: 64px;
-				margin-top: 90px;
+		.director-grid {
+			gap: 64px;
+			margin-top: 90px;
 		}
 
 		.director-grid article {
@@ -2636,41 +2645,36 @@ const faqColumns = [
 		}
 	}
 
-	@media (max-width: 720px), (pointer: coarse) and (max-width: 920px) {
+	@media (max-width: 720px), (pointer: coarse) and (max-width: 1180px) {
 		.use-case-carousel {
-			width: 100%;
-			max-height: min(72svh, 620px);
-			left: auto;
-			overflow-x: hidden;
-			overflow-y: auto;
-			padding: 4px;
-			scroll-snap-type: y mandatory;
-			scroll-padding-block: 4px;
-			overscroll-behavior-y: contain;
-			touch-action: pan-y;
-			transform: none;
+			width: 100vw;
+			max-height: none;
+			left: 50%;
+			overflow-x: auto;
+			overflow-y: hidden;
+			padding: 4px 0;
+			scroll-snap-type: x proximity;
+			scroll-padding-inline: var(--mobile-gutter);
+			overscroll-behavior-x: contain;
+			touch-action: pan-x pan-y;
+			transform: translateX(-50%);
 		}
 
 		.use-case-track {
-			width: 100%;
-			padding: 0;
-			flex-direction: column;
-			align-items: center;
+			width: max-content;
+			padding-inline: var(--mobile-gutter);
+			flex-direction: row;
+			align-items: stretch;
 			gap: 16px;
 		}
 
 		.use-case {
-			width: min(100%, 360px);
-			scroll-snap-align: start;
-			scroll-snap-stop: always;
-		}
-
-		.use-case[data-practice-clone] {
-			display: none;
+			width: min(82vw, 360px);
+			scroll-snap-align: center;
 		}
 
 		.practice-controls {
-			display: none;
+			display: flex;
 		}
 	}
 
@@ -2984,7 +2988,7 @@ const faqColumns = [
 		const previous = controls?.querySelector("[data-practice-previous]");
 		const next = controls?.querySelector("[data-practice-next]");
 		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-		const handheldLayout = window.matchMedia("(max-width: 720px), (pointer: coarse) and (max-width: 920px)");
+		const handheldLayout = window.matchMedia("(max-width: 720px), (pointer: coarse) and (max-width: 1180px)");
 		let pauseUntil = 0;
 		let lastTick = performance.now();
 		window.requestAnimationFrame(() => {
