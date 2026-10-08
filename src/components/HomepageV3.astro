@@ -2672,7 +2672,7 @@ const faqColumns = [
 		}
 
 		.use-case {
-			width: min(82vw, 360px);
+			width: min(65.6vw, 288px);
 			scroll-snap-align: center;
 		}
 
@@ -2758,6 +2758,18 @@ const faqColumns = [
 		.director-grid { gap: 24px; }
 		.director-grid article { padding-bottom: 40px; }
 		.director-grid article:last-child { padding-bottom: 0; }
+	}
+	@media (max-width: 720px), (pointer: coarse) and (max-width: 1180px) {
+		.use-case-carousel { margin-top: 48px; }
+		.use-case { padding: 20px; }
+		.use-case-body { top: 17%; left: 20px; right: 20px; }
+		.use-case-body p { font-size: 12px; min-height: 24px; margin-bottom: 26px; }
+		.use-case-body h3 { font-size: clamp(20px, 5.5vw, 24px); line-height: 1.05; }
+		.use-case-details { gap: 6px; }
+		.use-case-details span { font-size: 12px; padding: 10px 12px; }
+	}
+	@media (max-width: 620px) {
+		.air-panel { aspect-ratio: 1; }
 	}
 </style>
 
