@@ -29,7 +29,7 @@ const airSlides = [
 		navNumber: "01.",
 		navName: "Seed",
 		copy: "We bring the agreed brief into the session.",
-		description: "We bring the agreed brief into the session, with the business context the agent needs.",
+		description: "we bring a shortlisted issue into the room, already seeded with business context and the right design tree started.",
 	},
 	{
 		image: "/images/website-v3-hero.webp",
@@ -37,7 +37,7 @@ const airSlides = [
 		navNumber: "02.",
 		navName: "Shape",
 		copy: "You discuss the process topic.",
-		description: "You discuss the process topic, adding the detail that matters and sharpening the direction together.",
+		description: "the room talks through the concept together, the agent asking what's needed to grow the design tree, decision by decision.",
 	},
 	{
 		image: "/images/website-v3-governance.webp",
@@ -45,7 +45,7 @@ const airSlides = [
 		navNumber: "03.",
 		navName: "Grill",
 		copy: "The expert refines the definition.",
-		description: "The expert refines the definition with the room, resolving gaps before anything moves forward.",
+		description: "the agent cross-examines the logic using established decision theory, naming contradictions and gaps, until they are appropriately filled.",
 	},
 	{
 		image: "/images/use-case-art/misty-glass-landscape.jpg",
@@ -53,7 +53,7 @@ const airSlides = [
 		navNumber: "04.",
 		navName: "Lock",
 		copy: "The agent confirms it has understood.",
-		description: "The agent confirms what it has understood, so the agreed direction is clear before the build.",
+		description: "the agent states back what's been agreed, the room confirms by consensus, and the whole design tree locks ready for build in the studio.",
 	},
 ];
 
@@ -276,7 +276,7 @@ const faqColumns = [
 					<div class="air-descriptions" aria-live="polite">
 						{airSlides.map((slide, index) => (
 							<p data-air-description hidden={index !== 0}>
-								<strong>{slide.navName}.</strong> {slide.description}
+								<strong>{slide.navName}:</strong> {slide.description}
 							</p>
 						))}
 					</div>
