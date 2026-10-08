@@ -180,7 +180,7 @@ const faqColumns = [
 		</a>
 
 		<nav class="desktop-nav" aria-label="Primary navigation">
-			<a href="#possibility">The possibility</a>
+			<a href="#opportunity">The opportunity</a>
 			<a href="#stages">The method</a>
 			<a href="#practice">The practice</a>
 			<a href="#governance">The governance</a>
@@ -193,7 +193,7 @@ const faqColumns = [
 		<details class="mobile-nav">
 			<summary aria-label="Open navigation"><span></span><span></span></summary>
 			<nav aria-label="Mobile navigation">
-				<a href="#possibility">The possibility</a>
+				<a href="#opportunity">The opportunity</a>
 				<a href="#stages">The method</a>
 				<a href="#practice">The practice</a>
 				<a href="#governance">The governance</a>
@@ -209,14 +209,14 @@ const faqColumns = [
 			<div class="hero-content">
 				<h1 id="hero-heading">Intelligence<br />needs direction</h1>
 				<p>Act AI Studio finds where your business creates value and shapes AI to accelerate the delivery of it.</p>
-				<a class="pill pill-light" href="#possibility">Our expert-driven approach</a>
+				<a class="pill pill-light" href="#opportunity">Our expert-driven approach</a>
 			</div>
 		</section>
 
-		<section class="section section-light possibility" id="possibility" aria-labelledby="possibility-heading" data-scroll-tone-section data-scroll-tone-entry="1.02">
+		<section class="section section-light possibility" id="opportunity" aria-labelledby="opportunity-heading" data-scroll-tone-section data-scroll-tone-entry="1.02">
 			<div class="section-inner narrow-center">
-				<p class="section-label">The possibility</p>
-				<h2 id="possibility-heading">
+				<p class="section-label">The opportunity</p>
+				<h2 id="opportunity-heading">
 					<span class="tone-heading-line" data-scroll-tone-line>You don't need to understand AI.</span>
 					<span class="tone-heading-line" data-scroll-tone-line>We need to understand your business.</span>
 				</h2>
@@ -420,7 +420,7 @@ const faqColumns = [
 			<nav aria-label="Information">
 				<strong>Information</strong>
 				<a href="#top">Home</a>
-				<a href="#possibility">The possibility</a>
+				<a href="#opportunity">The opportunity</a>
 				<a href="#stages">The method</a>
 				<a href="#practice">The practice</a>
 				<a href="#governance">The governance</a>
@@ -2451,6 +2451,38 @@ const faqColumns = [
 	const stackMain = document.querySelector(".v3-page main");
 	if (stackMain) stackResizeObserver.observe(stackMain);
 	updateSectionStack();
+
+	const alignSectionTarget = (target) => {
+		let correctionsRemaining = 3;
+		const align = () => {
+			updateSectionStack();
+			const header = document.querySelector(".site-header");
+			const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
+			const targetTop = window.scrollY + target.getBoundingClientRect().top - headerHeight - 16;
+			window.scrollTo({ top: Math.max(0, targetTop), behavior: "auto" });
+			correctionsRemaining -= 1;
+			if (correctionsRemaining > 0) window.requestAnimationFrame(align);
+		};
+		window.requestAnimationFrame(align);
+	};
+
+	document.querySelectorAll('.v3-page a[href^="#"]').forEach((anchor) => {
+		anchor.addEventListener("click", (event) => {
+			if (!(anchor instanceof HTMLAnchorElement)) return;
+			const targetId = anchor.hash.slice(1);
+			const target = document.getElementById(targetId);
+			if (!(target instanceof HTMLElement)) return;
+			event.preventDefault();
+			history.pushState(null, "", anchor.hash);
+			anchor.closest("details")?.removeAttribute("open");
+			alignSectionTarget(target);
+		});
+	});
+
+	if (window.location.hash) {
+		const initialTarget = document.getElementById(window.location.hash.slice(1));
+		if (initialTarget instanceof HTMLElement) window.addEventListener("load", () => alignSectionTarget(initialTarget), { once: true });
+	}
 
 	document.querySelectorAll("[data-air-carousel]").forEach((carousel) => {
 		const slides = [...carousel.querySelectorAll("[data-air-slide]")];
