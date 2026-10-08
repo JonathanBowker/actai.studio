@@ -1417,10 +1417,10 @@ const faqColumns = [
 	.use-case-meta span:last-child {
 		padding: 6px 10px;
 		font-size: 11px;
-		border: 1px solid var(--glass-rim);
+		border: 1px solid rgb(var(--act-white-rgb) / 0.16);
 		border-radius: 999px;
 		background: var(--glass-surface);
-		box-shadow: var(--glass-shadow);
+		box-shadow: inset 0 1px 0 rgb(var(--act-white-rgb) / 0.14);
 		backdrop-filter: blur(20px) saturate(1.4);
 	}
 
@@ -1479,10 +1479,10 @@ const faqColumns = [
 		justify-self: start;
 		max-width: 100%;
 		padding: 7px 10px;
-		border: 1px solid rgb(var(--act-white-rgb) / 0.28);
+		border: 1px solid rgb(var(--act-white-rgb) / 0.16);
 		border-radius: 9999px;
-		background: linear-gradient(135deg, rgb(var(--act-white-rgb) / 0.22), rgb(var(--act-white-rgb) / 0.08));
-		box-shadow: inset 0 1px 0 rgb(var(--act-white-rgb) / 0.36), 0 6px 16px rgba(2, 10, 20, 0.12);
+		background: linear-gradient(135deg, rgb(var(--act-white-rgb) / 0.14), rgb(var(--act-white-rgb) / 0.06));
+		box-shadow: inset 0 1px 0 rgb(var(--act-white-rgb) / 0.14), 0 3px 8px rgba(2, 10, 20, 0.06);
 		backdrop-filter: blur(20px) saturate(1.35);
 		font-family: var(--font-sans);
 		font-size: 11px;
@@ -3066,6 +3066,10 @@ const faqColumns = [
 		let lastTick = performance.now();
 		let scrollPosition = 0;
 		let interacting = false;
+		let arrowTarget = null;
+		let arrowTimer;
+		let centring = false;
+		let arrowControlled = false;
 		window.requestAnimationFrame(() => {
 			const firstCard = originalCards[0];
 			if (!(firstCard instanceof HTMLElement)) return;
@@ -3080,6 +3084,7 @@ const faqColumns = [
 		};
 
 		const normalise = () => {
+			if (centring) return;
 			const width = loopWidth();
 			if (!width) return;
 			while (carousel.scrollLeft >= width) carousel.scrollLeft -= width;
@@ -3090,20 +3095,43 @@ const faqColumns = [
 			const firstCard = originalCards[0];
 			if (!(firstCard instanceof HTMLElement)) return;
 			const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
-			pauseUntil = performance.now() + 3200;
-			carousel.scrollBy({ left: direction * (firstCard.offsetWidth + gap), behavior: reducedMotion.matches ? "auto" : "smooth" });
-			window.setTimeout(normalise, reducedMotion.matches ? 0 : 520);
+			const step = firstCard.offsetWidth + gap;
+			const width = loopWidth();
+			if (!width) return;
+			const firstCentre = firstCard.offsetLeft - track.offsetLeft + firstCard.offsetWidth / 2 - carousel.clientWidth / 2;
+			const position = arrowTarget ?? carousel.scrollLeft;
+			let target = firstCentre + (Math.round((position - firstCentre) / step) + direction) * step;
+			// Shift to an equivalent loop position before crossing the left edge.
+			if (target < 0) {
+				carousel.scrollLeft += width;
+				target += width;
+			} else if (position >= width && target >= width) {
+				carousel.scrollLeft -= width;
+				target -= width;
+			}
+			arrowControlled = true;
+			centring = true;
+			arrowTarget = target;
+			window.clearTimeout(arrowTimer);
+			carousel.scrollTo({ left: target, behavior: reducedMotion.matches ? "auto" : "smooth" });
+			arrowTimer = window.setTimeout(() => {
+				carousel.scrollLeft = target;
+				centring = false;
+				normalise();
+				arrowTarget = carousel.scrollLeft;
+				scrollPosition = carousel.scrollLeft;
+			}, reducedMotion.matches ? 0 : 700);
 		};
 
-		previous?.addEventListener("click", () => {
-			const width = loopWidth();
-			if (carousel.scrollLeft < 2 && width) carousel.scrollLeft += width;
-			moveByCard(-1);
-		});
+		previous?.addEventListener("click", () => moveByCard(-1));
 		next?.addEventListener("click", () => moveByCard(1));
 
 		carousel.addEventListener("scroll", normalise, { passive: true });
 		carousel.addEventListener("pointerdown", () => {
+			window.clearTimeout(arrowTimer);
+			centring = false;
+			arrowTarget = null;
+			arrowControlled = false;
 			interacting = true;
 		});
 		const endInteraction = () => {
@@ -3114,6 +3142,10 @@ const faqColumns = [
 		window.addEventListener("pointerup", endInteraction);
 		window.addEventListener("pointercancel", endInteraction);
 		carousel.addEventListener("wheel", () => {
+			window.clearTimeout(arrowTimer);
+			centring = false;
+			arrowTarget = null;
+			arrowControlled = false;
 			pauseUntil = performance.now() + 3200;
 		}, { passive: true });
 
@@ -3122,7 +3154,7 @@ const faqColumns = [
 			lastTick = time;
 			const bounds = carousel.getBoundingClientRect();
 			const isVisible = bounds.top < window.innerHeight && bounds.bottom > 0;
-			if (!reducedMotion.matches && !interacting && isVisible && time >= pauseUntil) {
+			if (!reducedMotion.matches && !interacting && !arrowControlled && isVisible && time >= pauseUntil) {
 				// Retain fractional movement on browsers that round scrollLeft.
 				const width = loopWidth();
 				scrollPosition += delta * (handheldLayout.matches ? 0.035 : 0.045);
