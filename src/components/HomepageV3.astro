@@ -10,33 +10,50 @@ const stages = [
 		title: "The prep",
 		copy: "If you choose to go ahead, we programme and prepare the agent on your brief, ready for the AIR session.",
 	},
+	{
+		number: "03",
+		title: "The AIR session",
+		copy: "Face to face, wherever suits the conversation. One or two of our experts join your people, with the agent we've prepared. It questions the room one question at a time. You answer. We steer. AI-led, expert-driven.",
+	},
+	{
+		number: "04",
+		title: "The build.",
+		copy: "What we agree goes to our studio, where we build, test and deploy it.",
+	},
 ];
 
 const airSlides = [
 	{
 		image: "/images/website-v3-air.webp",
 		label: "(AIR)",
+		navNumber: "01.",
+		navName: "Seed",
 		copy: "We bring the agreed brief into the session.",
+		description: "We bring the agreed brief into the session, with the business context the agent needs.",
 	},
 	{
 		image: "/images/website-v3-hero.webp",
 		label: "Interaction 01",
+		navNumber: "02.",
+		navName: "Shape",
 		copy: "You discuss the process topic.",
+		description: "You discuss the process topic, adding the detail that matters and sharpening the direction together.",
 	},
 	{
 		image: "/images/website-v3-governance.webp",
 		label: "Interaction 02",
+		navNumber: "03.",
+		navName: "Grill",
 		copy: "The expert refines the definition.",
+		description: "The expert refines the definition with the room, resolving gaps before anything moves forward.",
 	},
 	{
 		image: "/images/use-case-art/misty-glass-landscape.jpg",
 		label: "Interaction 03",
+		navNumber: "04.",
+		navName: "Lock",
 		copy: "The agent confirms it has understood.",
-	},
-	{
-		image: "/images/use-case-art/orange-glass-figure.jpg",
-		label: "Interaction 04",
-		copy: "The agent starts the discovery process.",
+		description: "The agent confirms what it has understood, so the agreed direction is clear before the build.",
 	},
 ];
 
@@ -73,11 +90,38 @@ const useCases = [
 		position: "50% 42%",
 		details: ["Brand guidance", "Approval routes", "Channel context"],
 	},
-];
-
-const useCaseColumns = [
-	useCases.filter((_, index) => index % 2 === 0),
-	useCases.filter((_, index) => index % 2 === 1),
+	{
+		sector: "Land & estates",
+		title: "Make estate knowledge easier to act on.",
+		image: "/images/use-case-art/neon-portrait-clean.webp",
+		accent: "#7452ff",
+		position: "50% 42%",
+		details: ["Asset context", "Maintenance records", "Local rules"],
+	},
+	{
+		sector: "Finance & banking",
+		title: "Keep reporting moving without losing control.",
+		image: "/images/use-case-art/neon-portrait-clean.webp",
+		accent: "#dd3295",
+		position: "50% 42%",
+		details: ["Board packs", "Variance notes", "Approval trails"],
+	},
+	{
+		sector: "Technology & software",
+		title: "Turn product knowledge into better support.",
+		image: "/images/use-case-art/neon-portrait-clean.webp",
+		accent: "#3158ff",
+		position: "50% 42%",
+		details: ["Product notes", "Support patterns", "Release context"],
+	},
+	{
+		sector: "Consulting & operations",
+		title: "Make delivery knowledge repeatable.",
+		image: "/images/use-case-art/neon-portrait-clean.webp",
+		accent: "#ba38bc",
+		position: "50% 42%",
+		details: ["Delivery playbooks", "Client context", "Repeatable steps"],
+	},
 ];
 
 const faqs = [
@@ -132,7 +176,7 @@ const faqColumns = [
 <div class="v3-page">
 	<header class="site-header">
 		<a class="brand" href="#top" aria-label="Act AI Studio home">
-			<img src="/logos/ACT_Black.svg" alt="Act." width="87" height="43" />
+			<img src="/logos/ACT_White.svg" alt="Act." width="87" height="43" />
 		</a>
 
 		<nav class="desktop-nav" aria-label="Primary navigation">
@@ -167,14 +211,18 @@ const faqColumns = [
 			</div>
 		</section>
 
-		<section class="section section-light possibility" id="possibility" aria-labelledby="possibility-heading" data-scroll-tone-section data-scroll-tone-theme="ink" data-scroll-tone-entry="0.72">
+		<section class="section section-light possibility" id="possibility" aria-labelledby="possibility-heading" data-scroll-tone-section data-scroll-tone-entry="0.72">
 			<div class="section-inner narrow-center">
 				<p class="section-label">The possibility</p>
 				<h2 id="possibility-heading">
 					<span class="tone-heading-line" data-scroll-tone-line>You don't need to understand AI.</span>
 					<span class="tone-heading-line" data-scroll-tone-line>We need to understand your business.</span>
 				</h2>
-				<p class="section-intro" data-scroll-tone-line>We start with how your business works, not with the technology. Then we shape practical agents around the places they can actually help, starting with Agent in the Room&trade; (AIR).</p>
+				<p class="section-intro possibility-intro" data-scroll-tone-line>
+					<span>We start with how your business works, not with the technology.</span>
+					<span>Then we shape practical agents around the places they can</span>
+					<span>actually help, starting with Agent in the Room&trade; (AIR).</span>
+				</p>
 			</div>
 		</section>
 
@@ -196,43 +244,42 @@ const faqColumns = [
 					))}
 				</div>
 
-				<article class="stage-item stage-feature" data-scroll-tone-line>
-					<p class="stage-number">03</p>
-					<h3>The AIR session</h3>
-					<p>Face to face, wherever suits the conversation. One or two of our experts join your people, with the agent we've prepared. It questions the room one question at a time. You answer. We steer. AI-led, expert-driven.</p>
-				</article>
-
-				<div class="air-panel" aria-label="Agent in the Room interaction stages" aria-roledescription="carousel" data-air-carousel>
-					{airSlides.map((slide, index) => (
-						<article class="air-slide" data-air-slide aria-label={`Frame ${index + 1} of ${airSlides.length}`}>
-							<img src={slide.image} alt="" />
-							<div class="air-copy">
-								<strong>{slide.label}</strong>
-								<p>{slide.copy}</p>
-							</div>
-						</article>
-					))}
-					<div class="carousel-dots">
-						{airSlides.map((_, index) => (
-							<button type="button" aria-label={`Show frame ${index + 1}`} data-air-dot></button>
+				<div class="air-carousel" aria-label="Agent in the Room interaction stages" aria-roledescription="carousel" data-air-carousel>
+					<div class="air-panel">
+						{airSlides.map((slide, index) => (
+							<article class="air-slide" data-air-slide aria-label={`Frame ${index + 1} of ${airSlides.length}`}>
+								<img src={slide.image} alt="" />
+								<div class="air-copy">
+									<strong>{slide.label}</strong>
+									<p>{slide.copy}</p>
+								</div>
+							</article>
+						))}
+					</div>
+					<div class="carousel-dots" aria-label="Choose an AIR frame">
+						{airSlides.map((slide, index) => (
+							<button type="button" aria-label={`Show frame ${index + 1}`} data-air-dot>
+								<span>{slide.navNumber}</span>
+								{slide.navName && <span class="air-nav-name">{slide.navName}</span>}
+							</button>
+						))}
+					</div>
+					<div class="air-descriptions" aria-live="polite">
+						{airSlides.map((slide, index) => (
+							<p data-air-description hidden={index !== 0}>
+								<strong>{slide.navName}.</strong> {slide.description}
+							</p>
 						))}
 					</div>
 				</div>
-
-				<article class="stage-item stage-build" data-scroll-tone-line>
-					<p class="stage-number">04</p>
-					<h3>The build.</h3>
-					<p>What we agree goes to our studio, where we build, test and deploy it.</p>
-				</article>
-				<a class="pill pill-light stage-booking" href="/contact">Request a 30 minute call</a>
 			</div>
 		</section>
 
-		<section class="section section-light practice" id="practice" aria-labelledby="practice-heading" data-scroll-tone-section data-scroll-tone-theme="ink">
+		<section class="section section-light practice" id="practice" aria-labelledby="practice-heading" data-scroll-tone-section>
 			<div class="section-inner">
 				<div class="narrow-center practice-heading">
 					<p class="section-label">The practice</p>
-					<h2 id="practice-heading" data-scroll-tone-line>Where AI earns its place.</h2>
+					<h2 id="practice-heading" data-scroll-tone-line>Where AI earns<br />its place.</h2>
 				</div>
 
 				<div class="practice-layout">
@@ -240,52 +287,26 @@ const faqColumns = [
 						<p data-scroll-tone-line>Agents can increase business capacity by orders of magnitude.</p>
 						<p data-scroll-tone-line>What matters is where they create value and how people stay in control.</p>
 					</div>
-					<div class="use-case-grid use-case-grid--desktop" aria-label="Business use cases">
-						{useCaseColumns.map((column) => (
-							<div class="use-case-column" data-practice-column>
-								{[false, true].map((duplicate) => (
-									<div class="use-case-sequence" data-practice-loop-start={duplicate ? "true" : undefined} aria-hidden={duplicate ? "true" : undefined}>
-										{column.map((useCase) => {
-											const index = useCases.indexOf(useCase);
-											return (
-								<article class:list={["use-case", index === 0 || index === 3 ? "use-case-tall" : ""]} style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image})`}>
-													<div class="use-case-art" aria-hidden="true"></div>
-													<div class="use-case-meta"><span>Use case</span><span>{String(index + 1).padStart(2, "0")} / 04</span></div>
-													<div class="use-case-body">
-														<p>{useCase.sector}</p>
-														<h3>{useCase.title}</h3>
-													</div>
-													<div class="use-case-details">
-														{useCase.details.map((detail) => <span>{detail}</span>)}
-													</div>
-												</article>
-											);
-										})}
+					<div class="use-case-carousel" aria-label="Business use cases" aria-roledescription="carousel" data-practice-carousel>
+						<div class="use-case-track" data-practice-track>
+							{useCases.map((useCase, index) => (
+								<article class="use-case" style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image})`}>
+									<div class="use-case-art" aria-hidden="true"></div>
+									<div class="use-case-meta"><span>Use case</span><span>{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
+									<div class="use-case-body">
+										<p>{useCase.sector}</p>
+										<h3>{useCase.title}</h3>
 									</div>
-								))}
-							</div>
-						))}
-					</div>
-					<div class="use-case-grid use-case-grid--compact" aria-label="Business use cases">
-						<div class="use-case-column" data-practice-column>
-							{[false, true].map((duplicate) => (
-								<div class="use-case-sequence" data-practice-loop-start={duplicate ? "true" : undefined} aria-hidden={duplicate ? "true" : undefined}>
-									{useCases.map((useCase, index) => (
-										<article class:list={["use-case", index === 0 || index === 3 ? "use-case-tall" : ""]} style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image})`}>
-											<div class="use-case-art" aria-hidden="true"></div>
-											<div class="use-case-meta"><span>Use case</span><span>{String(index + 1).padStart(2, "0")} / 04</span></div>
-											<div class="use-case-body">
-												<p>{useCase.sector}</p>
-												<h3>{useCase.title}</h3>
-											</div>
-											<div class="use-case-details">
-												{useCase.details.map((detail) => <span>{detail}</span>)}
-											</div>
-										</article>
-									))}
-								</div>
+									<div class="use-case-details">
+										{useCase.details.map((detail) => <span>{detail}</span>)}
+									</div>
+								</article>
 							))}
 						</div>
+					</div>
+					<div class="practice-controls">
+						<button type="button" aria-label="Previous use case" data-practice-previous>&larr;</button>
+						<button type="button" aria-label="Next use case" data-practice-next>&rarr;</button>
 					</div>
 				</div>
 			</div>
@@ -300,15 +321,29 @@ const faqColumns = [
 
 				<div class="governance-layout">
 					<div class="governance-copy">
-						<p data-scroll-tone-line>We embed agents with approved policies, review points and escalation routes.</p>
-						<p data-scroll-tone-line>Every agent remains governed by your control procedures and human decisions.</p>
+						<p data-scroll-tone-line>We embed agents with approved policies, review points and escalation routes. Every agent remains governed by your control procedures and human decisions.</p>
 					</div>
-					<img src="/images/website-v3-governance.webp" alt="Transparent human profile with liquid gold highlights" width="1254" height="1254" />
+					<figure class="governance-visual" aria-label="Governance areas surrounding an AI agent">
+						<img class="governance-image governance-image--primary" src="/images/website-v3-governance.webp" alt="Transparent human profile with liquid gold highlights" width="1254" height="1254" />
+						<img class="governance-image governance-image--left" src="/images/website-v3-governance.webp" alt="" width="1254" height="1254" />
+						<img class="governance-image governance-image--right" src="/images/website-v3-governance.webp" alt="" width="1254" height="1254" />
+						<img class="governance-image governance-image--small-left" src="/images/website-v3-governance.webp" alt="" width="1254" height="1254" />
+						<img class="governance-image governance-image--small-right" src="/images/website-v3-governance.webp" alt="" width="1254" height="1254" />
+						<span class="governance-tag governance-tag--security">Information Security</span>
+						<span class="governance-tag governance-tag--data">Data Protection</span>
+						<span class="governance-tag governance-tag--brand">Brand Guidelines</span>
+						<span class="governance-tag governance-tag--esg">ESG</span>
+						<span class="governance-tag governance-tag--employment">Employment</span>
+						<span class="governance-tag governance-tag--regulations">Regulations</span>
+						<span class="governance-tag governance-tag--ai">AI</span>
+						<span class="governance-tag governance-tag--legal">Legal</span>
+						<span class="governance-tag governance-tag--risk">Risk</span>
+					</figure>
 				</div>
 			</div>
 		</section>
 
-		<section class="section section-light direction" id="direction" aria-labelledby="direction-heading" data-scroll-tone-section data-scroll-tone-theme="ink">
+		<section class="section section-light direction" id="direction" aria-labelledby="direction-heading" data-scroll-tone-section>
 			<div class="section-inner">
 				<div class="narrow-center direction-heading">
 					<p class="section-label">The direction</p>
@@ -414,10 +449,12 @@ const faqColumns = [
 	}
 
 	.v3-page {
-		--paper: #f5f4f2;
-		--ink: #10100f;
+		--paper: #050505;
+		--ink: #f7f7f5;
 		--dark: #10100f;
 		--round: 48px;
+		--grid-gap: 20px;
+		--grid-gutter: clamp(24px, 4.167vw, 80px);
 		background: var(--dark);
 		color: var(--ink);
 		font-family: "MG12", "Helvetica Neue", Arial, sans-serif;
@@ -434,14 +471,15 @@ const faqColumns = [
 	}
 
 	.site-header {
-		height: 78px;
-		padding: 0 30px;
+		height: 80px;
+		padding: 0 var(--grid-gutter);
 		display: grid;
-		grid-template-columns: 150px 1fr auto;
+		grid-template-columns: 1fr auto 1fr;
 		align-items: center;
 		gap: 28px;
-		background: rgba(250, 250, 248, 0.98);
-		border-bottom: 1px solid rgba(16, 16, 15, 0.13);
+		background: rgba(7, 7, 7, 0.96);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+		color: #fff;
 		position: relative;
 		z-index: 50;
 	}
@@ -462,6 +500,7 @@ const faqColumns = [
 		gap: 36px;
 		font-family: var(--font-sans);
 		font-size: 15px;
+		color: #999;
 	}
 
 	.desktop-nav a,
@@ -496,7 +535,10 @@ const faqColumns = [
 	}
 
 	.nav-cta {
-		background: #fff;
+		justify-self: end;
+		border-color: rgba(255, 255, 255, 0.75);
+		background: transparent;
+		color: #fff;
 	}
 
 	.mobile-nav {
@@ -504,17 +546,22 @@ const faqColumns = [
 	}
 
 	.image-section {
-		background-image: url("/images/website-v3-hero.webp");
+		background-image: url("/images/website-v3-governance.webp");
 		background-position: center;
 		background-size: cover;
 	}
 
 	.hero {
-		min-height: 880px;
+		--section-stack-hold: 0px;
+		height: calc(100svh - 112px);
+		min-height: 704px;
+		max-height: 1366px;
 		display: grid;
 		place-items: center;
 		position: relative;
 		color: #fff;
+		transform: translate3d(0, var(--section-stack-hold), 0);
+		will-change: transform;
 		isolation: isolate;
 	}
 
@@ -543,43 +590,71 @@ const faqColumns = [
 	h1,
 	h2,
 	h3 {
-		letter-spacing: 0;
+		letter-spacing: -0.025em;
 	}
 
 	h1 {
 		margin-bottom: 38px;
-		font-size: 104px;
-		font-weight: 500;
-		line-height: 0.88;
+		font-size: 90px;
+		font-weight: 700;
+		line-height: 1.05;
 	}
 
 	.hero-content > p {
 		max-width: 670px;
 		margin: 0 auto 34px;
 		font-size: 25px;
-		line-height: 1.22;
+		font-weight: 700;
+		letter-spacing: -0.025em;
+		line-height: 1.3;
 	}
 
 	.pill-light {
 		border-color: #fff;
 		background: #fff;
-		color: var(--ink);
+		color: #11110f;
 	}
 
 	.section {
+		--section-stack-hold: 0px;
 		position: relative;
 		margin-top: calc(var(--round) * -1);
 		border-radius: var(--round) var(--round) 0 0;
-		z-index: 2;
+		transform: translate3d(0, var(--section-stack-hold), 0);
+		will-change: transform;
 	}
 
-	.section + .section {
+	.possibility {
 		z-index: 3;
+	}
+
+	.stages {
+		z-index: 4;
+	}
+
+	.practice {
+		z-index: 5;
+	}
+
+	.governance {
+		z-index: 6;
+	}
+
+	.direction {
+		z-index: 7;
+	}
+
+	.conversation {
+		z-index: 8;
+	}
+
+	.faq {
+		z-index: 9;
 	}
 
 	.section-light {
 		background: var(--paper);
-		color: var(--ink);
+		color: #fff;
 	}
 
 	.section-dark {
@@ -588,13 +663,18 @@ const faqColumns = [
 	}
 
 	.section-inner {
-		width: min(1440px, calc(100% - 96px));
+		width: min(1760px, calc(100% - (var(--grid-gutter) * 2)));
 		margin: 0 auto;
+		display: grid;
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+		column-gap: var(--grid-gap);
 	}
 
 	.narrow-center {
-		max-width: 1050px;
-		margin-inline: auto;
+		width: 100%;
+		max-width: none;
+		margin-inline: 0;
+		grid-column: 3 / 11;
 		text-align: center;
 	}
 
@@ -603,11 +683,12 @@ const faqColumns = [
 		min-width: 190px;
 		margin: 0 auto 62px;
 		padding: 12px 28px;
-		border: 1px solid rgba(16, 16, 15, 0.76);
+		border: 1px solid rgba(255, 255, 255, 0.66);
 		border-radius: 4px;
 		font-family: var(--font-sans);
-		font-size: 16px;
+		font-size: 20px;
 		font-weight: 700;
+		letter-spacing: 0;
 		line-height: 1;
 		text-align: center;
 		text-transform: uppercase;
@@ -618,17 +699,20 @@ const faqColumns = [
 	}
 
 	.section h2 {
-		font-size: 82px;
-		font-weight: 500;
-		line-height: 0.96;
+		font-size: 90px;
+		font-weight: 700;
+		line-height: 1.05;
 	}
 
 	.section-intro {
 		max-width: 720px;
 		margin: 44px auto 0;
 		font-family: var(--font-sans);
-		font-size: 20px;
-		line-height: 1.45;
+		color: #999;
+		font-size: 35px;
+		font-weight: 700;
+		letter-spacing: -0.025em;
+		line-height: 1.3;
 	}
 
 	.muted-light {
@@ -636,15 +720,36 @@ const faqColumns = [
 	}
 
 	.possibility {
-		padding: 160px 0 210px;
+		padding: 132px 0 218px;
 	}
 
 	.possibility .narrow-center {
-		max-width: 1150px;
+		max-width: none;
+	}
+
+	.possibility .section-inner.narrow-center {
+		width: min(1400px, calc(100% - (var(--grid-gutter) * 2)));
+		display: block;
+		margin-inline: auto;
 	}
 
 	.possibility h2 {
-		font-size: 92px;
+		font-size: 90px;
+		text-wrap: nowrap;
+	}
+
+	.possibility .section-label {
+		margin-bottom: 104px;
+	}
+
+	.possibility-intro {
+		max-width: 1080px;
+		margin-top: 76px;
+		color: rgba(255, 255, 255, 0.56);
+	}
+
+	.possibility-intro span {
+		display: block;
 	}
 
 	.tone-heading-line {
@@ -656,52 +761,64 @@ const faqColumns = [
 	}
 
 	.stages-inner {
-		max-width: 1280px;
+		max-width: 1760px;
 	}
 
 	.stages .narrow-center {
-		max-width: 980px;
+		max-width: none;
 	}
 
 	.stage-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 70px;
+		column-gap: 80px;
+		row-gap: 0;
+		grid-column: 2 / 12;
 		margin-top: 130px;
 	}
 
 	.stage-item {
-		padding-top: 32px;
+		display: grid;
+		grid-template-columns: 120px minmax(0, 1fr);
+		grid-template-rows: auto auto;
+		column-gap: 32px;
+		align-content: start;
+		padding: 34px 0 72px;
 		border-top: 1px solid rgba(255, 255, 255, 0.58);
-		text-align: center;
+		text-align: left;
 	}
 
 	.stage-number {
-		margin-bottom: 18px;
+		grid-column: 1;
+		margin: 0 0 18px;
 		font-family: var(--font-sans);
 		font-size: 15px;
 		font-weight: 700;
 	}
 
 	.stage-item h3 {
-		margin-bottom: 24px;
-		font-size: 38px;
-		font-weight: 500;
-		line-height: 1;
+		grid-column: 1;
+		margin: 0;
+		font-size: 25px;
+		font-weight: 700;
+		line-height: 1.1;
 	}
 
 	.stage-item > p:last-child {
-		max-width: 500px;
-		margin: 0 auto;
+		grid-column: 2;
+		grid-row: 1 / span 2;
+		max-width: 540px;
+		margin: 0;
 		color: rgba(255, 255, 255, 0.76);
 		font-family: var(--font-sans);
-		font-size: 18px;
-		line-height: 1.45;
+		font-size: 25px;
+		letter-spacing: -0.025em;
+		line-height: 1.3;
 	}
 
-	.stage-feature {
-		width: min(780px, 100%);
-		margin: 105px auto 75px;
+	.air-carousel {
+		grid-column: 2 / 12;
+		min-width: 0;
 	}
 
 	.air-panel {
@@ -776,39 +893,75 @@ const faqColumns = [
 	}
 
 	.carousel-dots {
-		position: absolute;
-		bottom: 24px;
-		left: 50%;
+		width: fit-content;
+		max-width: 100%;
+		margin: 70px auto 0;
+		padding: 7px;
 		display: flex;
-		gap: 12px;
-		transform: translateX(-50%);
+		gap: 3px;
+		border-radius: 9999px;
+		background: #343434;
 	}
 
 	.carousel-dots button {
-		width: 8px;
-		height: 8px;
-		padding: 0;
+		min-width: 124px;
+		height: 50px;
+		padding: 0 20px;
 		border: 0;
-		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.46);
+		border-radius: 9999px;
+		background: transparent;
+		color: rgba(255, 255, 255, 0.78);
+		font: inherit;
+		font-size: 17px;
+		font-weight: 700;
+		white-space: nowrap;
 		cursor: pointer;
-		transition: background 180ms ease, transform 180ms ease;
+		transition: background 180ms ease, color 180ms ease;
+	}
+
+	.air-nav-name {
+		margin-left: 5px;
 	}
 
 	.carousel-dots button[data-active="true"] {
-		background: #fff;
-		transform: scale(1.3);
+		background: #050505;
+		color: #fff;
 	}
 
-	.stage-build {
-		width: min(760px, 100%);
-		margin: 90px auto 0;
+	.carousel-dots button:hover,
+	.carousel-dots button:focus-visible {
+		color: #fff;
 	}
 
-	.stage-booking {
-		width: fit-content;
-		margin: 58px auto 0;
-		display: flex;
+	.carousel-dots button:focus-visible {
+		outline: 2px solid #fff;
+		outline-offset: 3px;
+	}
+
+	.air-descriptions {
+		min-height: 52px;
+		margin: 30px auto 0;
+		text-align: center;
+	}
+
+	.air-descriptions p {
+		max-width: 640px;
+		margin: 0 auto;
+		color: rgba(255, 255, 255, 0.62);
+		font-family: var(--font-sans);
+		font-size: 18px;
+		letter-spacing: -0.025em;
+		line-height: 1.3;
+		text-wrap: balance;
+	}
+
+	.air-descriptions p[hidden] {
+		display: none;
+	}
+
+	.air-descriptions strong {
+		color: #fff;
+		font-weight: 700;
 	}
 
 	.practice {
@@ -816,73 +969,71 @@ const faqColumns = [
 	}
 
 	.practice-heading {
-		max-width: 1100px;
+		max-width: none;
 	}
 
 	.practice .section-inner,
 	.governance .section-inner {
-		max-width: 1340px;
+		max-width: 1760px;
 	}
 
 	.practice-layout {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 650px));
-		column-gap: 40px;
+		grid-template-columns: repeat(10, minmax(0, 1fr));
+		column-gap: var(--grid-gap);
+		grid-column: 1 / 13;
 		align-items: start;
-		margin-top: 120px;
+		margin-top: 68px;
 	}
 
 	.practice-copy {
-		max-width: 560px;
+		max-width: none;
+		grid-column: 2 / 10;
+		text-align: center;
 	}
 
 	.practice-copy p {
-		font-size: 44px;
-		line-height: 1.02;
+		font-size: 35px;
+		font-weight: 700;
+		letter-spacing: -0.025em;
+		line-height: 1.3;
 	}
 
 	.practice-copy p + p {
-		margin-top: 44px;
+		margin-top: 10px;
+		color: rgba(255, 255, 255, 0.62);
 	}
 
-	.use-case-grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 20px;
-		height: 590px;
-		overflow: hidden;
-		-webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
-		mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 88%, transparent 100%);
-	}
-
-	.use-case-grid--compact {
-		display: none;
-	}
-
-	.use-case-column {
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-		overflow-y: auto;
-		overscroll-behavior: contain;
+	.use-case-carousel {
+		width: 100vw;
+		position: relative;
+		left: 50%;
+		overflow-x: auto;
+		overflow-y: hidden;
+		grid-column: 1 / 11;
+		margin-top: 92px;
+		padding-bottom: 0;
 		scrollbar-width: none;
-		touch-action: pan-y;
+		touch-action: pan-x pan-y;
+		transform: translateX(-50%);
 	}
 
-	.use-case-column::-webkit-scrollbar {
+	.use-case-carousel::-webkit-scrollbar {
 		display: none;
 	}
 
-	.use-case-sequence {
-		display: grid;
-		gap: 20px;
-		flex: none;
+	.use-case-track {
+		display: flex;
+		gap: clamp(34px, 5vw, 96px);
+		width: max-content;
+		padding-inline: clamp(20px, 5vw, 96px);
 	}
 
 	.use-case {
+		width: clamp(280px, 21.5vw, 410px);
 		min-height: 0;
 		aspect-ratio: 2 / 3;
+		flex: 0 0 auto;
 		padding: 18px;
 		display: flex;
 		flex-direction: column;
@@ -894,8 +1045,35 @@ const faqColumns = [
 		isolation: isolate;
 	}
 
-	.use-case-tall {
-		min-height: 0;
+	.practice-controls {
+		display: flex;
+		gap: 12px;
+		grid-column: 1 / 11;
+		justify-self: center;
+		margin-top: 34px;
+	}
+
+	.practice-controls button {
+		width: 48px;
+		height: 48px;
+		padding: 0;
+		border: 1px solid rgba(255, 255, 255, 0.58);
+		border-radius: 999px;
+		background: transparent;
+		color: #fff;
+		font: inherit;
+		font-size: 20px;
+		cursor: pointer;
+		transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+	}
+
+	.practice-controls button:hover,
+	.practice-controls button:focus-visible {
+		background: #fff;
+		color: #11110f;
+		transform: translateY(-2px);
+		outline: 2px solid #fff;
+		outline-offset: 3px;
 	}
 
 	.use-case::before {
@@ -1012,36 +1190,176 @@ const faqColumns = [
 	}
 
 	.governance-heading {
-		max-width: 1040px;
+		max-width: none;
 	}
 
 	.governance-layout {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 650px));
-		column-gap: 40px;
-		align-items: center;
-		margin-top: 120px;
+		grid-template-columns: repeat(10, minmax(0, 1fr));
+		column-gap: var(--grid-gap);
+		grid-column: 2 / 12;
+		align-items: start;
+		margin-top: 68px;
 	}
 
 	.governance-copy {
-		max-width: 560px;
+		max-width: none;
+		grid-column: 2 / 10;
+		text-align: center;
 	}
 
 	.governance-copy p {
-		font-size: 43px;
-		line-height: 1.02;
+		font-size: 35px;
+		font-weight: 700;
+		letter-spacing: -0.025em;
+		line-height: 1.3;
 	}
 
-	.governance-copy p + p {
-		margin-top: 52px;
-		color: rgba(255, 255, 255, 0.62);
+	.governance-visual {
+		min-height: 660px;
+		margin: 92px 0 0;
+		position: relative;
+		overflow: hidden;
+		border-radius: 22px;
+		background: #f4f4f2;
+		grid-column: 1 / 11;
 	}
 
-	.governance-layout img {
+	.governance-image {
+		position: absolute;
+		object-fit: cover;
+		border-radius: 18px;
+		cursor: pointer;
+		transition: opacity 360ms ease, filter 360ms ease, transform 520ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 520ms ease;
+		will-change: transform, opacity;
+	}
+
+	.governance-image--primary {
+		width: 33%;
+		height: 72%;
+		left: 34%;
+		top: 14%;
+		z-index: 5;
+	}
+
+	.governance-image--left {
+		width: 25%;
+		height: 47%;
+		left: 16%;
+		top: 8%;
+		z-index: 3;
+	}
+
+	.governance-image--right {
+		width: 23%;
+		height: 43%;
+		right: 14%;
+		top: 5%;
+		z-index: 3;
+	}
+
+	.governance-image--small-left {
+		width: 10%;
+		height: 24%;
+		left: 7%;
+		bottom: 15%;
+		z-index: 2;
+	}
+
+	.governance-image--small-right {
+		width: 11%;
+		height: 26%;
+		right: 7%;
+		bottom: 8%;
+		z-index: 2;
+	}
+
+	.governance-tag {
+		min-width: 190px;
+		height: 52px;
+		padding: 0 24px;
+		display: grid;
+		place-items: center;
+		position: absolute;
+		z-index: 20;
+		border-radius: 9999px;
+		background: #050505;
+		color: #fff;
+		font-family: var(--font-sans);
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 1;
+		white-space: nowrap;
+	}
+
+	.governance-tag--security {
+		left: 5%;
+		top: 7%;
+	}
+
+	.governance-tag--data {
+		left: 39%;
+		top: 14%;
+	}
+
+	.governance-tag--brand {
+		right: 4%;
+		top: 20%;
+	}
+
+	.governance-tag--esg {
+		right: 20%;
+		top: 40%;
+	}
+
+	.governance-tag--employment {
+		right: 8%;
+		top: 62%;
+	}
+
+	.governance-tag--regulations {
+		right: 8%;
+		bottom: 7%;
+	}
+
+	.governance-tag--ai {
+		left: 42%;
+		top: 59%;
+	}
+
+	.governance-tag--legal {
+		left: 29%;
+		bottom: 4%;
+	}
+
+	.governance-tag--risk {
+		left: 5%;
+		top: 68%;
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.governance-visual:has(.governance-image:hover) .governance-image {
+			opacity: 0.34;
+			filter: saturate(0.55) brightness(0.9);
+			transform: scale(0.97);
+			z-index: 1;
+		}
+
+		.governance-visual .governance-image:hover {
+			opacity: 1;
+			filter: saturate(1) brightness(1);
+			transform: translateY(-12px) scale(1.055);
+			box-shadow: 0 30px 70px rgba(0, 0, 0, 0.24);
+			z-index: 15;
+		}
+	}
+
+	.governance-layout > img {
 		width: 100%;
-		aspect-ratio: 0.94;
+		aspect-ratio: 2.4 / 1;
 		object-fit: cover;
 		border-radius: 22px;
+		grid-column: 1 / 11;
 	}
 
 	.direction {
@@ -1049,45 +1367,74 @@ const faqColumns = [
 	}
 
 	.direction-heading {
-		max-width: 1100px;
+		max-width: none;
+	}
+
+	.direction h2 {
+		line-height: 1.05 !important;
+	}
+
+	.direction .section-intro {
+		max-width: 820px;
+		margin-top: 76px;
+		line-height: 1.3 !important;
 	}
 
 	.director-grid {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 90px;
-		max-width: 1050px;
-		margin: 125px auto 0;
+		grid-template-columns: minmax(0, 1fr);
+		gap: 84px;
+		max-width: none;
+		margin: 132px 0 0;
+		grid-column: 3 / 11;
 	}
 
 	.director-grid article {
-		padding-top: 26px;
-		border-top: 1px solid rgba(16, 16, 15, 0.72);
+		display: grid;
+		grid-template-columns: 280px minmax(0, 1fr);
+		grid-template-rows: auto auto 1fr;
+		column-gap: 96px;
 	}
 
 	.director-grid h3 {
-		margin-bottom: 4px;
-		font-size: 30px;
+		grid-column: 1;
+		grid-row: 1;
+		margin: 0 0 6px;
+		font-size: 25px;
 		font-weight: 700;
+		line-height: 1.3 !important;
 	}
 
 	.director-grid p {
+		grid-column: 2;
+		grid-row: 1 / span 2;
+		margin: 0;
 		font-family: var(--font-sans);
-		font-size: 18px;
-		line-height: 1.48;
+		font-size: 25px;
+		font-weight: 500;
+		letter-spacing: -0.025em;
+		line-height: 1.3 !important;
 	}
 
 	.director-grid .director-role {
-		margin-bottom: 28px;
-		font-size: 16px;
+		grid-column: 1;
+		grid-row: 2;
+		margin: 0;
+		font-size: 25px;
 		font-weight: 700;
+		line-height: 1.3 !important;
 	}
 
 	.director-grid strong {
 		display: block;
+		grid-column: 2;
+		grid-row: 3;
 		margin-top: 30px;
 		font-family: var(--font-sans);
-		font-size: 16px;
+		font-size: 25px;
+		font-weight: 700;
+		letter-spacing: -0.025em;
+		line-height: 1.3 !important;
 	}
 
 	.conversation {
@@ -1095,40 +1442,58 @@ const faqColumns = [
 		padding: 155px 32px 145px;
 		display: grid;
 		place-items: center;
+		background-image: url("/images/website-v3-air.webp");
+		background-position: center;
+		background-size: cover;
 		color: #fff;
-		z-index: 4;
 		isolation: isolate;
 	}
 
+	.conversation::before {
+		background: rgba(5, 5, 5, 0.52);
+	}
+
 	.conversation-content {
-		max-width: 930px;
+		max-width: 1040px;
 	}
 
 	.conversation h2 {
-		margin-bottom: 34px;
-		font-size: 96px;
+		margin-bottom: 76px;
+		font-size: 90px;
+		font-weight: 700;
+		line-height: 1.05 !important;
 	}
 
 	.conversation-lead {
-		margin-bottom: 40px;
+		margin-bottom: 108px;
 		font-size: 35px;
+		font-weight: 700;
+		letter-spacing: -0.025em;
+		line-height: 1.3 !important;
 	}
 
 	.conversation-content > p:not(.section-label):not(.conversation-lead) {
-		max-width: 640px;
-		margin: 0 auto 38px;
+		max-width: 720px;
+		margin: 0 auto 72px;
 		font-family: var(--font-sans);
+		font-size: 25px;
+		font-weight: 700;
+		letter-spacing: -0.025em;
+		line-height: 1.3 !important;
+	}
+
+	.conversation .pill {
+		min-width: 350px;
+		height: 60px;
 		font-size: 20px;
-		line-height: 1.45;
 	}
 
 	.faq {
 		padding: 140px 0 190px;
-		z-index: 5;
 	}
 
 	.faq .section-inner {
-		max-width: 1180px;
+		max-width: 1760px;
 	}
 
 	.faq-grid {
@@ -1136,6 +1501,7 @@ const faqColumns = [
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		column-gap: 60px;
 		margin-top: 70px;
+		grid-column: 3 / 11;
 	}
 
 	.faq-column {
@@ -1144,11 +1510,11 @@ const faqColumns = [
 	}
 
 	.faq details {
-		border-top: 1px solid rgba(16, 16, 15, 0.36);
+		border-top: 1px solid rgba(255, 255, 255, 0.3);
 	}
 
 	.faq-column details:last-child {
-		border-bottom: 1px solid rgba(16, 16, 15, 0.36);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 	}
 
 	.faq summary {
@@ -1159,7 +1525,9 @@ const faqColumns = [
 		gap: 24px;
 		cursor: pointer;
 		list-style: none;
-		font-size: 22px;
+		font-size: 30px;
+		font-weight: 700;
+		letter-spacing: -0.025em;
 	}
 
 	.faq summary::-webkit-details-marker {
@@ -1179,13 +1547,15 @@ const faqColumns = [
 	.faq details p {
 		max-width: 570px;
 		padding: 0 42px 28px 0;
-		color: rgba(16, 16, 15, 0.68);
+		color: #999;
 		font-family: var(--font-sans);
-		font-size: 17px;
-		line-height: 1.5;
+		font-size: 25px;
+		letter-spacing: -0.025em;
+		line-height: 1.3 !important;
 	}
 
 	.site-footer {
+		--section-stack-hold: 0px;
 		min-height: 1190px;
 		margin-top: -48px;
 		padding: 156px 56px 0;
@@ -1194,15 +1564,17 @@ const faqColumns = [
 		border-radius: var(--round) var(--round) 0 0;
 		background: var(--dark);
 		color: #fff;
-		z-index: 6;
+		transform: translate3d(0, var(--section-stack-hold), 0);
+		will-change: transform;
+		z-index: 10;
 	}
 
 	.footer-grid {
 		width: 100%;
 		margin: 0 auto;
 		display: grid;
-		grid-template-columns: 1.61fr 1fr 2.07fr 0.64fr;
-		gap: 74px;
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+		gap: var(--grid-gap);
 		font-family: var(--font-sans);
 		font-size: 15px;
 		line-height: 1.45;
@@ -1210,6 +1582,22 @@ const faqColumns = [
 
 	.footer-grid > * {
 		min-width: 0;
+	}
+
+	.footer-primary {
+		grid-column: 1 / 5;
+	}
+
+	.footer-grid > nav {
+		grid-column: 6 / 8;
+	}
+
+	.footer-about {
+		grid-column: 9 / 12;
+	}
+
+	.footer-social {
+		grid-column: 12 / 13;
 	}
 
 	.footer-grid strong {
@@ -1282,6 +1670,16 @@ const faqColumns = [
 		border: 0;
 	}
 
+	@media (max-width: 1680px) {
+		.possibility h2 {
+			font-size: 72px;
+		}
+
+		.possibility-intro {
+			font-size: 30px;
+		}
+	}
+
 	@media (max-width: 1180px) {
 		.site-header {
 			grid-template-columns: 120px 1fr auto;
@@ -1304,8 +1702,8 @@ const faqColumns = [
 
 		.practice-layout,
 		.governance-layout {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-			gap: 50px;
+			grid-template-columns: repeat(10, minmax(0, 1fr));
+			column-gap: 20px;
 		}
 
 		.practice-copy,
@@ -1392,6 +1790,7 @@ const faqColumns = [
 			border: 1px solid rgba(16, 16, 15, 0.16);
 			border-radius: 8px;
 			background: #fff;
+			color: #11110f;
 			box-shadow: 0 20px 50px rgba(16, 16, 15, 0.15);
 			font-family: var(--font-sans);
 			font-size: 16px;
@@ -1419,6 +1818,42 @@ const faqColumns = [
 			font-size: 58px;
 		}
 
+		.conversation h2 {
+			margin-bottom: 52px;
+		}
+
+		.conversation-lead {
+			margin-bottom: 70px;
+		}
+
+		.conversation-content > p:not(.section-label):not(.conversation-lead) {
+			margin-bottom: 46px;
+		}
+
+		.possibility h2 {
+			text-wrap: balance;
+		}
+
+		.possibility .section-label {
+			margin-bottom: 70px;
+		}
+
+		.possibility-intro {
+			margin-top: 52px;
+		}
+
+		.direction .section-intro {
+			margin-top: 52px;
+		}
+
+		.possibility-intro span {
+			display: inline;
+		}
+
+		.possibility-intro span + span::before {
+			content: " ";
+		}
+
 		.possibility,
 		.stages,
 		.practice,
@@ -1439,8 +1874,16 @@ const faqColumns = [
 		}
 
 		.stage-grid {
-			gap: 72px;
+			gap: 0;
 			margin-top: 90px;
+		}
+
+		.air-carousel {
+			grid-column: 1 / -1;
+		}
+
+		.stage-item {
+			grid-template-columns: 100px minmax(0, 1fr);
 		}
 
 		.practice-layout,
@@ -1451,22 +1894,33 @@ const faqColumns = [
 		.practice-copy,
 		.governance-copy {
 			max-width: 580px;
+			grid-column: 1;
+			justify-self: center;
 		}
 
-		.use-case-grid--desktop {
-			display: none;
+		.use-case-carousel {
+			width: 100vw;
+			margin-inline: 0;
+			grid-column: 1;
 		}
 
-		.use-case-grid--compact {
-			display: grid;
-			grid-template-columns: minmax(0, 1fr);
-			width: min(100%, 400px);
-			margin-inline: auto;
+		.practice-controls {
+			grid-column: 1;
+		}
+
+		.governance-visual {
+			min-height: 500px;
+			grid-column: 1;
 		}
 
 		.director-grid {
 			gap: 64px;
 			margin-top: 90px;
+		}
+
+		.director-grid article {
+			grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1.4fr);
+			column-gap: 48px;
 		}
 
 		.faq-grid {
@@ -1478,7 +1932,7 @@ const faqColumns = [
 		}
 
 		.faq details:last-child {
-			border-bottom: 1px solid rgba(16, 16, 15, 0.36);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 		}
 
 		.site-footer {
@@ -1548,6 +2002,23 @@ const faqColumns = [
 			line-height: 0.98;
 		}
 
+		.conversation h2 {
+			margin-bottom: 42px;
+			line-height: 1.05 !important;
+		}
+
+		.possibility .section-label {
+			margin-bottom: 52px;
+		}
+
+		.possibility-intro {
+			margin-top: 38px;
+		}
+
+		.direction .section-intro {
+			margin-top: 38px;
+		}
+
 		.section-intro {
 			margin-top: 32px;
 			font-size: 17px;
@@ -1571,24 +2042,54 @@ const faqColumns = [
 		}
 
 		.stage-item h3 {
-			font-size: 30px;
+			font-size: 22px;
 		}
 
 		.stage-item > p:last-child {
 			font-size: 16px;
 		}
 
-		.stage-feature,
-		.stage-build {
-			margin-top: 70px;
+		.stage-item {
+			grid-template-columns: 1fr;
+			padding-bottom: 52px;
 		}
 
-		.stage-booking {
-			margin-top: 44px;
+		.stage-number,
+		.stage-item h3,
+		.stage-item > p:last-child {
+			grid-column: 1;
+			grid-row: auto;
+		}
+
+		.stage-item h3 {
+			margin-bottom: 20px;
 		}
 
 		.air-panel {
 			aspect-ratio: 4 / 5;
+		}
+
+		.carousel-dots {
+			margin-top: 38px;
+			padding: 5px;
+			gap: 2px;
+		}
+
+		.carousel-dots button {
+			min-width: 0;
+			height: 38px;
+			padding-inline: 9px;
+			font-size: 10px;
+		}
+
+		.air-descriptions {
+			min-height: 66px;
+			margin-top: 24px;
+		}
+
+		.air-descriptions p {
+			max-width: 310px;
+			font-size: 15px;
 		}
 
 		.air-copy {
@@ -1608,19 +2109,12 @@ const faqColumns = [
 			font-size: 31px;
 		}
 
-		.use-case-grid--compact {
-			grid-template-columns: minmax(0, 1fr);
-			gap: 12px;
-			height: 590px;
+		.use-case-track {
+			gap: 14px;
 		}
 
-		.use-case-column,
-		.use-case-sequence {
-			gap: 12px;
-		}
-
-		.use-case,
-		.use-case-tall {
+		.use-case {
+			width: min(82vw, 330px);
 			min-height: 0;
 			padding: 13px;
 		}
@@ -1671,12 +2165,38 @@ const faqColumns = [
 			gap: 54px;
 		}
 
-		.governance-copy p + p {
+		.governance-visual {
+			min-height: 390px;
 			margin-top: 32px;
 		}
 
-		.governance-layout img {
+		.governance-image {
 			border-radius: 14px;
+		}
+
+		.governance-tag {
+			min-width: 82px;
+			height: 30px;
+			padding-inline: 10px;
+			font-size: 8px;
+		}
+
+		.director-grid article {
+			grid-template-columns: 1fr;
+			row-gap: 0;
+		}
+
+		.director-grid h3,
+		.director-grid .director-role,
+		.director-grid p,
+		.director-grid strong {
+			grid-column: 1;
+			grid-row: auto;
+		}
+
+		.director-grid .director-role {
+			margin-bottom: 24px;
+			font-size: 20px;
 		}
 
 		.director-grid h3 {
@@ -1687,17 +2207,28 @@ const faqColumns = [
 			font-size: 16px;
 		}
 
+		.director-grid strong {
+			font-size: 16px;
+		}
+
 		.conversation {
 			min-height: 700px;
 			padding-inline: 18px;
 		}
 
 		.conversation-lead {
+			margin-bottom: 58px;
 			font-size: 27px;
 		}
 
 		.conversation-content > p:not(.section-label):not(.conversation-lead) {
+			margin-bottom: 42px;
 			font-size: 17px;
+		}
+
+		.conversation .pill {
+			width: 100%;
+			min-width: 0;
 		}
 
 		.faq summary {
@@ -1720,13 +2251,72 @@ const faqColumns = [
 			scroll-behavior: auto !important;
 			transition-duration: 0.01ms !important;
 		}
+
+		.hero,
+		.section,
+		.site-footer {
+			transform: none !important;
+		}
 	}
 </style>
 
 <script>
+	const stackedSections = [
+		...document.querySelectorAll(".v3-page main > .hero, .v3-page main > .section"),
+		...document.querySelectorAll(".v3-page > .site-footer"),
+	];
+	const stackMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+	let stackFrame = 0;
+
+	const getLayoutTop = (element) => {
+		let top = 0;
+		let node = element;
+		while (node instanceof HTMLElement) {
+			top += node.offsetTop;
+			node = node.offsetParent;
+		}
+		return top;
+	};
+
+	const updateSectionStack = () => {
+		stackFrame = 0;
+		const viewportHeight = window.innerHeight;
+
+		stackedSections.forEach((section, index) => {
+			if (!(section instanceof HTMLElement)) return;
+			if (stackMotionPreference.matches) {
+				section.style.removeProperty("--section-stack-hold");
+				return;
+			}
+
+			const nextSection = stackedSections[index + 1];
+			const nextTop = nextSection instanceof HTMLElement ? getLayoutTop(nextSection) : null;
+			const transitionStart = nextTop === null ? 0 : Math.max(0, nextTop - viewportHeight);
+			const transitionDistance = nextTop === null ? 0 : nextTop - transitionStart;
+			const hold = Math.max(0, Math.min(transitionDistance, window.scrollY - transitionStart));
+			section.style.setProperty("--section-stack-hold", `${hold.toFixed(2)}px`);
+		});
+	};
+
+	const requestSectionStackUpdate = () => {
+		if (stackFrame) return;
+		stackFrame = window.requestAnimationFrame(updateSectionStack);
+	};
+
+	window.addEventListener("scroll", requestSectionStackUpdate, { passive: true });
+	window.addEventListener("resize", requestSectionStackUpdate, { passive: true });
+	window.addEventListener("load", requestSectionStackUpdate, { once: true });
+	stackMotionPreference.addEventListener("change", requestSectionStackUpdate);
+	document.fonts?.ready.then(requestSectionStackUpdate);
+	const stackResizeObserver = new ResizeObserver(requestSectionStackUpdate);
+	const stackMain = document.querySelector(".v3-page main");
+	if (stackMain) stackResizeObserver.observe(stackMain);
+	updateSectionStack();
+
 	document.querySelectorAll("[data-air-carousel]").forEach((carousel) => {
 		const slides = [...carousel.querySelectorAll("[data-air-slide]")];
 		const dots = [...carousel.querySelectorAll("[data-air-dot]")];
+		const descriptions = [...carousel.querySelectorAll("[data-air-description]")];
 		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 		let activeIndex = 0;
 		let moving = false;
@@ -1745,6 +2335,9 @@ const faqColumns = [
 			dots.forEach((dot, index) => {
 				dot.dataset.active = String(index === activeIndex);
 				dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
+			});
+			descriptions.forEach((description, index) => {
+				description.hidden = index !== activeIndex;
 			});
 		};
 
@@ -1848,55 +2441,82 @@ const faqColumns = [
 		render();
 	});
 
-	const practiceColumns = [...document.querySelectorAll("[data-practice-column]")];
-	const practiceReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+	document.querySelectorAll("[data-practice-carousel]").forEach((carousel) => {
+		if (!(carousel instanceof HTMLElement) || carousel.dataset.initialised === "true") return;
+		const track = carousel.querySelector("[data-practice-track]");
+		if (!(track instanceof HTMLElement)) return;
+		carousel.dataset.initialised = "true";
 
-	if (practiceColumns.length && !practiceReducedMotion.matches) {
-		const practiceStates = practiceColumns.map((column, index) => {
-			const loopStart = column.querySelector("[data-practice-loop-start]");
-			const loopPoint = loopStart instanceof HTMLElement ? loopStart.offsetTop : column.scrollHeight / 2;
-			column.scrollTop = index % 2 === 0 ? loopPoint * 0.06 : loopPoint * 0.72;
-			return {
-				column,
-				direction: index % 2 === 0 ? 1 : -1,
-				pauseUntil: 0,
-			};
+		const originalCards = [...track.children].filter((card) => card instanceof HTMLElement);
+		originalCards.forEach((card) => {
+			const clone = card.cloneNode(true);
+			if (!(clone instanceof HTMLElement)) return;
+			clone.setAttribute("aria-hidden", "true");
+			clone.dataset.practiceClone = "true";
+			track.append(clone);
 		});
 
-		practiceStates.forEach((state) => {
-			["wheel", "touchstart", "pointerdown"].forEach((eventName) => {
-				state.column.addEventListener(eventName, () => {
-					state.pauseUntil = performance.now() + 2600;
-				}, { passive: true });
-			});
+		const controls = carousel.parentElement;
+		const previous = controls?.querySelector("[data-practice-previous]");
+		const next = controls?.querySelector("[data-practice-next]");
+		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+		let pauseUntil = 0;
+		let lastTick = performance.now();
+		window.requestAnimationFrame(() => {
+			const firstCard = originalCards[0];
+			if (!(firstCard instanceof HTMLElement)) return;
+			const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
+			carousel.scrollLeft = (firstCard.offsetWidth + gap) * 0.48;
 		});
 
-		let lastPracticeTick = performance.now();
-		const animatePracticeColumns = (time) => {
-			const delta = Math.min(34, time - lastPracticeTick);
-			lastPracticeTick = time;
-			practiceStates.forEach((state) => {
-				const bounds = state.column.getBoundingClientRect();
-				const isVisible = state.column.offsetParent !== null && bounds.top < window.innerHeight && bounds.bottom > 0;
-
-				if (isVisible) {
-					const loopStart = state.column.querySelector("[data-practice-loop-start]");
-					const loopPoint = loopStart instanceof HTMLElement ? loopStart.offsetTop : state.column.scrollHeight / 2;
-					if (!loopPoint || time < state.pauseUntil) return;
-
-					state.column.scrollTop += state.direction * delta * 0.064;
-					if (state.direction > 0 && state.column.scrollTop >= loopPoint) {
-						state.column.scrollTop -= loopPoint;
-					}
-					if (state.direction < 0 && state.column.scrollTop <= 0) {
-						state.column.scrollTop += loopPoint;
-					}
-				}
-			});
-
-			window.requestAnimationFrame(animatePracticeColumns);
+		const loopWidth = () => {
+			const firstClone = track.querySelector("[data-practice-clone]");
+			return firstClone instanceof HTMLElement ? firstClone.offsetLeft - track.offsetLeft : track.scrollWidth / 2;
 		};
 
-		window.requestAnimationFrame(animatePracticeColumns);
-	}
+		const normalise = () => {
+			const width = loopWidth();
+			if (!width) return;
+			while (carousel.scrollLeft >= width) carousel.scrollLeft -= width;
+			while (carousel.scrollLeft < 0) carousel.scrollLeft += width;
+		};
+
+		const moveByCard = (direction) => {
+			const firstCard = originalCards[0];
+			if (!(firstCard instanceof HTMLElement)) return;
+			const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
+			pauseUntil = performance.now() + 3200;
+			carousel.scrollBy({ left: direction * (firstCard.offsetWidth + gap), behavior: reducedMotion.matches ? "auto" : "smooth" });
+			window.setTimeout(normalise, reducedMotion.matches ? 0 : 520);
+		};
+
+		previous?.addEventListener("click", () => {
+			const width = loopWidth();
+			if (carousel.scrollLeft < 2 && width) carousel.scrollLeft += width;
+			moveByCard(-1);
+		});
+		next?.addEventListener("click", () => moveByCard(1));
+
+		["wheel", "touchstart", "pointerdown", "focusin", "mouseenter"].forEach((eventName) => {
+			carousel.addEventListener(eventName, () => {
+				pauseUntil = performance.now() + 2600;
+			}, { passive: true });
+		});
+		carousel.addEventListener("scroll", normalise, { passive: true });
+
+		if (!reducedMotion.matches) {
+			const animatePracticeCarousel = (time) => {
+				const delta = Math.min(34, time - lastTick);
+				lastTick = time;
+				const bounds = carousel.getBoundingClientRect();
+				const isVisible = bounds.top < window.innerHeight && bounds.bottom > 0;
+				if (isVisible && time >= pauseUntil) {
+					carousel.scrollLeft += delta * 0.045;
+					normalise();
+				}
+				window.requestAnimationFrame(animatePracticeCarousel);
+			};
+			window.requestAnimationFrame(animatePracticeCarousel);
+		}
+	});
 </script>
