@@ -494,7 +494,7 @@ const faqColumns = [
 		--round: 48px;
 		--grid-gap: 20px;
 		--grid-gutter: clamp(24px, 4.167vw, 80px);
-		--mobile-gutter: 24px;
+		--mobile-gutter: 32px;
 		--section-pad-top: clamp(5.25rem, 5.208vw, 6.25rem);
 		--section-pad-bottom: calc(var(--section-pad-top) * 2);
 		--section-overlap: 0px;
@@ -683,7 +683,7 @@ const faqColumns = [
 
 	h1 {
 		margin-bottom: 42px;
-		font-size: var(--type-display);
+		font-size: calc(var(--type-display) * 1.2);
 		font-weight: 700;
 		line-height: 1.05;
 		overflow-wrap: break-word;
@@ -2281,7 +2281,7 @@ const faqColumns = [
 
 	@media (max-width: 620px) {
 		.v3-page {
-			--mobile-gutter: 24px;
+			--mobile-gutter: 32px;
 			--section-pad-top: 5.25rem;
 			--section-pad-bottom: 6.875rem;
 			--section-overlap: 0px;
@@ -2451,11 +2451,12 @@ const faqColumns = [
 		}
 
 		.air-copy strong {
-			font-size: clamp(2.75rem, 10vw, 3rem);
+			font-size: calc(var(--type-display) * 0.85);
 		}
 
 		.air-copy p {
-			font-size: clamp(2rem, 7vw, 2.125rem);
+			font-size: calc(var(--type-display) * 0.7);
+			line-height: 1.08;
 		}
 
 		.use-case-track {
@@ -2669,7 +2670,7 @@ const faqColumns = [
 
 	@media (max-width: 380px) {
 		.v3-page {
-			--mobile-gutter: 18px;
+			--mobile-gutter: 26px;
 			--type-display: clamp(1.625rem, 7.5vw, 1.78125rem);
 		}
 
@@ -2724,10 +2725,22 @@ const faqColumns = [
 	}
 	@media (max-width: 620px) {
 		.air-nav-number { display: none; }
+		.stage-item > p:last-child,
+		.director-grid p,
+		.director-grid strong {
+			font-size: var(--type-body-large);
+			line-height: 1.3;
+		}
+		.stage-title,
+		.director-grid h3,
+		.director-grid .director-role {
+			font-size: var(--type-stage-title);
+			line-height: 1.08;
+		}
 		.practice-layout,
 		.governance-layout { margin-top: 32px; }
-		.director-grid { gap: 0; }
-		.director-grid article { padding-bottom: 28px; }
+		.director-grid { gap: 24px; }
+		.director-grid article { padding-bottom: 40px; }
 		.director-grid article:last-child { padding-bottom: 0; }
 	}
 </style>
