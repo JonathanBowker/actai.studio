@@ -1,9 +1,12 @@
 <style is:global>
 	[data-scroll-tone-line] {
 		color: #fff;
-		opacity: var(--scroll-tone-opacity, 0.28);
-		transition: opacity 120ms linear;
-		will-change: opacity;
+		opacity: var(--scroll-tone-opacity, 0);
+		transform: translateY(var(--scroll-tone-lift, 0.75rem));
+		transition:
+			opacity 160ms linear,
+			transform 160ms linear;
+		will-change: opacity, transform;
 	}
 
 	[data-scroll-tone-section][data-scroll-tone-theme="ink"] [data-scroll-tone-line] {
@@ -13,6 +16,7 @@
 	@media (prefers-reduced-motion: reduce) {
 		[data-scroll-tone-line] {
 			opacity: 1;
+			transform: none;
 			transition: none;
 		}
 	}
@@ -26,28 +30,32 @@
 	const syncScrollTones = () => {
 		toneFrame = 0;
 		toneSections.forEach((section) => {
-			const bounds = section.getBoundingClientRect();
 			const lines = [...section.querySelectorAll("[data-scroll-tone-line]")];
 			const explicitEntry = Number(section.dataset.scrollToneEntry);
-			const entryPoint = Number.isFinite(explicitEntry) ? explicitEntry : 1.02;
-			const steps = lines.map((line, index) => {
-				if (!(line instanceof HTMLElement)) return index;
-				const explicitStep = Number(line.dataset.scrollToneStep);
-				return Number.isFinite(explicitStep) ? explicitStep : index;
-			});
-			const finalStep = Math.max(0, ...steps);
-			const spreadAttribute = section.getAttribute("data-scroll-tone-spread");
-			const configuredSpread = spreadAttribute === null ? Number.NaN : Number(spreadAttribute);
-			const revealSpread = Number.isFinite(configuredSpread) && configuredSpread >= 0 ? configuredSpread : 0.38;
-			const travel = bounds.height + window.innerHeight * 0.3;
-			const progress = Math.max(0, Math.min(1, (window.innerHeight * entryPoint - bounds.top) / travel));
-			const stagger = finalStep > 0 ? revealSpread / finalStep : 0;
-			const duration = lines.length > 4 ? 0.19 : 0.27;
+			const entryPoint = Number.isFinite(explicitEntry) ? explicitEntry : 0.86;
+			const revealDistance = window.innerHeight * 0.18;
 
-			lines.forEach((line, index) => {
+			lines.forEach((line) => {
 				if (!(line instanceof HTMLElement)) return;
-				const lineProgress = Math.max(0, Math.min(1, (progress - (0.03 + steps[index] * stagger)) / duration));
-				line.style.setProperty("--scroll-tone-opacity", String(0.28 + lineProgress * 0.72));
+				const block = line.closest("[data-scroll-tone-block]");
+				const anchor = block instanceof HTMLElement ? block : line;
+				const lineTop = anchor.getBoundingClientRect().top;
+				const blockHasTitle = block instanceof HTMLElement && Boolean(block.querySelector(".section-label"));
+				const isSectionTitle = line.classList.contains("section-label");
+				const isHeadline = line.matches("h1, h2, h3") || Boolean(line.closest("h1, h2, h3"));
+				const revealStep = block instanceof HTMLElement
+					? isSectionTitle
+						? 0
+						: isHeadline
+							? blockHasTitle ? 1 : 0
+							: blockHasTitle ? 2 : 1
+					: 0;
+				const blockProgress = Math.max(0, Math.min(1, (window.innerHeight * entryPoint - lineTop) / revealDistance));
+				const progress = block instanceof HTMLElement
+					? Math.max(0, Math.min(1, (blockProgress - revealStep * 0.08) / 0.82))
+					: blockProgress;
+				line.style.setProperty("--scroll-tone-opacity", String(progress));
+				line.style.setProperty("--scroll-tone-lift", `${((1 - progress) * 0.75).toFixed(3)}rem`);
 			});
 		});
 	};

@@ -176,7 +176,7 @@ const faqColumns = [
 <div class="v3-page">
 	<header class="site-header">
 		<a class="brand" href="#top" aria-label="Act AI Studio home">
-			<img src="/logos/ACT_White.svg" alt="Act." width="87" height="43" />
+			<img src="/act-logo.svg" alt="Act." width="1200" height="501" />
 		</a>
 
 		<nav class="desktop-nav" aria-label="Primary navigation">
@@ -206,6 +206,9 @@ const faqColumns = [
 
 	<main id="top">
 		<section class="hero image-section" aria-labelledby="hero-heading">
+			<video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="/images/website-v3-governance.webp" aria-hidden="true">
+				<source src="/videos/hero-shadow-eyes.mp4" type="video/mp4" />
+			</video>
 			<div class="hero-content">
 				<h1 id="hero-heading">Intelligence<br />needs direction</h1>
 				<p>Act AI Studio finds where your business creates value and shapes AI to accelerate the delivery of it.</p>
@@ -214,8 +217,8 @@ const faqColumns = [
 		</section>
 
 		<section class="section section-light possibility" id="opportunity" aria-labelledby="opportunity-heading" data-scroll-tone-section data-scroll-tone-entry="1.02">
-			<div class="section-inner narrow-center">
-				<p class="section-label">The opportunity</p>
+			<div class="section-inner narrow-center" data-scroll-tone-block>
+				<p class="section-label" data-scroll-tone-line>The opportunity</p>
 				<h2 id="opportunity-heading">
 					<span class="tone-heading-line" data-scroll-tone-line>You don't need to understand AI.</span>
 					<span class="tone-heading-line" data-scroll-tone-line>We need to understand your business.</span>
@@ -239,9 +242,9 @@ const faqColumns = [
 
 		<section class="section section-dark stages" id="stages" aria-labelledby="stages-heading" data-scroll-tone-section>
 			<div class="section-inner stages-inner">
-				<div class="narrow-center">
-					<p class="section-label section-label-dark">The method</p>
-					<h2 id="stages-heading" data-scroll-tone-line>Start with a conversation,<br />not a deck.</h2>
+				<div class="narrow-center" data-scroll-tone-block>
+					<p class="section-label section-label-dark" data-scroll-tone-line>The method</p>
+					<h2 id="stages-heading" data-scroll-tone-line>Start with a conversation.<br />Not a Deck.</h2>
 					<p class="section-intro muted-light" data-scroll-tone-line>It starts with a call. We record it, steer it, and by the end we know what the problem is. That becomes the brief.</p>
 				</div>
 
@@ -253,6 +256,11 @@ const faqColumns = [
 							<p>{stage.copy}</p>
 						</article>
 					))}
+				</div>
+
+				<div class="air-header" data-scroll-tone-block>
+					<h3 data-scroll-tone-line>Agent in the Room&trade;</h3>
+					<p data-scroll-tone-line>A structured working session that turns a conversation into a clear AI brief.</p>
 				</div>
 
 				<div class="air-carousel" aria-label="Agent in the Room interaction stages" aria-roledescription="carousel" data-air-carousel>
@@ -288,13 +296,13 @@ const faqColumns = [
 
 		<section class="section section-light practice" id="practice" aria-labelledby="practice-heading" data-scroll-tone-section>
 			<div class="section-inner">
-				<div class="narrow-center practice-heading">
-					<p class="section-label">The practice</p>
+				<div class="narrow-center practice-heading" data-scroll-tone-block>
+					<p class="section-label" data-scroll-tone-line>The practice</p>
 					<h2 id="practice-heading" data-scroll-tone-line>Where AI earns<br />its place.</h2>
 				</div>
 
 				<div class="practice-layout">
-					<div class="practice-copy">
+					<div class="practice-copy" data-scroll-tone-block>
 						<p data-scroll-tone-line>Agents can increase business capacity by orders of magnitude.</p>
 						<p data-scroll-tone-line>What matters is where they create value and how people stay in control.</p>
 					</div>
@@ -325,13 +333,13 @@ const faqColumns = [
 
 		<section class="section section-dark governance" id="governance" aria-labelledby="governance-heading" data-scroll-tone-section>
 			<div class="section-inner">
-				<div class="narrow-center governance-heading">
-					<p class="section-label section-label-dark">The governance</p>
-					<h2 id="governance-heading" data-scroll-tone-line>Your policies,<br />your boundaries.</h2>
+				<div class="narrow-center governance-heading" data-scroll-tone-block>
+					<p class="section-label section-label-dark" data-scroll-tone-line>The governance</p>
+					<h2 id="governance-heading" data-scroll-tone-line>Your Policies.<br />Your Boundaries.</h2>
 				</div>
 
 				<div class="governance-layout">
-					<div class="governance-copy">
+					<div class="governance-copy" data-scroll-tone-block>
 						<p data-scroll-tone-line>We embed agents with approved policies, review points and escalation routes. Every agent remains governed by your control procedures and human decisions.</p>
 					</div>
 					<figure class="governance-visual" aria-label="Governance areas surrounding an AI agent">
@@ -356,9 +364,9 @@ const faqColumns = [
 
 		<section class="section section-light direction" id="direction" aria-labelledby="direction-heading" data-scroll-tone-section>
 			<div class="section-inner">
-				<div class="narrow-center direction-heading">
-					<p class="section-label">The direction</p>
-					<h2 id="direction-heading" data-scroll-tone-line>We direct your AI,<br />and deliver the results.</h2>
+				<div class="narrow-center direction-heading" data-scroll-tone-block>
+					<p class="section-label" data-scroll-tone-line>The direction</p>
+					<h2 id="direction-heading" data-scroll-tone-line>We direct your AI.<br />We deliver the results.</h2>
 					<p class="section-intro" data-scroll-tone-line>AI led by creative thinking, backed by technical practice, driven by outcomes, not reports.</p>
 				</div>
 
@@ -380,8 +388,8 @@ const faqColumns = [
 		</section>
 
 		<section class="section image-section conversation" id="conversation" aria-labelledby="conversation-heading" data-scroll-tone-section>
-			<div class="conversation-content narrow-center">
-				<p class="section-label section-label-dark">The conversation</p>
+			<div class="conversation-content narrow-center" data-scroll-tone-block>
+				<p class="section-label section-label-dark" data-scroll-tone-line>The conversation</p>
 				<h2 id="conversation-heading" data-scroll-tone-line>Let's talk agents.</h2>
 				<p class="conversation-lead" data-scroll-tone-line>What follows could change your business - <em>forever</em></p>
 				<p data-scroll-tone-line>Request a 30-minute call with our directors to find where AI can create value for your business.</p>
@@ -461,18 +469,35 @@ const faqColumns = [
 	}
 
 	:global(body) {
-		background: #10100f;
+		background: #020203;
 	}
 
 	.v3-page {
-		--paper: #050505;
-		--ink: #f7f7f5;
-		--dark: #10100f;
-		--section-very-dark: #050505;
-		--section-dark: #171715;
+		--act-black: #020203;
+		--act-dark-grey: #171719;
+		--act-deep-grey: #111113;
+		--act-white: #f4f4f6;
+		--act-light-text: #8b8b92;
+		--act-muted-text: #707077;
+		--act-white-rgb: 244 244 246;
+		--act-light-rgb: 139 139 146;
+		--paper: var(--act-black);
+		--ink: var(--act-white);
+		--dark: var(--act-black);
+		--section-very-dark: var(--act-black);
+		--section-dark: var(--act-dark-grey);
 		--round: 48px;
 		--grid-gap: 20px;
 		--grid-gutter: clamp(24px, 4.167vw, 80px);
+		--section-pad-top: clamp(5.25rem, 5.208vw, 6.25rem);
+		--section-pad-bottom: clamp(8.75rem, 13.021vw, 15.625rem);
+		--type-display: clamp(3.75rem, 5.417vw, 6.5rem);
+		--type-intro: clamp(1.125rem, 1.354vw, 1.625rem);
+		--type-body-large: clamp(1rem, 1.1458vw, 1.375rem);
+		--type-label: clamp(1rem, 1.25vw, 1.5rem);
+		--type-small: clamp(0.875rem, 0.7813vw, 0.9375rem);
+		--tracking-heading: 0;
+		--tracking-copy: -0.025em;
 		background: var(--dark);
 		color: var(--ink);
 		font-family: "MG12", "Helvetica Neue", Arial, sans-serif;
@@ -481,6 +506,10 @@ const faqColumns = [
 
 	.v3-page * {
 		font-family: "MG12", "Helvetica Neue", Arial, sans-serif !important;
+	}
+
+	.v3-page :where(p, a, button, summary, figcaption, span, strong, cite, li) {
+		letter-spacing: var(--tracking-copy);
 	}
 
 	a {
@@ -495,9 +524,9 @@ const faqColumns = [
 		grid-template-columns: 1fr auto 1fr;
 		align-items: center;
 		gap: 28px;
-		background: rgba(7, 7, 7, 0.96);
-		border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-		color: #fff;
+		background: rgb(2 2 3 / 0.96);
+		border-bottom: 1px solid rgb(var(--act-white-rgb) / 0.14);
+		color: var(--act-white);
 		position: sticky;
 		top: 0;
 		z-index: 50;
@@ -509,8 +538,9 @@ const faqColumns = [
 	}
 
 	.brand img {
-		width: 84px;
-		height: auto;
+		width: auto;
+		height: 44px;
+		filter: brightness(0) invert(1);
 	}
 
 	.desktop-nav {
@@ -519,7 +549,7 @@ const faqColumns = [
 		gap: 36px;
 		font-family: var(--font-sans);
 		font-size: 15px;
-		color: #999;
+		color: var(--act-light-text);
 	}
 
 	.desktop-nav a,
@@ -534,6 +564,7 @@ const faqColumns = [
 
 	.nav-cta,
 	.pill {
+		--button-font-size: 14px;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -542,7 +573,7 @@ const faqColumns = [
 		border: 1px solid currentColor;
 		border-radius: 999px;
 		font-family: var(--font-sans);
-		font-size: 14px;
+		font-size: var(--button-font-size);
 		font-weight: 700;
 		line-height: 1;
 		transition: transform 180ms ease, background 180ms ease, color 180ms ease;
@@ -555,9 +586,9 @@ const faqColumns = [
 
 	.nav-cta {
 		justify-self: end;
-		border-color: rgba(255, 255, 255, 0.75);
+		border-color: rgb(var(--act-white-rgb) / 0.75);
 		background: transparent;
-		color: #fff;
+		color: var(--act-white);
 	}
 
 	.mobile-nav {
@@ -571,16 +602,13 @@ const faqColumns = [
 	}
 
 	.hero {
-		--section-stack-hold: 0px;
 		height: calc(100svh - 112px);
 		min-height: 704px;
 		max-height: 1366px;
 		display: grid;
 		place-items: center;
 		position: relative;
-		color: #fff;
-		transform: translate3d(0, var(--section-stack-hold), 0);
-		will-change: transform;
+		color: var(--act-white);
 		isolation: isolate;
 	}
 
@@ -589,12 +617,22 @@ const faqColumns = [
 		content: "";
 		position: absolute;
 		inset: 0;
-		background: rgba(23, 12, 43, 0.08);
+		background: rgb(2 2 3 / 0.32);
 		z-index: -1;
 	}
 
+	.hero-video {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		inset: 0;
+		object-fit: cover;
+		object-position: center;
+		z-index: -2;
+	}
+
 	.hero-content {
-		width: min(920px, calc(100% - 48px));
+		width: min(1180px, calc(100% - 48px));
 		margin-top: -15px;
 		text-align: center;
 	}
@@ -609,38 +647,34 @@ const faqColumns = [
 	h1,
 	h2,
 	h3 {
-		letter-spacing: -0.025em;
+		letter-spacing: var(--tracking-heading);
 	}
 
 	h1 {
-		margin-bottom: 38px;
-		font-size: 90px;
+		margin-bottom: 34px;
+		font-size: var(--type-display);
 		font-weight: 700;
 		line-height: 1.05;
 	}
 
 	.hero-content > p {
-		max-width: 670px;
+		max-width: 760px;
 		margin: 0 auto 34px;
-		font-size: 25px;
+		font-size: var(--type-body-large);
 		font-weight: 700;
-		letter-spacing: -0.025em;
-		line-height: 1.3;
+		letter-spacing: var(--tracking-copy);
+		line-height: 1.25;
+		color: rgb(var(--act-light-rgb) / 0.92);
 	}
 
 	.pill-light {
-		border-color: #fff;
-		background: #fff;
-		color: #11110f;
+		border-color: var(--act-white);
+		background: var(--act-white);
+		color: var(--act-black);
 	}
 
 	.section {
-		--section-stack-hold: 0px;
 		position: relative;
-		margin-top: calc(var(--round) * -1);
-		border-radius: var(--round) var(--round) 0 0;
-		transform: translate3d(0, var(--section-stack-hold), 0);
-		will-change: transform;
 	}
 
 	.possibility {
@@ -673,12 +707,12 @@ const faqColumns = [
 
 	.section-light {
 		background: var(--section-very-dark);
-		color: #fff;
+		color: var(--act-white);
 	}
 
 	.section-dark {
 		background: var(--section-dark);
-		color: #fff;
+		color: var(--act-white);
 	}
 
 	.section-inner {
@@ -693,53 +727,59 @@ const faqColumns = [
 		width: 100%;
 		max-width: none;
 		margin-inline: 0;
-		grid-column: 3 / 11;
+		grid-column: 2 / 12;
 		text-align: center;
 	}
 
 	.section-label {
 		width: fit-content;
-		min-width: 190px;
-		margin: 0 auto 62px;
-		padding: 12px 28px;
-		border: 1px solid rgba(255, 255, 255, 0.66);
-		border-radius: 4px;
+		min-width: 0;
+		margin: 0 auto 54px;
+		padding: 0;
+		border: 0;
 		font-family: var(--font-sans);
-		font-size: 20px;
+		font-size: var(--type-label);
 		font-weight: 700;
 		letter-spacing: 0;
-		line-height: 1;
+		line-height: 1.08;
 		text-align: center;
-		text-transform: uppercase;
+		text-transform: none;
+		color: var(--act-muted-text);
 	}
 
 	.section-label-dark {
-		border-color: rgba(255, 255, 255, 0.66);
+		color: var(--act-muted-text);
+	}
+
+	.section-label,
+	.section-label * {
+		letter-spacing: 0;
 	}
 
 	.section h2 {
-		font-size: 90px;
+		font-size: var(--type-display);
 		font-weight: 700;
 		line-height: 1.05;
+		letter-spacing: var(--tracking-heading);
 	}
 
 	.section-intro {
-		max-width: 720px;
-		margin: 44px auto 0;
+		max-width: 1260px;
+		margin: 42px auto 0;
 		font-family: var(--font-sans);
-		color: #999;
-		font-size: 35px;
-		font-weight: 700;
-		letter-spacing: -0.025em;
-		line-height: 1.3;
+		color: var(--act-light-text);
+		font-size: var(--type-intro);
+		font-weight: 500;
+		letter-spacing: var(--tracking-copy);
+		line-height: 1.18;
 	}
 
 	.muted-light {
-		color: rgba(255, 255, 255, 0.78);
+		color: var(--act-light-text);
 	}
 
 	.possibility {
-		padding: 132px 0 218px;
+		padding: var(--section-pad-top) 0 var(--section-pad-bottom);
 	}
 
 	.possibility .narrow-center {
@@ -747,24 +787,24 @@ const faqColumns = [
 	}
 
 	.possibility .section-inner.narrow-center {
-		width: min(1400px, calc(100% - (var(--grid-gutter) * 2)));
+		width: min(1660px, calc(100% - clamp(96px, 10vw, 220px)));
 		display: block;
 		margin-inline: auto;
 	}
 
 	.possibility h2 {
-		font-size: 90px;
-		text-wrap: nowrap;
+		font-size: var(--type-display);
+		text-wrap: balance;
 	}
 
 	.possibility .section-label {
-		margin-bottom: 104px;
+		margin-bottom: 72px;
 	}
 
 	.possibility-intro {
-		max-width: 1080px;
-		margin-top: 76px;
-		color: rgba(255, 255, 255, 0.56);
+		max-width: 1500px;
+		margin-top: 62px;
+		color: var(--act-light-text);
 	}
 
 	.possibility-intro > span {
@@ -799,7 +839,7 @@ const faqColumns = [
 	}
 
 	.stages {
-		padding: 150px 0 195px;
+		padding: var(--section-pad-top) 0 var(--section-pad-bottom);
 	}
 
 	.stages-inner {
@@ -826,7 +866,7 @@ const faqColumns = [
 		column-gap: 32px;
 		align-content: start;
 		padding: 34px 0 72px;
-		border-top: 1px solid rgba(255, 255, 255, 0.58);
+		border-top: 1px solid rgb(var(--act-white-rgb) / 0.24);
 		text-align: left;
 	}
 
@@ -834,14 +874,14 @@ const faqColumns = [
 		grid-column: 1;
 		margin: 0 0 18px;
 		font-family: var(--font-sans);
-		font-size: 15px;
+		font-size: var(--type-small);
 		font-weight: 700;
 	}
 
 	.stage-item h3 {
 		grid-column: 1;
 		margin: 0;
-		font-size: 25px;
+		font-size: var(--type-body-large);
 		font-weight: 700;
 		line-height: 1.1;
 	}
@@ -851,16 +891,41 @@ const faqColumns = [
 		grid-row: 1 / span 2;
 		max-width: 540px;
 		margin: 0;
-		color: rgba(255, 255, 255, 0.76);
+		color: rgb(var(--act-light-rgb) / 0.96);
 		font-family: var(--font-sans);
-		font-size: 25px;
-		letter-spacing: -0.025em;
+		font-size: var(--type-body-large);
+		letter-spacing: var(--tracking-copy);
 		line-height: 1.3;
 	}
 
 	.air-carousel {
 		grid-column: 2 / 12;
 		min-width: 0;
+	}
+
+	.air-header {
+		grid-column: 3 / 11;
+		margin: 108px auto 86px;
+		text-align: center;
+	}
+
+	.air-header h3 {
+		margin: 0;
+		color: var(--act-white);
+		font-size: clamp(2rem, 2.5vw, 3rem);
+		font-weight: 700;
+		letter-spacing: var(--tracking-copy);
+		line-height: 1.02;
+	}
+
+	.air-header p {
+		max-width: 760px;
+		margin: 28px auto 0;
+		color: var(--act-light-text);
+		font-size: var(--type-intro);
+		font-weight: 500;
+		letter-spacing: var(--tracking-copy);
+		line-height: 1.18;
 	}
 
 	.air-panel {
@@ -923,14 +988,14 @@ const faqColumns = [
 	}
 
 	.air-copy strong {
-		font-size: 76px;
+		font-size: clamp(2.75rem, 3.9583vw, 4.75rem);
 		font-weight: 500;
 		line-height: 1;
 	}
 
 	.air-copy p {
 		margin: 0;
-		font-size: 48px;
+		font-size: clamp(2rem, 2.5vw, 3rem);
 		line-height: 0.98;
 	}
 
@@ -942,7 +1007,7 @@ const faqColumns = [
 		display: flex;
 		gap: 3px;
 		border-radius: 9999px;
-		background: #343434;
+		background: #2b2b2f;
 		position: relative;
 		z-index: 5;
 	}
@@ -954,7 +1019,7 @@ const faqColumns = [
 		border: 0;
 		border-radius: 9999px;
 		background: transparent;
-		color: rgba(255, 255, 255, 0.78);
+		color: var(--act-light-text);
 		font: inherit;
 		font-size: 17px;
 		font-weight: 700;
@@ -969,17 +1034,17 @@ const faqColumns = [
 	}
 
 	.carousel-dots button[data-active="true"] {
-		background: #050505;
-		color: #fff;
+		background: var(--act-black);
+		color: var(--act-white);
 	}
 
 	.carousel-dots button:hover,
 	.carousel-dots button:focus-visible {
-		color: #fff;
+		color: var(--act-white);
 	}
 
 	.carousel-dots button:focus-visible {
-		outline: 2px solid #fff;
+		outline: 2px solid var(--act-white);
 		outline-offset: 3px;
 	}
 
@@ -992,10 +1057,10 @@ const faqColumns = [
 	.air-descriptions p {
 		max-width: 640px;
 		margin: 0 auto;
-		color: rgba(255, 255, 255, 0.62);
+		color: var(--act-light-text);
 		font-family: var(--font-sans);
-		font-size: 18px;
-		letter-spacing: -0.025em;
+		font-size: clamp(0.9375rem, 0.9375vw, 1.125rem);
+		letter-spacing: var(--tracking-copy);
 		line-height: 1.3;
 		text-wrap: balance;
 	}
@@ -1005,12 +1070,12 @@ const faqColumns = [
 	}
 
 	.air-descriptions strong {
-		color: #fff;
+		color: var(--act-white);
 		font-weight: 700;
 	}
 
 	.practice {
-		padding: 150px 0 190px;
+		padding: var(--section-pad-top) 0 var(--section-pad-bottom);
 	}
 
 	.practice-heading {
@@ -1038,15 +1103,16 @@ const faqColumns = [
 	}
 
 	.practice-copy p {
-		font-size: 35px;
-		font-weight: 700;
-		letter-spacing: -0.025em;
-		line-height: 1.3;
+		font-size: var(--type-intro);
+		font-weight: 500;
+		letter-spacing: var(--tracking-copy);
+		line-height: 1.18;
+		color: rgb(var(--act-light-rgb) / 0.92);
 	}
 
 	.practice-copy p + p {
-		margin-top: 10px;
-		color: rgba(255, 255, 255, 0.62);
+		margin-top: 12px;
+		color: var(--act-light-text);
 	}
 
 	.use-case-carousel {
@@ -1085,8 +1151,8 @@ const faqColumns = [
 		position: relative;
 		overflow: hidden;
 		border-radius: 18px;
-		background: #050505;
-		color: #fff;
+		background: var(--act-black);
+		color: var(--act-white);
 		isolation: isolate;
 	}
 
@@ -1102,10 +1168,10 @@ const faqColumns = [
 		width: 48px;
 		height: 48px;
 		padding: 0;
-		border: 1px solid rgba(255, 255, 255, 0.58);
+		border: 1px solid rgb(var(--act-white-rgb) / 0.24);
 		border-radius: 999px;
 		background: transparent;
-		color: #fff;
+		color: var(--act-white);
 		font: inherit;
 		font-size: 20px;
 		cursor: pointer;
@@ -1114,10 +1180,10 @@ const faqColumns = [
 
 	.practice-controls button:hover,
 	.practice-controls button:focus-visible {
-		background: #fff;
-		color: #11110f;
+		background: var(--act-white);
+		color: var(--act-black);
 		transform: translateY(-2px);
-		outline: 2px solid #fff;
+		outline: 2px solid var(--act-white);
 		outline-offset: 3px;
 	}
 
@@ -1135,7 +1201,7 @@ const faqColumns = [
 		position: absolute;
 		inset: 0;
 		background-image: var(--image);
-		background-color: #050505;
+		background-color: var(--act-black);
 		background-position: var(--position);
 		background-repeat: no-repeat;
 		background-size: 82% auto;
@@ -1167,7 +1233,7 @@ const faqColumns = [
 
 	.use-case-meta span:last-child {
 		padding: 9px 12px;
-		border: 1px solid rgba(255, 255, 255, 0.08);
+		border: 1px solid rgb(var(--act-white-rgb) / 0.08);
 		border-radius: 8px;
 		background: rgba(225, 238, 244, 0.15);
 		backdrop-filter: blur(12px);
@@ -1212,16 +1278,16 @@ const faqColumns = [
 		gap: 6px;
 		margin-top: auto;
 		padding: 10px;
-		border: 1px solid rgba(255, 255, 255, 0.2);
+		border: 1px solid rgb(var(--act-white-rgb) / 0.2);
 		border-radius: 12px;
 		background: rgba(214, 231, 238, 0.12);
-		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 10px 28px rgba(2, 10, 20, 0.13);
+		box-shadow: inset 0 1px 0 rgb(var(--act-white-rgb) / 0.14), 0 10px 28px rgba(2, 10, 20, 0.13);
 		backdrop-filter: blur(15px);
 	}
 
 	.use-case-details span {
 		padding: 10px 12px;
-		border: 1px solid rgba(255, 255, 255, 0.08);
+		border: 1px solid rgb(var(--act-white-rgb) / 0.08);
 		border-radius: 7px;
 		background: rgba(225, 238, 244, 0.14);
 		box-shadow: 0 4px 12px rgba(2, 10, 20, 0.1);
@@ -1231,7 +1297,7 @@ const faqColumns = [
 	}
 
 	.governance {
-		padding: 150px 0 185px;
+		padding: var(--section-pad-top) 0 var(--section-pad-bottom);
 	}
 
 	.governance-heading {
@@ -1254,10 +1320,11 @@ const faqColumns = [
 	}
 
 	.governance-copy p {
-		font-size: 35px;
-		font-weight: 700;
-		letter-spacing: -0.025em;
-		line-height: 1.3;
+		font-size: var(--type-intro);
+		font-weight: 500;
+		letter-spacing: var(--tracking-copy);
+		line-height: 1.18;
+		color: var(--act-light-text);
 	}
 
 	.governance-visual {
@@ -1328,8 +1395,8 @@ const faqColumns = [
 		position: absolute;
 		z-index: 20;
 		border-radius: 9999px;
-		background: #050505;
-		color: #fff;
+		background: var(--act-black);
+		color: var(--act-white);
 		font-family: var(--font-sans);
 		font-size: 14px;
 		font-weight: 700;
@@ -1408,7 +1475,7 @@ const faqColumns = [
 	}
 
 	.direction {
-		padding: 150px 0 190px;
+		padding: var(--section-pad-top) 0 var(--section-pad-bottom);
 	}
 
 	.direction-heading {
@@ -1416,13 +1483,13 @@ const faqColumns = [
 	}
 
 	.direction h2 {
-		line-height: 1.05 !important;
+		line-height: 1.05;
 	}
 
 	.direction .section-intro {
-		max-width: 820px;
-		margin-top: 76px;
-		line-height: 1.3 !important;
+		max-width: 1260px;
+		margin-top: 62px;
+		line-height: 1.18;
 	}
 
 	.director-grid {
@@ -1445,9 +1512,9 @@ const faqColumns = [
 		grid-column: 1;
 		grid-row: 1;
 		margin: 0 0 6px;
-		font-size: 25px;
+		font-size: var(--type-body-large);
 		font-weight: 700;
-		line-height: 1.3 !important;
+		line-height: 1.3;
 	}
 
 	.director-grid p {
@@ -1455,19 +1522,19 @@ const faqColumns = [
 		grid-row: 1 / span 2;
 		margin: 0;
 		font-family: var(--font-sans);
-		font-size: 25px;
+		font-size: var(--type-body-large);
 		font-weight: 500;
-		letter-spacing: -0.025em;
-		line-height: 1.3 !important;
+		letter-spacing: var(--tracking-copy);
+		line-height: 1.3;
 	}
 
 	.director-grid .director-role {
 		grid-column: 1;
 		grid-row: 2;
 		margin: 0;
-		font-size: 25px;
+		font-size: var(--type-body-large);
 		font-weight: 700;
-		line-height: 1.3 !important;
+		line-height: 1.3;
 	}
 
 	.director-grid strong {
@@ -1476,68 +1543,71 @@ const faqColumns = [
 		grid-row: 3;
 		margin-top: 30px;
 		font-family: var(--font-sans);
-		font-size: 25px;
+		font-size: var(--type-body-large);
 		font-weight: 700;
-		letter-spacing: -0.025em;
-		line-height: 1.3 !important;
+		letter-spacing: var(--tracking-copy);
+		line-height: 1.3;
 	}
 
 	.conversation {
 		min-height: 820px;
-		padding: 155px 32px 145px;
+		padding: var(--section-pad-top) 32px var(--section-pad-bottom);
 		display: grid;
 		place-items: center;
 		background-image: url("/images/website-v3-air.webp");
 		background-position: center;
 		background-size: cover;
-		color: #fff;
+		color: var(--act-white);
 		isolation: isolate;
 	}
 
 	.conversation::before {
-		background: rgba(5, 5, 5, 0.52);
+		background: rgb(2 2 3 / 0.56);
 	}
 
 	.conversation-content {
-		width: min(1040px, 100%);
+		width: min(1280px, 100%);
 		max-width: none;
 		margin-inline: auto;
 		grid-column: auto;
 	}
 
 	.conversation h2 {
-		margin-bottom: 76px;
-		font-size: 90px;
+		margin-bottom: 54px;
+		font-size: var(--type-display);
 		font-weight: 700;
-		line-height: 1.05 !important;
+		line-height: 1.05;
+		letter-spacing: var(--tracking-heading);
 	}
 
 	.conversation-lead {
-		margin-bottom: 108px;
-		font-size: 35px;
-		font-weight: 700;
-		letter-spacing: -0.025em;
-		line-height: 1.3 !important;
+		margin-bottom: 74px;
+		font-size: var(--type-intro);
+		font-weight: 500;
+		letter-spacing: var(--tracking-copy);
+		line-height: 1.18;
+		color: rgb(var(--act-light-rgb) / 0.92);
 	}
 
 	.conversation-content > p:not(.section-label):not(.conversation-lead) {
-		max-width: 720px;
+		max-width: 780px;
 		margin: 0 auto 72px;
 		font-family: var(--font-sans);
-		font-size: 25px;
+		font-size: var(--type-body-large);
 		font-weight: 700;
-		letter-spacing: -0.025em;
-		line-height: 1.3 !important;
+		letter-spacing: var(--tracking-copy);
+		line-height: 1.25;
+		color: var(--act-light-text);
 	}
 
 	.conversation .pill {
 		min-width: 350px;
 		height: 60px;
-		font-size: 20px;
+		--button-font-size: 14px;
 	}
 
 	.faq {
-		padding: 140px 0 190px;
+		padding: var(--section-pad-top) 0 var(--section-pad-bottom);
 	}
 
 	.faq .section-inner {
@@ -1558,11 +1628,11 @@ const faqColumns = [
 	}
 
 	.faq details {
-		border-top: 1px solid rgba(255, 255, 255, 0.3);
+		border-top: 1px solid rgb(var(--act-white-rgb) / 0.18);
 	}
 
 	.faq-column details:last-child {
-		border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+		border-bottom: 1px solid rgb(var(--act-white-rgb) / 0.18);
 	}
 
 	.faq summary {
@@ -1573,9 +1643,10 @@ const faqColumns = [
 		gap: 24px;
 		cursor: pointer;
 		list-style: none;
-		font-size: 30px;
+		font-size: var(--type-body-large);
 		font-weight: 700;
-		letter-spacing: -0.025em;
+		letter-spacing: var(--tracking-copy);
+		line-height: 1.3;
 	}
 
 	.faq summary::-webkit-details-marker {
@@ -1595,25 +1666,20 @@ const faqColumns = [
 	.faq details p {
 		max-width: 570px;
 		padding: 0 42px 28px 0;
-		color: #999;
+		color: var(--act-light-text);
 		font-family: var(--font-sans);
-		font-size: 25px;
-		letter-spacing: -0.025em;
-		line-height: 1.3 !important;
+		font-size: var(--type-body-large);
+		letter-spacing: var(--tracking-copy);
+		line-height: 1.3;
 	}
 
 	.site-footer {
-		--section-stack-hold: 0px;
 		min-height: 860px;
-		margin-top: -48px;
 		padding: clamp(84px, 6vw, 112px) clamp(32px, 4.25vw, 68px) 72px;
 		position: relative;
 		overflow: hidden;
-		border-radius: var(--round) var(--round) 0 0;
 		background: var(--dark);
-		color: #fff;
-		transform: translate3d(0, var(--section-stack-hold), 0);
-		will-change: transform;
+		color: var(--act-white);
 		z-index: 10;
 	}
 
@@ -1655,9 +1721,9 @@ const faqColumns = [
 	}
 
 	.footer-about > strong {
-		color: rgba(255, 255, 255, 0.62);
-		font-size: 24px;
-		letter-spacing: -0.025em;
+		color: var(--act-light-text);
+		font-size: var(--type-body-large);
+		letter-spacing: var(--tracking-copy);
 	}
 
 	.footer-grid nav,
@@ -1676,7 +1742,7 @@ const faqColumns = [
 
 	.footer-about-copy {
 		margin-top: 24px;
-		color: rgba(255, 255, 255, 0.56);
+		color: var(--act-light-text);
 		font-weight: 400;
 	}
 
@@ -1688,25 +1754,25 @@ const faqColumns = [
 		max-width: 300px;
 		margin: 42px 0 0;
 		padding-left: 16px;
-		border-left: 1px solid rgba(255, 255, 255, 0.34);
-		color: rgba(255, 255, 255, 0.86);
-		font-size: 21px;
+		border-left: 1px solid rgb(var(--act-white-rgb) / 0.24);
+		color: var(--act-white);
+		font-size: clamp(1.125rem, 1.0938vw, 1.3125rem);
 		font-weight: 500;
-		letter-spacing: -0.025em;
+		letter-spacing: var(--tracking-copy);
 		line-height: 1.18;
 	}
 
-	.footer-quote cite {
-		display: block;
-		margin-top: 12px;
-		color: rgba(255, 255, 255, 0.5);
-		font-size: 11px;
-		font-style: normal;
-		font-weight: 700;
-		letter-spacing: 0.06em;
-		line-height: 1.3;
-		text-transform: uppercase;
-	}
+		.footer-quote cite {
+			display: block;
+			margin-top: 12px;
+			color: var(--act-muted-text);
+			font-size: 11px;
+			font-style: normal;
+			font-weight: 700;
+			letter-spacing: var(--tracking-copy);
+			line-height: 1.3;
+			text-transform: uppercase;
+		}
 
 	.footer-social {
 		align-items: flex-end;
@@ -1762,12 +1828,8 @@ const faqColumns = [
 	}
 
 	@media (max-width: 1680px) {
-		.possibility h2 {
-			font-size: 72px;
-		}
-
 		.possibility-intro {
-			font-size: 30px;
+			max-width: 1120px;
 		}
 	}
 
@@ -1782,32 +1844,10 @@ const faqColumns = [
 			font-size: 13px;
 		}
 
-		h1 {
-			font-size: 82px;
-		}
-
-		.section h2,
-		.possibility h2 {
-			font-size: 70px;
-		}
-
 		.practice-layout,
 		.governance-layout {
 			grid-template-columns: repeat(10, minmax(0, 1fr));
 			column-gap: 20px;
-		}
-
-		.practice-copy,
-		.governance-copy p {
-			font-size: 36px;
-		}
-
-		.air-copy strong {
-			font-size: 60px;
-		}
-
-		.air-copy p {
-			font-size: 38px;
 		}
 	}
 
@@ -1818,6 +1858,12 @@ const faqColumns = [
 
 		.v3-page {
 			--round: 30px;
+			--section-pad-top: 5.625rem;
+			--section-pad-bottom: 10rem;
+			--type-display: clamp(3.2rem, 8vw, 4.85rem);
+			--type-intro: clamp(1.0625rem, 2.25vw, 1.45rem);
+			--type-body-large: clamp(1rem, 2.25vw, 1.18rem);
+			--type-label: clamp(0.9375rem, 1.8vw, 1.15rem);
 		}
 
 		.site-header {
@@ -1827,7 +1873,8 @@ const faqColumns = [
 		}
 
 		.brand img {
-			width: 70px;
+			width: auto;
+			height: 42px;
 		}
 
 		.desktop-nav,
@@ -1880,8 +1927,8 @@ const faqColumns = [
 			right: -4px;
 			border: 1px solid rgba(16, 16, 15, 0.16);
 			border-radius: 8px;
-			background: #fff;
-			color: #11110f;
+			background: var(--act-white);
+			color: var(--act-black);
 			box-shadow: 0 20px 50px rgba(16, 16, 15, 0.15);
 			font-family: var(--font-sans);
 			font-size: 16px;
@@ -1891,22 +1938,8 @@ const faqColumns = [
 			min-height: 760px;
 		}
 
-		h1 {
-			font-size: 66px;
-		}
-
-		.hero-content > p {
-			font-size: 21px;
-		}
-
 		.section-inner {
 			width: min(100% - 48px, 740px);
-		}
-
-		.section h2,
-		.possibility h2,
-		.conversation h2 {
-			font-size: 58px;
 		}
 
 		.conversation h2 {
@@ -1945,16 +1978,6 @@ const faqColumns = [
 			content: " ";
 		}
 
-		.possibility,
-		.stages,
-		.practice,
-		.governance,
-		.direction,
-		.faq {
-			padding-top: 110px;
-			padding-bottom: 140px;
-		}
-
 		.stage-grid,
 		.practice-layout,
 		.governance-layout,
@@ -1969,8 +1992,13 @@ const faqColumns = [
 			margin-top: 90px;
 		}
 
+		.air-header,
 		.air-carousel {
 			grid-column: 1 / -1;
+		}
+
+		.air-header {
+			margin: 88px auto 66px;
 		}
 
 		.stage-item {
@@ -2023,7 +2051,7 @@ const faqColumns = [
 		}
 
 		.faq details:last-child {
-			border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+			border-bottom: 1px solid rgb(var(--act-white-rgb) / 0.18);
 		}
 
 		.site-footer {
@@ -2072,6 +2100,15 @@ const faqColumns = [
 	}
 
 	@media (max-width: 620px) {
+		.v3-page {
+			--section-pad-top: 5.25rem;
+			--section-pad-bottom: 6.875rem;
+			--type-display: clamp(2.8rem, 10.8vw, 3.8rem);
+			--type-intro: clamp(1rem, 3.55vw, 1.25rem);
+			--type-body-large: clamp(1rem, 3.4vw, 1.0625rem);
+			--type-label: 0.9375rem;
+		}
+
 		.hero-content,
 		.narrow-center,
 		.stage-item,
@@ -2088,14 +2125,12 @@ const faqColumns = [
 		}
 
 		h1 {
-			margin-bottom: 28px;
-			font-size: 50px;
-			line-height: 0.92;
+			margin-bottom: 30px;
+			line-height: 1.05;
 		}
 
 		.hero-content > p {
 			max-width: 360px;
-			font-size: 17px;
 		}
 
 		.section-inner {
@@ -2104,21 +2139,18 @@ const faqColumns = [
 
 		.section-label {
 			min-width: 160px;
-			margin-bottom: 42px;
-			padding: 10px 18px;
-			font-size: 13px;
+			margin-bottom: 38px;
 		}
 
 		.section h2,
 		.possibility h2,
 		.conversation h2 {
-			font-size: 42px;
-			line-height: 0.98;
+			line-height: 1.05;
 		}
 
 		.conversation h2 {
 			margin-bottom: 42px;
-			line-height: 1.05 !important;
+			line-height: 1.05;
 		}
 
 		.possibility .section-label {
@@ -2135,17 +2167,6 @@ const faqColumns = [
 
 		.section-intro {
 			margin-top: 32px;
-			font-size: 17px;
-		}
-
-		.possibility,
-		.stages,
-		.practice,
-		.governance,
-		.direction,
-		.faq {
-			padding-top: 84px;
-			padding-bottom: 110px;
 		}
 
 		.stage-grid,
@@ -2156,11 +2177,11 @@ const faqColumns = [
 		}
 
 		.stage-item h3 {
-			font-size: 22px;
+			font-size: var(--type-body-large);
 		}
 
 		.stage-item > p:last-child {
-			font-size: 16px;
+			font-size: var(--type-body-large);
 		}
 
 		.stage-item {
@@ -2177,6 +2198,15 @@ const faqColumns = [
 
 		.stage-item h3 {
 			margin-bottom: 20px;
+		}
+
+		.air-header {
+			margin-top: 72px;
+			margin-bottom: 48px;
+		}
+
+		.air-header p {
+			margin-top: 18px;
 		}
 
 		.air-panel {
@@ -2211,16 +2241,11 @@ const faqColumns = [
 		}
 
 		.air-copy strong {
-			font-size: 48px;
+			font-size: clamp(2.75rem, 10vw, 3rem);
 		}
 
 		.air-copy p {
-			font-size: 34px;
-		}
-
-		.practice-copy,
-		.governance-copy p {
-			font-size: 31px;
+			font-size: clamp(2rem, 7vw, 2.125rem);
 		}
 
 		.use-case-track {
@@ -2310,19 +2335,19 @@ const faqColumns = [
 
 		.director-grid .director-role {
 			margin-bottom: 24px;
-			font-size: 20px;
+			font-size: var(--type-body-large);
 		}
 
 		.director-grid h3 {
-			font-size: 26px;
+			font-size: var(--type-body-large);
 		}
 
 		.director-grid p {
-			font-size: 16px;
+			font-size: var(--type-body-large);
 		}
 
 		.director-grid strong {
-			font-size: 16px;
+			font-size: var(--type-body-large);
 		}
 
 		.conversation {
@@ -2332,12 +2357,10 @@ const faqColumns = [
 
 		.conversation-lead {
 			margin-bottom: 58px;
-			font-size: 27px;
 		}
 
 		.conversation-content > p:not(.section-label):not(.conversation-lead) {
 			margin-bottom: 42px;
-			font-size: 17px;
 		}
 
 		.conversation .pill {
@@ -2347,7 +2370,6 @@ const faqColumns = [
 
 		.faq summary {
 			min-height: 74px;
-			font-size: 18px;
 		}
 
 		.site-footer {
@@ -2389,12 +2411,6 @@ const faqColumns = [
 	}
 
 	@media (max-width: 720px), (pointer: coarse) and (max-width: 920px) {
-		.hero,
-		.section,
-		.site-footer {
-			transform: none !important;
-		}
-
 		.use-case-carousel {
 			width: 100%;
 			max-height: min(72svh, 620px);
@@ -2437,23 +2453,10 @@ const faqColumns = [
 			scroll-behavior: auto !important;
 			transition-duration: 0.01ms !important;
 		}
-
-		.hero,
-		.section,
-		.site-footer {
-			transform: none !important;
-		}
 	}
 </style>
 
 <script>
-	const stackedSections = [
-		...document.querySelectorAll(".v3-page main > .hero, .v3-page main > .section"),
-		...document.querySelectorAll(".v3-page > .site-footer"),
-	];
-	const stackMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-	let stackFrame = 0;
-
 	const getLayoutTop = (element) => {
 		let top = 0;
 		let node = element;
@@ -2464,50 +2467,11 @@ const faqColumns = [
 		return top;
 	};
 
-	const updateSectionStack = () => {
-		stackFrame = 0;
-		const viewportHeight = window.innerHeight;
-
-		stackedSections.forEach((section, index) => {
-			if (!(section instanceof HTMLElement)) return;
-			if (stackMotionPreference.matches) {
-				section.style.removeProperty("--section-stack-hold");
-				return;
-			}
-
-			const nextSection = stackedSections[index + 1];
-			const nextTop = nextSection instanceof HTMLElement ? getLayoutTop(nextSection) : null;
-			const transitionStart = nextTop === null ? 0 : Math.max(0, nextTop - viewportHeight);
-			const transitionDistance = nextTop === null ? 0 : nextTop - transitionStart;
-			const hold = Math.max(0, Math.min(transitionDistance, window.scrollY - transitionStart));
-			section.style.setProperty("--section-stack-hold", `${hold.toFixed(2)}px`);
-		});
-	};
-
-	const requestSectionStackUpdate = () => {
-		if (stackFrame) return;
-		stackFrame = window.requestAnimationFrame(updateSectionStack);
-	};
-
-	window.addEventListener("scroll", requestSectionStackUpdate, { passive: true });
-	window.addEventListener("resize", requestSectionStackUpdate, { passive: true });
-	window.addEventListener("load", requestSectionStackUpdate, { once: true });
-	stackMotionPreference.addEventListener("change", requestSectionStackUpdate);
-	document.fonts?.ready.then(requestSectionStackUpdate);
-	const stackResizeObserver = new ResizeObserver(requestSectionStackUpdate);
-	const stackMain = document.querySelector(".v3-page main");
-	if (stackMain) stackResizeObserver.observe(stackMain);
-	updateSectionStack();
-
 	const alignSectionTarget = (target) => {
 		const header = document.querySelector(".site-header");
 		const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
-		const sectionCurve = target.matches(".section, .site-footer")
-			? Number.parseFloat(getComputedStyle(document.querySelector(".v3-page")).getPropertyValue("--round")) || 0
-			: 0;
-		const targetTop = getLayoutTop(target) + sectionCurve - headerHeight;
+		const targetTop = getLayoutTop(target) - headerHeight;
 		window.scrollTo({ top: Math.max(0, targetTop), behavior: "auto" });
-		window.requestAnimationFrame(updateSectionStack);
 	};
 
 	document.querySelectorAll('.v3-page a[href^="#"]').forEach((anchor) => {
