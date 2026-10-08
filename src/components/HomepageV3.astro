@@ -2455,7 +2455,7 @@ const faqColumns = [
 	const alignSectionTarget = (target) => {
 		const header = document.querySelector(".site-header");
 		const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
-		const targetTop = getLayoutTop(target) - headerHeight - 16;
+		const targetTop = getLayoutTop(target) - headerHeight;
 		window.scrollTo({ top: Math.max(0, targetTop), behavior: "auto" });
 		window.requestAnimationFrame(updateSectionStack);
 	};
