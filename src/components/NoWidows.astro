@@ -1,0 +1,63 @@
+<script>
+	const textSelector = [
+		"h1",
+		"h2",
+		"h3",
+		"h4",
+		"h5",
+		"h6",
+		"p",
+		"li",
+		"blockquote",
+		"summary",
+	].join(",");
+	const skipSelector = "script, style, textarea, input, select, option, code, pre, [data-allow-widows]";
+	const keepTogether = [
+		[/\bWe steer\. AI-led\b/g, "We steer.\u00a0AI\u2011led"],
+		[/\b[Ee]xpert-driven\b/g, (match) => match.replace("-", "\u2011")],
+		[/\bAI-led\b/g, "AI\u2011led"],
+	];
+
+	const findLastTextNode = (node) => {
+		for (let index = node.childNodes.length - 1; index >= 0; index -= 1) {
+			const child = node.childNodes[index];
+			if (child.nodeType === Node.TEXT_NODE && /\S/.test(child.textContent || "")) {
+				return child;
+			}
+
+			if (child.nodeType === Node.ELEMENT_NODE && !child.matches(skipSelector)) {
+				const textNode = findLastTextNode(child);
+				if (textNode) return textNode;
+			}
+		}
+
+		return null;
+	};
+
+	const preventWidow = (element) => {
+		if (element.matches(skipSelector) || element.closest(skipSelector)) return;
+
+		element.childNodes.forEach((child) => {
+			if (child.nodeType !== Node.TEXT_NODE || !child.textContent) return;
+
+			child.textContent = keepTogether.reduce((text, [pattern, replacement]) => {
+				return text.replace(pattern, replacement);
+			}, child.textContent);
+		});
+
+		const textNode = findLastTextNode(element);
+		if (!textNode || textNode.textContent?.includes("\u00a0")) return;
+
+		textNode.textContent = textNode.textContent?.replace(/(\S+)\s+(\S+)\s*$/, "$1\u00a0$2") || "";
+	};
+
+	const applyNoWidows = () => {
+		document.querySelectorAll(textSelector).forEach(preventWidow);
+	};
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", applyNoWidows, { once: true });
+	} else {
+		applyNoWidows();
+	}
+</script>

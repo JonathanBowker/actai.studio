@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import NoWidows from "../components/NoWidows.astro";
 import SeoGuard from "../components/SeoGuard.astro";
 import { isReviewStaging } from "../lib/siteEnvironment";
 import { getCollection } from "astro:content";
@@ -55,7 +56,7 @@ const groups = [
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content="A complete directory of Act AI Studio pages, agent diagnostics and site information." />
 		<SeoGuard
@@ -74,5 +75,6 @@ const groups = [
 			<SitemapDirectorySection {groups} />
 		</main>
 		<SitemapFooterSection {bookingHref} />
+		<NoWidows />
 	</body>
 </html>

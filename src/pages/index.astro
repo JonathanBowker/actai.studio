@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import HomepageV3 from "../components/HomepageV3.astro";
+import NoWidows from "../components/NoWidows.astro";
 import SeoGuard from "../components/SeoGuard.astro";
 import ScrollToneController from "../components/sections/ScrollToneController.astro";
 ---
@@ -9,7 +10,7 @@ import ScrollToneController from "../components/sections/ScrollToneController.as
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<SeoGuard
 			path="/"
 			title="Act AI Studio | Intelligence needs direction"
@@ -21,5 +22,6 @@ import ScrollToneController from "../components/sections/ScrollToneController.as
 	<body>
 		<ScrollToneController />
 		<HomepageV3 />
+		<NoWidows />
 	</body>
 </html>

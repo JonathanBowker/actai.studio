@@ -1,5 +1,6 @@
 ---
 import "../../styles/global.css";
+import NoWidows from "../../components/NoWidows.astro";
 import SeoGuard from "../../components/SeoGuard.astro";
 import { AgentCascadeSection, AgentDiagnosisSection, AgentHeroSection, AgentPackSection, SiteHeader } from "../../components/sections";
 import { getCollection } from "astro:content";
@@ -32,7 +33,7 @@ const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index 
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content={`${agent.data.name}: a diagnostic self-help pack from Act AI Studio.`} />
 		<SeoGuard
 			path={`/agents/${agent.id}`}
@@ -183,6 +184,7 @@ const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index 
 			<AgentPackSection {agent} {zipHref} {packBase} {bookingHref} />
 		</main>
 
+		<NoWidows />
 		<script>
 			const trackPackEvent = (name, detail = {}) => {
 				window.dispatchEvent(new CustomEvent(name, { detail }));

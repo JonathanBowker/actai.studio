@@ -435,9 +435,8 @@ const faqColumns = [
 	<footer class="site-footer" id="footer">
 		<div class="footer-grid">
 			<div class="footer-primary">
-				<img src="/logos/ACT_White.svg" alt="Act." width="87" height="43" />
 				<blockquote class="footer-quote">
-					&ldquo;Just because it&rsquo;s a serious topic, it doesn&rsquo;t mean you have to be serious about the way you talk about it.&rdquo;
+					&ldquo;Just because it&rsquo;s a serious topic,<br />it doesn&rsquo;t mean you have to be serious about the way you talk&nbsp;about&nbsp;it.&rdquo;
 					<cite>John Humphrys</cite>
 				</blockquote>
 			</div>
@@ -470,20 +469,22 @@ const faqColumns = [
 <style>
 	:global(html) {
 		scroll-padding-top: 78px;
+		overflow-x: hidden;
 	}
 
 	:global(body) {
 		background: #101010;
+		overflow-x: hidden;
 	}
 
 	.v3-page {
 		--act-black: #101010;
 		--act-dark-grey: #171719;
 		--act-deep-grey: #111113;
-		--act-white: #f7f7f7;
+		--act-white: #fcfcfc;
 		--act-light-text: #8d8d95;
 		--act-muted-text: #85858d;
-		--act-white-rgb: 247 247 247;
+		--act-white-rgb: 252 252 252;
 		--act-light-rgb: 141 141 149;
 		--paper: var(--act-black);
 		--ink: var(--act-white);
@@ -514,6 +515,7 @@ const faqColumns = [
 		color: var(--ink);
 		font-family: "MG12", "Helvetica Neue", Arial, sans-serif;
 		overflow: clip;
+		max-width: 100%;
 	}
 
 	.v3-page * {
@@ -582,6 +584,8 @@ const faqColumns = [
 	.nav-cta,
 	.pill {
 		--button-font-size: 14px;
+		max-width: 100%;
+		min-width: 0;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -593,6 +597,8 @@ const faqColumns = [
 		font-size: var(--button-font-size);
 		font-weight: 700;
 		line-height: 1;
+		text-align: center;
+		white-space: normal;
 		transition: transform 180ms ease, background 180ms ease, color 180ms ease;
 	}
 
@@ -680,6 +686,7 @@ const faqColumns = [
 		font-size: var(--type-display);
 		font-weight: 700;
 		line-height: 1.05;
+		overflow-wrap: break-word;
 	}
 
 	.hero-content > p {
@@ -1019,8 +1026,11 @@ const faqColumns = [
 		padding: 8px;
 		border-radius: 9999px;
 		border: 1px solid var(--glass-rim);
-		background: var(--glass-surface);
-		box-shadow: var(--glass-shadow);
+		background: rgb(16 16 16 / 0.72);
+		box-shadow:
+			inset 0 1px 0 rgb(var(--act-white-rgb) / 0.26),
+			inset 0 -1px 0 rgb(0 0 0 / 0.26),
+			0 18px 44px rgb(0 0 0 / 0.18);
 		backdrop-filter: blur(22px) saturate(1.4);
 		position: relative;
 		z-index: 5;
@@ -1068,15 +1078,6 @@ const faqColumns = [
 		transform: translateX(calc(var(--air-active-index, 0) * 100%));
 		transition: transform 920ms cubic-bezier(0.22, 1, 0.36, 1);
 		z-index: 1;
-	}
-
-	.air-active-pill::after {
-		content: "";
-		position: absolute;
-		inset: 1px 2px;
-		border-radius: inherit;
-		background: linear-gradient(90deg, rgb(0 0 0 / 0) 0%, rgb(var(--act-white-rgb) / 0.09) 72%, rgb(var(--act-white-rgb) / 0.16) 100%);
-		pointer-events: none;
 	}
 
 	.air-dot-progress {
@@ -1317,8 +1318,11 @@ const faqColumns = [
 		padding: 8px;
 		border-radius: 9999px;
 		border: 1px solid var(--glass-rim);
-		background: var(--glass-surface);
-		box-shadow: var(--glass-shadow);
+		background: rgb(16 16 16 / 0.72);
+		box-shadow:
+			inset 0 1px 0 rgb(var(--act-white-rgb) / 0.26),
+			inset 0 -1px 0 rgb(0 0 0 / 0.26),
+			0 18px 44px rgb(0 0 0 / 0.18);
 		backdrop-filter: blur(22px) saturate(1.4);
 	}
 
@@ -1343,9 +1347,8 @@ const faqColumns = [
 	.practice-controls button:focus-visible {
 		background: rgb(40 40 44 / 0.98);
 		color: var(--act-white);
-		transform: translateY(-2px);
-		outline: 2px solid var(--act-white);
-		outline-offset: 3px;
+		transform: none;
+		outline: none;
 	}
 
 	.use-case::before {
@@ -1895,12 +1898,6 @@ const faqColumns = [
 		gap: 12px;
 	}
 
-	.footer-primary img {
-		width: 70px;
-		height: auto;
-		display: block;
-	}
-
 	.footer-about-copy {
 		margin-top: 24px;
 		color: var(--act-light-text);
@@ -1916,7 +1913,7 @@ const faqColumns = [
 
 	.footer-quote {
 		max-width: 300px;
-		margin: 42px 0 0;
+		margin: 0;
 		color: var(--act-white);
 		font-size: clamp(1.125rem, 1.0938vw, 1.3125rem);
 		font-weight: 500;
@@ -2100,7 +2097,8 @@ const faqColumns = [
 		}
 
 		.hero {
-			min-height: 760px;
+			height: auto;
+			min-height: min(760px, calc(100svh - 66px));
 		}
 
 		.section-inner {
@@ -2183,9 +2181,11 @@ const faqColumns = [
 		}
 
 		.use-case-carousel {
-			width: 100vw;
+			width: 100%;
+			left: auto;
 			margin-inline: 0;
 			grid-column: 1;
+			transform: none;
 		}
 
 		.practice-controls {
@@ -2203,7 +2203,7 @@ const faqColumns = [
 		}
 
 		.director-grid article {
-			grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1.4fr);
+			grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
 			column-gap: 48px;
 		}
 
@@ -2289,7 +2289,7 @@ const faqColumns = [
 		}
 
 		.hero {
-			min-height: 680px;
+			min-height: min(680px, calc(100svh - 66px));
 			background-position: 50% center;
 		}
 
@@ -2381,6 +2381,7 @@ const faqColumns = [
 
 		.air-controls {
 			width: 100%;
+			min-width: 0;
 			gap: 8px;
 			margin-top: 28px;
 			padding: 6px;
@@ -2395,6 +2396,7 @@ const faqColumns = [
 			height: 34px;
 			padding-inline: 8px;
 			font-size: 10px;
+			overflow-wrap: anywhere;
 		}
 
 		.air-pause {
@@ -2447,7 +2449,7 @@ const faqColumns = [
 		}
 
 		.use-case {
-			width: min(82vw, 330px);
+			width: min(100%, 330px);
 			min-height: 0;
 			padding: 24px;
 		}
@@ -2614,15 +2616,12 @@ const faqColumns = [
 	@media (max-width: 720px), (pointer: coarse) and (max-width: 920px) {
 		.use-case-carousel {
 			width: 100%;
-			max-height: min(72svh, 620px);
 			left: auto;
 			overflow-x: hidden;
-			overflow-y: auto;
+			overflow-y: visible;
 			padding: 4px;
-			scroll-snap-type: y mandatory;
-			scroll-padding-block: 4px;
-			overscroll-behavior-y: contain;
-			touch-action: pan-y;
+			scroll-snap-type: none;
+			touch-action: auto;
 			transform: none;
 		}
 
@@ -2636,8 +2635,6 @@ const faqColumns = [
 
 		.use-case {
 			width: min(100%, 360px);
-			scroll-snap-align: start;
-			scroll-snap-stop: always;
 		}
 
 		.use-case[data-practice-clone] {
@@ -2646,6 +2643,32 @@ const faqColumns = [
 
 		.practice-controls {
 			display: none;
+		}
+	}
+
+	@media (max-width: 380px) {
+		.v3-page {
+			--mobile-gutter: 18px;
+			--type-display: clamp(1.95rem, 8.8vw, 2.35rem);
+		}
+
+		.site-header {
+			padding-inline: var(--mobile-gutter);
+		}
+
+		.brand img {
+			height: 30px;
+		}
+
+		.hero-content .pill,
+		.conversation .pill {
+			min-height: 54px;
+			padding-inline: 18px;
+		}
+
+		.carousel-dots button {
+			padding-inline: 5px;
+			font-size: 9px;
 		}
 	}
 
