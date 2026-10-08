@@ -1680,6 +1680,10 @@ const faqColumns = [
 		border-top: 1px solid rgb(var(--act-white-rgb) / 0.24);
 	}
 
+	.director-grid article:last-child {
+		padding-bottom: 0;
+	}
+
 	.director-grid h3 {
 		grid-column: 1;
 		grid-row: 1;
@@ -2984,14 +2988,10 @@ const faqColumns = [
 		let pauseUntil = 0;
 		let lastTick = performance.now();
 		window.requestAnimationFrame(() => {
-			if (handheldLayout.matches) {
-				carousel.scrollLeft = 0;
-				return;
-			}
 			const firstCard = originalCards[0];
 			if (!(firstCard instanceof HTMLElement)) return;
 			const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
-			carousel.scrollLeft = (firstCard.offsetWidth + gap) * 0.48;
+			carousel.scrollLeft = handheldLayout.matches ? 0 : (firstCard.offsetWidth + gap) * 0.48;
 		});
 
 		const loopWidth = () => {
@@ -3000,7 +3000,6 @@ const faqColumns = [
 		};
 
 		const normalise = () => {
-			if (handheldLayout.matches) return;
 			const width = loopWidth();
 			if (!width) return;
 			while (carousel.scrollLeft >= width) carousel.scrollLeft -= width;
@@ -3038,6 +3037,9 @@ const faqColumns = [
 				const isVisible = bounds.top < window.innerHeight && bounds.bottom > 0;
 				if (!handheldLayout.matches && isVisible && time >= pauseUntil) {
 					carousel.scrollLeft += delta * 0.045;
+					normalise();
+				} else if (handheldLayout.matches && isVisible && time >= pauseUntil) {
+					carousel.scrollLeft += delta * 0.035;
 					normalise();
 				}
 				window.requestAnimationFrame(animatePracticeCarousel);
