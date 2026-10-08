@@ -2630,7 +2630,7 @@ const faqColumns = [
 			overflow-x: auto;
 			overflow-y: hidden;
 			padding: 4px 0;
-			scroll-snap-type: x proximity;
+			scroll-snap-type: none;
 			scroll-padding-inline: var(--mobile-gutter);
 			overscroll-behavior-x: contain;
 			touch-action: pan-x pan-y;
@@ -2994,11 +2994,14 @@ const faqColumns = [
 		const handheldLayout = window.matchMedia("(max-width: 720px), (pointer: coarse) and (max-width: 1180px)");
 		let pauseUntil = 0;
 		let lastTick = performance.now();
+		let scrollPosition = 0;
+		let interacting = false;
 		window.requestAnimationFrame(() => {
 			const firstCard = originalCards[0];
 			if (!(firstCard instanceof HTMLElement)) return;
 			const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
 			carousel.scrollLeft = handheldLayout.matches ? 0 : (firstCard.offsetWidth + gap) * 0.48;
+			scrollPosition = carousel.scrollLeft;
 		});
 
 		const loopWidth = () => {
@@ -3030,23 +3033,36 @@ const faqColumns = [
 		next?.addEventListener("click", () => moveByCard(1));
 
 		carousel.addEventListener("scroll", normalise, { passive: true });
+		carousel.addEventListener("pointerdown", () => {
+			interacting = true;
+		});
+		const endInteraction = () => {
+			if (!interacting) return;
+			interacting = false;
+			pauseUntil = performance.now() + 3200;
+		};
+		window.addEventListener("pointerup", endInteraction);
+		window.addEventListener("pointercancel", endInteraction);
+		carousel.addEventListener("wheel", () => {
+			pauseUntil = performance.now() + 3200;
+		}, { passive: true });
 
-		if (!reducedMotion.matches) {
-			const animatePracticeCarousel = (time) => {
-				const delta = Math.min(34, time - lastTick);
-				lastTick = time;
-				const bounds = carousel.getBoundingClientRect();
-				const isVisible = bounds.top < window.innerHeight && bounds.bottom > 0;
-				if (!handheldLayout.matches && isVisible && time >= pauseUntil) {
-					carousel.scrollLeft += delta * 0.045;
-					normalise();
-				} else if (handheldLayout.matches && isVisible && time >= pauseUntil) {
-					carousel.scrollLeft += delta * 0.035;
-					normalise();
-				}
-				window.requestAnimationFrame(animatePracticeCarousel);
-			};
+		const animatePracticeCarousel = (time) => {
+			const delta = Math.min(34, time - lastTick);
+			lastTick = time;
+			const bounds = carousel.getBoundingClientRect();
+			const isVisible = bounds.top < window.innerHeight && bounds.bottom > 0;
+			if (!reducedMotion.matches && !interacting && isVisible && time >= pauseUntil) {
+				// Retain fractional movement on browsers that round scrollLeft.
+				const width = loopWidth();
+				scrollPosition += delta * (handheldLayout.matches ? 0.035 : 0.045);
+				if (width) scrollPosition %= width;
+				carousel.scrollLeft = scrollPosition;
+			} else {
+				scrollPosition = carousel.scrollLeft;
+			}
 			window.requestAnimationFrame(animatePracticeCarousel);
-		}
+		};
+		window.requestAnimationFrame(animatePracticeCarousel);
 	});
 </script>
