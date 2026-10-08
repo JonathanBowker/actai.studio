@@ -284,7 +284,7 @@ const faqColumns = [
 							{airSlides.map((slide, index) => (
 								<button type="button" aria-label={`Show frame ${index + 1}: ${slide.navName}`} aria-controls={`air-slide-${index + 1}`} aria-pressed={index === 0 ? "true" : "false"} data-air-dot>
 									<span class="air-nav-label">
-										<span>{slide.navNumber}</span>
+										<span class="air-nav-number">{slide.navNumber}</span>
 										{slide.navName && <span class="air-nav-name">{slide.navName}</span>}
 									</span>
 								</button>
@@ -2723,6 +2723,7 @@ const faqColumns = [
 		.director-grid { gap: 24px; }
 	}
 	@media (max-width: 620px) {
+		.air-nav-number { display: none; }
 		.practice-layout,
 		.governance-layout { margin-top: 32px; }
 		.director-grid { gap: 0; }
