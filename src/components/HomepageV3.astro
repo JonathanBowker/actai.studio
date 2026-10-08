@@ -1026,7 +1026,7 @@ const faqColumns = [
 	}
 
 	.air-controls {
-		width: min(100%, 660px);
+		width: min(100%, 560px);
 		max-width: 100%;
 		display: flex;
 		align-items: center;
@@ -1058,7 +1058,10 @@ const faqColumns = [
 	.carousel-dots button {
 		min-width: 0;
 		height: 40px;
-		padding: 0 14px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0 10px;
 		border: 0;
 		border-radius: 9999px;
 		background: transparent;
@@ -1104,8 +1107,15 @@ const faqColumns = [
 		white-space: nowrap;
 	}
 
+	.air-nav-label {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 5px;
+	}
+
 	.air-nav-name {
-		margin-left: 5px;
+		margin-left: 0;
 	}
 
 	.carousel-dots button[data-active="true"] {
@@ -2410,7 +2420,7 @@ const faqColumns = [
 			min-width: 0;
 			height: 34px;
 			padding-inline: 8px;
-			font-size: 10px;
+			font-size: 12px;
 			overflow-wrap: anywhere;
 		}
 
@@ -2690,7 +2700,7 @@ const faqColumns = [
 
 		.carousel-dots button {
 			padding-inline: 5px;
-			font-size: 9px;
+			font-size: 11px;
 		}
 	}
 
@@ -2725,6 +2735,8 @@ const faqColumns = [
 	}
 	@media (max-width: 620px) {
 		.air-nav-number { display: none; }
+		.air-nav-label { gap: 0; }
+		.air-controls { width: min(100%, 360px); gap: 4px; padding: 4px; box-sizing: border-box; }
 		.stage-item > p:last-child,
 		.director-grid p,
 		.director-grid strong {
