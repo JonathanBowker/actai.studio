@@ -69,6 +69,7 @@ const useCases = [
 	},
 	{
 		sector: "Risk & compliance",
+		agentTitleLines: ["Risk & compliance", "Expert"],
 		title: "Clear review points, evidence and escalation.",
 		titleLines: ["Clear review points", "evidence and", "escalation."],
 		image: "/images/use-case-art/portrait_03-turquoise-contour.png",
@@ -98,6 +99,7 @@ const useCases = [
 	},
 	{
 		sector: "Land & estates",
+		agentTitleLines: ["Land & estates", "Agent"],
 		title: "Make estate knowledge easier to act on.",
 		titleLines: ["Make estate", "knowledge easier", "to act on."],
 		image: "/images/use-case-art/portrait_04.png",
@@ -325,7 +327,7 @@ const faqColumns = [
 									<div class="use-case-art" aria-hidden="true">
 										{"video" in useCase && <video class="use-case-video" src={useCase.video} poster={useCase.image} muted loop playsinline preload="metadata" />}
 									</div>
-									<div class="use-case-meta"><div class="use-case-agent-title">{useCase.sector.includes(" & ") ? <>{useCase.sector.split(" & ")[0]} &<span class="use-case-agent-line">{useCase.sector.split(" & ")[1]} Agent</span></> : <>Professional<span class="use-case-agent-line">Services Agent</span></>}</div><span class="use-case-count">{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
+									<div class="use-case-meta"><div class="use-case-agent-title">{"agentTitleLines" in useCase ? <>{useCase.agentTitleLines[0]}<span class="use-case-agent-line">{useCase.agentTitleLines[1]}</span></> : useCase.sector.includes(" & ") ? <>{useCase.sector.split(" & ")[0]} &<span class="use-case-agent-line">{useCase.sector.split(" & ")[1]} Agent</span></> : <>Professional<span class="use-case-agent-line">Services Agent</span></>}</div><span class="use-case-count">{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
 									<div class="use-case-body">
 										<h3>{useCase.title}</h3>
 									</div>
