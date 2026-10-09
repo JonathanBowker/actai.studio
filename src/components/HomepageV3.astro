@@ -80,6 +80,7 @@ const useCases = [
 		strongOverlay: true,
 		accent: "#7452ff",
 		position: "50% 0%",
+		artOffsetY: "4%",
 		details: ["Asset context", "Maintenance records", "Local rules"],
 	},
 	{
@@ -332,7 +333,7 @@ const faqColumns = [
 						<div class="use-case-track" data-practice-track>
 							{useCases.map((useCase, index) => (
 								<article class:list={["use-case", { "use-case--extended": "artScale" in useCase, "use-case--strong-overlay": "strongOverlay" in useCase && useCase.strongOverlay }]} style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image});--image-size:${"imageSize" in useCase ? useCase.imageSize : "cover"};--art-scale:${"artScale" in useCase ? useCase.artScale : 1};--art-offset-x:${"artOffsetX" in useCase ? useCase.artOffsetX : "0%"}`}>
-									<div class="use-case-art" aria-hidden="true">
+									<div class="use-case-art" style={`--art-offset-y:${"artOffsetY" in useCase ? useCase.artOffsetY : "0%"}`} aria-hidden="true">
 										{"video" in useCase && <video class="use-case-video" src={useCase.video} style={`--video-scale:${"videoScale" in useCase ? useCase.videoScale : 1}`} data-playback-rate={"videoPlaybackRate" in useCase ? useCase.videoPlaybackRate : 1.5} poster={useCase.image} muted loop playsinline preload="metadata" />}
 									</div>
 									<div class="use-case-meta"><div class="use-case-agent-title">{"agentTitleLines" in useCase ? <>{useCase.agentTitleLines[0]}<span class="use-case-agent-line">{useCase.agentTitleLines[1]}</span></> : useCase.sector.includes(" & ") ? <>{useCase.sector.split(" & ")[0]} &<span class="use-case-agent-line">{useCase.sector.split(" & ")[1]} Agent</span></> : <>Professional<span class="use-case-agent-line">Services Agent</span></>}</div><span class="use-case-count">{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
@@ -1403,6 +1404,10 @@ const faqColumns = [
 		z-index: -1;
 	}
 
+	.use-case--strong-overlay {
+		background-color: #d5dfc4;
+	}
+
 	.use-case--strong-overlay::before {
 		background: linear-gradient(180deg, rgb(0 0 0 / 0.48), rgb(0 0 0 / 0.08) 28%, rgb(0 0 0 / 0.16) 42%, rgb(0 0 0 / 0.72) 68%, rgb(0 0 0 / 0.88) 100%);
 	}
@@ -1430,7 +1435,7 @@ const faqColumns = [
 		background-size: var(--image-size);
 		filter: saturate(1.08);
 		opacity: 1;
-		transform: translateX(var(--art-offset-x)) scale(var(--art-scale));
+		transform: translate(var(--art-offset-x), var(--art-offset-y, 0%)) scale(var(--art-scale));
 		transform-origin: center;
 		transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1), filter 700ms ease;
 		will-change: transform;
