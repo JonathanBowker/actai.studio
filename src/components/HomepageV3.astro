@@ -119,6 +119,7 @@ const useCases = [
 		title: "Make estate knowledge easier to act on.",
 		titleLines: ["Make estate", "knowledge easier", "to act on."],
 		image: "/images/use-case-art/portrait-06-stone.png",
+		strongOverlay: true,
 		accent: "#7452ff",
 		position: "50% 0%",
 		details: ["Asset context", "Maintenance records", "Local rules"],
@@ -330,7 +331,7 @@ const faqColumns = [
 					<div class="use-case-carousel" aria-label="Business use cases" aria-roledescription="carousel" data-practice-carousel>
 						<div class="use-case-track" data-practice-track>
 							{useCases.map((useCase, index) => (
-								<article class:list={["use-case", { "use-case--extended": "artScale" in useCase }]} style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image});--image-size:${"imageSize" in useCase ? useCase.imageSize : "cover"};--art-scale:${"artScale" in useCase ? useCase.artScale : 1};--art-offset-x:${"artOffsetX" in useCase ? useCase.artOffsetX : "0%"}`}>
+								<article class:list={["use-case", { "use-case--extended": "artScale" in useCase, "use-case--strong-overlay": "strongOverlay" in useCase && useCase.strongOverlay }]} style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image});--image-size:${"imageSize" in useCase ? useCase.imageSize : "cover"};--art-scale:${"artScale" in useCase ? useCase.artScale : 1};--art-offset-x:${"artOffsetX" in useCase ? useCase.artOffsetX : "0%"}`}>
 									<div class="use-case-art" aria-hidden="true">
 										{"video" in useCase && <video class="use-case-video" src={useCase.video} style={`--video-scale:${"videoScale" in useCase ? useCase.videoScale : 1}`} data-playback-rate={"videoPlaybackRate" in useCase ? useCase.videoPlaybackRate : 1.5} poster={useCase.image} muted loop playsinline preload="metadata" />}
 									</div>
@@ -1400,6 +1401,10 @@ const faqColumns = [
 		inset: 0;
 		background: linear-gradient(180deg, rgb(0 0 0 / 0.12), transparent 20%, transparent 60%, rgb(0 0 0 / 0.65) 100%);
 		z-index: -1;
+	}
+
+	.use-case--strong-overlay::before {
+		background: linear-gradient(180deg, rgb(0 0 0 / 0.48), rgb(0 0 0 / 0.08) 28%, rgb(0 0 0 / 0.16) 42%, rgb(0 0 0 / 0.72) 68%, rgb(0 0 0 / 0.88) 100%);
 	}
 
 	.use-case--extended::after {
