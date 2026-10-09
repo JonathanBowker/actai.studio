@@ -325,7 +325,7 @@ const faqColumns = [
 									<div class="use-case-art" aria-hidden="true">
 										{"video" in useCase && <video class="use-case-video" src={useCase.video} poster={useCase.image} muted loop playsinline preload="metadata" />}
 									</div>
-									<div class="use-case-meta"><span>{useCase.sector} Agent</span><span>{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
+									<div class="use-case-meta"><span class="use-case-agent-title">{useCase.sector.includes(" & ") ? <>{useCase.sector.split(" & ")[0]} &<span class="use-case-agent-line">{useCase.sector.split(" & ")[1]} Agent</span></> : <>Professional<span class="use-case-agent-line">Services Agent</span></>}</span><span>{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
 									<div class="use-case-body">
 										<h3>{useCase.title}</h3>
 									</div>
@@ -1428,15 +1428,19 @@ const faqColumns = [
 		line-height: 1.2;
 	}
 
-	.use-case-meta span:last-child {
+	.use-case-meta > span:last-child {
 		flex-shrink: 0;
 	}
 
-	.use-case-meta span:first-child {
+	.use-case-meta > span:first-child {
 		font-weight: 700;
 	}
 
-	.use-case-meta span:last-child {
+	.use-case-agent-line::before {
+		content: " ";
+	}
+
+	.use-case-meta > span:last-child {
 		padding: 6px 10px;
 		font-size: 11px;
 		border: 1px solid rgb(var(--act-white-rgb) / 0.16);
@@ -2777,6 +2781,10 @@ const faqColumns = [
 		.practice-controls button { width: 30px; height: 30px; font-size: 16px; }
 		.use-case { padding: 20px; }
 		.use-case-meta { font-size: 10px; }
+		.use-case-meta { align-items: flex-start; }
+		.use-case-agent-title { min-height: 2.4em; }
+		.use-case-agent-line { display: block; white-space: nowrap; }
+		.use-case-agent-line::before { content: none; }
 		.use-case-body p { font-size: 12px; min-height: 24px; margin-bottom: 26px; }
 		.use-case-body h3 { font-size: 19px; line-height: 1.2; }
 		.use-case-details { grid-template-rows: repeat(2, 23px); margin-top: 12px; }
