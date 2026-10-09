@@ -1401,23 +1401,29 @@ const faqColumns = [
 	.portrait-slice {
 		position: absolute;
 		inset: 0;
+		clip-path: polygon(var(--slice-left) 0, var(--slice-right) 0, var(--slice-right) 100%, var(--slice-left) 100%);
+		pointer-events: none;
+	}
+
+	.portrait-slice::before {
+		content: "";
+		position: absolute;
+		inset: 0;
 		background-image: var(--image);
 		background-position: var(--position);
 		background-repeat: no-repeat;
 		background-size: cover;
-		clip-path: polygon(var(--slice-left) 0, var(--slice-right) 0, var(--slice-right) 100%, var(--slice-left) 100%);
-		pointer-events: none;
 		animation: portrait-slice-drift 7s ease-in-out var(--slice-delay) infinite;
 		animation-play-state: paused;
 	}
 
-	.use-case[data-in-view="true"] .portrait-slice {
+	.use-case[data-in-view="true"] .portrait-slice::before {
 		animation-play-state: running;
 	}
 
 	@keyframes portrait-slice-drift {
-		0%, 100% { transform: translateX(0); }
-		50% { transform: translateX(var(--slice-shift)); }
+		0%, 100% { transform: translateX(0) scale(1.03); }
+		50% { transform: translateX(var(--slice-shift)) scale(1.03); }
 	}
 
 	@media (hover: hover) and (pointer: fine) {
@@ -2719,7 +2725,7 @@ const faqColumns = [
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.portrait-slice { animation: none; }
+		.portrait-slice::before { animation: none; }
 		* {
 			scroll-behavior: auto !important;
 			transition-duration: 0.01ms !important;
