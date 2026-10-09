@@ -63,6 +63,9 @@ const useCases = [
 		title: "Operational knowledge, exactly where the team needs it.",
 		titleLines: ["Operational knowledge", "exactly where the", "team needs it."],
 		image: "/images/use-case-art/portrait-01-porcelain.png",
+		video: "/videos/card-01-porcelain-smooth.mp4",
+		videoPlaybackRate: 1,
+		videoScale: 1.35,
 		imageSize: "auto 170%",
 		accent: "#6d42ff",
 		position: "50% 18%",
@@ -330,7 +333,7 @@ const faqColumns = [
 							{useCases.map((useCase, index) => (
 								<article class:list={["use-case", { "use-case--extended": "artScale" in useCase }]} style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image});--image-size:${"imageSize" in useCase ? useCase.imageSize : "cover"};--art-scale:${"artScale" in useCase ? useCase.artScale : 1};--art-offset-x:${"artOffsetX" in useCase ? useCase.artOffsetX : "0%"}`}>
 									<div class="use-case-art" aria-hidden="true">
-										{"video" in useCase && <video class="use-case-video" src={useCase.video} data-playback-rate={"videoPlaybackRate" in useCase ? useCase.videoPlaybackRate : 1.5} poster={useCase.image} muted loop playsinline preload="metadata" />}
+										{"video" in useCase && <video class="use-case-video" src={useCase.video} style={`--video-scale:${"videoScale" in useCase ? useCase.videoScale : 1}`} data-playback-rate={"videoPlaybackRate" in useCase ? useCase.videoPlaybackRate : 1.5} poster={useCase.image} muted loop playsinline preload="metadata" />}
 									</div>
 									<div class="use-case-meta"><div class="use-case-agent-title">{"agentTitleLines" in useCase ? <>{useCase.agentTitleLines[0]}<span class="use-case-agent-line">{useCase.agentTitleLines[1]}</span></> : useCase.sector.includes(" & ") ? <>{useCase.sector.split(" & ")[0]} &<span class="use-case-agent-line">{useCase.sector.split(" & ")[1]} Agent</span></> : <>Professional<span class="use-case-agent-line">Services Agent</span></>}</div><span class="use-case-count">{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
 									<div class="use-case-body">
@@ -1436,6 +1439,8 @@ const faqColumns = [
 		height: 100%;
 		object-fit: cover;
 		object-position: var(--position);
+		transform: scale(var(--video-scale, 1));
+		transform-origin: var(--position);
 	}
 
 	@media (hover: hover) and (pointer: fine) {
