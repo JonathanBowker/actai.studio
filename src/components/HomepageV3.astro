@@ -226,9 +226,7 @@ const faqColumns = [
 
 	<main id="top">
 		<section class="hero image-section" aria-labelledby="hero-heading">
-			<video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="/images/website-v3-governance.webp" aria-hidden="true">
-				<source src="/videos/hero-shadow-eyes.mp4" type="video/mp4" />
-			</video>
+			<img class="hero-image" src="/images/hero-porcelain.png" alt="" width="4344" height="5792" fetchpriority="high" aria-hidden="true" />
 			<div class="hero-content">
 				<h1 id="hero-heading">Intelligence<br />needs direction.</h1>
 				<p>Act AI Studio finds where your business creates value and shapes AI to accelerate the delivery of it.</p>
@@ -667,13 +665,13 @@ const faqColumns = [
 		z-index: -1;
 	}
 
-	.hero-video {
+	.hero-image {
 		width: 100%;
 		height: 100%;
 		position: absolute;
 		inset: 0;
 		object-fit: cover;
-		object-position: center;
+		object-position: center top;
 		z-index: -2;
 	}
 
