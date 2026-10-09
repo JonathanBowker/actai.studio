@@ -733,6 +733,16 @@ const faqColumns = [
 		z-index: 5;
 	}
 
+	@media (min-width: 721px) and (pointer: fine) {
+		.use-case-agent-title { font-size: 13px; }
+		.use-case-details span { font-size: 12px; padding: 6px; }
+	}
+
+	@media (min-width: 1600px) and (pointer: fine) {
+		.use-case-details { grid-template-rows: repeat(2, 30px); }
+		.use-case-details span { font-size: 13px; padding: 6px 8px; }
+	}
+
 	.governance {
 		z-index: 6;
 	}
