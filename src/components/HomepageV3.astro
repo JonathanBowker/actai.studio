@@ -325,7 +325,7 @@ const faqColumns = [
 									<div class="use-case-art" aria-hidden="true">
 										{"video" in useCase && <video class="use-case-video" src={useCase.video} poster={useCase.image} muted loop playsinline preload="metadata" />}
 									</div>
-									<div class="use-case-meta"><span>{useCase.sector}</span><span>{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
+									<div class="use-case-meta"><span>{useCase.sector} Agent</span><span>{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
 									<div class="use-case-body">
 										<h3>{useCase.title}</h3>
 									</div>
@@ -1432,6 +1432,10 @@ const faqColumns = [
 		flex-shrink: 0;
 	}
 
+	.use-case-meta span:first-child {
+		font-weight: 700;
+	}
+
 	.use-case-meta span:last-child {
 		padding: 6px 10px;
 		font-size: 11px;
@@ -1465,7 +1469,7 @@ const faqColumns = [
 		max-width: 100%;
 		margin: 0 auto;
 		font-size: 21px;
-		font-weight: 500;
+		font-weight: 700;
 		line-height: 1.15;
 		text-wrap: balance;
 	}
