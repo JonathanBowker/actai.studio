@@ -320,11 +320,7 @@ const faqColumns = [
 						<div class="use-case-track" data-practice-track>
 							{useCases.map((useCase, index) => (
 								<article class="use-case" style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image})`}>
-									<div class="use-case-art" aria-hidden="true">
-										{Array.from({ length: 10 }, (_, slice) => (
-											<span class="portrait-slice" style={`--slice-left:${slice * 10}%;--slice-right:${(slice + 1) * 10}%;--slice-delay:${-(slice * 0.7 + index * 0.4)}s;--slice-shift:${slice % 2 === 0 ? 4 : -4}px;`} />
-										))}
-									</div>
+									<div class="use-case-art" aria-hidden="true"></div>
 									<div class="use-case-meta"><span>{useCase.sector}</span><span>{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
 									<div class="use-case-body">
 										<h3>{useCase.title}</h3>
@@ -1396,34 +1392,6 @@ const faqColumns = [
 		transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1), filter 700ms ease;
 		will-change: transform;
 		z-index: -2;
-	}
-
-	.portrait-slice {
-		position: absolute;
-		inset: 0;
-		clip-path: polygon(var(--slice-left) 0, var(--slice-right) 0, var(--slice-right) 100%, var(--slice-left) 100%);
-		pointer-events: none;
-	}
-
-	.portrait-slice::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		background-image: var(--image);
-		background-position: var(--position);
-		background-repeat: no-repeat;
-		background-size: cover;
-		animation: portrait-slice-drift 7s ease-in-out var(--slice-delay) infinite;
-		animation-play-state: paused;
-	}
-
-	.use-case[data-in-view="true"] .portrait-slice::before {
-		animation-play-state: running;
-	}
-
-	@keyframes portrait-slice-drift {
-		0%, 100% { transform: translateX(0) scale(1.03); }
-		50% { transform: translateX(var(--slice-shift)) scale(1.03); }
 	}
 
 	@media (hover: hover) and (pointer: fine) {
@@ -2725,7 +2693,6 @@ const faqColumns = [
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.portrait-slice::before { animation: none; }
 		* {
 			scroll-behavior: auto !important;
 			transition-duration: 0.01ms !important;
@@ -3088,14 +3055,6 @@ const faqColumns = [
 		});
 
 		const controls = carousel.parentElement;
-		const portraitVisibility = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				if (entry.target instanceof HTMLElement) {
-					entry.target.dataset.inView = String(entry.isIntersecting);
-				}
-			});
-		}, { threshold: 0.1 });
-		track.querySelectorAll(".use-case").forEach((card) => portraitVisibility.observe(card));
 		const previous = controls?.querySelector("[data-practice-previous]");
 		const next = controls?.querySelector("[data-practice-next]");
 		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
