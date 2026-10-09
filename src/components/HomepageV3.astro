@@ -65,8 +65,8 @@ const useCases = [
 		image: "/images/use-case-art/portrait-01-porcelain.png",
 		video: "/videos/card-01-porcelain-smooth.mp4",
 		videoPlaybackRate: 1,
-		videoScale: 1.1,
-		imageSize: "auto 140%",
+		videoScale: 1.35,
+		imageSize: "auto 170%",
 		accent: "#6d42ff",
 		position: "50% 18%",
 		details: ["Production context", "Shift handovers", "Supplier actions"],
@@ -77,10 +77,11 @@ const useCases = [
 		title: "Make estate knowledge easier to act on.",
 		titleLines: ["Make estate", "knowledge easier", "to act on."],
 		image: "/images/use-case-art/portrait-06-stone.png",
+		artScale: 0.8,
 		strongOverlay: true,
 		accent: "#7452ff",
 		position: "50% 0%",
-		artOffsetY: "4%",
+		artOffsetY: "0%",
 		details: ["Asset context", "Maintenance records", "Local rules"],
 	},
 	{
@@ -101,6 +102,7 @@ const useCases = [
 		title: "Keep reporting moving without losing control.",
 		titleLines: ["Keep reporting", "moving without", "losing control."],
 		image: "/images/use-case-art/portrait_07.png",
+		imageSize: "auto 105%",
 		accent: "#dd3295",
 		position: "50% 42%",
 		details: ["Board packs", "Variance notes", "Approval trails"],
@@ -121,8 +123,9 @@ const useCases = [
 		title: "Expert context, ready for the next brief.",
 		titleLines: ["Expert context", "ready for the", "next brief."],
 		image: "/images/use-case-art/portrait_02-neon-dreamscape-v2.png",
+		imageSize: "auto 120%",
 		accent: "#2548ff",
-		position: "50% 50%",
+		position: "50% 65%",
 		details: ["Brief context", "Expert handovers", "Client decisions"],
 	},
 	{
@@ -130,9 +133,10 @@ const useCases = [
 		title: "Turn product knowledge into better support.",
 		titleLines: ["Turn product", "knowledge into", "better support."],
 		image: "/images/use-case-art/portrait-07-iridescent.png",
+		imageSize: "auto 115%",
 		artOffsetY: "4%",
 		accent: "#3158ff",
-		position: "50% 42%",
+		position: "50% 20%",
 		details: ["Product notes", "Support patterns", "Release context"],
 	},
 	{
@@ -140,8 +144,9 @@ const useCases = [
 		title: "Make delivery knowledge repeatable.",
 		titleLines: ["Make delivery", "knowledge", "repeatable."],
 		image: "/images/use-case-art/portrait_03.png",
+		imageSize: "auto 115%",
 		accent: "#ba38bc",
-		position: "50% calc(42% - 24px)",
+		position: "50% 85%",
 		details: ["Delivery playbooks", "Client context", "Repeatable steps"],
 	},
 ];
@@ -1406,6 +1411,7 @@ const faqColumns = [
 	}
 
 	.use-case--strong-overlay {
+		--portrait-fill: #d5dfc4;
 		background-color: #d5dfc4;
 	}
 
@@ -1417,7 +1423,7 @@ const faqColumns = [
 		content: "";
 		position: absolute;
 		inset: 0;
-		background: #000807;
+		background: var(--portrait-fill, #000807);
 		z-index: -3;
 	}
 
