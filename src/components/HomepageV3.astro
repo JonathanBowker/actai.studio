@@ -325,7 +325,7 @@ const faqColumns = [
 									<div class="use-case-art" aria-hidden="true">
 										{"video" in useCase && <video class="use-case-video" src={useCase.video} poster={useCase.image} muted loop playsinline preload="metadata" />}
 									</div>
-									<div class="use-case-meta"><span class="use-case-agent-title">{useCase.sector.includes(" & ") ? <>{useCase.sector.split(" & ")[0]} &<span class="use-case-agent-line">{useCase.sector.split(" & ")[1]} Agent</span></> : <>Professional<span class="use-case-agent-line">Services Agent</span></>}</span><span>{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
+									<div class="use-case-meta"><div class="use-case-agent-title">{useCase.sector.includes(" & ") ? <>{useCase.sector.split(" & ")[0]} &<span class="use-case-agent-line">{useCase.sector.split(" & ")[1]} Agent</span></> : <>Professional<span class="use-case-agent-line">Services Agent</span></>}</div><span class="use-case-count">{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
 									<div class="use-case-body">
 										<h3>{useCase.title}</h3>
 									</div>
@@ -1428,11 +1428,11 @@ const faqColumns = [
 		line-height: 1.2;
 	}
 
-	.use-case-meta > span:last-child {
+	.use-case-count {
 		flex-shrink: 0;
 	}
 
-	.use-case-meta > span:first-child {
+	.use-case-agent-title {
 		font-weight: 700;
 	}
 
@@ -1440,7 +1440,7 @@ const faqColumns = [
 		content: " ";
 	}
 
-	.use-case-meta > span:last-child {
+	.use-case-count {
 		padding: 6px 10px;
 		font-size: 11px;
 		border: 1px solid rgb(var(--act-white-rgb) / 0.16);
