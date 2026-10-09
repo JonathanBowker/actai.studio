@@ -3087,6 +3087,10 @@ const faqColumns = [
 		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 		const handheldLayout = window.matchMedia("(max-width: 720px), (pointer: coarse) and (max-width: 1180px)");
 		const cardVideos = [...track.querySelectorAll("video")];
+		cardVideos.forEach((video) => {
+			video.defaultPlaybackRate = 1.5;
+			video.playbackRate = 1.5;
+		});
 		const videoVisibility = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
 				const video = entry.target;
