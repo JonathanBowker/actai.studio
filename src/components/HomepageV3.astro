@@ -1460,8 +1460,8 @@ const faqColumns = [
 	}
 
 	.use-case-details {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		display: flex;
+		flex-wrap: wrap;
 		gap: 5px;
 		align-items: start;
 		margin-top: 20px;
@@ -1474,7 +1474,8 @@ const faqColumns = [
 	}
 
 	.use-case-details span {
-		justify-self: start;
+		flex: 0 0 auto;
+		white-space: nowrap;
 		max-width: 100%;
 		padding: 5px 8px;
 		border: 1px solid rgb(var(--act-white-rgb) / 0.16);
