@@ -321,10 +321,9 @@ const faqColumns = [
 							{useCases.map((useCase, index) => (
 								<article class="use-case" style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image})`}>
 									<div class="use-case-art" aria-hidden="true"></div>
-									<div class="use-case-meta"><span>Use case</span><span>{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
+									<div class="use-case-meta"><span>{useCase.sector}</span><span>{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
 									<div class="use-case-body">
-										<p>{useCase.sector}</p>
-										<h3 aria-label={useCase.title}>{useCase.titleLines.map((line) => <span>{line}</span>)}</h3>
+										<h3>{useCase.title}</h3>
 									</div>
 									<div class="use-case-details">
 										{useCase.details.map((detail) => <span>{detail}</span>)}
@@ -1374,9 +1373,7 @@ const faqColumns = [
 		content: "";
 		position: absolute;
 		inset: 0;
-		background:
-			linear-gradient(180deg, rgba(6, 15, 24, 0.52) 0%, rgba(6, 15, 24, 0.05) 36%, rgba(6, 15, 24, 0.08) 56%, rgba(6, 15, 24, 0.56) 100%),
-			color-mix(in srgb, var(--accent) 12%, rgba(182, 217, 230, 0.18));
+		background: linear-gradient(180deg, rgb(0 0 0 / 0.12), transparent 20%, transparent 60%, rgb(0 0 0 / 0.65) 100%);
 		z-index: -1;
 	}
 
@@ -1388,8 +1385,8 @@ const faqColumns = [
 		background-position: var(--position);
 		background-repeat: no-repeat;
 		background-size: cover;
-		filter: contrast(1.08) saturate(1.12);
-		opacity: 0.96;
+		filter: saturate(1.08);
+		opacity: 1;
 		transform: scale(1);
 		transform-origin: var(--position);
 		transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1), filter 700ms ease;
@@ -1399,8 +1396,8 @@ const faqColumns = [
 
 	@media (hover: hover) and (pointer: fine) {
 		.use-case:hover .use-case-art {
-			filter: contrast(1.12) saturate(1.2);
-			transform: scale(1.2);
+			filter: saturate(1.12);
+			transform: scale(1.04);
 		}
 	}
 
@@ -1412,6 +1409,13 @@ const faqColumns = [
 		font-size: 13px;
 		line-height: 1;
 		text-transform: uppercase;
+		gap: 12px;
+		font-size: 10px;
+		line-height: 1.2;
+	}
+
+	.use-case-meta span:last-child {
+		flex-shrink: 0;
 	}
 
 	.use-case-meta span:last-child {
@@ -1425,11 +1429,8 @@ const faqColumns = [
 	}
 
 	.use-case-body {
-		position: absolute;
-		top: 18%;
-		left: 30px;
-		right: 30px;
-		text-align: center;
+		margin-top: auto;
+		text-align: left;
 	}
 
 	.use-case-body p {
@@ -1448,14 +1449,10 @@ const faqColumns = [
 	.use-case-body h3 {
 		max-width: 100%;
 		margin: 0 auto;
-		display: -webkit-box;
-		overflow: hidden;
-		font-size: clamp(1.75rem, 1.65vw, 2.25rem);
+		font-size: 18px;
 		font-weight: 500;
-		line-height: 0.98;
+		line-height: 1.15;
 		text-wrap: balance;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 3;
 	}
 
 	.use-case-body h3 span {
@@ -1463,10 +1460,11 @@ const faqColumns = [
 	}
 
 	.use-case-details {
-		display: grid;
+		display: flex;
+		flex-wrap: wrap;
 		gap: 5px;
 		align-items: start;
-		margin-top: auto;
+		margin-top: 10px;
 		padding: 0;
 		border: 0;
 		border-radius: 0;
@@ -1478,14 +1476,14 @@ const faqColumns = [
 	.use-case-details span {
 		justify-self: start;
 		max-width: 100%;
-		padding: 7px 10px;
+		padding: 5px 8px;
 		border: 1px solid rgb(var(--act-white-rgb) / 0.16);
 		border-radius: 9999px;
 		background: linear-gradient(135deg, rgb(var(--act-white-rgb) / 0.14), rgb(var(--act-white-rgb) / 0.06));
 		box-shadow: inset 0 1px 0 rgb(var(--act-white-rgb) / 0.14), 0 3px 8px rgba(2, 10, 20, 0.06);
 		backdrop-filter: blur(20px) saturate(1.35);
 		font-family: var(--font-sans);
-		font-size: 11px;
+		font-size: 10px;
 		line-height: 1.1;
 	}
 
@@ -2497,7 +2495,7 @@ const faqColumns = [
 		}
 
 		.use-case-body h3 {
-			font-size: 28px;
+			font-size: 16px;
 		}
 
 		.use-case-body {
@@ -2588,7 +2586,6 @@ const faqColumns = [
 			padding-inline: 20px;
 		}
 
-		.use-case-body,
 		.carousel-dots,
 		.air-copy {
 			text-align: center;
@@ -2750,9 +2747,9 @@ const faqColumns = [
 	@media (max-width: 720px), (pointer: coarse) and (max-width: 1180px) {
 		.use-case-carousel { margin-top: 32px; }
 		.use-case { padding: 16px; }
-		.use-case-body { top: 17%; left: 16px; right: 16px; }
+		.use-case-meta { font-size: 10px; }
 		.use-case-body p { font-size: 12px; min-height: 24px; margin-bottom: 26px; }
-		.use-case-body h3 { font-size: clamp(20px, 5.5vw, 24px); line-height: 1.05; }
+		.use-case-body h3 { font-size: 16px; line-height: 1.15; }
 	}
 	@media (max-width: 620px) {
 		.air-panel { aspect-ratio: 1; }
