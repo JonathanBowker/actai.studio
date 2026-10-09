@@ -326,7 +326,7 @@ const faqColumns = [
 					<div class="use-case-carousel" aria-label="Business use cases" aria-roledescription="carousel" data-practice-carousel>
 						<div class="use-case-track" data-practice-track>
 							{useCases.map((useCase, index) => (
-								<article class="use-case" style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image});--art-scale:${"artScale" in useCase ? useCase.artScale : 1};--art-offset-x:${"artOffsetX" in useCase ? useCase.artOffsetX : "0%"}`}>
+								<article class:list={["use-case", { "use-case--extended": "artScale" in useCase }]} style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image});--art-scale:${"artScale" in useCase ? useCase.artScale : 1};--art-offset-x:${"artOffsetX" in useCase ? useCase.artOffsetX : "0%"}`}>
 									<div class="use-case-art" aria-hidden="true">
 										{"video" in useCase && <video class="use-case-video" src={useCase.video} data-playback-rate={"videoPlaybackRate" in useCase ? useCase.videoPlaybackRate : 1.5} poster={useCase.image} muted loop playsinline preload="metadata" />}
 									</div>
@@ -1385,6 +1385,19 @@ const faqColumns = [
 		inset: 0;
 		background: linear-gradient(180deg, rgb(0 0 0 / 0.12), transparent 20%, transparent 60%, rgb(0 0 0 / 0.65) 100%);
 		z-index: -1;
+	}
+
+	.use-case--extended::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: #000807 var(--image) left top / 1500% auto no-repeat;
+		z-index: -3;
+	}
+
+	.use-case--extended .use-case-art {
+		mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent), linear-gradient(to bottom, transparent, black 6%, black 90%, transparent);
+		mask-composite: intersect;
 	}
 
 	.use-case-art {
