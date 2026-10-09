@@ -1460,11 +1460,11 @@ const faqColumns = [
 	}
 
 	.use-case-details {
-		display: flex;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 5px;
 		align-items: start;
-		margin-top: 10px;
+		margin-top: 20px;
 		padding: 0;
 		border: 0;
 		border-radius: 0;
@@ -2482,7 +2482,6 @@ const faqColumns = [
 		.use-case {
 			width: min(100%, 330px);
 			min-height: 0;
-			padding: 24px;
 		}
 
 		.use-case-art {
@@ -2746,7 +2745,6 @@ const faqColumns = [
 	}
 	@media (max-width: 720px), (pointer: coarse) and (max-width: 1180px) {
 		.use-case-carousel { margin-top: 56px; }
-		.use-case { padding: 16px; }
 		.use-case-meta { font-size: 10px; }
 		.use-case-body p { font-size: 12px; min-height: 24px; margin-bottom: 26px; }
 		.use-case-body h3 { font-size: 16px; line-height: 1.15; }
