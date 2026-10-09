@@ -2657,7 +2657,7 @@ const faqColumns = [
 		}
 
 		.use-case {
-			width: min(65.6vw, 288px);
+			width: min(calc(100vw - 48px), 330px);
 			scroll-snap-align: center;
 		}
 
@@ -2748,7 +2748,8 @@ const faqColumns = [
 		.use-case-carousel { margin-top: 56px; }
 		.use-case-meta { font-size: 10px; }
 		.use-case-body p { font-size: 12px; min-height: 24px; margin-bottom: 26px; }
-		.use-case-body h3 { font-size: 16px; line-height: 1.15; }
+		.use-case-body h3 { font-size: 15px; line-height: 1.2; }
+		.use-case-details { max-width: 220px; margin-top: 12px; }
 	}
 	@media (max-width: 620px) {
 		.air-panel { aspect-ratio: 1; }
