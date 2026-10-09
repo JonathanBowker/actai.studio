@@ -92,7 +92,8 @@ const useCases = [
 		title: "Content that stays useful and on brand.",
 		titleLines: ["Content that", "stays useful and", "on brand."],
 		image: "/images/use-case-art/portrait_02-liquid-gold.png",
-		video: "/videos/card-04-molten-chrome-half-speed.mp4",
+		video: "/videos/card-04-molten-chrome-trimmed-slow.mp4",
+		videoPlaybackRate: 1,
 		accent: "#ec3c8d",
 		position: "50% 42%",
 		details: ["Brand guidance", "Approval routes", "Channel context"],
@@ -325,7 +326,7 @@ const faqColumns = [
 							{useCases.map((useCase, index) => (
 								<article class="use-case" style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image})`}>
 									<div class="use-case-art" aria-hidden="true">
-										{"video" in useCase && <video class="use-case-video" src={useCase.video} poster={useCase.image} muted loop playsinline preload="metadata" />}
+										{"video" in useCase && <video class="use-case-video" src={useCase.video} data-playback-rate={"videoPlaybackRate" in useCase ? useCase.videoPlaybackRate : 1.5} poster={useCase.image} muted loop playsinline preload="metadata" />}
 									</div>
 									<div class="use-case-meta"><div class="use-case-agent-title">{"agentTitleLines" in useCase ? <>{useCase.agentTitleLines[0]}<span class="use-case-agent-line">{useCase.agentTitleLines[1]}</span></> : useCase.sector.includes(" & ") ? <>{useCase.sector.split(" & ")[0]} &<span class="use-case-agent-line">{useCase.sector.split(" & ")[1]} Agent</span></> : <>Professional<span class="use-case-agent-line">Services Agent</span></>}</div><span class="use-case-count">{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
 									<div class="use-case-body">
@@ -3102,8 +3103,9 @@ const faqColumns = [
 		const handheldLayout = window.matchMedia("(max-width: 720px), (pointer: coarse) and (max-width: 1180px)");
 		const cardVideos = [...track.querySelectorAll("video")];
 		cardVideos.forEach((video) => {
-			video.defaultPlaybackRate = 1.5;
-			video.playbackRate = 1.5;
+			const playbackRate = Number(video.dataset.playbackRate) || 1.5;
+			video.defaultPlaybackRate = playbackRate;
+			video.playbackRate = playbackRate;
 		});
 		const videoVisibility = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
