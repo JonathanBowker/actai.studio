@@ -1,6 +1,6 @@
 ---
-interface Props { bookingHref: string }
-const { bookingHref } = Astro.props;
+interface Props { bookingHref: string; showBookingButton?: boolean; showContactLink?: boolean; showPrivacyLink?: boolean }
+const { bookingHref, showBookingButton = true, showContactLink = true, showPrivacyLink = true } = Astro.props;
 ---
 
 <footer class="bg-black px-5 py-12 text-white sm:px-8 lg:px-10">
@@ -13,9 +13,9 @@ const { bookingHref } = Astro.props;
 			</div>
 		</div>
 		<div class="flex flex-wrap items-center gap-5 font-bold">
-			<a class="text-white/60 no-underline transition hover:text-white" href="/contact">Contact</a>
-			<a class="text-white/60 no-underline transition hover:text-white" href="/privacy">Privacy</a>
-			<a class="action-pill inline-flex h-12 items-center bg-white px-5 text-sm text-black no-underline transition hover:bg-[#dfff42]" href={bookingHref}>Request a 30-minute call</a>
+			{showContactLink && <a class="text-white/60 no-underline transition hover:text-white" href="/contact">Contact</a>}
+			{showPrivacyLink && <a class="text-white/60 no-underline transition hover:text-white" href="/privacy">Privacy</a>}
+			{showBookingButton && <a class="action-pill inline-flex h-12 items-center bg-white px-5 text-sm text-black no-underline transition hover:bg-[#dfff42]" href={bookingHref}>Request a 30-minute call</a>}
 		</div>
 	</div>
 </footer>

@@ -255,6 +255,11 @@ const { showContactLink = true, theme = "light" } = Astro.props;
 		.nav-pill { grid-template-columns: 1fr auto; }
 		.nav-pill > .menu-toggle { grid-column: 2; grid-row: 1; }
 	}
+
+	@media (max-width: 620px) {
+		.nav-pill { height: 58px; }
+		.site-brand img { width: auto; height: 26px; }
+	}
 </style>
 
 <script>

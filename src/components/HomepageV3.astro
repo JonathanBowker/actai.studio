@@ -280,7 +280,7 @@ const faqColumns = [
 
 				<div class="air-header" id="air" data-scroll-tone-block>
 					<h3 data-scroll-tone-line>Agent in the Room&trade;</h3>
-					<p data-scroll-tone-line><strong class="text-highlight">Your business. Your intelligence. Your advantage.</strong><br />We turn your data, knowledge and challenges into AI agents built for your business.<br />Then bring them into the room. Your people. Our experts. AI that challenges thinking, explores possibilities and shapes the way forward. Governed by your rules.</p>
+					<p data-scroll-tone-line><strong class="text-highlight air-opening"><span>Your business.</span> <span>Your intelligence.</span> <span>Your advantage.</span></strong><br class="air-copy-break" /><span class="air-paragraph">We turn your data, knowledge and challenges into AI agents built for your business.</span><br class="air-copy-break" /><span class="air-paragraph">Then bring them into the room. Your people. Our experts. AI that challenges thinking, explores possibilities and shapes the way forward. Governed by your rules.</span></p>
 				</div>
 
 				<div class="air-carousel" aria-label="Agent in the Room">
@@ -420,7 +420,7 @@ const faqColumns = [
 			</div>
 		</div>
 		<div class="footer-wordmark" aria-hidden="true">
-			<img src="/logos/ACT_White.svg" alt="" />
+			<video src="/videos/hero-porcelain-firefly.mp4" poster="/images/hero-porcelain-firefly.jpg" autoplay muted loop playsinline preload="metadata" data-footer-video />
 		</div>
 	</footer>
 </div>
@@ -437,6 +437,7 @@ const faqColumns = [
 	}
 
 	.v3-page {
+		padding-top: 80px;
 		--act-black: #101010;
 		--act-dark-grey: #171719;
 		--act-deep-grey: #111113;
@@ -505,9 +506,24 @@ const faqColumns = [
 		background: var(--act-white);
 		border-bottom: 1px solid rgb(16 16 16 / 0.14);
 		color: var(--act-black);
-		position: sticky;
+		position: fixed;
 		top: 0;
+		left: 0;
+		right: 0;
+		transition: transform 180ms ease;
 		z-index: 50;
+	}
+
+	.site-header[data-scroll-hidden="true"] {
+		transform: translateY(-100%);
+	}
+
+	.site-header:focus-within {
+		transform: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.site-header { transition: none; }
 	}
 
 	.brand,
@@ -563,7 +579,13 @@ const faqColumns = [
 
 	.nav-cta:hover,
 	.pill:hover {
-		transform: translateY(-2px);
+		background: var(--act-black);
+		color: var(--act-white);
+		transform: none;
+	}
+
+	.nav-cta:hover {
+		border-color: var(--act-black);
 	}
 
 	.pill {
@@ -1356,8 +1378,8 @@ const faqColumns = [
 
 	.practice-controls button:hover,
 	.practice-controls button:focus-visible {
-		background: rgb(40 40 44 / 0.98);
-		color: var(--act-white);
+		background: var(--act-white);
+		color: var(--act-black);
 		transform: none;
 		outline: none;
 	}
@@ -2032,15 +2054,17 @@ const faqColumns = [
 		left: 50%;
 		overflow: hidden;
 		transform: translateX(-50%);
+		-webkit-mask: url("/act-logo.svg") center / contain no-repeat;
+		mask: url("/act-logo.svg") center / contain no-repeat;
 	}
 
-	.footer-wordmark img {
-		width: 160%;
-		height: auto;
+	.footer-wordmark video {
+		width: 110%;
 		max-width: none;
-		position: absolute;
-		top: -58%;
-		left: -30%;
+		margin-left: -10%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center 18%;
 		display: block;
 	}
 
@@ -2103,6 +2127,8 @@ const faqColumns = [
 			padding-inline: var(--mobile-gutter);
 			grid-template-columns: 1fr auto;
 		}
+
+		.v3-page { padding-top: 66px; }
 
 		.brand img {
 			width: auto;
@@ -2340,6 +2366,11 @@ const faqColumns = [
 	}
 
 	@media (max-width: 620px) {
+		:global(html) { scroll-padding-top: 58px; }
+		.site-header { height: 58px; }
+		.v3-page { padding-top: 58px; }
+		.brand img { height: 28px; }
+
 		.v3-page {
 			--mobile-gutter: 32px;
 			--section-pad-top: 5.25rem;
@@ -2364,7 +2395,7 @@ const faqColumns = [
 		}
 
 		.hero {
-			min-height: min(680px, calc(100svh - 66px));
+			min-height: min(680px, calc(100svh - 58px));
 			background-position: 50% center;
 		}
 
@@ -2460,7 +2491,38 @@ const faqColumns = [
 		}
 
 		.air-header p {
-			margin-top: 18px;
+			max-width: 36ch;
+			margin-top: 24px;
+			font-size: 17px;
+			line-height: 1.5;
+			text-align: center;
+			text-wrap: pretty;
+		}
+
+		.air-header#air h3 {
+			text-align: center;
+			font-size: 32px;
+			line-height: 1.1;
+		}
+
+		.air-opening {
+			display: block;
+			font-size: 21px;
+			line-height: 1.3;
+			text-wrap: balance;
+		}
+
+		.air-opening > span {
+			display: inline;
+		}
+
+		.air-paragraph {
+			display: block;
+			margin-top: 20px;
+		}
+
+		.air-copy-break {
+			display: none;
 		}
 
 		.air-controls {
@@ -2735,7 +2797,7 @@ const faqColumns = [
 		}
 
 		.brand img {
-			height: 30px;
+			height: 26px;
 		}
 
 		.hero-content .pill,
@@ -2825,8 +2887,27 @@ const faqColumns = [
 </style>
 
 <script>
-	document.querySelectorAll("[data-air-video]").forEach((video) => {
+	const scrollingHeader = document.querySelector<HTMLElement>(".site-header");
+	if (scrollingHeader) {
+		let previousScroll = Math.max(0, window.scrollY);
+		const menu = scrollingHeader.querySelector("details");
+		const revealHeader = () => { scrollingHeader.dataset.scrollHidden = "false"; };
+		menu?.addEventListener("toggle", revealHeader);
+		window.addEventListener("scroll", () => {
+			const currentScroll = Math.max(0, window.scrollY);
+			const delta = currentScroll - previousScroll;
+			if (currentScroll <= scrollingHeader.offsetHeight || menu?.open) revealHeader();
+			else if (delta < 0) revealHeader();
+			else if (delta > 4) scrollingHeader.dataset.scrollHidden = "true";
+			previousScroll = currentScroll;
+		}, { passive: true });
+	}
+
+	document.querySelectorAll("[data-air-video], [data-footer-video]").forEach((video) => {
 		if (!(video instanceof HTMLVideoElement)) return;
+		const playbackRate = video.hasAttribute("data-air-video") ? 0.75 : 1;
+		video.defaultPlaybackRate = playbackRate;
+		video.playbackRate = playbackRate;
 		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 		let visible = false;
 		const syncPlayback = () => {

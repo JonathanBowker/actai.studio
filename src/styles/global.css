@@ -71,6 +71,12 @@
   box-sizing: border-box;
 }
 
+@media (max-width: 620px) {
+  :root {
+    --header-height: 58px;
+  }
+}
+
 html {
   background: var(--color-paper);
   scroll-behavior: smooth;
