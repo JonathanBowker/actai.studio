@@ -3141,6 +3141,13 @@ const faqColumns = [
 		carousel.dataset.initialised = "true";
 
 		const originalCards = [...track.children].filter((card) => card instanceof HTMLElement);
+		originalCards.forEach((card) => {
+			const clone = card.cloneNode(true);
+			if (!(clone instanceof HTMLElement)) return;
+			clone.setAttribute("aria-hidden", "true");
+			clone.dataset.practiceClone = "true";
+			track.append(clone);
+		});
 
 		const controls = carousel.parentElement;
 		const previous = controls?.querySelector("[data-practice-previous]");
@@ -3189,40 +3196,54 @@ const faqColumns = [
 		let arrowTimer;
 		let centring = false;
 		let arrowControlled = false;
-		let reachedEnd = false;
-		const maxScroll = () => Math.max(0, carousel.scrollWidth - carousel.clientWidth);
-		const updateControls = () => {
-			const position = arrowTarget ?? carousel.scrollLeft;
-			if (previous instanceof HTMLButtonElement) previous.disabled = position <= 1;
-			if (next instanceof HTMLButtonElement) next.disabled = position >= maxScroll() - 1;
-			if (carousel.scrollLeft >= maxScroll() - 1) reachedEnd = true;
-		};
 		window.requestAnimationFrame(() => {
 			const firstCard = originalCards[0];
 			if (!(firstCard instanceof HTMLElement)) return;
-			carousel.scrollLeft = 0;
+			const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
+			carousel.scrollLeft = (firstCard.offsetWidth + gap) * 0.48;
 			scrollPosition = carousel.scrollLeft;
-			updateControls();
 		});
+
+		const loopWidth = () => {
+			const firstClone = track.querySelector("[data-practice-clone]");
+			return firstClone instanceof HTMLElement ? firstClone.offsetLeft - track.offsetLeft : track.scrollWidth / 2;
+		};
+
+		const normalise = () => {
+			if (centring) return;
+			const width = loopWidth();
+			if (!width) return;
+			while (carousel.scrollLeft >= width) carousel.scrollLeft -= width;
+			while (carousel.scrollLeft < 0) carousel.scrollLeft += width;
+		};
 
 		const moveByCard = (direction) => {
 			const firstCard = originalCards[0];
 			if (!(firstCard instanceof HTMLElement)) return;
 			const gap = Number.parseFloat(getComputedStyle(track).gap) || 0;
 			const step = firstCard.offsetWidth + gap;
+			const width = loopWidth();
+			if (!width) return;
 			const firstCentre = firstCard.offsetLeft - track.offsetLeft + firstCard.offsetWidth / 2 - carousel.clientWidth / 2;
 			const position = arrowTarget ?? carousel.scrollLeft;
-			const target = Math.max(0, Math.min(maxScroll(), firstCentre + (Math.round((position - firstCentre) / step) + direction) * step));
+			let target = firstCentre + (Math.round((position - firstCentre) / step) + direction) * step;
+			// Shift to an equivalent loop position before crossing the left edge.
+			if (target < 0) {
+				carousel.scrollLeft += width;
+				target += width;
+			} else if (position >= width && target >= width) {
+				carousel.scrollLeft -= width;
+				target -= width;
+			}
 			arrowControlled = true;
 			centring = true;
 			arrowTarget = target;
-			updateControls();
 			window.clearTimeout(arrowTimer);
 			carousel.scrollTo({ left: target, behavior: reducedMotion.matches ? "auto" : "smooth" });
 			arrowTimer = window.setTimeout(() => {
 				carousel.scrollLeft = target;
 				centring = false;
-				updateControls();
+				normalise();
 				arrowTarget = carousel.scrollLeft;
 				scrollPosition = carousel.scrollLeft;
 			}, reducedMotion.matches ? 0 : 700);
@@ -3231,8 +3252,7 @@ const faqColumns = [
 		previous?.addEventListener("click", () => moveByCard(-1));
 		next?.addEventListener("click", () => moveByCard(1));
 
-		carousel.addEventListener("scroll", updateControls, { passive: true });
-		window.addEventListener("resize", updateControls, { passive: true });
+		carousel.addEventListener("scroll", normalise, { passive: true });
 		carousel.addEventListener("pointerdown", () => {
 			window.clearTimeout(arrowTimer);
 			centring = false;
@@ -3260,11 +3280,12 @@ const faqColumns = [
 			lastTick = time;
 			const bounds = carousel.getBoundingClientRect();
 			const isVisible = bounds.top < window.innerHeight && bounds.bottom > 0;
-			if (!reducedMotion.matches && !interacting && !arrowControlled && !reachedEnd && isVisible && time >= pauseUntil) {
+			if (!reducedMotion.matches && !interacting && !arrowControlled && isVisible && time >= pauseUntil) {
 				// Retain fractional movement on browsers that round scrollLeft.
-				scrollPosition = Math.min(maxScroll(), scrollPosition + delta * (handheldLayout.matches ? 0.035 : 0.045));
+				const width = loopWidth();
+				scrollPosition += delta * (handheldLayout.matches ? 0.035 : 0.045);
+				if (width) scrollPosition %= width;
 				carousel.scrollLeft = scrollPosition;
-				updateControls();
 			} else {
 				scrollPosition = carousel.scrollLeft;
 			}
