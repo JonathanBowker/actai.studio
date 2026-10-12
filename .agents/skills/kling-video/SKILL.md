@@ -1,47 +1,40 @@
 ---
 name: kling-video
-description: Generate and retrieve Kling videos for ACT, including the AIR sonic brand film, using local server-side credentials. Use for requested Kling generation, connection checks, and task status; not ordinary website edits.
+description: Generate and retrieve ACT video assets through Kling's official hosted MCP connector in Claude, including the ten-second AIR sonic film. Use for Kling setup, authenticated discovery, video generation and task status; not ordinary website edits.
 ---
 
 # Kling Video
 
-Run from the repository root. Use `node .agents/skills/kling-video/scripts/kling.mjs`.
-Credentials belong in the ignored root `.env`: `KLING_ACCESS_KEY` and
-`KLING_SECRET_KEY`, or `KLING_API_TOKEN` for a provider-issued bearer token.
-Never print credentials, tokens, or embed them in browser code or public assets.
-This helper targets Kling directly, not fal.ai or other resellers.
+Use Kling's official international MCP server at `https://kling.ai/mcp`, declared
+in the repo's `.mcp.json`. No third-party wrapper or bespoke API client is used.
+Read the Kling section of the root README for Claude Code and custom-connector
+setup. A shared config alone does not mean a Claude account is connected.
 
-## Workflow
+## Authentication
 
-1. Run `check` to test authentication without starting a paid generation.
-   If credentials are absent or rejected, stop and ask for local configuration.
-2. Confirm the requested prompt, duration, format and model. For the current AIR
-   film, use [the ten-second brief](references/air-film.md). The website must not
-   change unless the user requests placement or publication.
-3. Verify model capabilities against the linked official documentation before
-   generation. Save a non-secret JSON request outside `public/`, then run
-   `submit /absolute/path/request.json`. The user must have requested generation;
-   do not spend credits merely to test a connection.
-4. Retain the returned task ID and query it with `status TASK_ID`. Never resubmit
-   after an ambiguous timeout: check the existing task/list first to avoid
-   duplicate charges. Poll no faster than every 15 seconds, stop on failure or
-   success, and report still-pending work after ten minutes.
-5. Download a successful video to a local working folder. Validate duration,
-   resolution, actual motion and audio with ffprobe and representative frames.
-   Do not claim successful rendering based only on submission.
+Complete the connector's browser OAuth flow with the ACT Kling account. Claude
+stores credentials outside this repo. Never extract browser tokens, print
+credentials, commit them, or send Open API access/secret keys to this endpoint.
+If tools are not available, have the user enable and authenticate the connector;
+do not fall back to a different provider or a direct API wrapper.
 
-For text-to-video, the helper uses `/v1/videos/text2video`. A request includes
-`model_name`, `prompt`, `duration` (string), `mode`, `aspect_ratio`, and `sound`.
-The current film requests `duration: "10"`, `mode: "pro"`, `aspect_ratio: "16:9"`,
-and `sound: "on"`; verify support for the selected model first.
+## Generation
 
-Composite the supplied AIR SVG during finishing, rather than generating its
-lettering. Preserve exact proportions and geometry. Do not send unrelated
-client files to the provider. No music or voiceover for the AIR film.
+1. Discover the connected identity, credits, exposed tools and model parameters.
+   Confirm the ACT account and distinguish discovery from a paid generation.
+2. Use the current tool schemas rather than assuming model IDs or parameters.
+   Run the README's single short text-to-video connectivity test only after
+   authentication, and only when the user requests a test or generation.
+3. For the AIR film, read [the ten-second brief](references/air-film.md). Confirm
+   aspect ratio, duration, sound, and reference roles before submission.
+4. Submit each approved task once. Retain its generation ID and query the same
+   task no faster than every 15 seconds. Never resubmit after an ambiguous timeout.
+   Stop on success or failure; report pending work after ten minutes.
+5. Retrieve the output and verify actual playback, duration, framing and audio.
+   Do not claim success based only on submission or unauthenticated reachability.
 
-## Official References
+Composite the supplied AIR SVG during finishing to preserve its exact proportions
+and typography. No music or voiceover for the AIR film. Keep review assets out of
+`public/`; website placement and publication require the user's request.
 
-- Authentication: https://kling.ai/document-api/api/get-started/authentication
-- Text-to-video: https://kling.ai/document-api/api/video/2-6/text-to-video/legacy
-- Current model capabilities: https://kling.ai/document-api/apiReference/updateNotice
-
+Official setup: https://kling.ai/blog/claude-code-kling-mcp-food-promo-workflow?tab=ai-tools-creation

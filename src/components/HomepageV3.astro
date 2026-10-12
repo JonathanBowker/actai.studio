@@ -282,7 +282,7 @@ const faqColumns = [
 
 				<div class="air-header" id="air" data-scroll-tone-block>
 					<h3 data-scroll-tone-line>Agent in the Room&trade;</h3>
-					<p data-scroll-tone-line>A structured, face-to-face working session with our experts and an AI agent prepared for your business. Together, we turn conversation into a clear brief.</p>
+					<p data-scroll-tone-line><strong class="text-highlight">Your business. Your intelligence. Your advantage.</strong><br />We turn your data, knowledge and challenges into AI agents built for your business.<br />Then bring them into the room. Your people. Our experts. AI that challenges thinking, explores possibilities and shapes the way forward. Governed by your rules.</p>
 				</div>
 
 				<div class="air-carousel" aria-label="Agent in the Room interaction stages" aria-roledescription="carousel" data-air-carousel>
@@ -296,22 +296,6 @@ const faqColumns = [
 								</div>
 							</article>
 						))}
-					</div>
-					<div class="air-controls">
-						<div class="carousel-dots" aria-label="Choose an AIR frame">
-							<span class="air-active-pill" aria-hidden="true"><span class="air-dot-progress"></span></span>
-							{airSlides.map((slide, index) => (
-								<button type="button" aria-label={`Show frame ${index + 1}: ${slide.navName}`} aria-controls={`air-slide-${index + 1}`} aria-pressed={index === 0 ? "true" : "false"} data-air-dot>
-									<span class="air-nav-label">
-										<span class="air-nav-number">{slide.navNumber}</span>
-										{slide.navName && <span class="air-nav-name">{slide.navName}</span>}
-									</span>
-								</button>
-							))}
-						</div>
-						<button class="air-pause" type="button" aria-label="Pause AIR carousel" aria-pressed="false" data-air-pause>
-							<span class="air-pause-bars" aria-hidden="true"></span>
-						</button>
 					</div>
 					<div class="air-descriptions" aria-live="polite">
 						{airSlides.map((slide, index) => (
