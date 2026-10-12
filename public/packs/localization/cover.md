@@ -14,4 +14,4 @@ Expanding into new markets is stalled by manual translation.
 
 ## Talk to Jonny and Mark
 
-Book a meeting: `/meeting`
+Request a 30-minute call: `/contact`

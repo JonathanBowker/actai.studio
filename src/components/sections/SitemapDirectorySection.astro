@@ -14,7 +14,7 @@ const { groups } = Astro.props;
 
 		<div class="grid gap-x-12 gap-y-16 lg:grid-cols-2">
 			{groups.map((group) => (
-				<section class:list={["border-t border-black/20 pt-6", group.wide && "lg:col-span-2"]}>
+				<section id={group.label === "Agent diagnostics" ? "agent-diagnostics" : undefined} class:list={["border-t border-black/20 pt-6", group.wide && "lg:col-span-2"]}>
 					<div class:list={["grid gap-8", group.wide && "lg:grid-cols-[0.38fr_1fr]"]}>
 						<h3 class="text-[1.45rem] font-bold leading-none">{group.label}</h3>
 						<div class:list={["grid gap-x-10", group.wide && "md:grid-cols-2"]}>

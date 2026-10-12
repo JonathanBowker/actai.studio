@@ -1,10 +1,20 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import node from '@astrojs/node';
 
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://actai.studio',
+  adapter: node({
+    mode: 'standalone',
+    bodySizeLimit: 32 * 1024
+  }),
+  security: {
+    checkOrigin: false
+  },
+  session: false,
   vite: {
     plugins: [tailwindcss()]
   }

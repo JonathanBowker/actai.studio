@@ -19,7 +19,7 @@ const { caseStudies, caseStudyFilters } = Astro.props;
 					<div class="reveal relative z-30 flex justify-start">
 						<div class="case-filter relative z-30" data-case-filter>
 							<button
-								class="flex min-w-[15rem] items-center justify-between gap-6 rounded-2xl border border-white/10 bg-white px-4 py-3 text-left font-bold text-[#11110f] shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition hover:bg-[#dfff42]"
+								class="action-pill flex min-w-[15rem] items-center justify-between gap-6 border border-white/10 bg-white px-4 py-3 text-left font-bold text-[#11110f] shadow-[0_20px_60px_rgba(0,0,0,0.28)] transition hover:bg-[#dfff42]"
 								type="button"
 								aria-expanded="false"
 								data-case-filter-toggle
@@ -30,7 +30,7 @@ const { caseStudies, caseStudyFilters } = Astro.props;
 							<div class="absolute left-0 top-[calc(100%+.5rem)] z-50 hidden min-w-[18rem] rounded-2xl border border-white/10 bg-[#f6f4ef] p-2 text-[#11110f] shadow-[0_24px_70px_rgba(0,0,0,0.38)]" data-case-filter-menu>
 								{caseStudyFilters.map((filter) => (
 									<button
-										class="flex w-full items-center justify-between rounded-xl px-4 py-3 text-left font-bold transition hover:bg-black/8"
+										class="action-pill flex w-full items-center justify-between px-4 py-3 text-left font-bold transition hover:bg-black/8"
 										type="button"
 										data-case-filter-option={filter.value}
 										data-case-filter-name={filter.label}
@@ -67,7 +67,7 @@ const { caseStudies, caseStudyFilters } = Astro.props;
 					</div>
 					<div class="reveal flex justify-center">
 						<button
-							class="inline-flex h-12 items-center rounded-xl bg-white px-7 font-bold text-black transition hover:bg-[#dfff42]"
+							class="action-pill inline-flex h-12 items-center bg-white px-7 font-bold text-black transition hover:bg-[#dfff42]"
 							type="button"
 							data-case-reveal
 						>

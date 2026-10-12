@@ -35,7 +35,7 @@ const { triageAgents, triageRows, useCaseArt } = Astro.props;
 												</div>
 												<div class="use-case-detail triage-detail mx-auto w-full max-w-[17.5rem] rounded-[1.05rem] p-3 text-left">
 													<p class="text-[0.88rem] font-bold leading-[1.28] text-white/84">{agent.data.cardCopy}</p>
-													<a href={`/agents/${agent.id}`} class="triage-action inline-flex min-h-11 w-full items-center justify-center rounded-xl px-4 text-center text-[0.9rem] font-bold no-underline transition" data-agent-card-click={agent.id} tabindex={itemIndex >= column.length ? "-1" : undefined}>That sounds like me</a>
+													<a href={`/agents/${agent.id}`} class="action-pill triage-action inline-flex min-h-11 w-full items-center justify-center px-4 text-center text-[0.9rem] font-bold no-underline transition" data-agent-card-click={agent.id} tabindex={itemIndex >= column.length ? "-1" : undefined}>That sounds like me</a>
 												</div>
 											</div>
 										</div>
@@ -59,7 +59,7 @@ const { triageAgents, triageRows, useCaseArt } = Astro.props;
 										<div class="use-case-heading mx-auto grid max-w-[18rem] justify-items-center"><h3 class="use-case-title font-bold text-white">{agent.data.nerve}</h3></div>
 										<div class="use-case-detail triage-detail mx-auto w-full max-w-[17.5rem] rounded-[1.05rem] p-3 text-left">
 											<p class="text-[0.88rem] font-bold leading-[1.28] text-white/84">{agent.data.cardCopy}</p>
-											<a href={`/agents/${agent.id}`} class="triage-action inline-flex min-h-11 w-full items-center justify-center rounded-xl px-4 text-center text-[0.9rem] font-bold no-underline transition" data-agent-card-click={agent.id}>That sounds like me</a>
+											<a href={`/agents/${agent.id}`} class="action-pill triage-action inline-flex min-h-11 w-full items-center justify-center px-4 text-center text-[0.9rem] font-bold no-underline transition" data-agent-card-click={agent.id}>That sounds like me</a>
 										</div>
 									</div>
 								</div>

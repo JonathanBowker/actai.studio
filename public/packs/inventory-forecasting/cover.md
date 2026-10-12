@@ -14,4 +14,4 @@ You are overstocked on the wrong items and running out of the right ones.
 
 ## Talk to Jonny and Mark
 
-Book a meeting: `/meeting`
+Request a 30-minute call: `/contact`

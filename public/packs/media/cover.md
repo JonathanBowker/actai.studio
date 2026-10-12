@@ -14,4 +14,4 @@ Every photo shoot and edit takes longer and costs more than it should.
 
 ## Talk to Jonny and Mark
 
-Book a meeting: `/meeting`
+Request a 30-minute call: `/contact`

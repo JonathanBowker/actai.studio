@@ -1,10 +1,10 @@
 ---
 import "../styles/global.css";
+import NoWidows from "../components/NoWidows.astro";
 import SeoGuard from "../components/SeoGuard.astro";
 import { ContactFormSection, ContactIntroSection, SiteHeader, SitemapFooterSection } from "../components/sections";
 
-const emailHref = "mailto:hello@actai.studio?subject=Act.%20AI%20contact";
-const bookingHref = "/contact";
+const bookingHref = "/meeting";
 ---
 
 <html lang="en">
@@ -12,26 +12,168 @@ const bookingHref = "/contact";
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="Contact Act. AI for clear guidance on where to start with AI in your business." />
-		<SeoGuard />
-		<title>Contact | actai.studio</title>
+		<meta name="description" content="Contact Act AI Studio about your business, AI direction or an agent project." />
+		<SeoGuard
+			title="Contact | Act AI Studio"
+			description="Contact Act AI Studio about your business, AI direction or an agent project."
+		/>
+		<title>Contact | Act AI Studio</title>
 		<style is:global>
-			html,
-			body {
-				background: #f6f4ef;
-				color: #11110f;
+				html,
+				body {
+					background: #101010;
+					color: #fcfcfc;
+			}
+
+			.contact-page { --header-height: 80px; --contact-gutter: clamp(24px, 4.167vw, 80px); }
+			.contact-page .nav-pill {
+				background: #fcfcfc;
+				box-shadow: none;
+				padding-inline: var(--contact-gutter);
+			}
+			.contact-page .site-brand { min-width: 0; padding: 0; }
+			.contact-page .site-brand img { width: auto; height: 35px; }
+			.contact-page .site-menu-links { padding-left: 48px; gap: 28px; }
+			.contact-page .site-menu-link { font-size: 15px; font-weight: 400; }
+			.contact-page .menu-toggle {
+				border: 0;
+				border-radius: 0;
+				margin-right: 0;
+			}
+			.contact-page .menu-icon { background: transparent; }
+			.contact-page .menu-icon::before { top: -3px; width: 22px; }
+			.contact-page .menu-icon::after { top: 3px; width: 22px; }
+			.contact-page .menu-icon[data-open="true"]::before { transform: translateY(3px) rotate(45deg); }
+			.contact-page .menu-icon[data-open="true"]::after { transform: translateY(-3px) rotate(-45deg); }
+			.contact-page .site-menu-link[href="/#governance"] { display: none; }
+			.contact-page .contact-intro {
+				background: #101010;
+				padding-block: 80px;
+				border: 0;
+				padding-inline: var(--contact-gutter);
+			}
+			.contact-page .contact-intro h1 { font-size: 56px; line-height: 1.05; letter-spacing: 0; }
+			.contact-page .contact-intro p { color: #8d8d95; font-size: 20px; line-height: 1.5; }
+			#contact-page .contact-form-section[data-theme="dark"] {
+				margin-top: 0;
+				border-radius: 0;
+				background: #171719;
+				color: #fcfcfc;
+				padding-block: 64px 88px;
+				padding-inline: var(--contact-gutter);
+			}
+			#contact-page .contact-form-section[data-theme="dark"] .contact-card {
+				border: 0;
+				border-radius: 0;
+				background: transparent;
+				padding: 0;
+			}
+			.contact-page .contact-card h2 { font-size: 32px; line-height: 1.15; }
+			.contact-page .contact-form-section :is(p, label, dl) { font-weight: 400; letter-spacing: 0; }
+			.contact-page .contact-form-section :is(p, h2, h3) { letter-spacing: 0; }
+			.contact-page .contact-form-section :is(form, aside) > div:first-child > p,
+			.contact-page .contact-card > div:first-child p { text-transform: none; font-size: 15px; }
+			.contact-page .contact-form-section :is(input, select, textarea) {
+				border: 1px solid #5e5e66;
+				border-radius: 0;
+				background: #fcfcfc;
+				color: #101010;
+				font-family: inherit;
+				font-weight: 400;
+				letter-spacing: 0;
+			}
+			.contact-page .contact-form-section :is(input, select, textarea):focus-visible {
+				outline: 2px solid #fcfcfc;
+				outline-offset: 3px;
+			}
+			.contact-page .contact-form-section [data-contact-submit] {
+				width: auto;
+				min-height: 44px;
+				height: 44px;
+				padding-inline: 24px;
+				border: 1px solid #fcfcfc;
+				border-radius: 999px;
+				background: #fcfcfc;
+				color: #101010;
+				font-size: 16px;
+				font-weight: 700;
+			}
+			#contact-page .contact-form-section[data-theme="dark"] [data-contact-submit]:hover { background: #101010; color: #fcfcfc; }
+			.contact-page .contact-form-section [data-contact-submit]:focus-visible { outline: 2px solid #fcfcfc; outline-offset: 4px; }
+			.contact-page .contact-card > div:first-child > span { display: none; }
+			.contact-page .contact-form-section aside span {
+				background: transparent;
+				border-radius: 0;
+				width: auto;
+				height: auto;
+				display: block;
+				align-self: start;
+				font-size: 20px;
+				line-height: 1.2;
+				font-weight: 700;
+			}
+			.contact-page .contact-form-section aside h3 { margin: 0; font-size: 20px; line-height: 1.2; color: #fcfcfc; }
+			.contact-page .contact-form-section aside .grid.grid-cols-\[3rem_1fr\] { grid-template-columns: 2rem 1fr; gap: 20px; }
+			.contact-page .contact-form-section aside p { font-size: 17px; line-height: 1.5; }
+			.contact-page .contact-form-section aside > p { border: 0; padding-left: 0; }
+			#contact-page .contact-form-section[data-theme="dark"] :is(.text-\[\#77736a\], .text-\[\#89857d\], .text-\[\#5f5b54\]) { color: #8d8d95; }
+			#contact-page .contact-card > p {
+				margin: 12px 0 0;
+				max-width: 42ch;
+				text-align: left;
+				font-size: 13px;
+				font-weight: 400;
+				line-height: 1.5;
+			}
+			#contact-page [data-contact-status] { color: #fcfcfc; }
+			#contact-page [data-contact-status]:empty { margin: 0; }
+			.contact-page footer { padding-inline: var(--contact-gutter); }
+			.contact-page footer :is(p, a) { font-weight: 400; letter-spacing: 0; }
+			.contact-page footer .action-pill { border-radius: 999px; min-height: 44px; padding-inline: 24px; font-weight: 700; background: #fcfcfc; color: #101010; }
+			.contact-page footer .action-pill:hover { background: #101010; color: #fcfcfc; }
+			.contact-page .site-contact-link:hover { background: #101010; color: #fcfcfc; }
+			@media (max-width: 1500px) {
+				.contact-page .site-menu { background: #fcfcfc; }
+				.contact-page .site-menu-links { padding: 16px 32px; gap: 8px; max-width: none; }
+			}
+			@media (min-width: 1181px) and (max-width: 1500px) {
+				.contact-page .site-menu {
+					display: flex;
+					position: static;
+					grid-column: 2;
+					grid-row: 1;
+					opacity: 1;
+					pointer-events: auto;
+					transform: none;
+					border: 0;
+					box-shadow: none;
+				}
+				.contact-page .site-menu-links { display: flex; padding: 0; gap: 28px; }
+				.contact-page .nav-pill > .menu-toggle { display: none; }
+			}
+			@media (max-width: 620px) {
+				.contact-page { --header-height: 58px; --contact-gutter: 32px; }
+				.contact-page .nav-pill { padding-inline: 24px; }
+				.contact-page .site-brand img { height: 26px; }
+				.contact-page :is(.contact-intro, .contact-form-section) { padding-inline: 32px; }
+				.contact-page .contact-intro { padding-block: 48px; }
+				.contact-page .contact-intro h1 { font-size: 36px; }
+				.contact-page .contact-intro p { font-size: 17px; }
+				.contact-page .contact-form-section { padding-block: 40px 64px; }
+				.contact-page .contact-card h2 { font-size: 28px; }
 			}
 		</style>
 	</head>
-	<body class="pt-[4.5rem]">
-		<SiteHeader />
+	<body id="contact-page" class="contact-page pt-[var(--header-height)]">
+		<SiteHeader showContactLink={false} />
 
 		<main>
-			<ContactIntroSection />
-			<ContactFormSection {emailHref} />
+			<ContactIntroSection theme="dark" />
+			<ContactFormSection theme="dark" />
 		</main>
-		<SitemapFooterSection {bookingHref} />
+		<SitemapFooterSection {bookingHref} showBookingButton={false} showContactLink={false} />
+		<NoWidows />
 	</body>
 </html>
