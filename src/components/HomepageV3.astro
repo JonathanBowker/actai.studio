@@ -3156,22 +3156,32 @@ const faqColumns = [
 		const handheldLayout = window.matchMedia("(max-width: 720px), (pointer: coarse) and (max-width: 1180px)");
 		const cardVideos = [...track.querySelectorAll("video")];
 		cardVideos.forEach((video) => {
+			video.muted = true;
 			const playbackRate = Number(video.dataset.playbackRate) || 1.5;
 			video.defaultPlaybackRate = playbackRate;
 			video.playbackRate = playbackRate;
+			const resumeWhenReady = () => {
+				if (video.dataset.visible === "true" && !reducedMotion.matches) video.play().catch(() => {});
+			};
+			video.addEventListener("loadeddata", resumeWhenReady);
+			video.addEventListener("canplay", resumeWhenReady);
 		});
 		const videoVisibility = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
-				const video = entry.target;
+				const video = entry.target.querySelector("video");
 				if (!(video instanceof HTMLVideoElement)) return;
 				video.dataset.visible = String(entry.isIntersecting);
 				if (entry.isIntersecting && !reducedMotion.matches) {
+					video.preload = "auto";
 					video.muted = true;
 					video.play().catch(() => {});
 				} else video.pause();
 			});
 		}, { threshold: 0.1 });
-		cardVideos.forEach((video) => videoVisibility.observe(video));
+		cardVideos.forEach((video) => {
+			const card = video.closest(".use-case");
+			if (card) videoVisibility.observe(card);
+		});
 		reducedMotion.addEventListener("change", () => {
 			cardVideos.forEach((video) => {
 				if (reducedMotion.matches) video.pause();
