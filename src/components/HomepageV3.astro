@@ -2483,6 +2483,14 @@ const faqColumns = [
 
 		.stage-title {
 			margin-bottom: 20px;
+			flex-direction: row;
+			align-items: baseline;
+			gap: 0;
+		}
+
+		.stage-title h3::before {
+			content: " \2013  ";
+			white-space: pre;
 		}
 
 		.air-header {
