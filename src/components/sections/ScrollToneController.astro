@@ -32,8 +32,8 @@
 		toneSections.forEach((section) => {
 			const lines = [...section.querySelectorAll("[data-scroll-tone-line]")];
 			const explicitEntry = Number(section.dataset.scrollToneEntry);
-			const entryPoint = Number.isFinite(explicitEntry) ? explicitEntry : 0.86;
-			const revealDistance = window.innerHeight * 0.18;
+			const entryPoint = Number.isFinite(explicitEntry) ? explicitEntry : 1.04;
+			const revealDistance = window.innerHeight * 0.36;
 
 			lines.forEach((line) => {
 				if (!(line instanceof HTMLElement)) return;
@@ -52,10 +52,19 @@
 					: 0;
 				const blockProgress = Math.max(0, Math.min(1, (window.innerHeight * entryPoint - lineTop) / revealDistance));
 				const progress = block instanceof HTMLElement
-					? Math.max(0, Math.min(1, (blockProgress - revealStep * 0.08) / 0.82))
+					? Math.max(0, Math.min(1, (blockProgress - revealStep * 0.045) / 0.9))
 					: blockProgress;
-				line.style.setProperty("--scroll-tone-opacity", String(progress));
+				const isBodyCopy = !isSectionTitle && !isHeadline;
+				const baseOpacity = isBodyCopy ? 0.22 : 0;
+				const opacity = baseOpacity + (1 - baseOpacity) * progress;
+				line.style.setProperty("--scroll-tone-opacity", String(opacity));
 				line.style.setProperty("--scroll-tone-lift", `${((1 - progress) * 0.75).toFixed(3)}rem`);
+
+				if (isBodyCopy) {
+					const channel = Math.round(141 + (226 - 141) * progress);
+					line.style.setProperty("--act-light-text", `rgb(${channel} ${channel} ${Math.min(231, channel + 3)})`);
+					line.style.setProperty("--act-light-rgb", `${channel} ${channel} ${Math.min(231, channel + 3)}`);
+				}
 			});
 		});
 	};
