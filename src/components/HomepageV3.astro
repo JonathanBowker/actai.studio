@@ -2,23 +2,27 @@
 const stages = [
 	{
 		number: "01",
-		title: "Call",
-		copy: "Thirty minutes, recorded. We steer the conversation until we land on the real problem, not just notes.",
+		title: "TALK",
+		lead: "It starts with a conversation.",
+		copy: "30 minutes. Your business. Your challenges. We find where AI could make a real difference.",
 	},
 	{
 		number: "02",
-		title: "Prep",
-		copy: "If you choose to proceed, we create a custom knowledge base in preparation for the AIR session.",
+		title: "DISCOVER",
+		lead: "Meet AI. Discover your potential.",
+		copy: "Experience AI for yourself. A guided conversation helps you explore your business, uncover challenges and turn what you know into insights we can work with.",
 	},
 	{
 		number: "03",
 		title: "(AIR)",
-		copy: "The agent questions the room, one question at a time. You answer. We steer the build of the brief.",
+		lead: "Your people. Our experts. AI in the room.",
+		copy: "We bring everything together. Your team, our specialists and AI agents prepared for your challenge. Together, we question, challenge and shape the right solution.",
 	},
 	{
 		number: "04",
-		title: "Build",
-		copy: "The final approved brief goes to our studio, where we plan, build, test and deploy the application.",
+		title: "BUILD",
+		lead: "From thinking to doing.",
+		copy: "We take what we've discovered and turn it into reality. AI designed, built and delivered around your business.",
 	},
 ];
 
@@ -261,9 +265,8 @@ const faqColumns = [
 		<section class="section section-dark stages" id="stages" aria-labelledby="stages-heading" data-scroll-tone-section>
 			<div class="section-inner stages-inner">
 					<div class="narrow-center" data-scroll-tone-block>
-						<p class="section-label section-label-dark" data-scroll-tone-line>The Method</p>
-						<h2 id="stages-heading" data-scroll-tone-line>Start with a conversation.<br />Not a Deck.</h2>
-						<p class="section-intro muted-light" data-scroll-tone-line>It starts with a call. We record it, steer it, and by the end we know what the problem is. <strong class="text-highlight">That becomes the brief.</strong></p>
+						<p class="section-label section-label-dark" data-scroll-tone-line>The Act Method</p>
+						<h2 id="stages-heading" data-scroll-tone-line>Four steps.<br />From possibility to reality.</h2>
 					</div>
 
 					<div class="stage-grid">
@@ -273,7 +276,7 @@ const faqColumns = [
 									<p class="stage-number">{stage.number}</p>
 									<h3>{stage.title}</h3>
 								</div>
-								<p>{stage.copy}</p>
+								<p><strong>{stage.lead}</strong><br />{stage.copy}</p>
 							</article>
 						))}
 				</div>
