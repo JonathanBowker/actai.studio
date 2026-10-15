@@ -65,6 +65,7 @@ const useCases = [
 	{
 		sector: "Manufacturing & supply",
 		title: "Operational knowledge, exactly where the team needs it.",
+		capability: "Connects production knowledge, shift handovers and supplier information so teams can act with the right operational context.",
 		titleLines: ["Operational knowledge", "exactly where the", "team needs it."],
 		image: "/images/use-case-art/portrait-01-porcelain.png",
 		video: "/videos/card-01-porcelain-smooth.mp4",
@@ -79,6 +80,7 @@ const useCases = [
 		sector: "Land & estates",
 		agentTitleLines: ["Land & estates", "Agent"],
 		title: "Make estate knowledge easier to act on.",
+		capability: "Organises asset records, maintenance history and local knowledge so every estate decision starts with reliable context.",
 		titleLines: ["Make estate", "knowledge easier", "to act on."],
 		image: "/images/use-case-art/portrait-06-stone.png",
 		artScale: 0.8,
@@ -92,6 +94,7 @@ const useCases = [
 		sector: "Risk & compliance",
 		agentTitleLines: ["Risk & compliance", "Agent"],
 		title: "Clear review points, evidence and escalation.",
+		capability: "Reviews evidence against agreed controls, flags exceptions and routes each issue to the right owner for action.",
 		titleLines: ["Clear review points", "evidence and", "escalation."],
 		image: "/images/use-case-art/portrait_03-turquoise-contour.png",
 		video: "/videos/card-02-cyan-contour-half-speed.mp4",
@@ -104,6 +107,7 @@ const useCases = [
 	{
 		sector: "Finance & banking",
 		title: "Keep reporting moving without losing control.",
+		capability: "Assembles reporting context, explains material changes and keeps approvals and audit evidence attached as work moves.",
 		titleLines: ["Keep reporting", "moving without", "losing control."],
 		image: "/images/use-case-art/portrait_07.png",
 		imageSize: "auto 105%",
@@ -114,6 +118,7 @@ const useCases = [
 	{
 		sector: "Brand & media",
 		title: "Content that stays useful and on brand.",
+		capability: "Applies brand guidance, audience context and approval rules so content stays useful, consistent and ready for every channel.",
 		titleLines: ["Content that", "stays useful and", "on brand."],
 		image: "/images/use-case-art/portrait_02-liquid-gold.png",
 		video: "/videos/card-04-molten-chrome-v2-smooth.mp4",
@@ -125,6 +130,7 @@ const useCases = [
 	{
 		sector: "Professional services",
 		title: "Expert context, ready for the next brief.",
+		capability: "Carries the brief, expert knowledge and client decisions between engagements so each team starts informed and ready.",
 		titleLines: ["Expert context", "ready for the", "next brief."],
 		image: "/images/use-case-art/portrait_02-neon-dreamscape-v2.png",
 		imageSize: "auto 120%",
@@ -135,6 +141,7 @@ const useCases = [
 	{
 		sector: "Technology & software",
 		title: "Turn product knowledge into better support.",
+		capability: "Connects product documentation, release knowledge and support patterns to produce grounded answers and clearer next actions.",
 		titleLines: ["Turn product", "knowledge into", "better support."],
 		image: "/images/use-case-art/portrait-07-fractal-mirrored.jpg",
 		video: "/videos/card-07-fractal-mirrored-smooth.mp4",
@@ -148,6 +155,7 @@ const useCases = [
 	{
 		sector: "Consulting & operations",
 		title: "Make delivery knowledge repeatable.",
+		capability: "Captures delivery practice, client context and proven steps so teams can repeat strong work without starting again.",
 		titleLines: ["Make delivery", "knowledge", "repeatable."],
 		image: "/images/use-case-art/portrait_03.png",
 		imageSize: "auto 115%",
@@ -156,6 +164,14 @@ const useCases = [
 		details: ["Delivery playbooks", "Client context", "Repeatable steps"],
 	},
 ];
+
+const coreAgentSkills = ["Research", "Analysis", "Review"];
+
+const getUseCaseAgentName = (useCase: (typeof useCases)[number]) => {
+	if ("agentTitleLines" in useCase) return useCase.agentTitleLines.join(" ");
+	if (useCase.sector.includes(" & ")) return `${useCase.sector} Agent`;
+	return "Professional Services Agent";
+};
 
 const faqs = [
 	{
@@ -305,21 +321,45 @@ const faqColumns = [
 					<div class="practice-layout">
 						<div class="practice-copy" data-scroll-tone-block>
 							<p data-scroll-tone-line>Agents can increase business capacity by orders of magnitude. What matters is where they create value for you and how <strong class="text-highlight">your people stay in control.</strong></p>
+							<p data-scroll-tone-line>Not one broad capability. Focused, reusable skills assembled around the work. Each one knows when to act, what to do and <strong class="text-highlight">what outcome it owns.</strong></p>
 						</div>
 					<div class="use-case-carousel" aria-label="Business use cases" aria-roledescription="carousel" data-practice-carousel>
 						<div class="use-case-track" data-practice-track>
 							{useCases.map((useCase, index) => (
-								<article class:list={["use-case", { "use-case--extended": "artScale" in useCase, "use-case--strong-overlay": "strongOverlay" in useCase && useCase.strongOverlay }]} style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image});--image-size:${"imageSize" in useCase ? useCase.imageSize : "cover"};--art-scale:${"artScale" in useCase ? useCase.artScale : 1};--art-offset-x:${"artOffsetX" in useCase ? useCase.artOffsetX : "0%"}`}>
-									<div class="use-case-art" style={`--art-offset-y:${"artOffsetY" in useCase ? useCase.artOffsetY : "0%"}`} aria-hidden="true">
-										{"video" in useCase && <video class="use-case-video" src={useCase.video} style={`--video-scale:${"videoScale" in useCase ? useCase.videoScale : 1}`} data-playback-rate={"videoPlaybackRate" in useCase ? useCase.videoPlaybackRate : 1.5} poster={useCase.image} autoplay muted loop playsinline preload="auto" />}
+								<article class:list={["use-case", { "use-case--extended": "artScale" in useCase, "use-case--strong-overlay": "strongOverlay" in useCase && useCase.strongOverlay }]} style={`--accent:${useCase.accent};--position:${useCase.position};--image:url(${useCase.image});--image-size:${"imageSize" in useCase ? useCase.imageSize : "cover"};--art-scale:${"artScale" in useCase ? useCase.artScale : 1};--art-offset-x:${"artOffsetX" in useCase ? useCase.artOffsetX : "0%"}`} data-agent-profile-card>
+									<div class="use-case-face use-case-front" data-agent-profile-front>
+										<div class="use-case-art" style={`--art-offset-y:${"artOffsetY" in useCase ? useCase.artOffsetY : "0%"}`} aria-hidden="true">
+											{"video" in useCase && <video class="use-case-video" src={useCase.video} style={`--video-scale:${"videoScale" in useCase ? useCase.videoScale : 1}`} data-playback-rate={"videoPlaybackRate" in useCase ? useCase.videoPlaybackRate : 1.5} poster={useCase.image} autoplay muted loop playsinline preload="auto" />}
+										</div>
+										<div class="use-case-meta"><div class="use-case-agent-title">{"agentTitleLines" in useCase ? <>{useCase.agentTitleLines[0]}<span class="use-case-agent-line">{useCase.agentTitleLines[1]}</span></> : useCase.sector.includes(" & ") ? <>{useCase.sector.split(" & ")[0]} &<span class="use-case-agent-line">{useCase.sector.split(" & ")[1]} Agent</span></> : <>Professional<span class="use-case-agent-line">Services Agent</span></>}</div><span class="use-case-count">{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
+										<div class="use-case-body">
+											<h3>{useCase.title}</h3>
+										</div>
+										<div class="use-case-details">
+											<div class="use-case-tag-row">{useCase.details.slice(0, 2).map((detail) => <span>{detail}</span>)}</div>
+											<div class="use-case-tag-row"><span>{useCase.details[2]}</span></div>
+										</div>
+										<button class="use-case-profile-toggle" type="button" aria-expanded="false" data-agent-profile-open>View agent profile</button>
 									</div>
-									<div class="use-case-meta"><div class="use-case-agent-title">{"agentTitleLines" in useCase ? <>{useCase.agentTitleLines[0]}<span class="use-case-agent-line">{useCase.agentTitleLines[1]}</span></> : useCase.sector.includes(" & ") ? <>{useCase.sector.split(" & ")[0]} &<span class="use-case-agent-line">{useCase.sector.split(" & ")[1]} Agent</span></> : <>Professional<span class="use-case-agent-line">Services Agent</span></>}</div><span class="use-case-count">{String(index + 1).padStart(2, "0")} / {String(useCases.length).padStart(2, "0")}</span></div>
-									<div class="use-case-body">
-										<h3>{useCase.title}</h3>
-									</div>
-									<div class="use-case-details">
-										<div class="use-case-tag-row">{useCase.details.slice(0, 2).map((detail) => <span>{detail}</span>)}</div>
-										<div class="use-case-tag-row"><span>{useCase.details[2]}</span></div>
+									<div class="use-case-face use-case-profile" data-agent-profile-back inert>
+										<div class="use-case-profile-head">
+											<p>Agent profile</p>
+											<button type="button" data-agent-profile-close>Back</button>
+										</div>
+										<h3>{getUseCaseAgentName(useCase)}</h3>
+										<div class="use-case-profile-section">
+											<p class="use-case-profile-label">Capability</p>
+											<p>{useCase.capability}</p>
+										</div>
+										<div class="use-case-profile-section use-case-profile-skills">
+											<p class="use-case-profile-label">Core skills</p>
+											<ul>{coreAgentSkills.map((skill) => <li>{skill}</li>)}</ul>
+										</div>
+										<div class="use-case-profile-section use-case-profile-skills">
+											<p class="use-case-profile-label">Specialist skills</p>
+											<ul>{useCase.details.map((detail) => <li>{detail}</li>)}</ul>
+										</div>
+										<a class="use-case-profile-cta" href="/contact">Scope this agent</a>
 									</div>
 								</article>
 							))}
@@ -1333,15 +1373,55 @@ const faqColumns = [
 		min-height: 0;
 		aspect-ratio: 2 / 3;
 		flex: 0 0 auto;
-		padding: 30px;
-		display: flex;
-		flex-direction: column;
 		position: relative;
 		overflow: hidden;
 		border-radius: 18px;
 		background: var(--act-black);
 		color: var(--act-white);
 		isolation: isolate;
+		perspective: 1200px;
+	}
+
+	.use-case-face {
+		position: absolute;
+		inset: 0;
+		padding: 30px;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		border-radius: inherit;
+		backface-visibility: hidden;
+		transition: transform 620ms cubic-bezier(0.16, 1, 0.3, 1), opacity 240ms ease;
+		transform-style: preserve-3d;
+	}
+
+	.use-case-front {
+		background: var(--act-black);
+		cursor: pointer;
+		isolation: isolate;
+		transform: rotateY(0deg);
+	}
+
+	.use-case-profile {
+		padding: 24px;
+		background-color: var(--accent);
+		background-image:
+			linear-gradient(180deg, rgb(8 8 8 / 0.7), rgb(8 8 8 / 0.86)),
+			var(--image);
+		background-position: center, var(--position);
+		background-repeat: no-repeat;
+		background-size: cover, var(--image-size);
+		transform: rotateY(-180deg);
+	}
+
+	.use-case[data-profile-open="true"] .use-case-front {
+		opacity: 0;
+		transform: rotateY(180deg);
+	}
+
+	.use-case[data-profile-open="true"] .use-case-profile {
+		opacity: 1;
+		transform: rotateY(0deg);
 	}
 
 	.practice-controls {
@@ -1387,7 +1467,7 @@ const faqColumns = [
 		outline: none;
 	}
 
-	.use-case::before {
+	.use-case-front::before {
 		content: "";
 		position: absolute;
 		inset: 0;
@@ -1397,14 +1477,17 @@ const faqColumns = [
 
 	.use-case--strong-overlay {
 		--portrait-fill: #d5dfc4;
+	}
+
+	.use-case--strong-overlay .use-case-front {
 		background-color: #d5dfc4;
 	}
 
-	.use-case--strong-overlay::before {
+	.use-case--strong-overlay .use-case-front::before {
 		background: linear-gradient(180deg, rgb(0 0 0 / 0.48), rgb(0 0 0 / 0.08) 28%, rgb(0 0 0 / 0.16) 42%, rgb(0 0 0 / 0.72) 68%, rgb(0 0 0 / 0.88) 100%);
 	}
 
-	.use-case--extended::after {
+	.use-case--extended .use-case-front::after {
 		content: "";
 		position: absolute;
 		inset: 0;
@@ -1552,6 +1635,109 @@ const faqColumns = [
 		font-family: var(--font-sans);
 		font-size: 11px;
 		line-height: 1.1;
+	}
+
+	.use-case-profile-toggle,
+	.use-case-profile-head button,
+	.use-case-profile-cta {
+		border: 1px solid rgb(var(--act-white-rgb) / 0.28);
+		background: rgb(var(--act-white-rgb) / 0.1);
+		color: var(--act-white);
+		font: inherit;
+		font-size: 12px;
+		font-weight: 700;
+		line-height: 1;
+		text-decoration: none;
+		cursor: pointer;
+		transition: background 180ms ease, color 180ms ease;
+	}
+
+	.use-case-profile-toggle {
+		min-height: 38px;
+		margin-top: 16px;
+		border-radius: 999px;
+	}
+
+	.use-case-profile-toggle:hover,
+	.use-case-profile-toggle:focus-visible,
+	.use-case-profile-head button:hover,
+	.use-case-profile-head button:focus-visible,
+	.use-case-profile-cta:hover,
+	.use-case-profile-cta:focus-visible {
+		background: var(--act-white);
+		color: var(--act-black);
+		outline: none;
+	}
+
+	.use-case-profile-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.use-case-profile-head button {
+		min-height: 32px;
+		padding: 0 14px;
+		border-radius: 999px;
+	}
+
+	.use-case-profile > h3 {
+		margin: 22px 0 18px;
+		font-size: clamp(1.35rem, 1.7vw, 1.85rem);
+		font-weight: 700;
+		line-height: 1.04;
+		text-wrap: balance;
+	}
+
+	.use-case-profile-section + .use-case-profile-section {
+		margin-top: 12px;
+	}
+
+	.use-case-profile-section > p:last-child {
+		margin-top: 6px;
+		color: rgb(var(--act-white-rgb) / 0.82);
+		font-size: 12px;
+		line-height: 1.25;
+	}
+
+	.use-case-profile-label {
+		color: rgb(var(--act-white-rgb) / 0.48);
+		font-size: 10px;
+		font-weight: 700;
+		line-height: 1;
+		text-transform: uppercase;
+	}
+
+	.use-case-profile-skills ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		margin: 7px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.use-case-profile-skills li {
+		padding: 5px 7px;
+		border: 1px solid rgb(var(--act-white-rgb) / 0.16);
+		border-radius: 999px;
+		font-size: 9px;
+		line-height: 1.1;
+	}
+
+	.use-case-profile-cta {
+		min-height: 36px;
+		margin-top: auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		background: var(--act-white);
+		color: var(--act-black);
 	}
 
 	.governance {
@@ -2876,7 +3062,7 @@ const faqColumns = [
 		.use-case-carousel { margin-top: 56px; }
 		.practice-controls { margin-top: 28px; padding: 4px; gap: 4px; }
 		.practice-controls button { width: 30px; height: 30px; font-size: 16px; }
-		.use-case { padding: 20px; }
+		.use-case-face { padding: 20px; }
 		.use-case-meta { font-size: 10px; }
 		.use-case-meta { align-items: flex-start; }
 		.use-case-agent-title { min-height: 2.4em; }
@@ -2886,6 +3072,13 @@ const faqColumns = [
 		.use-case-body h3 { font-size: 19px; line-height: 1.2; }
 		.use-case-details { grid-template-rows: repeat(2, 23px); margin-top: 12px; }
 		.use-case-details span { font-size: 10px; padding: 5px 8px; }
+		.use-case-profile-toggle { min-height: 34px; margin-top: 10px; font-size: 11px; }
+		.use-case-profile > h3 { margin: 20px 0 16px; font-size: 1.35rem; }
+		.use-case-profile-section + .use-case-profile-section { margin-top: 12px; }
+		.use-case-profile-section > p:last-child { font-size: 12px; line-height: 1.25; }
+		.use-case-profile-skills ul { margin-top: 7px; }
+		.use-case-profile-skills li { padding: 5px 7px; font-size: 9px; }
+		.use-case-profile-cta { min-height: 36px; font-size: 11px; }
 	}
 	@media (max-width: 620px) {
 		.air-panel,
@@ -3242,6 +3435,7 @@ const faqColumns = [
 			if (!(clone instanceof HTMLElement)) return;
 			clone.setAttribute("aria-hidden", "true");
 			clone.dataset.practiceClone = "true";
+			clone.querySelectorAll("button, a").forEach((control) => control.setAttribute("tabindex", "-1"));
 			track.append(clone);
 		});
 
@@ -3250,6 +3444,7 @@ const faqColumns = [
 		const next = controls?.querySelector("[data-practice-next]");
 		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 		const handheldLayout = window.matchMedia("(max-width: 720px), (pointer: coarse) and (max-width: 1180px)");
+		const hoverProfiles = window.matchMedia("(hover: hover) and (pointer: fine)");
 		const cardVideos = [...track.querySelectorAll("video")];
 		cardVideos.forEach((video) => {
 			prepareInlineVideo(video);
@@ -3264,10 +3459,11 @@ const faqColumns = [
 		});
 		const videoVisibility = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
+				const card = entry.target;
 				const video = entry.target.querySelector("video");
 				if (!(video instanceof HTMLVideoElement)) return;
 				video.dataset.visible = String(entry.isIntersecting);
-				if (entry.isIntersecting && !reducedMotion.matches) {
+				if (entry.isIntersecting && !reducedMotion.matches && card instanceof HTMLElement && card.dataset.profileOpen !== "true") {
 					playInlineVideo(video);
 				} else video.pause();
 			});
@@ -3279,7 +3475,7 @@ const faqColumns = [
 		reducedMotion.addEventListener("change", () => {
 			cardVideos.forEach((video) => {
 				if (reducedMotion.matches) video.pause();
-				else if (video.dataset.visible === "true") playInlineVideo(video);
+				else if (video.dataset.visible === "true" && video.closest("[data-agent-profile-card]")?.getAttribute("data-profile-open") !== "true") playInlineVideo(video);
 			});
 		});
 		let pauseUntil = 0;
@@ -3290,6 +3486,55 @@ const faqColumns = [
 		let arrowTimer;
 		let centring = false;
 		let arrowControlled = false;
+		const profileCards = [...track.querySelectorAll("[data-agent-profile-card]")];
+		const setProfileState = (card, open, moveFocus = true) => {
+			if (!(card instanceof HTMLElement)) return;
+			const front = card.querySelector("[data-agent-profile-front]");
+			const back = card.querySelector("[data-agent-profile-back]");
+			const openButton = card.querySelector("[data-agent-profile-open]");
+			const closeButton = card.querySelector("[data-agent-profile-close]");
+			const video = card.querySelector("video");
+			card.dataset.profileOpen = String(open);
+			front?.setAttribute("aria-hidden", String(open));
+			back?.setAttribute("aria-hidden", String(!open));
+			if (open) {
+				front?.setAttribute("inert", "");
+				back?.removeAttribute("inert");
+				if (video instanceof HTMLVideoElement) video.pause();
+				if (moveFocus && closeButton instanceof HTMLElement) closeButton.focus();
+			} else {
+				front?.removeAttribute("inert");
+				back?.setAttribute("inert", "");
+				if (video instanceof HTMLVideoElement && video.dataset.visible === "true" && !reducedMotion.matches) playInlineVideo(video);
+				if (moveFocus && openButton instanceof HTMLElement) openButton.focus();
+			}
+			if (openButton instanceof HTMLButtonElement) openButton.setAttribute("aria-expanded", String(open));
+			pauseUntil = performance.now() + 5000;
+		};
+		profileCards.forEach((card) => {
+			if (!(card instanceof HTMLElement)) return;
+			card.addEventListener("pointerenter", () => {
+				if (hoverProfiles.matches) setProfileState(card, true, false);
+			});
+			card.addEventListener("pointerleave", () => {
+				if (hoverProfiles.matches && !card.matches(":focus-within")) setProfileState(card, false, false);
+			});
+			card.addEventListener("click", (event) => {
+				if (!(event.target instanceof Element) || event.target.closest("a, button")) return;
+				setProfileState(card, card.dataset.profileOpen !== "true", false);
+			});
+			card.querySelector("[data-agent-profile-open]")?.addEventListener("click", (event) => {
+				event.stopPropagation();
+				setProfileState(card, true);
+			});
+			card.querySelector("[data-agent-profile-close]")?.addEventListener("click", (event) => {
+				event.stopPropagation();
+				setProfileState(card, false);
+			});
+			card.addEventListener("keydown", (event) => {
+				if (event.key === "Escape" && card.dataset.profileOpen === "true") setProfileState(card, false);
+			});
+		});
 		window.requestAnimationFrame(() => {
 			const firstCard = originalCards[0];
 			if (!(firstCard instanceof HTMLElement)) return;
@@ -3374,7 +3619,8 @@ const faqColumns = [
 			lastTick = time;
 			const bounds = carousel.getBoundingClientRect();
 			const isVisible = bounds.top < window.innerHeight && bounds.bottom > 0;
-			if (!reducedMotion.matches && !interacting && !arrowControlled && isVisible && time >= pauseUntil) {
+			const hasOpenProfile = Boolean(track.querySelector('[data-profile-open="true"]'));
+			if (!reducedMotion.matches && !interacting && !arrowControlled && !hasOpenProfile && isVisible && time >= pauseUntil) {
 				// Retain fractional movement on browsers that round scrollLeft.
 				const width = loopWidth();
 				scrollPosition += delta * (handheldLayout.matches ? 0.035 : 0.045);
