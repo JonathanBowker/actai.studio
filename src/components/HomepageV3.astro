@@ -394,7 +394,7 @@ const faqColumns = [
 		</section>
 	</main>
 
-	<footer class="site-footer" id="footer">
+	<footer class="site-footer" id="footer" data-scroll-tone-section data-scroll-tone-entry="1.08">
 		<div class="footer-grid">
 			<div class="footer-primary">
 				<blockquote class="footer-quote">
@@ -408,12 +408,12 @@ const faqColumns = [
 				<a href="/privacy">Privacy</a>
 			</nav>
 			<div class="footer-about">
-				<strong>Advanced Analytica</strong>
+				<strong data-scroll-tone-line>Advanced Analytica</strong>
 				<div class="footer-about-copy">
-					<p>Act AI Studio is the outreach and AI engagement arm of Advanced Analytica, a UK-based business.</p>
-					<p>Advanced Analytica helps businesses put the knowledge they already hold to work. That knowledge sits with busy people, in static documents and in processes that weren&rsquo;t built for AI.</p>
-					<p>We turn it into governed data, then put AI to work on it under the client&rsquo;s own policies. We bring the strategy, the specification and the AI skills to make it happen.</p>
-					<p>Move fast. Stay safe.</p>
+					<p data-scroll-tone-line>Act AI Studio is the outreach and AI engagement arm of Advanced Analytica, a UK-based business.</p>
+					<p data-scroll-tone-line>Advanced Analytica helps businesses put the knowledge they already hold to work. That knowledge sits with busy people, in static documents and in processes that weren&rsquo;t built for AI.</p>
+					<p data-scroll-tone-line>We turn it into governed data, then put AI to work on it under the client&rsquo;s own policies. We bring the strategy, the specification and the AI skills to make it happen.</p>
+					<p data-scroll-tone-line>Move fast. Stay safe.</p>
 				</div>
 			</div>
 			<div class="footer-social">
@@ -2000,6 +2000,10 @@ const faqColumns = [
 		font-weight: 400;
 		letter-spacing: var(--tracking-copy);
 		line-height: 1.3;
+	}
+
+	.footer-about-copy [data-scroll-tone-line] {
+		color: var(--act-light-text);
 	}
 
 	.footer-about-copy p + p {
