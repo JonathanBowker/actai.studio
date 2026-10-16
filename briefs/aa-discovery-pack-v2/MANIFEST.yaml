@@ -1,0 +1,73 @@
+pack: aa-discovery-pack
+version: 2.0.0
+owner: Advanced Analytica Ltd
+contact: jonathan@advancedanalytica.co.uk
+doors: [make, work]
+question_count: 10
+probe_limit_per_question: 1
+consent_option: B
+package_trigger: "package my answers"
+platforms: [chatgpt-project, chatgpt-custom-gpt, claude-project]
+files:
+  - path: MANIFEST.yaml
+    role: manifest
+    sha256: 81588aa3c3d53481c5b8f8b104bb667bf4539ddc4ca9c696411cfe425c9fcbfa
+  - path: AGENTS.md
+    role: system
+    sha256: 08eaafb8ff2d0546ba216383cd0711c889edd7550683e662731ff0669974d22a
+  - path: CHANGELOG.md
+    role: changelog
+    sha256: 21d8ed29ec261dc1f28336cc9978ba68fe09949fa49a085ebba8358cd720d55a
+  - path: LICENCE.txt
+    role: licence
+    sha256: adb6f0ee30c0d5e6ef4005fe8bc6f6d9a5c769a09d254ce47e21acb8c995dbb0
+  - path: README.md
+    role: instructions
+    sha256: 337548d957b06a3f609363e40dea5abb483206b8fd03a3725253fd6c41a37f70
+  - path: examples/sample-answers-make.md
+    role: example
+    sha256: 2d6f79514c2fd90a8c14a90c2ef19394a9637df4f8c419e61db7ca96d31b23bd
+  - path: examples/sample-answers-work.md
+    role: example
+    sha256: 00e62f403135aea625be2bdd0a4143f0ad8e5e7f037462dae6fb77d29535a596
+  - path: platform/chatgpt-custom-gpt-config.md
+    role: platform
+    sha256: 77f1dd615fede036e6e1e3dd73939e2952abab5026bf4ef232ff62d17bccc800
+  - path: platform/chatgpt-project-instructions.md
+    role: platform
+    sha256: ceb8b36489b707026a4e047068d692c2e16d2c81d2a151cbd5d645ba99dfa39f
+  - path: platform/claude-project-instructions.md
+    role: platform
+    sha256: 55c11e447cb41ed9f7f2cfbe9c7aec503acad602358c1ff56c1e63190503f04c
+  - path: prompts/00-consent.md
+    role: consent
+    sha256: 2fd561cd35883184677167f0279c2c9bb6e97e88eda60dc1259f7e569c4c8ffc
+  - path: prompts/01-opener-make.md
+    role: prompt
+    sha256: 98e338290d944087ba92ed03063f946f9807ac85043038be7a73586c0af8f530
+  - path: prompts/01-opener-work.md
+    role: prompt
+    sha256: b0289b59dc419a91ee160a5a241283550b9eb9435bd3a32e5d41779a5275b93a
+  - path: prompts/02-questions.md
+    role: prompt
+    sha256: 10cf6bba6f336b183c02e8b0d9b2117e1bd2cea5590885a9fd9189420c21d2b8
+  - path: prompts/03-close.md
+    role: prompt
+    sha256: b813e8f181fabe8eb947b689c94dcaa477c6d2fd61ead30987105717bed9a566
+  - path: prompts/04-output-template.md
+    role: output-template
+    sha256: bef3d9cda7dc22db78cfc5b7a621ca804af6223c990a181adc035097f2c51ba9
+  - path: scripts/build_zip.py
+    role: tool
+    sha256: 9593e55aeaac9094824b77d4d0d1ac36448a55591fe5d8fde8bca662571d9cf9
+  - path: scripts/parse_answers.py
+    role: tool
+    sha256: 0b87d57a245a781df058dfc1b1a2fe9cd002f4d2b463fbc21a92e6c2198dcdb7
+  - path: scripts/validate_pack.py
+    role: tool
+    sha256: 70eb404e8e6b1e0fbdbe12661d64679fd06d8c582399b9c510416bf9a48018d3
+output:
+  format: markdown
+  template: prompts/04-output-template.md
+  filename_pattern: "{session_id}.md"
+  return_to: jonathan@advancedanalytica.co.uk
