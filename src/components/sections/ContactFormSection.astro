@@ -14,14 +14,15 @@ const callSteps = [
 ];
 const nextSteps = isCall ? callSteps : contactSteps;
 const options = isCall
-	? ["AI direction", "Agent diagnostic", "Agent delivery", "Not sure yet"]
-	: ["Agent in the Room", "AI direction", "Agent delivery", "Something else"];
+	? ["Something to Make", "Something to Work", "AI direction", "Agent diagnostic", "Agent delivery", "Not sure yet"]
+	: ["Something to Make", "Something to Work", "Agent in the Room", "AI direction", "Agent delivery", "Something else"];
 const buttonLabel = isCall ? "Send call request" : "Send message";
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
 ---
 
 <section class="contact-form-section bg-[#ebe9e4] px-5 py-20 text-[#11110f] sm:px-8 lg:px-10 lg:py-28" data-theme={theme}>
 	<div class="mx-auto grid min-w-0 max-w-[88rem] gap-16 lg:grid-cols-[1.08fr_0.82fr] lg:items-start">
-		<form class="contact-card min-w-0 rounded-lg border border-black/10 bg-[#f6f4ef] p-6 sm:p-9 lg:p-11" action="/api/contact" method="post" data-contact-page-form>
+		<form class="contact-card min-w-0 rounded-lg border border-black/10 bg-[#f6f4ef] p-6 sm:p-9 lg:p-11" action="/api/contact" method="post" data-contact-page-form data-turnstile-site-key={turnstileSiteKey}>
 			<div class="mb-10 flex items-end justify-between gap-6 border-b border-black/12 pb-7">
 				<div>
 					<p class="text-sm font-bold uppercase tracking-[0.12em] text-[#77736a]">{isCall ? "Start the conversation" : "Send us a message"}</p>
@@ -50,7 +51,7 @@ const buttonLabel = isCall ? "Send call request" : "Send message";
 
 			<label class="contact-honeypot" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
 
-			<button class="action-pill mt-7 inline-flex h-13 w-full items-center justify-center bg-[#11110f] px-6 text-sm font-bold text-white transition hover:bg-[#dfff42] hover:text-black disabled:cursor-wait disabled:opacity-65" type="submit" data-contact-submit data-default-label={buttonLabel}>{buttonLabel}</button>
+			<button class="action-pill mt-7 inline-flex h-13 w-full items-center justify-center border border-[#11110f] bg-[#11110f] px-6 text-sm font-bold text-white transition hover:bg-white hover:text-[#11110f] disabled:cursor-wait disabled:opacity-65" type="submit" data-contact-submit data-default-label={buttonLabel}>{buttonLabel}</button>
 			<p class="mt-4 text-center text-sm font-bold" data-contact-status aria-live="polite"></p>
 			<p class="mt-4 text-center text-sm font-bold text-[#89857d]">{isCall ? "No commitment required." : "Your details are used only to respond to your enquiry."}</p>
 		</form>
@@ -109,12 +110,14 @@ const buttonLabel = isCall ? "Send call request" : "Send message";
 	}
 
 	.contact-form-section[data-theme="dark"] [data-contact-submit] {
+		border-color: #fff;
 		background: #fff;
 		color: #10100f;
 	}
 
 	.contact-form-section[data-theme="dark"] [data-contact-submit]:hover {
-		background: #dfff42;
+		background: #10100f;
+		color: #fff;
 	}
 
 	.contact-form-section[data-theme="dark"] :is(input, select, textarea) {
@@ -144,9 +147,16 @@ const buttonLabel = isCall ? "Send call request" : "Send message";
 </style>
 
 <script>
+	import { getProtectedFormData, getProtectionErrorMessage, initialiseProtectedForm, resetProtectedForm } from "../../scripts/contactProtection";
 	const form = document.querySelector<HTMLFormElement>("[data-contact-page-form]");
 	const submitButton = form?.querySelector<HTMLButtonElement>("[data-contact-submit]");
 	const status = form?.querySelector<HTMLElement>("[data-contact-status]");
+	const startingPoint = form?.querySelector<HTMLSelectElement>('[name="starting-point"]');
+	const path = new URLSearchParams(window.location.search).get("path");
+	if (startingPoint && (path === "make" || path === "work")) {
+		startingPoint.value = path === "make" ? "Something to Make" : "Something to Work";
+	}
+	initialiseProtectedForm(form);
 
 	form?.addEventListener("submit", async (event) => {
 		event.preventDefault();
@@ -159,16 +169,17 @@ const buttonLabel = isCall ? "Send call request" : "Send message";
 		try {
 			const response = await fetch(form.action, {
 				method: "POST",
-				body: new FormData(form),
+				body: await getProtectedFormData(form),
 				headers: { Accept: "application/json" },
 			});
 			const result = await response.json();
 
 			if (!response.ok || !result.ok) {
-				throw new Error(result.message || "We could not send your note.");
+				throw new Error(getProtectionErrorMessage(result, "We could not send your note."));
 			}
 
 			form.reset();
+			resetProtectedForm(form);
 			status.className = "mt-4 text-center text-sm font-bold text-[#315c00]";
 			status.textContent = result.message;
 		} catch (error) {

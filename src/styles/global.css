@@ -64,11 +64,17 @@
   font-synthesis: none;
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
-  --header-height: 60px;
+  --header-height: 80px;
 }
 
 * {
   box-sizing: border-box;
+}
+
+@media (max-width: 1180px) {
+  :root {
+    --header-height: 66px;
+  }
 }
 
 @media (max-width: 620px) {

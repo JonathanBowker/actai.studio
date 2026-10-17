@@ -1,6 +1,7 @@
 ---
-interface Props { showContactLink?: boolean; theme?: "light" | "dark" }
-const { showContactLink = true, theme = "light" } = Astro.props;
+interface Props { showContactLink?: boolean; theme?: "light" | "dark"; homeLinks?: boolean }
+const { showContactLink = true, theme = "light", homeLinks = false } = Astro.props;
+const sectionHref = (id: string) => `${homeLinks ? "" : "/"}#${id}`;
 ---
 
 <header class="nav-pill glass" data-site-header data-has-contact={String(showContactLink)} data-theme={theme}>
@@ -10,17 +11,16 @@ const { showContactLink = true, theme = "light" } = Astro.props;
 	<nav class="site-menu" data-menu-panel data-open="false" aria-label="Main menu">
 		<div>
 			<div class="site-menu-links">
-				<a class="site-menu-link" href="/#opportunity">The opportunity</a>
-				<a class="site-menu-link" href="/#stages">The method</a>
-				<a class="site-menu-link" href="/#practice">The practice</a>
-				<a class="site-menu-link" href="/#governance">The governance</a>
-				<a class="site-menu-link" href="/#direction">The direction</a>
-				<a class="site-menu-link" href="/#footer">The company</a>
-				{showContactLink && <a class="action-pill site-menu-link site-menu-contact" href="/meeting">Request a 30-minute call</a>}
+				<a class="site-menu-link" href={sectionHref("opportunity")}>The opportunity</a>
+				<a class="site-menu-link" href={sectionHref("stages")}>The method</a>
+				<a class="site-menu-link" href={sectionHref("practice")}>The practice</a>
+				<a class="site-menu-link" href={sectionHref("direction")}>The direction</a>
+				<a class="site-menu-link" href={sectionHref("footer")}>The company</a>
+				{showContactLink && <a class="action-pill site-menu-link site-menu-contact" href="/meeting" data-opportunity-drawer="make">Request a 30-minute call</a>}
 			</div>
 		</div>
 	</nav>
-	{showContactLink && <a class="action-pill site-contact-link" href="/meeting">Request a 30-minute call</a>}
+	{showContactLink && <a class="action-pill site-contact-link" href="/meeting" data-opportunity-drawer="make">Request a 30-minute call</a>}
 	<button class="action-pill menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
 		<span class="menu-icon" data-menu-icon data-open="false" aria-hidden="true"></span>
 	</button>
@@ -40,6 +40,7 @@ const { showContactLink = true, theme = "light" } = Astro.props;
 		position: fixed;
 		right: 0;
 		top: 0;
+		padding-inline: clamp(1.5rem, 4.167vw, 5rem);
 		z-index: 50;
 	}
 
@@ -49,45 +50,47 @@ const { showContactLink = true, theme = "light" } = Astro.props;
 		background: transparent;
 		display: flex;
 		justify-self: start;
-		min-width: 14.25rem;
-		padding: 0 0 0 3.75rem;
+		min-width: 0;
+		padding-left: 0;
 	}
 
 	.site-brand img {
 		filter: brightness(0);
-		width: 10.5rem;
+		height: 2.1875rem;
+		width: auto;
 	}
 
 	.site-menu {
 		display: flex;
-		justify-content: flex-start;
+		justify-content: flex-end;
+		min-width: 0;
 	}
 
 	.site-menu-links {
 		align-items: center;
 		display: flex;
-		gap: clamp(1rem, 2.4vw, 3.25rem);
-		justify-content: flex-start;
-		padding: 0 0 0 3.875rem;
+		gap: clamp(1rem, 1.8vw, 2.25rem);
+		justify-content: flex-end;
+		padding: 0 1.75rem 0 2rem;
 		white-space: nowrap;
 	}
 
 	.site-menu-link {
 		border-radius: 9999px;
 		color: #101010;
-		font-size: clamp(1rem, 1.3vw, 1.5625rem);
-		font-weight: 600;
+		font-size: 0.9375rem;
+		font-weight: 400;
 		padding: 0.5rem 0;
 		text-decoration: none;
-		transition: background 160ms ease, color 160ms ease;
+		transition: background 160ms ease, color 160ms ease, opacity 160ms ease;
 	}
 
 	.site-menu-link:hover,
 	.site-menu-link:focus-visible {
 		background: transparent;
 		color: #101010;
-		outline: 2px solid #101010;
-		outline-offset: 5px;
+		opacity: 0.55;
+		outline: 0;
 	}
 
 	.site-menu-contact { display: none; }
@@ -95,25 +98,30 @@ const { showContactLink = true, theme = "light" } = Astro.props;
 	.site-contact-link {
 		align-items: center;
 		background: transparent;
-		border: 2px solid #101010;
+		border: 1px solid #101010;
 		border-radius: 9999px;
 		color: #11110f;
 		display: inline-flex;
-		font-weight: 700;
-		font-size: clamp(1rem, 1.3vw, 1.5625rem);
-		height: 4.375rem;
+		font-weight: 400;
+		font-size: 0.875rem;
+		height: 2.75rem;
 		justify-content: center;
 		justify-self: end;
-		margin-right: 3.75rem;
-		padding: 0 2rem;
+		margin-right: 0;
+		padding: 0 1.5rem;
 		text-decoration: none;
 		transition: background 180ms ease;
-		width: clamp(18rem, 21.77vw, 26.125rem);
+		width: auto;
 	}
 
-	.site-contact-link:hover,
+	.site-contact-link:hover {
+		background: #101010;
+		color: #fff;
+	}
+
 	.site-contact-link:focus-visible {
-		background: #dfff42;
+		background: #101010;
+		color: #fff;
 		outline: 2px solid #101010;
 		outline-offset: 2px;
 	}
@@ -128,7 +136,7 @@ const { showContactLink = true, theme = "light" } = Astro.props;
 		height: 2.75rem;
 		justify-content: center;
 		justify-self: end;
-		margin-right: 1.25rem;
+		margin-right: 0;
 		width: 2.75rem;
 	}
 
@@ -183,15 +191,15 @@ const { showContactLink = true, theme = "light" } = Astro.props;
 		outline-color: #fff;
 	}
 
-	@media (max-width: 1500px) {
+	@media (max-width: 1180px) {
 		.nav-pill { grid-template-columns: 1fr auto; }
 
 		.site-brand {
-			min-width: 9.5rem;
-			padding: 0 1.25rem;
+			min-width: 0;
+			padding: 0;
 		}
 
-		.site-brand img { width: 5.25rem; }
+		.site-brand img { width: auto; height: 2.125rem; }
 		.site-contact-link { display: none; }
 		.site-menu-contact { color: #101010; display: block; }
 
@@ -238,8 +246,15 @@ const { showContactLink = true, theme = "light" } = Astro.props;
 		}
 
 		.site-menu-link {
+			border-radius: 0;
 			font-size: 1rem;
 			padding: 0.75rem 0.9rem;
+		}
+
+		.site-menu-link:hover,
+		.site-menu-link:focus-visible {
+			opacity: 0.55;
+			outline: 0;
 		}
 
 		.nav-pill > .menu-toggle {
@@ -257,9 +272,10 @@ const { showContactLink = true, theme = "light" } = Astro.props;
 	}
 
 	@media (max-width: 620px) {
-		.nav-pill { height: 58px; }
+		.nav-pill { height: 58px; padding-inline: 1.5rem; }
 		.site-brand img { width: auto; height: 26px; }
 	}
+
 </style>
 
 <script>

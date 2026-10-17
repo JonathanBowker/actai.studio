@@ -1,6 +1,7 @@
 ---
 interface Props { agent: any; zipHref: string; packBase: string; bookingHref: string }
 const { agent, zipHref, packBase, bookingHref } = Astro.props;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
 ---
 <section id="pack" class="pack stack-panel">
 	<div class="pack__inner">
@@ -23,7 +24,12 @@ const { agent, zipHref, packBase, bookingHref } = Astro.props;
 				</div>
 			</div>
 			<div class="gate-surface reveal">
-				<form class="gate-form" data-pack-gate data-agent-slug={agent.id}>
+				<form class="gate-form" action="/api/contact" method="post" data-pack-gate data-agent-slug={agent.id} data-turnstile-site-key={turnstileSiteKey}>
+					<input type="hidden" name="role" value="Diagnostic pack request" />
+					<input type="hidden" name="company" value="Not supplied" />
+					<input type="hidden" name="starting-point" value="Agent diagnostic" />
+					<input type="hidden" name="details" value={`Requested the ${agent.data.name} diagnostic pack.`} />
+					<input type="text" name="website" tabindex="-1" autocomplete="off" hidden />
 					<div class="gate-fields">
 						<label class="gate-label"><span>Name</span><input class="gate-input" name="name" autocomplete="name" required /></label>
 						<label class="gate-label"><span>Email</span><input class="gate-input" name="email" type="email" autocomplete="email" required /></label>
@@ -31,6 +37,7 @@ const { agent, zipHref, packBase, bookingHref } = Astro.props;
 					<label class="gate-checkbox"><input name="consent" type="checkbox" required /><span>I consent to Act AI Studio contacting me about this diagnostic pack and related AI direction.</span></label>
 					<p class="gate-privacy">We use these details to exchange the self-help pack for contact permission. Read the <a href="/privacy">privacy notice</a>.</p>
 					<button class="action-pill agent-button agent-button--unlock" type="submit">Unlock the pack</button>
+					<p class="gate-privacy" data-pack-status aria-live="polite"></p>
 				</form>
 				<div class="unlock-panel" data-pack-unlock hidden>
 					<p>Your compressed ZIP pack is ready.</p>

@@ -1,0 +1,418 @@
+---
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
+---
+
+<dialog class="opportunity-drawer" data-opportunity-dialog aria-labelledby="opportunity-drawer-title">
+	<div class="opportunity-drawer-panel">
+		<button class="opportunity-drawer-close" type="button" aria-label="Close contact form" data-opportunity-close>
+			<span aria-hidden="true">&times;</span>
+		</button>
+
+		<p class="opportunity-drawer-label">Your direction</p>
+		<h2 id="opportunity-drawer-title">Request a<br />30-minute call.</h2>
+
+		<div class="opportunity-tabs" role="tablist" aria-label="Choose your direction" data-direction="make">
+			<button type="button" role="tab" aria-selected="true" data-opportunity-tab="make">Something to Make</button>
+			<button type="button" role="tab" aria-selected="false" data-opportunity-tab="work">Something to Work</button>
+		</div>
+
+		<form action="/api/contact" method="post" data-opportunity-form data-turnstile-site-key={turnstileSiteKey}>
+			<input type="hidden" name="starting-point" value="Something to Make" data-opportunity-type />
+
+			<div class="opportunity-field-grid">
+				<label>Full name<input name="name" autocomplete="name" required /></label>
+				<label>Job title<input name="role" autocomplete="organization-title" required /></label>
+				<label>Company<input name="company" autocomplete="organization" required /></label>
+				<label>Work email<input name="email" type="email" autocomplete="email" required /></label>
+			</div>
+
+			<label class="opportunity-details">
+				<span data-opportunity-details-label>What do you want to make?</span>
+				<textarea name="details" required></textarea>
+			</label>
+
+			<label class="opportunity-honeypot" aria-hidden="true">Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+
+			<button class="opportunity-submit" type="submit" data-opportunity-submit>Send call request</button>
+			<p class="opportunity-status" data-opportunity-status aria-live="polite"></p>
+			<p class="opportunity-privacy">Your details are used only to respond to your enquiry. Read our <a href="/privacy">privacy policy</a>.</p>
+		</form>
+	</div>
+</dialog>
+
+<style>
+	.opportunity-drawer {
+		width: clamp(540px, 36vw, 720px);
+		max-width: none;
+		height: calc(100dvh - 32px);
+		max-height: none;
+		margin: 16px 16px 16px auto;
+		padding: 0;
+		border: 1px solid rgb(255 255 255 / 0.08);
+		border-radius: 32px;
+		outline: 0;
+		background: #171719;
+		color: #fcfcfc;
+		box-shadow: 0 24px 80px rgb(0 0 0 / 0.42);
+		transform: translateX(100%);
+		transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.opportunity-drawer[open][data-visible="true"] {
+		transform: translateX(0);
+	}
+
+	.opportunity-drawer[data-closing="true"] {
+		transform: translateX(100%);
+	}
+
+	.opportunity-drawer::backdrop {
+		background: rgb(0 0 0 / 0.68);
+		backdrop-filter: blur(10px);
+		opacity: 0;
+		transition: opacity 240ms ease;
+	}
+
+	.opportunity-drawer[data-visible="true"]::backdrop {
+		opacity: 1;
+	}
+
+	.opportunity-drawer-panel {
+		min-height: 100%;
+		box-sizing: border-box;
+		padding: clamp(32px, 3vw, 52px);
+		position: relative;
+		overflow-y: auto;
+		font-family: var(--font-sans, sans-serif);
+	}
+
+	.opportunity-drawer-close {
+		width: 40px;
+		height: 40px;
+		display: grid;
+		place-items: center;
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		padding: 0;
+		border: 1px solid rgb(255 255 255 / 0.2);
+		border-radius: 999px;
+		background: rgb(255 255 255 / 0.04);
+		color: inherit;
+		font: inherit;
+		font-size: 30px;
+		line-height: 1;
+		cursor: pointer;
+	}
+
+	.opportunity-drawer-label {
+		margin: 0 0 18px;
+		color: #9a9aa1;
+		font-size: 13px;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.opportunity-drawer h2 {
+		margin: 0;
+		font-size: clamp(2.5rem, 3.8vw, 4rem);
+		font-weight: 600;
+		letter-spacing: -0.025em;
+		line-height: 1.05;
+	}
+
+	.opportunity-tabs {
+		position: relative;
+		margin: clamp(36px, 5vh, 52px) 0 32px;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4px;
+		width: 100%;
+		padding: 4px;
+		border-radius: 999px;
+		background: #232326;
+	}
+
+	.opportunity-tabs::before {
+		content: "";
+		position: absolute;
+		inset: 4px auto 4px 4px;
+		width: calc((100% - 12px) / 2);
+		border-radius: 999px;
+		background: #fcfcfc;
+		transform: translateX(0);
+		transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.opportunity-tabs[data-direction="work"]::before {
+		transform: translateX(calc(100% + 4px));
+	}
+
+	.opportunity-tabs button {
+		position: relative;
+		z-index: 1;
+		min-width: 0;
+		min-height: 46px;
+		padding: 0 12px;
+		border: 0;
+		border-radius: 999px;
+		background: transparent;
+		color: #919198;
+		font: inherit;
+		font-size: clamp(14px, 1.2vw, 18px);
+		font-weight: 700;
+		white-space: nowrap;
+		cursor: pointer;
+	}
+
+	.opportunity-tabs button[aria-selected="true"] {
+		background: transparent;
+		color: #101010;
+	}
+
+	.opportunity-field-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px 12px;
+	}
+
+	.opportunity-drawer label {
+		display: grid;
+		gap: 9px;
+		color: #9a9aa1;
+		font-size: 13px;
+		font-weight: 700;
+	}
+
+	.opportunity-drawer input,
+	.opportunity-drawer textarea {
+		width: 100%;
+		box-sizing: border-box;
+		border: 1px solid transparent;
+		border-radius: 14px;
+		background: #232326;
+		color: #fcfcfc;
+		font: inherit;
+		font-size: 17px;
+		outline: none;
+	}
+
+	.opportunity-drawer input {
+		height: 48px;
+		padding: 0 16px;
+	}
+
+	.opportunity-drawer textarea {
+		min-height: 104px;
+		padding: 16px 18px;
+		resize: vertical;
+	}
+
+	.opportunity-drawer input:focus-visible,
+	.opportunity-drawer textarea:focus-visible,
+	.opportunity-drawer button:focus-visible {
+		outline: 2px solid #fcfcfc;
+		outline-offset: 3px;
+	}
+
+	.opportunity-details {
+		margin-top: 22px;
+	}
+
+	.opportunity-honeypot {
+		position: absolute;
+		left: -10000px;
+	}
+
+	.opportunity-submit {
+		width: 100%;
+		min-height: 48px;
+		margin-top: 28px;
+		padding: 0 28px;
+		border: 1px solid #fcfcfc;
+		border-radius: 999px;
+		background: #fcfcfc;
+		color: #101010;
+		font: inherit;
+		font-size: 15px;
+		font-weight: 700;
+		cursor: pointer;
+		transition: background 180ms ease, color 180ms ease;
+	}
+
+	.opportunity-submit:hover {
+		background: #101010;
+		color: #fcfcfc;
+		border-color: #fcfcfc;
+	}
+
+	.opportunity-submit:disabled {
+		cursor: wait;
+		opacity: 0.6;
+	}
+
+	.opportunity-status,
+	.opportunity-privacy {
+		margin: 16px 0 0;
+		font-size: 13px;
+		line-height: 1.4;
+	}
+
+	.opportunity-privacy {
+		color: #898990;
+		text-align: center;
+		text-wrap: balance;
+	}
+
+	.opportunity-privacy a {
+		color: #fcfcfc;
+		text-decoration: underline;
+		text-decoration-color: rgb(252 252 252 / 0.5);
+		text-underline-offset: 3px;
+	}
+
+	.opportunity-privacy a:hover {
+		text-decoration-color: currentColor;
+	}
+
+	@media (max-width: 620px) {
+		.opportunity-drawer {
+			width: 100%;
+			height: 100dvh;
+			margin: 0;
+			border-radius: 0;
+		}
+
+		.opportunity-drawer-panel {
+			padding: 56px 24px 32px;
+		}
+
+		.opportunity-field-grid {
+			grid-template-columns: 1fr;
+			gap: 16px;
+		}
+
+		.opportunity-tabs {
+			margin: 32px 0 28px;
+		}
+
+		.opportunity-drawer input {
+			height: 48px;
+		}
+
+		.opportunity-details {
+			margin-top: 20px;
+		}
+
+		.opportunity-drawer textarea {
+			min-height: 96px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.opportunity-drawer,
+		.opportunity-drawer::backdrop,
+		.opportunity-tabs::before {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	import { getProtectedFormData, getProtectionErrorMessage, initialiseProtectedForm, resetProtectedForm } from "../../scripts/contactProtection";
+	const dialog = document.querySelector<HTMLDialogElement>("[data-opportunity-dialog]");
+	const form = dialog?.querySelector<HTMLFormElement>("[data-opportunity-form]");
+	const tabs = [...(dialog?.querySelectorAll<HTMLButtonElement>("[data-opportunity-tab]") ?? [])];
+	const typeInput = dialog?.querySelector<HTMLInputElement>("[data-opportunity-type]");
+	const detailsLabel = dialog?.querySelector<HTMLElement>("[data-opportunity-details-label]");
+	const submitButton = dialog?.querySelector<HTMLButtonElement>("[data-opportunity-submit]");
+	const status = dialog?.querySelector<HTMLElement>("[data-opportunity-status]");
+	let returnFocus: HTMLElement | null = null;
+	initialiseProtectedForm(form);
+
+	const selectDirection = (direction: "make" | "work") => {
+		const tabList = dialog?.querySelector<HTMLElement>(".opportunity-tabs");
+		if (tabList) tabList.dataset.direction = direction;
+		for (const tab of tabs) {
+			tab.setAttribute("aria-selected", String(tab.dataset.opportunityTab === direction));
+		}
+		if (typeInput) typeInput.value = direction === "make" ? "Something to Make" : "Something to Work";
+		if (detailsLabel) detailsLabel.textContent = direction === "make" ? "What do you want to make?" : "What do you want to improve?";
+	};
+
+	const closeDrawer = () => {
+		if (!dialog?.open) return;
+		dialog.dataset.closing = "true";
+		delete dialog.dataset.visible;
+		const delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 500;
+		window.setTimeout(() => {
+			dialog.close();
+			delete dialog.dataset.closing;
+			returnFocus?.focus();
+		}, delay);
+	};
+
+	for (const trigger of document.querySelectorAll<HTMLAnchorElement>("[data-opportunity-drawer]")) {
+		trigger.addEventListener("click", (event) => {
+			if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+			event.preventDefault();
+			returnFocus = trigger;
+			selectDirection(trigger.dataset.opportunityDrawer === "work" ? "work" : "make");
+			dialog?.showModal();
+			window.requestAnimationFrame(() => {
+				window.requestAnimationFrame(() => {
+					if (dialog) dialog.dataset.visible = "true";
+				});
+			});
+		});
+	}
+
+	for (const tab of tabs) {
+		tab.addEventListener("click", () => selectDirection(tab.dataset.opportunityTab === "work" ? "work" : "make"));
+	}
+
+	dialog?.querySelector("[data-opportunity-close]")?.addEventListener("click", closeDrawer);
+	dialog?.addEventListener("cancel", (event) => {
+		event.preventDefault();
+		closeDrawer();
+	});
+	dialog?.addEventListener("click", (event) => {
+		if (event.target === dialog) closeDrawer();
+	});
+
+	form?.addEventListener("submit", async (event) => {
+		event.preventDefault();
+		if (!submitButton || !status) return;
+		submitButton.disabled = true;
+		submitButton.textContent = "Sending";
+		status.textContent = "";
+
+		try {
+			const response = await fetch(form.action, {
+				method: "POST",
+				body: await getProtectedFormData(form),
+				headers: { Accept: "application/json" },
+			});
+			const result = await response.json();
+			if (!response.ok || !result.ok) throw new Error(getProtectionErrorMessage(result, "We could not send your message."));
+			const selectedDirection = typeInput?.value;
+			form.reset();
+			resetProtectedForm(form);
+			if (typeInput && selectedDirection) typeInput.value = selectedDirection;
+			status.style.color = "#315c00";
+			status.textContent = result.message;
+		} catch (error) {
+			const message = error instanceof Error ? error.message : "We could not send your message.";
+			status.style.color = "#fcfcfc";
+			status.replaceChildren(document.createTextNode(`${message} Email `));
+			const emailLink = document.createElement("a");
+			emailLink.href = "mailto:hello@actai.studio";
+			emailLink.textContent = "hello@actai.studio";
+			emailLink.style.textDecoration = "underline";
+			status.append(emailLink, ".");
+		} finally {
+			submitButton.disabled = false;
+			submitButton.textContent = "Send call request";
+		}
+	});
+</script>

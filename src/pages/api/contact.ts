@@ -1,20 +1,31 @@
 import { randomBytes, createHmac } from "node:crypto";
+import { promises as dns } from "node:dns";
 import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
 import type { APIRoute } from "astro";
 
 export const prerender = false;
 
 const CONTACT_EMAIL = "hello@actai.studio";
+const env = import.meta.env;
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
-const ALLOWED_STARTING_POINTS = new Set(["Agent in the Room", "AI direction", "Agent diagnostic", "Agent delivery", "Not sure yet", "Something else"]);
+const MIN_SUBMIT_MS = 2_000;
+const ALLOWED_STARTING_POINTS = new Set(["Something to Make", "Something to Work", "Agent in the Room", "AI direction", "Agent diagnostic", "Agent delivery", "Not sure yet", "Something else"]);
+const PERSONAL_EMAIL_DOMAINS = new Set([
+	"aol.com", "btinternet.com", "fastmail.com", "gmail.com", "googlemail.com", "hey.com", "hotmail.co.uk", "hotmail.com",
+	"icloud.com", "live.co.uk", "live.com", "mail.com", "me.com", "msn.com", "outlook.co.uk", "outlook.com", "proton.me",
+	"protonmail.com", "yahoo.co.uk", "yahoo.com", "ymail.com",
+]);
 const rateLimitSalt = randomBytes(32);
 const requestCounts = new Map<string, { count: number; resetAt: number }>();
 let rateLimitChecks = 0;
+if (env.AWS_PROFILE && !process.env.AWS_PROFILE) process.env.AWS_PROFILE = env.AWS_PROFILE;
 const ses = new SESv2Client({
-	region: process.env.AWS_SES_REGION || process.env.AWS_REGION || "eu-west-2",
+	region: env.AWS_SES_REGION || process.env.AWS_SES_REGION || process.env.AWS_REGION || "eu-west-2",
 	maxAttempts: 3,
 });
+
+const envValue = (name: string) => env[name] || process.env[name] || "";
 
 const json = (body: Record<string, unknown>, status = 200, headers: HeadersInit = {}) =>
 	new Response(JSON.stringify(body), {
@@ -35,6 +46,39 @@ const clientKey = (request: Request) => {
 	const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
 	const address = request.headers.get("cf-connecting-ip") || forwardedFor || request.headers.get("x-real-ip") || "unknown";
 	return createHmac("sha256", rateLimitSalt).update(address).digest("hex");
+};
+
+const clientAddress = (request: Request) =>
+	request.headers.get("cf-connecting-ip") || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || request.headers.get("x-real-ip") || "";
+
+const validateBusinessEmail = async (email: string) => {
+	const domain = email.split("@").at(-1)?.toLowerCase() || "";
+	if (!domain || PERSONAL_EMAIL_DOMAINS.has(domain)) return { valid: false, error: "business_email_required" };
+
+	try {
+		const records = await dns.resolveMx(domain);
+		return records.length > 0 ? { valid: true } : { valid: false, error: "email_mx_lookup_failed" };
+	} catch {
+		return { valid: false, error: "email_mx_lookup_failed" };
+	}
+};
+
+const verifyTurnstile = async (token: string, remoteIp: string) => {
+	const secret = envValue("TURNSTILE_SECRET_KEY");
+	if (!secret) return true;
+	if (!token) return false;
+
+	try {
+		const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+			method: "POST",
+			headers: { "content-type": "application/json" },
+			body: JSON.stringify({ secret, response: token, remoteip: remoteIp || undefined }),
+		});
+		const result = await response.json() as { success?: boolean };
+		return response.ok && result.success === true;
+	} catch {
+		return false;
+	}
 };
 
 const isRateLimited = (request: Request) => {
@@ -88,7 +132,7 @@ export const POST = (async ({ request }) => {
 
 	if (isRateLimited(request)) {
 		return json(
-			{ ok: false, message: "Too many attempts. Please wait 15 minutes or email us directly.", contactEmail: CONTACT_EMAIL },
+			{ ok: false, error: "rate_limited", message: "Too many attempts. Please wait 15 minutes or email us directly.", contactEmail: CONTACT_EMAIL },
 			429,
 			{ "retry-after": "900" },
 		);
@@ -102,6 +146,8 @@ export const POST = (async ({ request }) => {
 		startingPoint: textField(formData, "starting-point", 80),
 		details: textField(formData, "details", 5000),
 	};
+	const startedAt = Number(textField(formData, "_started_at", 30));
+	const turnstileToken = textField(formData, "_turnstile_token", 4096);
 	const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 	if (
@@ -109,11 +155,27 @@ export const POST = (async ({ request }) => {
 		!emailPattern.test(submission.email) ||
 		!ALLOWED_STARTING_POINTS.has(submission.startingPoint)
 	) {
-		return json({ ok: false, message: "Please complete every field with a valid work email.", contactEmail: CONTACT_EMAIL }, 400);
+		return json({ ok: false, error: "invalid_email", message: "Please complete every field with a valid work email.", contactEmail: CONTACT_EMAIL }, 400);
 	}
 
-	const from = process.env.CONTACT_EMAIL_FROM || process.env.LEAD_EMAIL_FROM;
-	const to = process.env.CONTACT_EMAIL_TO || process.env.LEAD_EMAIL_TO;
+	if (!Number.isFinite(startedAt) || Date.now() - startedAt < MIN_SUBMIT_MS) {
+		return json({ ok: false, error: "submitted_too_fast", message: "Please take a moment to complete the form.", contactEmail: CONTACT_EMAIL }, 400);
+	}
+
+	const emailValidation = await validateBusinessEmail(submission.email);
+	if (!emailValidation.valid) {
+		const message = emailValidation.error === "business_email_required"
+			? "Please use a business email address."
+			: "Please use a work email domain with valid mail server records.";
+		return json({ ok: false, error: emailValidation.error, message, contactEmail: CONTACT_EMAIL }, 400);
+	}
+
+	if (!(await verifyTurnstile(turnstileToken, clientAddress(request)))) {
+		return json({ ok: false, error: "turnstile_failed", message: "Please retry the form verification and send again.", contactEmail: CONTACT_EMAIL }, 400);
+	}
+
+	const from = envValue("CONTACT_EMAIL_FROM") || envValue("LEAD_EMAIL_FROM");
+	const to = envValue("CONTACT_EMAIL_TO") || envValue("LEAD_EMAIL_TO");
 
 	if (!from || !to) {
 		return json({ ok: false, message: "Email delivery is temporarily unavailable.", contactEmail: CONTACT_EMAIL }, 503);

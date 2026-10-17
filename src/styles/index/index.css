@@ -182,7 +182,8 @@ body[data-contact-open="true"] .contact-trigger {
 }
 
 .contact-submit:hover {
-	background: var(--lime);
+	background: #11110f;
+	color: white;
 	transform: translateY(-1px);
 }
 

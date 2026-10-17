@@ -25,20 +25,6 @@ const bookingHref = "/meeting";
 				background: #171719;
 				color: #fcfcfc;
 			}
-			#privacy-page .nav-pill { background: #fcfcfc; box-shadow: none; padding-inline: var(--page-gutter); }
-			#privacy-page .site-brand { padding: 0; min-width: 0; }
-			#privacy-page .site-brand img { width: auto; height: 35px; }
-			#privacy-page .site-menu-links { padding-left: 48px; gap: 28px; }
-			#privacy-page .site-menu-link { font-size: 15px; font-weight: 400; }
-			#privacy-page .site-menu-link[href="/#governance"] { display: none; }
-			#privacy-page .menu-toggle { border: 0; border-radius: 0; margin-right: 0; }
-			#privacy-page .menu-icon { background: transparent; }
-			#privacy-page .menu-icon::before { top: -3px; width: 22px; }
-			#privacy-page .menu-icon::after { top: 3px; width: 22px; }
-			#privacy-page .menu-icon[data-open="true"]::before { transform: translateY(3px) rotate(45deg); }
-			#privacy-page .menu-icon[data-open="true"]::after { transform: translateY(-3px) rotate(-45deg); }
-			#privacy-page .site-contact-link { height: 44px; width: auto; margin-right: 0; padding-inline: 24px; font-size: 13px; }
-			#privacy-page .site-contact-link:hover { background: #101010; color: #fcfcfc; }
 			#privacy-page main { max-width: 1760px; margin-inline: auto; padding: 80px var(--page-gutter) 96px; }
 			#privacy-page main section { display: block; max-width: 760px; margin-inline: auto; }
 			#privacy-page h1 { margin: 0 0 40px; font-size: 56px; font-weight: 700; line-height: 1.05; letter-spacing: 0; }
@@ -50,19 +36,8 @@ const bookingHref = "/meeting";
 			#privacy-page footer .action-pill { border: 1px solid #fcfcfc; border-radius: 999px; min-height: 44px; padding-inline: 24px; font-weight: 700; background: #fcfcfc; color: #101010; }
 			#privacy-page footer .action-pill:hover { background: #101010; color: #fcfcfc; }
 			#privacy-page a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
-			@media (max-width: 1500px) {
-				#privacy-page .site-menu { background: #fcfcfc; }
-				#privacy-page .site-menu-links { padding: 16px var(--page-gutter); gap: 8px; max-width: none; }
-			}
-			@media (min-width: 1181px) and (max-width: 1500px) {
-				#privacy-page .site-menu { display: flex; position: static; grid-column: 2; grid-row: 1; opacity: 1; pointer-events: auto; transform: none; border: 0; box-shadow: none; }
-				#privacy-page .site-menu-links { display: flex; padding: 0; gap: 24px; }
-				#privacy-page .nav-pill > .menu-toggle { display: none; }
-				#privacy-page .site-menu-contact { display: none; }
-			}
 			@media (max-width: 620px) {
 				#privacy-page { --header-height: 58px; --page-gutter: 32px; }
-				#privacy-page .site-brand img { height: 26px; }
 				#privacy-page main { padding-block: 48px 64px; }
 				#privacy-page h1 { font-size: 36px; margin-bottom: 28px; }
 				#privacy-page main section > div { font-size: 17px; gap: 20px; }

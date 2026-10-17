@@ -51,7 +51,8 @@ const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index 
 			.agent-nav__brand, .agent-nav__link, .agent-button { align-items:center; border-radius:.85rem; display:inline-flex; font-weight:800; justify-content:center; min-height:3.25rem; padding:.8rem 1.15rem; text-decoration:none; transition:background 180ms ease,color 180ms ease,transform 180ms ease; }
 			.agent-nav__brand, .agent-nav__link--primary { background:white; color:var(--ink); }
 			.agent-nav__link { background:rgba(17,17,15,.72); color:white; backdrop-filter:blur(16px); }
-			.agent-nav__brand:hover, .agent-nav__link:hover, .agent-button:hover { background:var(--lime); color:var(--ink); transform:translateY(-1px); }
+			.agent-nav__brand:hover, .agent-nav__link:hover { background:var(--lime); color:var(--ink); transform:translateY(-1px); }
+			.agent-button:hover { background:var(--ink); color:white; transform:translateY(-1px); }
 
 			.agent-hero { align-items:end; display:grid; isolation:isolate; min-height:min(58rem,100svh); overflow:hidden; padding:clamp(8rem,14vh,11rem) clamp(1rem,4vw,4.5rem) clamp(5rem,8vw,8rem); position:relative; }
 			.agent-hero__media, .agent-hero__shade { inset:0; position:absolute; }
@@ -126,6 +127,8 @@ const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index 
 			.unlock-panel__actions { display:grid; gap:.65rem; grid-template-columns:repeat(3,1fr); }
 			.unlock-panel .agent-button { background:var(--ink); color:white; font-size:.9rem; }
 			.unlock-panel .agent-button--download { background:white; color:var(--ink); }
+			.unlock-panel .agent-button:hover { background:white; color:var(--ink); }
+			.unlock-panel .agent-button--download:hover { background:var(--ink); color:white; }
 			.unlock-panel p { font-weight:700; line-height:1.35; margin:0; }
 			.agent-footer { align-items:end; border-top:1px solid rgba(255,255,255,.22); display:flex; gap:2rem; justify-content:space-between; padding:2rem 0 0; }
 			.agent-footer p { color:rgba(255,255,255,.5); font-size:.85rem; font-weight:700; margin:0; }
@@ -186,20 +189,39 @@ const cascadeImages = cascadeLabels.map((_, index) => heroArt[(artIndex + index 
 
 		<NoWidows />
 		<script>
+			import { getProtectedFormData, getProtectionErrorMessage, initialiseProtectedForm, resetProtectedForm } from "../../scripts/contactProtection";
 			const trackPackEvent = (name, detail = {}) => {
 				window.dispatchEvent(new CustomEvent(name, { detail }));
 				window.dataLayer?.push({ event: name, ...detail });
 			};
 			const gate = document.querySelector("[data-pack-gate]");
 			const unlockPanel = document.querySelector("[data-pack-unlock]");
+			const gateStatus = gate?.querySelector("[data-pack-status]");
+			const gateButton = gate?.querySelector('button[type="submit"]');
 			const storageKey = gate ? `actai-pack:${gate.dataset.agentSlug}` : "";
 			if (storageKey && localStorage.getItem(storageKey) === "unlocked") unlockPanel?.removeAttribute("hidden");
-			gate?.addEventListener("submit", (event) => {
+			initialiseProtectedForm(gate);
+			gate?.addEventListener("submit", async (event) => {
 				event.preventDefault();
-				localStorage.setItem(storageKey, "unlocked");
-				trackPackEvent("pack_gate_submit", { agentSlug:gate.dataset.agentSlug });
-				unlockPanel?.removeAttribute("hidden");
-				unlockPanel?.scrollIntoView({ behavior:"smooth", block:"center" });
+				if (!(gate instanceof HTMLFormElement) || !(gateButton instanceof HTMLButtonElement)) return;
+				gateButton.disabled = true;
+				gateButton.textContent = "Checking...";
+				if (gateStatus) gateStatus.textContent = "";
+				try {
+					const response = await fetch(gate.action, { method:"POST", body:await getProtectedFormData(gate), headers:{ Accept:"application/json" } });
+					const result = await response.json();
+					if (!response.ok || !result.ok) throw new Error(getProtectionErrorMessage(result, "We could not unlock the pack."));
+					localStorage.setItem(storageKey, "unlocked");
+					trackPackEvent("pack_gate_submit", { agentSlug:gate.dataset.agentSlug });
+					unlockPanel?.removeAttribute("hidden");
+					unlockPanel?.scrollIntoView({ behavior:"smooth", block:"center" });
+					resetProtectedForm(gate);
+				} catch (error) {
+					if (gateStatus) gateStatus.textContent = error instanceof Error ? error.message : "We could not unlock the pack.";
+				} finally {
+					gateButton.disabled = false;
+					gateButton.textContent = "Unlock the pack";
+				}
 			});
 			document.querySelectorAll("[data-open-tool]").forEach((button) => {
 				button.addEventListener("click", async () => {

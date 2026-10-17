@@ -1,4 +1,7 @@
 ---
+import OpportunityContactDrawer from "./sections/OpportunityContactDrawer.astro";
+import SiteHeader from "./sections/SiteHeader.astro";
+
 const stages = [
 	{
 		number: "01",
@@ -223,33 +226,7 @@ const faqColumns = [
 ---
 
 <div class="v3-page">
-	<header class="site-header">
-		<a class="brand" href="#top" aria-label="Act AI Studio home">
-			<img src="/act-logo.svg" alt="Act." width="1200" height="501" />
-		</a>
-
-		<nav class="desktop-nav" aria-label="Primary navigation">
-			<a href="#opportunity">The Opportunity</a>
-			<a href="#stages">The Method</a>
-			<a href="#practice">The Practice</a>
-			<a href="#direction">The Direction</a>
-			<a href="#footer">The Company</a>
-		</nav>
-
-		<a class="nav-cta" href="/contact">Request a 30 minute call</a>
-
-		<details class="mobile-nav">
-			<summary aria-label="Open navigation"><span></span><span></span></summary>
-			<nav aria-label="Mobile navigation">
-				<a href="#opportunity">The Opportunity</a>
-				<a href="#stages">The Method</a>
-				<a href="#practice">The Practice</a>
-				<a href="#direction">The Direction</a>
-				<a href="#footer">The Company</a>
-				<a href="/contact">Request a 30 minute call</a>
-			</nav>
-		</details>
-	</header>
+	<SiteHeader homeLinks />
 
 	<main id="top">
 		<section class="hero image-section" aria-labelledby="hero-heading">
@@ -275,6 +252,19 @@ const faqColumns = [
 						<span>locked away in systems. We bring it together, find where AI can</span>
 						<span>make a difference, and equip your people to put it to work.</span>
 					</p>
+				<p class="section-intro opportunity-prompt" data-scroll-tone-line>Which is your direction?</p>
+				<div class="opportunity-choices" aria-label="Choose where to start">
+					<a class="opportunity-choice" href="/meeting?path=make" data-opportunity-drawer="make">
+						<h3 data-scroll-tone-line>Something to Make</h3>
+						<p data-scroll-tone-line>Create the things that people need to see. Imagery, film, brochures and digital content.</p>
+						<span aria-hidden="true">&rarr;</span>
+					</a>
+					<a class="opportunity-choice" href="/meeting?path=work" data-opportunity-drawer="work">
+						<h3 data-scroll-tone-line>Something to Work</h3>
+						<p data-scroll-tone-line>Improve how things get done. Processes, handovers, decisions and repeated tasks.</p>
+						<span aria-hidden="true">&rarr;</span>
+					</a>
+				</div>
 			</div>
 		</section>
 
@@ -433,6 +423,8 @@ const faqColumns = [
 			</div>
 		</section>
 	</main>
+
+	<OpportunityContactDrawer />
 
 	<footer class="site-footer" id="footer" data-scroll-tone-section data-scroll-tone-entry="1.08">
 		<div class="footer-grid">
@@ -893,6 +885,67 @@ const faqColumns = [
 
 	.possibility-intro > span {
 		display: block;
+	}
+
+	.opportunity-choices {
+		width: min(100%, 1120px);
+		margin: 32px auto 0;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: var(--grid-gap);
+		text-align: left;
+	}
+
+	.opportunity-prompt {
+		width: min(100%, 1120px);
+		margin: 48px auto 0;
+		text-align: center;
+	}
+
+	.opportunity-choice {
+		min-height: 250px;
+		padding: clamp(28px, 2.5vw, 40px) 0;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		border-top: 1px solid rgb(var(--act-white-rgb) / 0.28);
+		background: transparent;
+		color: var(--act-white);
+		transition: border-color 180ms ease, color 180ms ease;
+	}
+
+	.opportunity-choice:hover,
+	.opportunity-choice:focus-visible {
+		border-color: var(--act-white);
+	}
+
+	.opportunity-choice:focus-visible {
+		outline: 2px solid var(--act-white);
+		outline-offset: 4px;
+	}
+
+	.opportunity-choice h3 {
+		margin: 0 0 20px;
+		font-size: clamp(1.75rem, 2.4vw, 2.75rem);
+		font-weight: 700;
+		line-height: 1.1;
+		letter-spacing: var(--tracking-heading);
+	}
+
+	.opportunity-choice p {
+		margin: 0;
+		max-width: 30ch;
+		color: var(--act-light-text);
+		font-size: clamp(1rem, 1.25vw, 1.25rem);
+		line-height: var(--leading-copy);
+		text-wrap: pretty;
+	}
+
+	.opportunity-choice > span {
+		margin-top: auto;
+		align-self: flex-end;
+		font-size: 1.5rem;
+		line-height: 1;
 	}
 
 	.tone-heading-line {
@@ -2634,6 +2687,19 @@ const faqColumns = [
 			margin-top: 38px;
 		}
 
+		.opportunity-choices {
+			grid-template-columns: 1fr;
+			margin-top: 24px;
+		}
+
+		.opportunity-prompt {
+			margin-top: 40px;
+		}
+
+		.opportunity-choice {
+			min-height: 170px;
+		}
+
 		.direction .section-intro {
 			margin-top: 38px;
 		}
@@ -3107,22 +3173,6 @@ const faqColumns = [
 		return video.play().catch(() => {});
 	};
 
-	const scrollingHeader = document.querySelector<HTMLElement>(".site-header");
-	if (scrollingHeader) {
-		let previousScroll = Math.max(0, window.scrollY);
-		const menu = scrollingHeader.querySelector("details");
-		const revealHeader = () => { scrollingHeader.dataset.scrollHidden = "false"; };
-		menu?.addEventListener("toggle", revealHeader);
-		window.addEventListener("scroll", () => {
-			const currentScroll = Math.max(0, window.scrollY);
-			const delta = currentScroll - previousScroll;
-			if (currentScroll <= scrollingHeader.offsetHeight || menu?.open) revealHeader();
-			else if (delta < 0) revealHeader();
-			else if (delta > 4) scrollingHeader.dataset.scrollHidden = "true";
-			previousScroll = currentScroll;
-		}, { passive: true });
-	}
-
 	document.querySelectorAll("[data-air-video], [data-footer-video]").forEach((video) => {
 		if (!(video instanceof HTMLVideoElement)) return;
 		prepareInlineVideo(video);
@@ -3155,7 +3205,7 @@ const faqColumns = [
 	};
 
 	const alignSectionTarget = (target) => {
-		const header = document.querySelector(".site-header");
+		const header = document.querySelector("[data-site-header]");
 		const headerHeight = header instanceof HTMLElement ? header.offsetHeight : 0;
 		const targetTop = getLayoutTop(target) - headerHeight;
 		window.scrollTo({ top: Math.max(0, targetTop), behavior: "auto" });

@@ -28,31 +28,14 @@ const bookingHref = "/meeting";
 			}
 
 			.contact-page { --header-height: 80px; --contact-gutter: clamp(24px, 4.167vw, 80px); }
-			.contact-page .nav-pill {
-				background: #fcfcfc;
-				box-shadow: none;
-				padding-inline: var(--contact-gutter);
-			}
-			.contact-page .site-brand { min-width: 0; padding: 0; }
-			.contact-page .site-brand img { width: auto; height: 35px; }
-			.contact-page .site-menu-links { padding-left: 48px; gap: 28px; }
-			.contact-page .site-menu-link { font-size: 15px; font-weight: 400; }
-			.contact-page .menu-toggle {
-				border: 0;
-				border-radius: 0;
-				margin-right: 0;
-			}
-			.contact-page .menu-icon { background: transparent; }
-			.contact-page .menu-icon::before { top: -3px; width: 22px; }
-			.contact-page .menu-icon::after { top: 3px; width: 22px; }
-			.contact-page .menu-icon[data-open="true"]::before { transform: translateY(3px) rotate(45deg); }
-			.contact-page .menu-icon[data-open="true"]::after { transform: translateY(-3px) rotate(-45deg); }
-			.contact-page .site-menu-link[href="/#governance"] { display: none; }
 			.contact-page .contact-intro {
 				background: #101010;
-				padding-block: 80px;
 				border: 0;
 				padding-inline: var(--contact-gutter);
+			}
+			#contact-page .contact-intro[data-theme="dark"] {
+				padding-top: clamp(64px, 6vw, 96px);
+				padding-bottom: clamp(72px, 7vw, 112px);
 			}
 			.contact-page .contact-intro h1 { font-size: 56px; line-height: 1.05; letter-spacing: 0; }
 			.contact-page .contact-intro p { color: #8d8d95; font-size: 20px; line-height: 1.5; }
@@ -133,30 +116,8 @@ const bookingHref = "/meeting";
 			.contact-page footer :is(p, a) { font-weight: 400; letter-spacing: 0; }
 			.contact-page footer .action-pill { border-radius: 999px; min-height: 44px; padding-inline: 24px; font-weight: 700; background: #fcfcfc; color: #101010; }
 			.contact-page footer .action-pill:hover { background: #101010; color: #fcfcfc; }
-			.contact-page .site-contact-link:hover { background: #101010; color: #fcfcfc; }
-			@media (max-width: 1500px) {
-				.contact-page .site-menu { background: #fcfcfc; }
-				.contact-page .site-menu-links { padding: 16px 32px; gap: 8px; max-width: none; }
-			}
-			@media (min-width: 1181px) and (max-width: 1500px) {
-				.contact-page .site-menu {
-					display: flex;
-					position: static;
-					grid-column: 2;
-					grid-row: 1;
-					opacity: 1;
-					pointer-events: auto;
-					transform: none;
-					border: 0;
-					box-shadow: none;
-				}
-				.contact-page .site-menu-links { display: flex; padding: 0; gap: 28px; }
-				.contact-page .nav-pill > .menu-toggle { display: none; }
-			}
 			@media (max-width: 620px) {
 				.contact-page { --header-height: 58px; --contact-gutter: 32px; }
-				.contact-page .nav-pill { padding-inline: 24px; }
-				.contact-page .site-brand img { height: 26px; }
 				.contact-page :is(.contact-intro, .contact-form-section) { padding-inline: 32px; }
 				.contact-page .contact-intro { padding-block: 48px; }
 				.contact-page .contact-intro h1 { font-size: 36px; }
@@ -167,7 +128,7 @@ const bookingHref = "/meeting";
 		</style>
 	</head>
 	<body id="contact-page" class="contact-page pt-[var(--header-height)]">
-		<SiteHeader showContactLink={false} />
+		<SiteHeader />
 
 		<main>
 			<ContactIntroSection theme="dark" />
