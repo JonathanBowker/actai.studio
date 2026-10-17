@@ -185,12 +185,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
 		} catch (error) {
 			const message = error instanceof Error ? error.message : "We could not send your note.";
 			status.className = "mt-4 text-center text-sm font-bold text-[#9f2626]";
-			status.replaceChildren(document.createTextNode(`${message} Email `));
-			const emailLink = document.createElement("a");
-			emailLink.href = "mailto:hello@actai.studio";
-			emailLink.textContent = "hello@actai.studio";
-			emailLink.className = "underline";
-			status.append(emailLink, ".");
+			status.textContent = message;
 		} finally {
 			submitButton.disabled = false;
 			submitButton.textContent = submitButton.dataset.defaultLabel || "Send message";

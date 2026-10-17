@@ -301,11 +301,11 @@ const faqColumns = [
 			</div>
 		</section>
 
-		<section class="section section-light practice" id="practice" aria-labelledby="practice-heading" data-scroll-tone-section>
+		<section class="section section-light practice" id="studio" aria-labelledby="studio-heading" data-scroll-tone-section>
 			<div class="section-inner">
 				<div class="narrow-center practice-heading" data-scroll-tone-block>
-					<p class="section-label" data-scroll-tone-line>The Practice</p>
-					<h2 id="practice-heading" data-scroll-tone-line>Where AI earns<br />its place.</h2>
+					<p class="section-label" data-scroll-tone-line>The Studio</p>
+					<h2 id="studio-heading" data-scroll-tone-line>Where AI earns<br />its place.</h2>
 				</div>
 
 					<div class="practice-layout">
@@ -431,7 +431,7 @@ const faqColumns = [
 			<div class="footer-primary">
 				<blockquote class="footer-quote">
 					&ldquo;Just because it&rsquo;s a serious topic, it doesn&rsquo;t mean you have to be serious about the way you talk about it.&rdquo;
-					<cite>John Humphrys</cite>
+					<cite><a href="https://en.wikipedia.org/wiki/John_Humphrys">John Humphrys</a> &ndash; <em>Broadcaster</em></cite>
 				</blockquote>
 			</div>
 			<nav aria-label="Information">
@@ -2270,6 +2270,11 @@ const faqColumns = [
 			letter-spacing: var(--tracking-copy);
 			line-height: 1.3;
 		}
+
+	.footer-quote cite a {
+		color: inherit;
+		text-decoration: none;
+	}
 
 	.footer-social {
 		align-items: flex-end;
