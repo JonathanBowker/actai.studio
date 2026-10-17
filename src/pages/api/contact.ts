@@ -10,7 +10,7 @@ const env = import.meta.env;
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
 const MIN_SUBMIT_MS = 2_000;
-const ALLOWED_STARTING_POINTS = new Set(["Something to Make", "Something to Work", "Agent in the Room", "AI direction", "Agent diagnostic", "Agent delivery", "Not sure yet", "Something else"]);
+const ALLOWED_STARTING_POINTS = new Set(["Something to make", "Something to work", "Something to Make", "Something to Work", "Agent in the Room", "AI direction", "Agent diagnostic", "Agent delivery", "Not sure yet", "Something else"]);
 const PERSONAL_EMAIL_DOMAINS = new Set([
 	"aol.com", "btinternet.com", "fastmail.com", "gmail.com", "googlemail.com", "hey.com", "hotmail.co.uk", "hotmail.com",
 	"icloud.com", "live.co.uk", "live.com", "mail.com", "me.com", "msn.com", "outlook.co.uk", "outlook.com", "proton.me",

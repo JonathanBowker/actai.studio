@@ -14,8 +14,8 @@ const callSteps = [
 ];
 const nextSteps = isCall ? callSteps : contactSteps;
 const options = isCall
-	? ["Something to Make", "Something to Work", "AI direction", "Agent diagnostic", "Agent delivery", "Not sure yet"]
-	: ["Something to Make", "Something to Work", "Agent in the Room", "AI direction", "Agent delivery", "Something else"];
+	? ["Something to make", "Something to work", "AI direction", "Agent diagnostic", "Agent delivery", "Not sure yet"]
+	: ["Something to make", "Something to work", "Agent in the Room", "AI direction", "Agent delivery", "Something else"];
 const buttonLabel = isCall ? "Send call request" : "Send message";
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
 ---
@@ -154,7 +154,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
 	const startingPoint = form?.querySelector<HTMLSelectElement>('[name="starting-point"]');
 	const path = new URLSearchParams(window.location.search).get("path");
 	if (startingPoint && (path === "make" || path === "work")) {
-		startingPoint.value = path === "make" ? "Something to Make" : "Something to Work";
+		startingPoint.value = path === "make" ? "Something to make" : "Something to work";
 	}
 	initialiseProtectedForm(form);
 

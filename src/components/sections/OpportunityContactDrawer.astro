@@ -12,12 +12,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
 		<h2 id="opportunity-drawer-title">Request a<br />30-minute call.</h2>
 
 		<div class="opportunity-tabs" role="tablist" aria-label="Choose your direction" data-direction="make">
-			<button type="button" role="tab" aria-selected="true" data-opportunity-tab="make">Something to Make</button>
-			<button type="button" role="tab" aria-selected="false" data-opportunity-tab="work">Something to Work</button>
+			<button type="button" role="tab" aria-selected="true" data-opportunity-tab="make">Something to make</button>
+			<button type="button" role="tab" aria-selected="false" data-opportunity-tab="work">Something to work</button>
 		</div>
 
 		<form action="/api/contact" method="post" data-opportunity-form data-turnstile-site-key={turnstileSiteKey}>
-			<input type="hidden" name="starting-point" value="Something to Make" data-opportunity-type />
+			<input type="hidden" name="starting-point" value="Something to make" data-opportunity-type />
 
 			<div class="opportunity-field-grid">
 				<label>Full name<input name="name" autocomplete="name" required /></label>
@@ -336,7 +336,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
 		for (const tab of tabs) {
 			tab.setAttribute("aria-selected", String(tab.dataset.opportunityTab === direction));
 		}
-		if (typeInput) typeInput.value = direction === "make" ? "Something to Make" : "Something to Work";
+		if (typeInput) typeInput.value = direction === "make" ? "Something to make" : "Something to work";
 		if (detailsLabel) detailsLabel.textContent = direction === "make" ? "What do you want to make?" : "What do you want to improve?";
 	};
 
